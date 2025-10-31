@@ -3,10 +3,7 @@
     "label": "🏠 Home",
     "href": "index.html"
   },
-  {
-    "label": "🧭 Site Map & Search",
-    "href": "SiteMap.html"
-  },
+
   {
     "label": "📘 Guides and Supporting Documentation",
     "href": "resources.html"

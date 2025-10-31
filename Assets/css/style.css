@@ -2005,7 +2005,7 @@ body.dark-mode .control-toolbar {
 .glass .img-fluid,
 .glass .nhs-header {
   background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(2px) saturate(180%);
+  backdrop-filter: blur(50px) saturate(180%);
   -webkit-backdrop-filter: blur(2px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 2rem;
@@ -2782,4 +2782,70 @@ body.theme-contrast .flow-box h5 {
   color: #0072ff;
   text-decoration: none;
   border-radius: 4px;
+}
+
+/* Results container stays neutral */
+#headerSearchResults {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 600px;
+  /* or 100% of toolbar */
+  background: transparent;
+  /* let items provide their own bubble */
+  border: none;
+  z-index: 1050;
+  max-height: 300px;
+  overflow-y: auto;
+  display: none;
+  padding: 0.25rem;
+  /* breathing room around bubbles */
+}
+
+#headerSearchResults.show {
+  display: block;
+}
+
+/* Each result as a theme‑aware bubble */
+#headerSearchResults .list-group-item {
+  display: inline-block;
+  margin: 0.25rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  /* pill shape */
+  background-color: color-mix(in srgb, var(--accent-color) 85%, var(--bg-color));
+  color: var(--text-color);
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+  width: 60%;
+
+}
+
+/* Hover/focus: stronger accent */
+#headerSearchResults .list-group-item:hover,
+#headerSearchResults .list-group-item:focus {
+  background-color: color-mix(in srgb, var(--accent-color) 95%, var(--bg-color));
+  color: var(--text-color);
+}
+
+/* Glass dropdown items, theme‑aware */
+.glass .dropdown-item {
+  /* stronger bubble background using theme accent */
+  background-color: color-mix(in srgb, var(--accent-color) 80%, var(--bg-color));
+  color: var(--text-color);
+  font-weight: 600;
+  border-radius: 999px;
+  /* pill shape */
+  margin: 2px 4px;
+  padding: 0.35rem 0.9rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+
+.glass .dropdown-item:hover,
+.glass .dropdown-item:focus {
+  background-color: color-mix(in srgb, var(--accent-color) 95%, var(--bg-color));
+  color: var(--text-color);
 }
