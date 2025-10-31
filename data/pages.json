@@ -158,5 +158,45 @@
     "title": "Update Banner",
     "description": "Changelog cheerleaders for fixes, features, and joyful transparency—modular and contributor-friendly.",
     "url": "Update Banner.html"
+  },
+  {
+    "title": "C4 Diagram",
+    "description": "Editable Mermaid C4 diagrams for modelling people, systems, and relationships—ideal for architecture and contributor-first clarity.",
+    "url": "C4 Diagram.html"
+  },
+  {
+    "title": "Gantt Chart",
+    "description": "Editable Mermaid Gantt charts for visualising project timelines, milestones, and dependencies—theme-safe, modular, and contributor-friendly.",
+    "url": "Gantt chart.html"
+  },
+  {
+    "title": "Git Graph",
+    "description": "Editable Mermaid Git Graphs for visualising branches, commits, merges, and tagged releases—ideal for sprint planning and repo clarity.",
+    "url": "Git graph.html"
+  },
+  {
+    "title": "Mindmap",
+    "description": "Editable Mermaid mindmaps for brainstorming, structuring ideas, and mapping contributor journeys—theme-safe, modular, and easy to customise.",
+    "url": "Mindmap.html"
+  },
+  {
+    "title": "Pie Chart",
+    "description": "Editable Mermaid pie charts for visualising proportions, survey results, and contributor breakdowns—simple, modular, and theme-safe.",
+    "url": "Pie chart.html"
+  },
+  {
+    "title": "Timeline",
+    "description": "Editable Mermaid timelines for visualising historical events, project milestones, and sequential phases—theme-safe, modular, and easy to customise.",
+    "url": "Timeline diagram.html"
+  },
+  {
+    "title": "User Journey Diagram",
+    "description": "Editable Mermaid user journey diagrams for mapping contributor experiences, onboarding flows, and service pathways—theme-safe, modular, and easy to customise.",
+    "url": "User journey diagram.html"
+  },
+  {
+    "title": "XY Chart",
+    "description": "Editable Mermaid XY charts (beta) for combining bar and line views—ideal for comparing datasets, visualising trends, and modular analysis.",
+    "url": "XY Chart.html"
   }
 ]
