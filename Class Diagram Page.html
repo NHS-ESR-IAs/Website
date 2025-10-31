@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MicroSiteKit – Class Diagram Page</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom Styles -->
+    <link href="Assets/css/style.css" rel="stylesheet" />
+
+    <!-- Mermaid Setup -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script type="module">
+        import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+        mermaid.initialize({ startOnLoad: false });
+        window.mermaid = mermaid;
+    </script>
+</head>
+
+<body class="glass">
+    <!-- Injected Partials -->
+    <div id="shared-header"></div>
+    <div id="main-nav"></div>
+    <div id="sidebar-nav"></div>
+
+    <!-- Page-Specific Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center">
+                <h3 class="gradient-text">Class Diagram Page</h3>
+            </div>
+            <div class="col-md-8">
+                <div class="page-intro text-center py-4 px-3">
+                    <p>This example shows how to use Mermaid syntax to create a class diagram directly in your
+                        microsite.
+                        It’s editable, theme-safe, and perfect for visualising modular components, plugin relationships,
+                        or
+                        contributor-first architecture.</p>
+
+                    <ul>
+                        <li>🧠 Mermaid syntax lives inside the site—no external rendering needed</li>
+                        <li>🎨 Theme-safe and layout-friendly—uses Bootstrap spacing</li>
+                        <li>🧩 Modular and editable—great for onboarding, guides, and system mapping</li>
+                        <li>📋 Includes copy-to-clipboard button for easy reuse</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Page full width content -->
+            <div class="row mt-4">
+                <div class="col-md">
+                    <h5 class="mt-4 mb-2">📊 Class Diagram Example</h5>
+                    <p>This Mermaid block renders a class diagram showing how a microsite might relate to plugins and
+                        snippets.
+                        You can customise the classes, methods, and relationships to suit your own architecture.</p>
+
+                    <!-- Mermaid Diagram Block -->
+                    <pre class="mermaid snippet">
+classDiagram
+  class Microsite {
+    +showPage()
+    +copySnippet()
+  }
+
+  class Plugin {
+    +activate()
+    +deactivate()
+  }
+
+  class Snippet {
+    +language
+    +copyToClipboard()
+  }
+
+  Microsite --> Plugin : loads
+  Microsite --> Snippet : contains
+  Plugin <|-- CopyButton
+  Plugin <|-- Mermaid
+  Plugin <|-- PlantUML
+        </pre>
+
+                    <!-- Customisation Tips -->
+                    <div class="mt-4">
+                        <h6>🛠️ How to Customise</h6>
+                        <ul>
+                            <li><strong>Change class names:</strong> Replace <code>Microsite</code>,
+                                <code>Plugin</code>, etc. with
+                                your own components</li>
+                            <li><strong>Update methods and properties:</strong> Add or remove lines inside each class
+                                block</li>
+                            <li><strong>Define relationships:</strong> Use arrows like <code>--&gt;</code>,
+                                <code>&lt;|--</code>,
+                                <code>..&gt;</code> to show inheritance, usage, or association
+                            </li>
+                            <li><strong>Style it:</strong> Mermaid supports themes and configuration via
+                                <code>mermaid.initialize()</code>
+                            </li>
+                        </ul>
+
+                        <pre><code class="snippet language-html">
+&lt;div class=&quot;mermaid snippet&quot;&gt;
+classDiagram
+  class Microsite {
+    +showPage()
+    +copySnippet()
+  }
+
+  class Plugin {
+    +activate()
+    +deactivate()
+  }
+
+  class Snippet {
+    +language
+    +copyToClipboard()
+  }
+
+  Microsite --&gt; Plugin : loads
+  Microsite --&gt; Snippet : contains
+  Plugin &lt;|-- CopyButton
+  Plugin &lt;|-- Mermaid
+  Plugin &lt;|-- PlantUML
+&lt;/div&gt;
+</code></pre>
+
+                        <!-- Copy Button -->
+                        <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div id="shared-footer"></div>
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Custom JS -->
+        <script src="Assets/js/script.js"></script>
+</body>
+
+</html>

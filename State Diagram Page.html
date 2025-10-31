@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MicroSiteKit – State Diagram Page</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom Styles -->
+    <link href="Assets/css/style.css" rel="stylesheet" />
+
+    <!-- Mermaid Setup -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script type="module">
+        import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+        mermaid.initialize({ startOnLoad: false });
+        window.mermaid = mermaid;
+    </script>
+</head>
+
+<body class="glass">
+    <!-- Injected Partials -->
+    <div id="shared-header"></div>
+    <div id="main-nav"></div>
+    <div id="sidebar-nav"></div>
+
+    <!-- Page-Specific Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center">
+                <h3 class="gradient-text">State Diagram Page</h3>
+            </div>
+            <div class="col-md-8">
+                <div class="page-intro text-center py-4 px-3">
+                    <p>This example shows how to use Mermaid syntax to create a state diagram directly in your
+                        microsite.
+                        It’s editable, theme-safe, and perfect for visualising contributor journeys, UI states, or
+                        process
+                        transitions.</p>
+
+                    <ul>
+                        <li>🧠 Mermaid syntax lives inside the site—no external rendering needed</li>
+                        <li>🎨 Theme-safe and layout-friendly—uses Bootstrap spacing</li>
+                        <li>🧩 Modular and editable—great for onboarding, guides, and state machines</li>
+                        <li>📋 Includes copy-to-clipboard button for easy reuse</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Page full width content -->
+            <div class="row mt-4">
+                <div class="col-md">
+                    <h5 class="mt-4 mb-2">📊 State Diagram Example</h5>
+                    <p>This Mermaid block renders a state diagram showing a contributor’s journey through a microsite.
+                        You can
+                        customise the states, transitions, and labels to suit your own flow.</p>
+
+                    <!-- Mermaid Diagram Block -->
+                    <pre class="mermaid snippet">
+stateDiagram-v2
+  [*] --> Landing
+  Landing --> Exploring : clicks "Start"
+  Exploring --> Copying : selects snippet
+  Copying --> Contacting : needs help
+  Contacting --> Supported : receives support
+  Supported --> Exploring : continues journey
+  Exploring --> [*] : exits microsite
+        </pre>
+
+                    <!-- Customisation Tips -->
+                    <div class="mt-4">
+                        <h6>🛠️ How to Customise</h6>
+                        <ul>
+                            <li><strong>Change states:</strong> Replace <code>Landing</code>, <code>Exploring</code>,
+                                etc. with your
+                                own process steps</li>
+                            <li><strong>Update transitions:</strong> Use <code>--&gt;</code> and labels to show how
+                                contributors move
+                                between states</li>
+                            <li><strong>Define start/end:</strong> Use <code>[*]</code> for initial and terminal states
+                            </li>
+                            <li><strong>Style it:</strong> Mermaid supports themes and configuration via
+                                <code>mermaid.initialize()</code>
+                            </li>
+                        </ul>
+
+                        <pre><code class="snippet language-html">
+&lt;div class=&quot;mermaid snippet&quot;&gt;
+stateDiagram-v2
+  [*] --&gt; Landing
+  Landing --&gt; Exploring : clicks &quot;Start&quot;
+  Exploring --&gt; Copying : selects snippet
+  Copying --&gt; Contacting : needs help
+  Contacting --&gt; Supported : receives support
+  Supported --&gt; Exploring : continues journey
+  Exploring --&gt; [*] : exits microsite
+&lt;/div&gt;
+</code></pre>
+
+                        <!-- Copy Button -->
+                        <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div id="shared-footer"></div>
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Custom JS -->
+        <script src="Assets/js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MicroSiteKit – Quote</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom Styles -->
+    <link href="Assets/css/style.css" rel="stylesheet" />
+
+    <!-- Mermaid Setup -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script type="module">
+        import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+        mermaid.initialize({ startOnLoad: false });
+        window.mermaid = mermaid;
+    </script>
+</head>
+
+<body class="glass">
+    <!-- Injected Partials -->
+    <div id="shared-header"></div>
+    <div id="main-nav"></div>
+    <div id="sidebar-nav"></div>
+
+    <!-- Page-Specific Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center">
+                <h3 class="gradient-text">Quote</h3>
+            </div>
+            <div class="col-md-8">
+                <div class="page-intro text-center py-4 px-3">
+                    <p>Quote boxes are your expressive echoes—ideal for surfacing contributor wisdom, onboarding
+                        mantras, or
+                        playful commentary that adds personality to your layout. They bring clarity, warmth, and a touch
+                        of
+                        humanity
+                        to technical spaces.</p>
+
+                    <ul>
+                        <li>🧠 Great for highlighting tips, reflections, or onboarding encouragement</li>
+                        <li>🎨 Theme-safe and modular—styled to harmonise across microsites</li>
+                        <li>🧱 Drop-in ready for cards, modals, tabs, or role-based layouts</li>
+                        <li>🧼 Keeps content scannable, expressive, and contributor-first</li>
+                    </ul>
+
+                    <p>Use them to say “Modularity is kindness,” “Scroll-collapse logic is a journey,” or “Every dohicky
+                        deserves
+                        a warm welcome.” Whether it’s a real quote or a playful nudge, it adds voice to your vision.</p>
+
+                </div>
+            </div>
+            <!-- Page full width content -->
+
+            <div class="row mt-4">
+                <div class="col-md">
+
+                    <blockquote class="quote-box">
+                        <p>“Modular code isn’t just tidy—it’s empowering.”</p>
+                        <footer>— Bronwyn, Implementation Advisor</footer>
+                    </blockquote>
+
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md">
+                    <h5 class="mt-4 mb-2">🗣️ Quote Panel: Share a Voice</h5>
+                    <ul>
+                        <li><strong>Change the quote:</strong> Edit the <code>&lt;p&gt;</code> to reflect a new insight,
+                            onboarding
+                            mantra, or contributor reflection.</li>
+                        <li><strong>Update the attribution:</strong> Modify the <code>&lt;footer&gt;</code> to credit a
+                            different
+                            contributor, role, or team.</li>
+                        <li><strong>Style it safely:</strong> Use theme-safe classes like <code>quote-box</code>,
+                            <code>border</code>, <code>rounded</code>, or <code>shadow-sm</code> to harmonise with your
+                            microsite.
+                        </li>
+                        <li><strong>Make it modular:</strong> Nest inside cards, tabs, or onboarding flows—quotes add
+                            warmth and
+                            clarity wherever they land.</li>
+                        <li><strong>Optional:</strong> Add emojis, avatars, or dohickies to visually enhance the quote
+                            or
+                            spotlight
+                            the contributor.</li>
+                    </ul>
+                    <pre><code id="quoteSnippet" class="snippet language-html">
+&lt;blockquote class=&quot;quote-box&quot;&gt;
+  &lt;p&gt;“Modular code isn’t just tidy—it’s empowering.”&lt;/p&gt;
+  &lt;footer&gt;— Bronwyn, Implementation Advisor&lt;/footer&gt;
+&lt;/blockquote&gt;
+    </code></pre>
+                    <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="shared-footer"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="Assets/js/script.js"></script>
+</body>
+
+</html>

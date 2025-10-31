@@ -1,0 +1,126 @@
+<header class="nhs-header">
+
+    <!-- Theme & Accessibility Controls -->
+    <div class="col-auto">
+        <div class="control-toolbar d-flex flex-wrap gap-2 p-2 rounded">
+            <!-- Theme Selector -->
+            <select id="themeSelectorSidebar" class="form-select form-select-sm w-auto theme-selector"
+                aria-label="Choose Theme"">
+                          
+                            <option value=" Select Theme">Select Theme</option>
+                <option value="blue">NHS Blue</option>
+                <option value="green">NHS Green</option>
+                <option value="grey">NHS Grey</option>
+                <option value="pink">NHS Pink</option>
+                <option value="purple">NHS Purple</option>
+                <option value="red">NHS Red</option>
+                <option value="yellow">NHS Yellow</option>
+                <option value="calm">Light Grey</option>
+                <option value="contrast">High Contrast</option>
+            </select>
+            <!-- Text Size Buttons -->
+            <div class="btn-group btn-group-sm" role="group" aria-label="Text Size">
+                <button onclick="setTextSize('scale-small')" class="btn btn-outline-secondary">
+                    A-
+                </button>
+                <button onclick="setTextSize('scale-medium')" class="btn btn-outline-secondary">
+                    A
+                </button>
+                <button onclick="setTextSize('scale-large')" class="btn btn-outline-secondary">
+                    A+
+                </button>
+                <button onclick="setTextSize('scale-xlarge')" class="btn btn-outline-secondary">
+                    A++
+                </button>
+            </div>
+            <!-- Dark Mode Toggle -->
+            <button class="btn btn-sm btn-outline-primary toggle-dark" onclick="toggleDarkMode()">
+                Dark Mode
+            </button>
+        </div>
+    </div>
+    <div class="header-bar d-flex align-items-center justify-content-between px-3 py-2 position-relative ">
+        <!-- Menu Button (Left) -->
+        <div class="menu-button-wrapper">
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu"
+                aria-controls="sidebarMenu">
+                ☰ Menu
+            </button>
+
+        </div>
+
+        <!-- Site Title (Center) -->
+        <div class="center-heading text-center flex-grow-1">
+            <h1 class="mb-0">MicroSiteKit</h1>
+        </div>
+
+        <!-- Logos (Right) -->
+        <div class="logo-container d-flex align-items-center gap-2">
+
+            <img src="Assets/Images/Logo1.png" alt="ESR Logo" class="logo esr" />
+            <img src="Assets/Images/Logo2.png"" alt=" NHS Logo" class="logo nhs" />
+
+        </div>
+
+    </div>
+
+
+    </div>
+
+    <!-- Hero Banner -->
+    <div class="banner-wrapper text-center position-relative">
+        <img src="Assets/Images/Banner.png" alt="Welcome Hub Banner" class="Banner_image w-100" />
+        <div class="banner-text-overlay">
+            <h1>Microsite Services</h1>
+        </div>
+
+    </div>
+
+    <!-- ================================= -->
+    <!-- ====== MAIN NAVIGATION BAR ====== -->
+    <!-- ================================= -->
+    <div id="desktop-nav-toolbar">
+        <nav class="navbar navbar-expand-lg mt-3">
+            <div class="container">
+                <!-- Button for toggling the menu on mobile -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Menu container -->
+                <div class="collapse navbar-collapse" id="navMenu">
+                    <ul class="navbar-nav mx-auto">
+
+                        <div id="main-nav"></div>
+
+
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+    </div>
+    </div>
+</header>
+
+<!-- Collapsible Sidebar -->
+<div class="offcanvas offcanvas-start sidebar theme-bg" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarLabel">
+    <div class="offcanvas-header">
+        <h5 id="sidebarLabel">MicroSiteKit</h5>
+        <button type="button" class="btn-close btn-outline-light text-reset" data-bs-dismiss="offcanvas"
+            aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="nav navbar-nav flex-column">
+            <div id="sidebar-nav"></div>
+        </ul>
+
+
+
+        </button>
+    </div>
+
+</div>
+</div>

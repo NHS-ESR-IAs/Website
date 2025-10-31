@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MicroSiteKit – Main Navigation Panel</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom Styles -->
+    <link href="Assets/css/style.css" rel="stylesheet" />
+
+    <!-- Mermaid Setup -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script type="module">
+        import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+        mermaid.initialize({ startOnLoad: false });
+        window.mermaid = mermaid;
+    </script>
+</head>
+
+<body class="glass">
+    <!-- Injected Partials -->
+    <div id="shared-header"></div>
+    <div id="main-nav"></div>
+    <div id="sidebar-nav"></div>
+
+    <!-- Page-Specific Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center">
+                <h3 class="gradient-text">Main Navigation Panel</h3>
+            </div>
+            <div class="col-md-8">
+                <div class="page-intro text-center py-4 px-3">
+                    <p>The main navigation bar is your microsite’s modular map—perfect for guiding contributors through
+                        snippet
+                        pages, training modules, and support tools with clarity and joy. It’s responsive, accessible,
+                        and
+                        theme-safe, with dropdowns, submenus, and built-in accessibility controls.</p>
+
+                    <ul>
+                        <li>🧭 Great for organising pages like <code>Home</code>, <code>Guides</code>,
+                            <code>FAQs</code>, and
+                            <code>Support</code>
+                        </li>
+                        <li>📁 Supports dropdowns and nested submenus for training catalogues and snippet libraries</li>
+                        <li>🎨 Theme-safe and layout-friendly—styled with Bootstrap classes for full responsiveness</li>
+                        <li>♿ Built-in accessibility controls for theme, text size, and dark mode</li>
+                        <li>🔍 Includes search inputs for desktop and mobile views</li>
+                    </ul>
+
+                    <p>Use it to say “Explore the snippet library,” “Browse training modules,” or “Switch to high
+                        contrast
+                        mode”—whatever sparks clarity and contributor empowerment.</p>
+                </div>
+            </div>
+
+            <!-- Page full width content -->
+            <div class="row mt-4">
+                <div class="col-md">
+                    <!-- ================================= -->
+                    <!-- ====== MAIN NAVIGATION BAR ====== -->
+                    <!-- ================================= -->
+                    <div id="desktop-nav-toolbar">
+                        <nav class="navbar navbar-expand-lg mt-3">
+                            <div class="container">
+                                <!-- Button for toggling the menu on mobile -->
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#navMenu">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+
+                                <!-- Menu container -->
+                                <div class="collapse navbar-collapse" id="navMenu">
+                                    <ul class="navbar-nav mx-auto">
+                                        <!-- ==== ADD A SINGLE SECTION ==== -->
+                                        <!-- To add a new section (simple link), copy and update one of the lines below -->
+                                        <li class="nav-item">
+                                            <a class="nav-link" onclick="showPage('home')">Home</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" onclick="showPage('guides')">Guides</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" onclick="showPage('faqs')">FAQs</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" onclick="showPage('SUP')">Support Request</a>
+                                        </li>
+
+                                        <!-- ==== ADD A DROPDOWN MENU ==== -->
+                                        <!-- To create a dropdown menu, use this structure -->
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
+                                                onclick="showPage('CC')">Catalogue</a>
+                                            <ul class="dropdown-menu">
+                                                <!-- ==== ADD A NORMAL DROPDOWN ITEM ==== -->
+                                                <!-- Each dropdown item below links to a page -->
+                                                <li>
+                                                    <a class="dropdown-item btn btn-block btn-primary"
+                                                        onclick="showPage('SaMT')">Statutory and
+                                                        Mandatory Training</a>
+                                                </li>
+
+                                                <!-- ==== ADD A SUBMENU ==== -->
+                                                <!-- To add a submenu (nested within dropdown), use this structure -->
+                                                <li class="dropdown-submenu">
+                                                    <a class="dropdown-item submenu-toggle" href="#"
+                                                        onclick="showPage('NSMT')">Non Statutory
+                                                        and
+                                                        Mandatory Training</a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a class="dropdown-item btn btn-block btn-primary"
+                                                                onclick="showPage('NSaMT1')">eLearning
+                                                                Modules</a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item btn btn-block btn-primary"
+                                                                onclick="showPage('NSaMT2')">Workshops</a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item btn btn-block btn-primary"
+                                                                onclick="showPage('NSaMT3')">Coaching
+                                                                Sessions</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <!-- ==== END SUBMENU ==== -->
+                                            </ul>
+                                        </li>
+                                        <!-- ==== END DROPDOWN MENU ==== -->
+                                        <!-- ==== ADD A DROPDOWN MENU ==== -->
+                                        <!-- To create a dropdown menu, use this structure -->
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#"
+                                                data-bs-toggle="dropdown">Snippet Examples</a>
+                                            <ul class="dropdown-menu">
+                                                <!-- ==== ADD A NORMAL DROPDOWN ITEM ==== -->
+                                                <!-- Each dropdown item below links to a page -->
+                                                <li>
+                                                    <a class="dropdown-item btn btn-block btn-primary"
+                                                        onclick="showPage('Modal')">Modal</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item btn btn-block btn-primary"
+                                                        onclick="showPage('ToggleSection')">Toggle
+                                                        Section</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item btn btn-block btn-primary"
+                                                        onclick="showPage('Alerts')">Alerts</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item btn btn-block btn-primary"
+                                                        onclick="showPage('Tabs')">Tabs</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item btn btn-block btn-primary"
+                                                        onclick="showPage('Breadcrumbs')">Breadcrumbs</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item btn btn-block btn-primary"
+                                                        onclick="showPage('Carousel')">Carousel</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item btn btn-block btn-primary"
+                                                        onclick="showPage('Image')">Image</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item btn btn-block btn-primary"
+                                                        onclick="showPage('DYK')">Did You
+                                                        Know?</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item btn btn-block btn-primary"
+                                                        onclick="showPage('SOC')">Shout Out
+                                                        Card</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item btn btn-block btn-primary"
+                                                        onclick="showPage('Quote')">Quote</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item btn btn-block btn-primary"
+                                                        onclick="showPage('FactBox')">Fact
+                                                        Box</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item btn btn-block btn-primary"
+                                                        onclick="showPage('TipBox')">Tip Box</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item btn btn-block btn-primary"
+                                                        onclick="showPage('RoleCardDev')">Role
+                                                        Card</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item btn btn-block btn-primary"
+                                                        onclick="showPage('AccessibilityFlag')">Accessibility</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item btn btn-block btn-primary"
+                                                        onclick="showPage('UpdateBanner')">Update
+                                                        Banner</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item btn btn-block btn-primary"
+                                                        onclick="showPage('DohickyGrid')">Dohicky
+                                                        Grid</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item btn btn-block btn-primary"
+                                                        onclick="showPage('PageCode')">Page
+                                                        Code</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item btn btn-block btn-primary"
+                                                        onclick="showPage('OpenNewPageButton')">Open New Page
+                                                        Button</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item btn btn-block btn-primary"
+                                                        onclick="showPage('PopOutPageButton')">Pop
+                                                        Out Page Button</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item btn btn-block btn-primary"
+                                                        onclick="showPage('NavigationMenu')">Navigation Menu</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <!-- ==== END DROPDOWN MENU ==== -->
+                                    </ul>
+                                    <div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+
+                    <!-- Page full width content -->
+                    <div class="row mt-4">
+                        <div class="col-md">
+                            <h5 class="mt-4 mb-2">🧭 Main Navigation Panel: Map the Microsite</h5>
+                            <ul>
+                                <li><strong>Add sections:</strong> Use <code>&lt;li class="nav-item"&gt;</code> for
+                                    simple links
+                                    like
+                                    <code>Home</code> or <code>FAQs</code>.
+                                </li>
+                                <li>
+                                    <strongAdd dropdowns:</strong> Use <code>.nav-item.dropdown</code> with
+                                        <code>.dropdown-menu</code> to
+                                        group related pages.
+                                </li>
+                                <li><strong>Build submenus:</strong> Nest <code>.dropdown-submenu</code> inside
+                                    dropdowns for
+                                    multi-level
+                                    navigation.</li>
+                                <li><strong>Enable accessibility:</strong> Use the built-in
+                                    <code>themeSelectorSidebar</code>,
+                                    text size
+                                    buttons, and <code>toggleDarkMode()</code> for inclusive control.</li>
+                                <li><strong>Style it safely:</strong> Use Bootstrap classes like <code>navbar</code>,
+                                    <code>btn-outline-secondary</code>, and <code>form-select-sm</code> to harmonise
+                                    with your
+                                    microsite.
+                                </li>
+                            </ul>
+                            <pre><code class="snippet language-html">
+&lt;ul class=&quot;navbar-nav mx-auto&quot;&gt;
+  &lt;!-- ==== ADD A SINGLE SECTION ==== --&gt;
+  &lt;!-- To add a new section (simple link), copy and update one of the lines below --&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link&quot; onclick=&quot;showPage('home')&quot;&gt;Home&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link&quot; onclick=&quot;showPage('guides')&quot;&gt;Guides&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link&quot; onclick=&quot;showPage('faqs')&quot;&gt;FAQs&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link&quot; onclick=&quot;showPage('SUP')&quot;&gt;Support Request&lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;!-- ==== ADD A DROPDOWN MENU ==== --&gt;
+  &lt;li class=&quot;nav-item dropdown&quot;&gt;
+    &lt;a class=&quot;nav-link dropdown-toggle&quot; href=&quot;#&quot; data-bs-toggle=&quot;dropdown&quot; onclick=&quot;showPage('CC')&quot;&gt;Catalogue&lt;/a&gt;
+    &lt;ul class=&quot;dropdown-menu&quot;&gt;
+      &lt;!-- ==== ADD A NORMAL DROPDOWN ITEM ==== --&gt;
+      &lt;li&gt;
+        &lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('SaMT')&quot;&gt;Statutory and Mandatory Training&lt;/a&gt;
+      &lt;/li&gt;
+
+      &lt;!-- ==== ADD A SUBMENU ==== --&gt;
+      &lt;li class=&quot;dropdown-submenu&quot;&gt;
+        &lt;a class=&quot;dropdown-item submenu-toggle&quot; href=&quot;#&quot; onclick=&quot;showPage('NSMT')&quot;&gt;Non Statutory and Mandatory Training&lt;/a&gt;
+        &lt;ul class=&quot;dropdown-menu&quot;&gt;
+          &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('NSaMT1')&quot;&gt;eLearning Modules&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('NSaMT2')&quot;&gt;Workshops&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('NSaMT3')&quot;&gt;Coaching Sessions&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;!-- ==== END SUBMENU ==== --&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;!-- ==== END DROPDOWN MENU ==== --&gt;
+
+  &lt;!-- ==== ADD A DROPDOWN MENU ==== --&gt;
+  &lt;li class=&quot;nav-item dropdown&quot;&gt;
+    &lt;a class=&quot;nav-link dropdown-toggle&quot; href=&quot;#&quot; data-bs-toggle=&quot;dropdown&quot;&gt;Snippet Examples&lt;/a&gt;
+    &lt;ul class=&quot;dropdown-menu&quot;&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('Modal')&quot;&gt;Modal&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('ToggleSection')&quot;&gt;Toggle Section&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('Alerts')&quot;&gt;Alerts&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('Tabs')&quot;&gt;Tabs&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;!-- ==== END DROPDOWN MENU ==== --&gt;
+&lt;/ul&gt;
+</code></pre>
+                            <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div id="shared-footer"></div>
+
+            <!-- Bootstrap JS -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+
+            <!-- Custom JS -->
+            <script src="Assets/js/script.js"></script>
+</body>
+
+</html>

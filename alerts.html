@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MicroSiteKit – Alerts</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Assets/css/style.css" rel="stylesheet" />
+
+    <!-- Mermaid Setup -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script type="module">
+        import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+        mermaid.initialize({ startOnLoad: false });
+        window.mermaid = mermaid;
+    </script>
+</head>
+
+<body class="glass">
+    <!-- Injected Partials -->
+    <div id="shared-header"></div>
+    <div id="main-nav"></div>
+    <div id="sidebar-nav"></div>
+
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <!-- Sidebar Gradient Title -->
+            <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+                <h3 class="gradient-text">Alerts</h3>
+            </div>
+
+            <!-- Intro Text -->
+            <div class="col-md-8">
+                <h4>🚨 Alerts</h4>
+                <p>Alerts are your go-to snippet for grabbing attention—whether you're flagging a system update, sharing
+                    a
+                    success, or gently warning contributors about something quirky. They’re modular, theme-safe, and
+                    easy to
+                    drop into any page for instant clarity.</p>
+
+                <ul>
+                    <li>🔔 Use for updates, warnings, confirmations, or onboarding nudges</li>
+                    <li>🎨 Fully theme-safe—styled to harmonise across microsites</li>
+                    <li>🧱 Modular and stackable—combine with icons, links, or dohickies</li>
+                    <li>🧼 Keeps pages clean while surfacing key info</li>
+                </ul>
+
+                <p>Whether it’s “New feature live!”, “Heads-up: system flicker expected”, or “Success! Your changes are
+                    saved”—alerts help contributors stay informed and empowered.</p>
+            </div>
+        </div>
+
+        <!-- Alert Examples -->
+        <div class="row mt-4">
+            <div class="col-md">
+                <!-- ✅ Success Alert -->
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> Your dohicky deployed without a hitch.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <!-- ⚠️ Warning Alert -->
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Heads up!</strong> This feature is experimental—use with joyful caution.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <!-- ❌ Danger Alert -->
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Oh no!</strong> Something went sideways. Check your scroll-collapse logic.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <!-- ℹ️ Info Alert -->
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    <strong>FYI:</strong> This microsite supports keyboard navigation and high contrast themes.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <!-- 🔵 Primary Alert -->
+                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    <strong>Notice:</strong> A new dohicky has landed—check the snippet library!
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <!-- ⚪ Secondary Alert -->
+                <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+                    <strong>Reminder:</strong> Modular code is your onboarding superpower.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <!-- 🖤 Dark Alert -->
+                <div class="alert alert-dark alert-dismissible fade show" role="alert">
+                    <strong>Low light mode:</strong> This alert is theme-safe and ready for dark mode.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <!-- ⚪ Light Alert -->
+                <div class="alert alert-light alert-dismissible fade show" role="alert">
+                    <strong>Gentle nudge:</strong> You can customize this alert with any message you like.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Snippet Guide -->
+        <div class="row mt-4">
+            <div class="col-md">
+                <h5 class="mt-4 mb-2">🚨 Alert Snippets: Style Your Signals</h5>
+                <ul>
+                    <li><strong>Choose your alert type:</strong> Swap <code>alert-success</code>,
+                        <code>alert-warning</code>,
+                        <code>alert-danger</code>, etc. to match the tone—success, caution, error, info, or themed
+                        nudges.
+                    </li>
+                    <li><strong>Update the message:</strong> Change the bolded lead-in (e.g.
+                        <code>&lt;strong&gt;Success!&lt;/strong&gt;</code>) and the follow-up text to suit your context.
+                    </li>
+                    <li><strong>Make it dismissible:</strong> Keep the <code>btn-close</code> and <code>fade show</code>
+                        classes
+                        to allow contributors to close the alert manually.</li>
+                    <li><strong>Stack multiple alerts:</strong> Just drop them in sequence—Bootstrap handles spacing and
+                        stacking beautifully.</li>
+                    <li><strong>Theme-safe styling:</strong> All variants harmonise with NHS microsite palettes. No
+                        extra
+                        overrides needed!</li>
+                    <li><strong>Optional:</strong> Add icons, links, or dohickies inside the alert for extra clarity or
+                        interactivity.</li>
+                </ul>
+
+                <pre><code id="alertSnippet" class="snippet language-html">
+&lt;!-- ✅ Success Alert --&gt;
+&lt;div class=&quot;alert alert-success alert-dismissible fade show&quot; role=&quot;alert&quot;&gt;
+  &lt;strong&gt;Success!&lt;/strong&gt; Your dohicky deployed without a hitch.
+  &lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- ⚠️ Warning Alert --&gt;
+&lt;div class=&quot;alert alert-warning alert-dismissible fade show&quot; role=&quot;alert&quot;&gt;
+  &lt;strong&gt;Heads up!&lt;/strong&gt; This feature is experimental—use with joyful caution.
+  &lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- ❌ Danger Alert --&gt;
+&lt;div class=&quot;alert alert-danger alert-dismissible fade show&quot; role=&quot;alert&quot;&gt;
+  &lt;strong&gt;Oh no!&lt;/strong&gt; Something went sideways. Check your scroll-collapse logic.
+  &lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- ℹ️ Info Alert --&gt;
+&lt;div class=&quot;alert alert-info alert-dismissible fade show&quot; role=&quot;alert&quot;&gt;
+  &lt;strong&gt;FYI:&lt;/strong&gt; This microsite supports keyboard navigation and high contrast themes.
+  &lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- 🔵 Primary Alert --&gt;
+&lt;div class=&quot;alert alert-primary alert-dismissible fade show&quot; role=&quot;alert&quot;&gt;
+  &lt;strong&gt;Notice:&lt;/strong&gt; A new dohicky has landed—check the snippet library!
+  &lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- ⚪ Secondary Alert --&gt;
+&lt;div class=&quot;alert alert-secondary alert-dismissible fade show&quot; role=&quot;alert&quot;&gt;
+  &lt;strong&gt;Reminder:&lt;/strong&gt; Modular code is your onboarding superpower.
+  &lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- 🖤 Dark Alert --&gt;
+&lt;div class=&quot;alert alert-dark alert-dismissible fade show&quot; role=&quot;alert&quot;&gt;
+  &lt;strong&gt;Low light mode:&lt;/strong&gt; This alert is theme-safe and ready for dark mode.
+  &lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- ⚪ Light Alert --&gt;
+&lt;div class=&quot;alert alert-light alert-dismissible fade show&quot; role=&quot;alert&quot;&gt;
+  &lt;strong&gt;Gentle nudge:&lt;/strong&gt; You can customize this alert with any message you like.
+  &lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/div&gt;
+    </code></pre>
+                <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="shared-footer"></div>
+
+    <!-- Bootstrap JS + Custom Script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="Assets/js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,455 @@
+<!-- 
+===================================================================================================================================
+🗂Code Snippets
+===================================================================================================================================
+Snippet                        | Notes                                                                                            |
+-------------------------------|---------------------------------------------------------------------------------------------------
+Page                           | Used to add new pages to the microsite.                                                          |
+Modal                          | Used to add pop outs to a page                                                                   |
+New Page Button                | Used to create a button to navigate between pages of the microsite.                              |
+Pop-Up Button                  | Used to create a button that opens an external website in a new window.                          |
+Toggle Section Code            | Used to have a section expand to show content. Use several to create an accordion effect.        |
+Bootstrap Alert Banner         | Used to add messages to a page to emphasise a message                                            |
+Bootstrap Tabs                 | Used to create a series of tabs for content.                                                     |
+Bootstrap Breadcrumbs          | Used to create a breadcrumbe trail for users to navigate back through the microsite.             |
+Bootstrap Carousel             | Used to create image carousels like the announcements portlet in ESR                             |
+Responsive Image Embed         ! Used to add responsive images to the microsite                                                   |
+===================================================================================================================================
+Usage:
+Each snippet is commented out, copy the snippet and paste it in the body, then delete any examples of tags below that are at the left hand margin of the page.-->
+
+<!--* and *-->
+
+<!-- ============================================================================================================= -->
+<!-- ============================= Start of Page Snippet ========================================================= -->
+<!-- ============================================================================================================= -->
+
+<!-- ===================================== -->
+<!-- ============= PAGE NAME ============= -->
+<!-- ===================================== -->
+<!--*   
+                <div id="#" class="page">     <!--* Replace the # with the page ID *-->
+<!--* 
+                <div class="container">
+                <div class="row">
+                    <!-- Sidebar Gradient -->
+<!--*         
+                <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center">
+                <h3 class="gradient-text">#</h3>     <!--* Replace the # with the page title *-->
+<!--*         
+                </div>
+                    <!-- Page Introduction -->
+<!--*         
+                <div class="col-md-8">
+          
+                    <!--* Put your page content here *-->
+<!--*          
+                </div>
+                </div>
+                    <!-- Page full width content -->
+<!--* 
+                <div class="row mt-4">
+                <div class="col-md">
+          
+                    <!--* Secondary full page section if required. Put your page content here *-->
+
+<!--* 
+                </div>
+                </div>
+                </div>
+                </div>
+
+*-->
+
+<!-- ============================================================================================================= -->
+<!-- ================ End of Page Snippet | Start of Modal Snippet =============================================== -->
+<!-- ============================================================================================================= -->
+
+<!--*
+                  <!-- Modal Name -->
+<!--*
+                <button class="btn btn-primary w-100 text-start mb-2" data-bs-toggle="modal" data-bs-target="#ID">#</button>   <!--* Replace the # with what you want the button on the page to say and ID with a unique ID for each Modal *-->
+<!--*
+                <div class="modal fade" id="ID" tabindex="-1" aria-labelledby="IDLabel" aria-hidden="true">  <!--* Replace both instances of ID with the unique ID from above *-->
+<!--*            
+                <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content">
+                <div class="modal-header btn btn-primary">
+                <h5 class="modal-title mb-0" id="IDLabel">#</h5>   <!--* Replace the # with what you want the title of the Modal to say and ID with a unique ID for each Modal *-->
+<!--*
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="card-body">
+
+                  <!--* Put your Modal content here *-->
+<!--*                  
+                </div>
+                </div>
+                </div>
+                </div>
+
+*-->
+
+<!-- ============================================================================================================= -->
+<!-- ================ End of PageModal Snippet | Start of Open New Page Button Snippet =========================== -->
+<!-- ============================================================================================================= -->
+
+<!--*
+                <button class="btn btn-primary w-100 text-start mb-2" onclick="showPage('ID')">#</button> <!--* Replace the # with what you want the button on the page to say and ID with a unique ID for the page you want to open *-->
+<!--**-->
+
+<!-- ============================================================================================================= -->
+<!-- ================ End of Open New Page Button Snippet | Start of Pop Out Page Button Snippet ================= -->
+<!-- ============================================================================================================= -->
+
+<!--*
+              <a class="btn btn-primary w-100 text-start mb-2" href="#" onclick="openPopup('URL')">Button</a>     <!--* Replace Button with what you want the button on the page to say and URL with the web address of the page you want to open *-->
+
+<!--**-->
+
+<!-- ============================================================================================================= -->
+<!-- ================ End of Pop Out Page Button Snippet | Start of Toggle Section Code Snippet  ================= -->
+<!-- ============================================================================================================= -->
+
+<!--*
+  <button class="btn btn-primary w-100 text-start mb-2" onclick="toggleSection('ID')">#</button> <!--* Replace # with button label, ID with the section's unique ID *-->
+<!--*
+  <div id="ID" style="display:none;" class="mt-3"> <!--* Replace ID with the section's unique ID *-->
+
+<!--* Put the content you want to toggle here *-->
+
+<!--*   
+  </div>
+*-->
+
+<!-- ============================================================================================================= -->
+<!-- ============== End of Toggle Section Code Snippet  | Start of Bootstrap Alert Banner Snippet ================ -->
+<!-- ============================================================================================================= -->
+
+<!--*
+    <div class="alert alert-warning alert-dismissible fade show" role="alert"> <!--* The alert-warning can be changed using the options in the table below.
+    <strong>Heads up!</strong> This is a customizable alert message.
+          <!--* Optional: Add detailed instructions or context here *-->
+<!--*   
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+*-->
+
+<!--**************************************-->
+<!--* Bootstrap Alert Styles Reference   *-->
+<!--**************************************-->
+
+<!--*
+  | Style Class        | Purpose / Mood               | Color Default     |
+  |--------------------|------------------------------|-------------------|
+  | alert-primary      | Informational or neutral note| Blue              |
+  | alert-secondary    | Subtle or understated alerts | Grey              |
+  | alert-success      | Positive feedback or success | Green             |
+  | alert-danger       | Errors or critical warnings  | Red               |
+  | alert-warning      | Cautions or mild alerts      | Orange/Yellow     |
+  | alert-info         | Informational, less prominent| Cyan/Light Blue   |
+  | alert-light        | Very soft tone, low priority | Pale              |
+  | alert-dark         | High contrast or moody vibe  | Dark grey/Black   |
+*-->
+
+<!-- ============================================================================================================= -->
+<!-- ==================== End of Bootstrap Alert Banner Snippet | Start of Bootstrap Tabs Snippet ================ -->
+<!-- ============================================================================================================= -->
+
+<!--* How to use this code
+
+1. Each tab set must have unique IDs, for this use 01 - 99 replacing as required.
+2. Each tab in a set must also have a unique ID, for this use the set number and a letter a - z
+
+*-->
+
+<!-- Tabs navigation -->
+<!--*
+        <ul class="nav nav-tabs" id="tabNav01" role="tablist">
+        <!-- Tab button 1 -->
+<!--*
+        <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="tabBtn01a" data-bs-toggle="tab"
+        data-bs-target="#tabPane01a" type="button" role="tab"
+        aria-controls="tabPane01a" aria-selected="true">Tab 01A</button>
+        </li>
+
+        <!-- Tab button 2 -->
+<!--*
+        <li class="nav-item" role="presentation">
+        <button class="nav-link" id="tabBtn01b" data-bs-toggle="tab"
+         data-bs-target="#tabPane01b" type="button" role="tab"
+        aria-controls="tabPane01b" aria-selected="false">Tab 01B</button>
+        </li>
+        </ul>
+
+        <!-- Tabs content -->
+<!--*
+        <div class="tab-content" id="tabContent01">
+        <!-- Content pane 1 -->
+<!--*
+        <div class="tab-pane fade show active" id="tabPane01a" role="tabpanel" aria-labelledby="tabBtn01a">
+        Content for Tab 01A.
+        </div>
+
+        <!-- Content pane 2 -->
+<!--*
+        <div class="tab-pane fade" id="tabPane01b" role="tabpanel" aria-labelledby="tabBtn01b">
+        Content for Tab 01B.
+        </div>
+        </div>
+*-->
+
+<!-- =========================================================================================================== -->
+<!-- =============== End of Bootstrap Tabs Snippet | Start of Bootstrap Breadcrumbs Snippet ==================== -->
+<!-- =========================================================================================================== -->
+
+<!--*
+Add this snippet to each page at the top of the page container (after the second line of code for each page)
+
+          <nav aria-label="breadcrumb"> <!--* Accessibility label: describes this as breadcrumb navigation *-->
+<!--*
+          <ol class="breadcrumb"> <!--* Ordered list for breadcrumb trail *-->
+
+<!--*
+          <li class="breadcrumb-item"><a onclick="showPage('home')">Home</a></li> <!--* Replace # with actual page URL *-->
+<!--*
+          <li class="breadcrumb-item"><a onclick="showPage('CC')">Catalogue</a></li> <!--* Add as many links as needed *-->
+<!--*
+          <<li class="breadcrumb-item active" aria-current="page">Statutory Training</li> <!--* Current page name *-->
+<!--*
+
+          </ol>
+          </nav>
+*-->
+
+<!-- ============================================================================================ -->
+<!-- ======= End of Bootstrap Breadcrumbs Snippet | Start of Bootstrap Carousel ================= -->
+<!-- ============================================================================================ -->
+
+<!--*
+          <div id="CID" class="carousel slide" data-bs-ride="carousel">     <!--* Replace CID with the carousel's unique ID *-->
+<!--*
+          <div class="carousel-indicators">
+          <button type="button" data-bs-target="#CID" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>   <!--* Replace CID with the carousel's unique ID *-->
+<!--*
+          <button type="button" data-bs-target="#CID" data-bs-slide-to="1" aria-label="Slide 2"></button>    <!--* Replace CID with the carousel's unique ID *-->
+<!--*      
+          <button type="button" data-bs-target="#CID" data-bs-slide-to="2" aria-label="Slide 3"></button>    <!--* Replace CID with the carousel's unique ID *-->
+
+<!--* Add more rows for each slide you want to include updating the data-bs-slide-to and aria-label to a new number *-->
+<!--*    
+          </div>
+
+<!--* Slide1 with captions *-->
+<!--*
+          <div class="carousel-inner">
+          <div class="carousel-item active">
+          <img src="#" class="d-block w-100" alt="##">  <!--* Replace the # with that of the image location and ## with alternative text for screen readers *-->
+<!--*        
+          <div class="carousel-caption d-none d-md-block">
+            <!--* Update with the text for the overlay *-->
+<!--*
+          <h5></h5>
+          <p></p>
+          </div>
+          </div>
+      
+<!--* Slide2 with captions *-->
+
+<!--*
+          <div class="carousel-item">
+          <img src="#" class="d-block w-100" alt="##"> <!--* Replace the # with that of the image location and ## with alternative text for screen readers *-->
+<!--*        
+          <div class="carousel-caption d-none d-md-block">
+            <!--* Update with the text for the overlay *-->
+<!--*          
+          <h5></h5>
+          <p></p>
+          </div>
+          </div>
+      
+<!--* Slide3 with captions *-->
+<!--*      
+          <div class="carousel-item">
+          <img src="#" class="d-block w-100" alt="##"> <!--* Replace the # with that of the image location and ## with alternative text for screen readers *-->
+<!--*        
+          <div class="carousel-caption d-none d-md-block">
+              <!--* Update with the text for the overlay *-->
+<!--*          
+          <h5></h5>
+          <p></p>
+          </div>
+          </div>
+          </div>
+
+<!--* Controls *-->
+<!--*
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselWithCaptions" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselWithCaptions" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+          </button>
+          </div>
+*-->
+
+<!-- ============================================================================================ -->
+<!-- ========== End of Bootstrap Carousel | Start of Responsive Image Embed ===================== -->
+<!-- ============================================================================================ -->
+
+<!--* 
+          <div class="text-center">
+          <img src="#" alt="##" class="img-fluid rounded shadow-sm" style="max-width: 100%; height: auto;">  <!--* Replace the # with that of the image location and ## with alternative text for screen readers *-->
+<!--* 
+          <small class="d-block mt-2 text-muted">#</small><!--* Replace the # with optional text text that will appear under the image *-->
+<!--* 
+          </div>
+*-->
+
+<!-- ============================================================================================ -->
+<!-- ========== End of Responsive Image Embed | Start of Did You Know Box ======================= -->
+<!-- ============================================================================================ -->
+
+<!--* 
+          <details class="did-you-know">
+            <summary>💡 Did you know?</summary>
+            <p>This microsite supports keyboard navigation and high contrast themes for accessibility.</p>
+          </details>
+*-->
+
+<!--* 
+          Add this inside any content block to surface tips, onboarding notes, or accessibility facts.
+          Theme styling is automatic—no extra classes needed.
+          You can duplicate this block and change the content freely.
+*-->
+
+<!-- ============================================================================================ -->
+<!-- ========== End of Did You Know Box | Start of Contributor Shout-Out Card =================== -->
+<!-- ============================================================================================ -->
+
+<!--* 
+          <div class="shout-card">
+            <strong>🌟 Shout-out:</strong> Thanks to <em>Bronwyn</em> for refactoring the scroll-collapse logic!
+          </div>
+*-->
+
+<!--* 
+          Drop this anywhere to celebrate a contributor, highlight a recent update, or share a fun fact.
+          The card will auto-style based on the current theme and dark mode.
+          You can duplicate this block and change the name or message freely.
+*-->
+
+<!-- ============================================================================================ -->
+<!-- ========== End of Shout-Out Card | Start of Contributor Quote Box ========================== -->
+<!-- ============================================================================================ -->
+
+<!--* 
+          <blockquote class="quote-box">
+            <p>“Modular code isn’t just tidy—it’s empowering.”</p>
+            <footer>— Bronwyn, Implementation Advisor</footer>
+          </blockquote>
+*-->
+
+<!--* 
+          Use this to highlight contributor wisdom, playful commentary, or onboarding encouragement.
+          Theme styling is automatic. You can duplicate and customize freely.
+*-->
+
+<!-- ============================================================================================ -->
+<!-- ========== End of Quote Box | Start of Contributor Factbox ================================= -->
+<!-- ============================================================================================ -->
+
+<!--* 
+          <div class="factbox">
+            <strong>📦 Fact:</strong> This microsite uses modular dohickies to make onboarding joyful.
+          </div>
+*-->
+
+<!--* 
+          Use this to surface technical facts, contributor tips, or onboarding nudges.
+          Theme styling is automatic. You can duplicate and customize freely.
+*-->
+
+
+<!-- ============================================================================================ -->
+<!-- ========== End of Did You Know Box | Start of Contributor Tip Box ========================== -->
+<!-- ============================================================================================ -->
+
+<!--* 
+          <details class="tip-box">
+            <summary>🛠 Contributor Tip</summary>
+            <p>Use `.dohicky-*` classes to drop in modular features without touching the CMS.</p>
+          </details>
+*-->
+
+<!--* 
+          Use this to surface helpful nudges, onboarding notes, or technical hints.
+          Theme styling is automatic. You can duplicate and customize freely.
+*-->
+
+<!-- ============================================================================================ -->
+<!-- ========== End of Tip Box | Start of Role-Based Onboarding Card ============================ -->
+<!-- ============================================================================================ -->
+
+<!--* 
+          <div class="role-card">
+            <h3>🧑‍💻 Developer</h3>
+            <p>Start with the modular dohickies and check the scroll-collapse logic in `onboarding.js`.</p>
+          </div>
+*-->
+
+<!--* 
+          Use this to guide contributors by role—dev, designer, content, etc.
+          Theme styling is automatic. You can duplicate and customize freely.
+*-->
+
+<!-- ============================================================================================ -->
+<!-- ========== End of Role Card | Start of Accessibility Flag ================================== -->
+<!-- ============================================================================================ -->
+
+<!--* 
+          <div class="accessibility-flag">
+            <strong>♿ Accessibility:</strong> This section supports keyboard navigation and screen readers.
+          </div>
+*-->
+
+<!--* 
+          Use this to highlight accessible features or flag inclusive design.
+          Theme styling is automatic. You can duplicate and customize freely.
+*-->
+
+<!-- ============================================================================================ -->
+<!-- ========== End of Accessibility Flag | Start of Update Banner ============================== -->
+<!-- ============================================================================================ -->
+
+<!--* 
+          <div class="update-banner">
+            <strong>🔄 Update:</strong> Scroll-collapse logic refactored for flicker-free transitions.
+          </div>
+*-->
+
+<!--* 
+          Use this to surface recent changes, bug fixes, or release notes.
+          Theme styling is automatic. You can duplicate and customize freely.
+*-->
+
+<!-- ============================================================================================ -->
+<!-- ========== End of Update Banner | Start of Dohicky Grid Showcase =========================== -->
+<!-- ============================================================================================ -->
+
+<!--* 
+          <div class="dohicky-grid">
+            <div class="dohicky-item">🎉 Did You Know</div>
+            <div class="dohicky-item">📦 Factbox</div>
+            <div class="dohicky-item">🌟 Shout Card</div>
+            <div class="dohicky-item">🛠 Tip Box</div>
+          </div>
+*-->
+
+<!--* 
+          Use this to showcase available dohickies or build a contributor dashboard.
+          Theme styling is automatic. You can duplicate and customize freely.
+*-->

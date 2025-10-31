@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MicroSiteKit – Git Graph Page</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom Styles -->
+    <link href="Assets/css/style.css" rel="stylesheet" />
+
+    <!-- Mermaid Setup -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script type="module">
+        import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+        mermaid.initialize({ startOnLoad: false });
+        window.mermaid = mermaid;
+    </script>
+</head>
+
+<body class="glass">
+    <!-- Injected Partials -->
+    <div id="shared-header"></div>
+    <div id="main-nav"></div>
+    <div id="sidebar-nav"></div>
+
+    <!-- Page-Specific Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center">
+                <h3 class="gradient-text">Git Graph Page</h3>
+            </div>
+            <div class="col-md-8">
+                <div class="page-intro text-center py-4 px-3">
+                    <p>This example shows how to use Mermaid syntax to create a Git Graph directly in your microsite.
+                        It’s ideal for visualising branches, commits, merges, and tagged releases.</p>
+
+                    <ul>
+                        <li>🌿 Clear view of branches and merges</li>
+                        <li>🏷️ Tags for releases</li>
+                        <li>🧩 Modular and editable—great for sprint planning</li>
+                        <li>📋 Includes copy-to-clipboard button for easy reuse</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Page full width content -->
+            <div class="row mt-4">
+                <div class="col-md">
+                    <h5 class="mt-4 mb-2">🌱 Git Graph Example</h5>
+                    <p>This Mermaid block renders a Git Graph showing a simple repo flow with feature branches, a
+                        hotfix,
+                        and tagged releases. You can customise branch names, commit order, and tags to reflect your own
+                        workflow.</p>
+
+                    <!-- Mermaid Diagram Block -->
+                    <pre class="mermaid snippet">
+gitGraph
+  commit id: "init"
+  commit tag: "v1.0.0"
+  branch feature/auth
+  checkout feature/auth
+  commit id: "auth-1"
+  commit id: "auth-2"
+  checkout main
+  merge feature/auth tag: "v1.1.0"
+
+  branch hotfix/login
+  checkout hotfix/login
+  commit id: "hotfix-1"
+  checkout main
+  merge hotfix/login tag: "v1.1.1"
+
+  branch feature/ui
+  checkout feature/ui
+  commit id: "ui-1"
+  commit id: "ui-2"
+  checkout main
+  merge feature/ui tag: "v1.2.0"
+          </pre>
+
+                    <!-- Customisation Tips -->
+                    <div class="mt-4">
+                        <h6>🛠️ How to Customise</h6>
+                        <ul>
+                            <li><strong>Branch strategy:</strong> Use <code>branch</code>, <code>checkout</code>, and
+                                <code>merge</code> to model your flow</li>
+                            <li><strong>Commits:</strong> Add <code>commit</code> lines; optionally label with
+                                <code>id: "message"</code></li>
+                            <li><strong>Tags:</strong> Append <code>tag: "vX.Y.Z"</code> to mark releases</li>
+                            <li><strong>Layout:</strong> You can add an <code>options { }</code> block under
+                                <code>gitGraph</code> to tweak spacing and node radius</li>
+                        </ul>
+                        <pre><code class="snippet language-html">
+&lt;div class=&quot;mermaid snippet&quot;&gt;
+gitGraph
+  commit
+  branch feature
+  checkout feature
+  commit
+  checkout main
+  merge feature
+&lt;/div&gt;
+</code></pre>
+                        <!-- Copy Button -->
+                        <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div id="shared-footer"></div>
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Custom JS -->
+        <script src="Assets/js/script.js"></script>
+</body>
+
+</html>

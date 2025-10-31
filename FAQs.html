@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MicroSiteKit – FAQs</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom Styles -->
+    <link href="Assets/css/style.css" rel="stylesheet" />
+
+    <!-- Mermaid Setup -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script type="module">
+        import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+        mermaid.initialize({ startOnLoad: false });
+        window.mermaid = mermaid;
+    </script>
+</head>
+
+<body class="glass">
+    <!-- Injected Partials -->
+    <div id="shared-header"></div>
+    <div id="main-nav"></div>
+    <div id="sidebar-nav"></div>
+
+    <!-- Page-Specific Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center">
+                <h3 class="gradient-text">FAQs</h3>
+            </div>
+            <div class="col-md-8">
+                <div class="page-intro text-center py-4 px-3">
+                    <!-- Replace this block with your page-specific content -->
+                    <h1 class="gradient-text mb-3">❓ MicroSiteKit FAQs</h1>
+                    <p class="lead">Got questions? You’re in the right place. This page is your friendly companion
+                        through the
+                        world of microsite building.</p>
+
+                    <p><strong>MicroSiteKit</strong> is packed with modular snippets, layout scaffolds, and
+                        contributor-first
+                        tools—but even the most joyful toolkit sparks a few “how do I…” moments. That’s where this FAQ
+                        page
+                        comes
+                        in.</p>
+
+                    <h5 class="mt-4">🧭 What You’ll Find Here</h5>
+                    <ul class="text-start d-inline-block">
+                        <li><strong>What is a microsite?</strong> And why are they so brilliant for onboarding and
+                            training</li>
+                        <li><strong>How do I use the snippets?</strong> Copy-paste guidance and layout tips</li>
+                        <li><strong>Can I customise them?</strong> Absolutely—warm scaffolding included</li>
+                        <li><strong>Is it accessible?</strong> Yes! With flags, toggles, and theme-safe styling</li>
+                        <li><strong>Do I need special software?</strong> Nope—just your code editor and a spark of joy
+                        </li>
+                    </ul>
+
+                    <p class="mt-4">Whether you’re launching your first microsite or refining a role-based dashboard,
+                        these
+                        FAQs
+                        are here to guide you with clarity, warmth, and a few cheeky dohickies along the way.</p>
+
+                    <p class="mt-4"><strong>Let’s demystify the magic.</strong> Scroll down and explore the answers.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md">
+                <!-- FAQ 1 -->
+                <button class="btn btn-primary w-100 text-start mb-2" data-bs-toggle="modal"
+                    data-bs-target="#whatIsMicroSiteKit">
+                    What is MicroSiteKit?
+                </button>
+                <div class="modal fade" id="whatIsMicroSiteKit" tabindex="-1" aria-labelledby="whatIsMicroSiteKitLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header btn btn-primary d-flex justify-content-between align-items-center">
+                                <h5 class="modal-title mb-0" id="whatIsMicroSiteKitLabel">MicroSiteKit Overview</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="card-body">
+                                <p>MicroSiteKit is a modular resource hub for building microsites—pages that are
+                                    lightweight,
+                                    focused, and full of contributor-first scaffolding. It includes reusable snippets,
+                                    layout
+                                    templates,
+                                    and accessibility tools to help you build with clarity and joy.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <button class="btn btn-primary w-100 text-start mb-2" data-bs-toggle="modal"
+                    data-bs-target="#whatCanIBuild">
+                    What can I build with it?
+                </button>
+                <div class="modal fade" id="whatCanIBuild" tabindex="-1" aria-labelledby="whatCanIBuildLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header btn btn-primary d-flex justify-content-between align-items-center">
+                                <h5 class="modal-title mb-0" id="whatCanIBuildLabel">Build Possibilities</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="card-body">
+                                <ul>
+                                    <li>Role-based onboarding pages</li>
+                                    <li>Training dashboards</li>
+                                    <li>Snippet libraries and launchers</li>
+                                    <li>Support request portals</li>
+                                    <li>Contributor shout-out walls</li>
+                                    <li>Theme-safe microsite layouts with headers, footers, and navigation</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <button class="btn btn-primary w-100 text-start mb-2" data-bs-toggle="modal" data-bs-target="#needCMS">
+                    Do I need a CMS or special software?
+                </button>
+                <div class="modal fade" id="needCMS" tabindex="-1" aria-labelledby="needCMSLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header btn btn-primary d-flex justify-content-between align-items-center">
+                                <h5 class="modal-title mb-0" id="needCMSLabel">CMS Requirements</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="card-body">
+                                <p>Nope! MicroSiteKit is designed to be copy-paste friendly. You can drop snippets
+                                    directly into
+                                    your
+                                    microsite codebase—no CMS, no plugins, just modular HTML/CSS/JS goodness.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <button class="btn btn-primary w-100 text-start mb-2" data-bs-toggle="modal"
+                    data-bs-target="#whoIsItFor">
+                    Who is MicroSiteKit for?
+                </button>
+                <div class="modal fade" id="whoIsItFor" tabindex="-1" aria-labelledby="whoIsItForLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header btn btn-primary d-flex justify-content-between align-items-center">
+                                <h5 class="modal-title mb-0" id="whoIsItForLabel">Audience</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="card-body">
+                                <p>It’s for anyone building or maintaining microsites:</p>
+                                <ul>
+                                    <li>Developers and implementers</li>
+                                    <li>Learning and development teams</li>
+                                    <li>Contributors and content designers</li>
+                                    <li>Anyone who wants to scaffold pages with clarity and warmth</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 5 -->
+                <button class="btn btn-primary w-100 text-start mb-2" data-bs-toggle="modal"
+                    data-bs-target="#whatIsMicrosite">
+                    What’s a microsite, exactly?
+                </button>
+                <div class="modal fade" id="whatIsMicrosite" tabindex="-1" aria-labelledby="whatIsMicrositeLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header btn btn-primary d-flex justify-content-between align-items-center">
+                                <h5 class="modal-title mb-0" id="whatIsMicrositeLabel">Microsite Defined</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="card-body">
+                                <p>A microsite is a standalone page or mini-hub focused on a specific purpose—like
+                                    onboarding,
+                                    training, or role guidance. It’s fast-loading, easy to navigate, and designed to
+                                    guide
+                                    contributors
+                                    without overwhelming them.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="shared-footer"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="Assets/js/script.js"></script>
+</body>
+
+</html>

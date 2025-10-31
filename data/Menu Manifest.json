@@ -1,0 +1,91 @@
+[
+  {
+    "label": "🏠 Home",
+    "href": "index.html"
+  },
+  {
+    "label": "🧭 Site Map & Search",
+    "href": "SiteMap.html"
+  },
+  {
+    "label": "📘 Guides and Supporting Documentation",
+    "href": "resources.html"
+  },
+  {
+    "label": "❓ FAQs",
+    "href": "FAQs.html"
+  },
+  {
+    "label": "📂 Snippet Examples",
+    "children": [
+      {
+        "label": "Main Structure and Navigation",
+        "children": [
+          { "label": "Page Code", "href": "Page Code.html" },
+          {
+            "label": "Header Section Panel",
+            "href": "Header Section Panel.html"
+          },
+          { "label": "Main Navigation", "href": "Main Navigation Panel.html" },
+          { "label": "Side Menu Panel", "href": "Side Menu Panel.html" },
+          { "label": "Footer Panel", "href": "Footer Panel.html" }
+        ]
+      },
+      {
+        "label": "Other Navigational Tools",
+        "children": [
+          { "label": "Breadcrumbs", "href": "Breadcrumbs.html" },
+          {
+            "label": "Open New Page Button",
+            "href": "Open New Page Button.html"
+          },
+          { "label": "Pop-Out Page Button", "href": "Pop-Out Page Button.html" }
+        ]
+      },
+      {
+        "label": "Content",
+        "children": [
+          { "label": "Modal", "href": "Modals.html" },
+          { "label": "Toggle Section", "href": "Toggle.html" },
+          { "label": "Alerts", "href": "alerts.html" },
+          { "label": "Tabs", "href": "tabs.html" },
+          { "label": "Carousel", "href": "Carousel.html" },
+          { "label": "Image", "href": "Responsive Image.html" },
+          { "label": "Did You Know?", "href": "Did You Know.html" },
+          { "label": "Shout Out Card", "href": "Shout Out Card.html" },
+          { "label": "Quote", "href": "Quote.html" },
+          { "label": "Fact Box", "href": "Fact Box.html" },
+          { "label": "Tip Box", "href": "Tip Box.html" },
+          { "label": "Role Card", "href": "Role Card.html" },
+          { "label": "Accessibility", "href": "Accessibility Flag.html" },
+          { "label": "Update Banner", "href": "Update Banner.html" },
+          { "label": "Dohicky Grid", "href": "Dohicky Grid.html" }
+        ]
+      },
+      {
+        "label": "Mermaid Charts",
+        "children": [
+          { "label": "Process Map", "href": "Process Flow Page.html" },
+          { "label": "Sequence Diagram", "href": "Sequence Diagram Page.html" },
+          { "label": "Class Diagram", "href": "Class Diagram Page.html" },
+          { "label": "State Diagram", "href": "State Diagram Page.html" },
+          {
+            "label": "Entity Relationship",
+            "href": "Entity Relationship Page.html"
+          },
+          {
+            "label": "User Journey Diagram",
+            "href": "User journey diagram.html"
+          },
+          { "label": "Mindmap", "href": "Mindmap.html" },
+          { "label": "Gantt Chart", "href": "Gantt chart.html" },
+          { "label": "Timeline Diagram", "href": "Timeline diagram.html" },
+          { "label": "Git Graph", "href": "Git graph.html" },
+          { "label": "Pie Chart", "href": "Pie chart.html" },
+          { "label": "C4 Diagram", "href": "C4 Diagram.html" },
+          { "label": "XY Chart", "href": "XY Chart.html" }
+        ]
+      }
+    ]
+  }
+]

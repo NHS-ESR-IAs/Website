@@ -1,0 +1,3742 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 
+===================================================================================================================
+🗂️ Microsite Page Index — Navigation Targets
+===================================================================================================================
+ID            | Page Title                               | Notes                                                  |
+--------------|------------------------------------------|---------------------------------------------------------
+home          | Home                                     | Welcome message & site overview                        |
+guides        | Guides                                   | ESR Learning Management step-by-step tutorials         |
+faqs          | FAQs                                     | Common issues and troubleshooting steps                |
+SUP           | Support Request                          | Microsoft Forms-based help request form                |
+SaMT          | Statutory & Mandatory Training           | Core NHS-required courses (includes modals)            |
+NSaMT         | Non Statutory & Mandatory Training       | Optional or role-specific training sessions            |
+===================================================================================================================
+Usage:
+Each nav-link uses `onclick="showPage('ID')"` to display the corresponding page div.
+Ensure divs use `<div id="ID" class="page">` and toggle visibility via JS.
+-->
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MicroSiteKit</title>
+  <!-- Bootstrap 5.3.6 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Custom Stylesheet -->
+  <link href="style.css" rel="stylesheet" />
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    // Don’t render on load, we’ll trigger it manually
+    mermaid.initialize({ startOnLoad: false });
+    window.mermaid = mermaid; // expose globally so showPage() can use it
+  </script>
+</head>
+
+<body class="glass">
+  <!-- ================================= -->
+  <!-- ====== HEADER & NAVIGATION ====== -->
+  <!-- ================================= -->
+
+  <div id="shared-nav" class="d-none">
+    <!-- ==== ADD A SINGLE SECTION ==== -->
+    <!-- To add a new section (simple link), copy and update one of the lines below -->
+    <li class="nav-item">
+      <a class="nav-link" onclick="showPage('home')">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" onclick="showPage('guides')">Guides and Supporting Documentation</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" onclick="showPage('faqs')">FAQs</a>
+    </li>
+    <!-- ==== ADD A DROPDOWN MENU ==== -->
+    <!-- To create a dropdown menu, use this structure -->
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Snippet Examples</a>
+      <ul class="dropdown-menu">
+        <!-- ==== ADD A SUBMENU ==== -->
+        <!-- To add a submenu (nested within dropdown), use this structure -->
+        <li class="dropdown-submenu">
+          <a class="dropdown-item submenu-toggle btn btn-block btn-primary" href="#">Main Structure and Navigation</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item btn btn-block btn-primary" onclick="showPage('PageCode')">Page Code</a></li>
+            <li><a class="dropdown-item btn btn-block btn-primary" onclick="showPage('HeaderSectionPanel')">Header
+                Section Panel</a>
+            </li>
+            <li><a class="dropdown-item btn btn-block btn-primary" onclick="showPage('MainNavigation')">Main
+                Navigation</a></li>
+            <li><a class="dropdown-item btn btn-block btn-primary" onclick="showPage('SideMenuPanel')">Side Menu
+                Panel</a></li>
+            <li><a class="dropdown-item btn btn-block btn-primary" onclick="showPage('FooterPanel')">Footer Panel</a>
+            </li>
+          </ul>
+        </li>
+        <!-- ==== END SUBMENU ==== -->
+        <!-- ==== ADD A SUBMENU ==== -->
+        <!-- To add a submenu (nested within dropdown), use this structure -->
+        <li class="dropdown-submenu">
+          <a class="dropdown-item submenu-toggle btn btn-block btn-primary" href="#">Other Navigational Tools</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item btn btn-block btn-primary" onclick="showPage('Breadcrumbs')">Breadcrumbs</a>
+            </li>
+            <li><a class="dropdown-item btn btn-block btn-primary" onclick="showPage('OpenNewPageButton')">Open New Page
+                Button</a>
+            </li>
+            <li><a class="dropdown-item btn btn-block btn-primary" onclick="showPage('PopOutPageButton')">Pop Out Page
+                Button</a></li>
+          </ul>
+        </li>
+        <!-- ==== END SUBMENU ==== -->
+        <!-- ==== ADD A SUBMENU ==== -->
+        <!-- To add a submenu (nested within dropdown), use this structure -->
+        <li class="dropdown-submenu ">
+          <a class="dropdown-item submenu-toggle btn btn-block btn-primary" href="#">Content</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item btn btn-block btn-primary" onclick="showPage('Modal')">Modal</a></li>
+            <li><a class="dropdown-item btn btn-block btn-primary" onclick="showPage('ToggleSection')">Toggle
+                Section</a></li>
+            <li><a class="dropdown-item btn btn-block btn-primary" onclick="showPage('Alerts')">Alerts</a></li>
+            <li><a class="dropdown-item btn btn-block btn-primary" onclick="showPage('Tabs')">Tabs</a></li>
+            <li><a class="dropdown-item btn btn-block btn-primary" onclick="showPage('Carousel')">Carousel</a></li>
+            <li><a class="dropdown-item btn btn-block btn-primary" onclick="showPage('Image')">Image</a></li>
+            <li><a class="dropdown-item btn btn-block btn-primary" onclick="showPage('DYK')">Did You Know?</a></li>
+            <li><a class="dropdown-item btn btn-block btn-primary" onclick="showPage('SOC')">Shout Out Card</a></li>
+            <li><a class="dropdown-item btn btn-block btn-primary" onclick="showPage('Quote')">Quote</a></li>
+            <li><a class="dropdown-item btn btn-block btn-primary" onclick="showPage('FactBox')">Fact Box</a></li>
+            <li><a class="dropdown-item btn btn-block btn-primary" onclick="showPage('TipBox')">Tip Box</a></li>
+            <li><a class="dropdown-item btn btn-block btn-primary" onclick="showPage('RoleCardDev')">Role Card</a></li>
+            <li><a class="dropdown-item btn btn-block btn-primary"
+                onclick="showPage('AccessibilityFlag')">Accessibility</a></li>
+            <li><a class="dropdown-item btn btn-block btn-primary" onclick="showPage('UpdateBanner')">Update Banner</a>
+            </li>
+            <li><a class="dropdown-item btn btn-block btn-primary" onclick="showPage('DohickyGrid')">Dohicky Grid</a>
+            </li>
+          </ul>
+        </li>
+        <!-- ==== ADD A SUBMENU ==== -->
+        <!-- To add a submenu (nested within dropdown), use this structure -->
+        <li class="dropdown-submenu">
+          <a class="dropdown-item submenu-toggle btn btn-block btn-primary" href="#">Mermaid charts</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item btn btn-block btn-primary" onclick="showPage('ProcessFlow')">Process Map</a>
+            </li>
+            <li><a class="dropdown-item btn btn-block btn-primary" onclick="showPage('SequenceDiagramPanel')">Sequence
+                Diagram</a>
+            </li>
+            <li><a class="dropdown-item btn btn-block btn-primary" onclick="showPage('ClassDiagramPanel')">Class
+                Diagram</a>
+            </li>
+            <li><a class="dropdown-item btn btn-block btn-primary" onclick="showPage('StateDiagramPanel')">State
+                Diagram</a>
+            </li>
+            <li><a class="dropdown-item btn btn-block btn-primary" onclick="showPage('ERDiagramPanel')">Entity
+                Relationship</a>
+            </li>
+        </li>
+      </ul>
+    </li>
+    <!-- ==== END SUBMENU ==== -->
+    </ul>
+    </li>
+    <!-- ==== END DROPDOWN MENU ==== -->
+  </div>
+
+
+
+  <header class="nhs-header">
+
+
+    <div class="header-bar d-flex align-items-center justify-content-between px-3 py-2 position-relative ">
+      <!-- Menu Button (Left) -->
+      <div class="menu-button-wrapper">
+        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu"
+          aria-controls="sidebarMenu">
+          ☰ Menu
+        </button>
+      </div>
+
+      <!-- Site Title (Center) -->
+      <div class="center-heading text-center flex-grow-1">
+        <h1 class="mb-0">MicroSiteKit</h1>
+      </div>
+
+      <!-- Logos (Right) -->
+      <div class="logo-container d-flex align-items-center gap-2">
+        <img src="Assets/Logo1.png" alt="ESR Logo" class="logo esr" />
+        <img src="Assets/Logo2.png"" alt=" NHS Logo" class="logo nhs" />
+      </div>
+    </div>
+
+
+    </div>
+
+    <!-- Hero Banner -->
+    <div class="banner-wrapper text-center position-relative">
+      <img src="Assets/Banner.png" alt="Welcome Hub Banner" class="Banner_image w-100" />
+      <div class="banner-text-overlay">
+        <h1>Microsite Services</h1>
+      </div>
+    </div>
+
+    <!-- ================================= -->
+    <!-- ====== MAIN NAVIGATION BAR ====== -->
+    <!-- ================================= -->
+    <div id="desktop-nav-toolbar">
+      <nav class="navbar navbar-expand-lg mt-3">
+        <div class="container">
+          <!-- Button for toggling the menu on mobile -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <!-- Menu container -->
+          <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav mx-auto ">
+
+              <div id="main-nav" class="nav-horizontal"></div>
+
+
+              <details class="mobile-toolbar d-sm-none mt-3">
+                <summary class="btn btn-outline-secondary w-100">
+                  Search & Settings
+                </summary>
+                <div class="p-2">
+                  <input type="text" id="searchInputMobileToolbar" class="form-control mb-2"
+                    placeholder="Search the site" onkeyup="searchPages(this.value)" />
+                  <select id="themeSelectorSidebar" class="form-select form-select-sm mb-2 theme-selector"
+                    aria-label="Choose Theme" onchange="applyTheme(this.value)">
+                    <option value="blue">NHS Blue</option>
+                    <option value="green">NHS Green</option>
+                    <option value="grey">NHS Grey</option>
+                    <option value="pink">NHS Pink</option>
+                    <option value="purple">NHS Purple</option>
+                    <option value="red">NHS Red</option>
+                    <option value="yellow">NHS Yellow</option>
+                    <option value="calm">Light Grey</option>
+                    <option value="contrast">High Contrast</option>
+                  </select>
+                  <div class="btn-group btn-group-sm w-100 mb-2" role="group">
+                    <button onclick="setTextSize('scale-small')" class="btn btn-outline-secondary">
+                      A-
+                    </button>
+                    <button onclick="setTextSize('scale-medium')" class="btn btn-outline-secondary">
+                      A
+                    </button>
+                    <button onclick="setTextSize('scale-large')" class="btn btn-outline-secondary">
+                      A+
+                    </button>
+                  </div>
+                  <button class="btn btn-sm btn-outline-primary w-100 toggle-dark" onclick="toggleDarkMode()">
+                    Dark Mode
+                  </button>
+                </div>
+              </details>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!-- ======================================== -->
+      <!-- ====== TOOLBAR: SEARCH + SETTINGS ====== -->
+      <!-- ======================================== -->
+      <!-- Collapsible Toolbar -->
+
+      <div class="container mt-3 d-none d-sm-block desktop-toolbar">
+        <div class="row align-items-center g-2">
+          <!-- Site Search -->
+          <div class="col">
+            <input id="searchInputToolbar" class="form-control" placeholder="Search the site"
+              onkeyup="searchPages(this.value)" onkeyup="searchPages(this.value)" />
+          </div>
+          <!-- Theme & Accessibility Controls -->
+          <div class="col-auto">
+            <div class="control-toolbar d-flex flex-wrap gap-2 p-2 rounded">
+              <!-- Theme Selector -->
+              <select id="themeSelectorSidebar" class="form-select form-select-sm w-auto theme-selector"
+                aria-label="Choose Theme" onchange="applyTheme(this.value)">
+                <option value="blue">NHS Blue</option>
+                <option value="green">NHS Green</option>
+                <option value="grey">NHS Grey</option>
+                <option value="pink">NHS Pink</option>
+                <option value="purple">NHS Purple</option>
+                <option value="red">NHS Red</option>
+                <option value="yellow">NHS Yellow</option>
+                <option value="calm">Light Grey</option>
+                <option value="contrast">High Contrast</option>
+              </select>
+              <!-- Text Size Buttons -->
+              <div class="btn-group btn-group-sm" role="group" aria-label="Text Size">
+                <button onclick="setTextSize('scale-small')" class="btn btn-outline-secondary">
+                  A-
+                </button>
+                <button onclick="setTextSize('scale-medium')" class="btn btn-outline-secondary">
+                  A
+                </button>
+                <button onclick="setTextSize('scale-large')" class="btn btn-outline-secondary">
+                  A+
+                </button>
+                <button onclick="setTextSize('scale-xlarge')" class="btn btn-outline-secondary">
+                  A++
+                </button>
+              </div>
+              <!-- Dark Mode Toggle -->
+              <button class="btn btn-sm btn-outline-primary toggle-dark" onclick="toggleDarkMode()">
+                Dark Mode
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Collapsible Sidebar -->
+  <div class="offcanvas offcanvas-start sidebar theme-bg" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarLabel">
+    <div class="offcanvas-header">
+      <h5 id="sidebarLabel">MicroSiteKit</h5>
+      <button type="button" class="btn-close btn-outline-light text-reset" data-bs-dismiss="offcanvas"
+        aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="nav navbar-nav flex-column">
+        <div id="sidebar-nav"></div>
+      </ul>
+
+
+      <!-- Search -->
+      <input type="text" id="searchInputSidebar" class="form-control mt-3" placeholder="Search the site"
+        onkeyup="searchPages(this.value)" />
+
+      <!-- Theme Selector -->
+      <select id="themeSelectorSidebar" class="form-select form-select-sm mt-3 theme-selector"
+        onchange="applyTheme(this.value)">
+        <option value="blue">NHS Blue</option>
+        <option value="green">NHS Green</option>
+        <option value="grey">NHS Grey</option>
+        <option value="pink">NHS Pink</option>
+        <option value="purple">NHS Purple</option>
+        <option value="red">NHS Red</option>
+        <option value="yellow">NHS Yellow</option>
+        <option value="calm">Light Grey</option>
+        <option value="contrast">High Contrast</option>
+      </select>
+      <div class="btn-group btn-group-sm mt-3 w-100" role="group">
+        <button onclick="setTextSize('scale-small')" class="btn btn-outline-light">
+          A -
+        </button>
+        <button onclick="setTextSize('scale-medium')" class="btn btn-outline-light">
+          A
+        </button>
+        <button onclick="setTextSize('scale-large')" class="btn btn-outline-light">
+          A+
+        </button>
+      </div>
+      </button>
+    </div>
+    <button class="btn btn-sm btn-outline-light w-100 mt-2 toggle-dark">
+      Dark Mode
+    </button>
+  </div>
+  </div>
+  <!-- =============================== -->
+  <!-- ====== HOME PAGE SECTION ====== -->
+  <!-- =============================== -->
+  <div id="home" class="page active">
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient Title -->
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center">
+          <h3 class="gradient-text">MicroSiteKit</h3>
+        </div>
+        <!-- Main Welcome Text -->
+        <div class="col-md-8">
+          <div class="homepage-intro text-center py-4 px-3">
+            <h1 class="gradient-text mb-3">Welcome to MicroSiteKit 🧱✨</h1>
+            <p class="lead">Your modular toolkit for building joyful, contributor-first microsites—no CMS stress, no
+              flicker, just pure layout clarity.</p>
+
+            <p>Whether you're launching a training hub, onboarding portal, or snippet showcase,
+              <strong>MicroSiteKit</strong> gives you everything you need to scaffold expressive, theme-safe pages with
+              ease. Think of it as your digital LEGO set—stackable, swappable, and built for clarity.
+            </p>
+
+            <h5 class="mt-4">🧭 What’s a Microsite?</h5>
+            <p>A microsite is a focused, standalone page or mini-hub—perfect for showcasing a role, a resource, or a
+              training journey. It’s lightweight, fast-loading, and designed to guide contributors with purpose.</p>
+
+            <h5 class="mt-4">🎨 What’s in the Kit?</h5>
+            <ul class="text-start d-inline-block">
+              <li><strong>🧩 Layout Scaffolds:</strong> Header, Footer, Navigation, Side Menu, Page Code</li>
+              <li><strong>📦 Content Blocks:</strong> Fact Box, Tip Box, Quote, Image, Carousel, Did You Know?</li>
+              <li><strong>🧑‍💻 Contributor Cards:</strong> Role Card, Shout Out Card</li>
+              <li><strong>🎛️ Interactive Dohickies:</strong> Modal, Toggle Section, Tabs, Alerts</li>
+              <li><strong>♿ Accessibility Tools:</strong> Accessibility Flag, Update Banner, Dark Mode Toggle</li>
+              <li><strong>🚀 Navigation Launchers:</strong> Open New Page Button, Pop Out Page Button</li>
+            </ul>
+
+            <p class="mt-4">Each snippet is theme-safe, copy-paste ready, and wrapped in warm scaffolding to help
+              contributors feel confident and empowered. You can mix, match, and drop them into any microsite page—no
+              CMS required.</p>
+
+            <p class="mt-4"><strong>Ready to build?</strong> Explore the snippets, launch a layout, and make onboarding
+              joyful. MicroSiteKit is your playground. Let’s scaffold something brilliant.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================= -->
+  <!-- ====== GUIDES PAGE SECTION ====== -->
+  <!-- ================================= -->
+  <div id="guides" class="page">
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient Title -->
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center">
+          <h3 class="gradient-text">Guidance</h3>
+        </div>
+        <!-- Main Description -->
+        <div class="col-md-8">
+          <div class="guidance-intro text-center py-4 px-3">
+            <h1 class="gradient-text mb-3">🛠️ MicroSiteKit Guidance</h1>
+            <p class="lead">Welcome to your microsite builder’s handbook—where modular magic meets contributor
+              clarity.
+            </p>
+
+            <p><strong>MicroSiteKit</strong> is your toolkit for crafting expressive, theme-safe microsites. Whether
+              you're launching a training hub, onboarding portal, or snippet showcase, this guidance page walks you
+              through the art of the possible—step by step, dohicky by dohicky.</p>
+
+            <h5 class="mt-4">🧭 What You’ll Find Here</h5>
+            <ul class="text-start d-inline-block">
+              <li><strong>Layout Scaffolds:</strong> Learn how to use headers, footers, navigation panels, and page
+                wrappers</li>
+              <li><strong>Reusable Snippets:</strong> Explore content blocks, role cards, alerts, tabs, and carousels
+              </li>
+              <li><strong>Accessibility Tools:</strong> Add flags, toggles, and controls to make your pages inclusive
+              </li>
+              <li><strong>Navigation Launchers:</strong> Use buttons and menus to guide contributors with ease</li>
+              <li><strong>Customisation Tips:</strong> Learn how to tweak titles, colours, and layouts safely</li>
+            </ul>
+
+            <p class="mt-4">Each section is packed with examples, warm scaffolding, and contributor-first commentary
+              to
+              help you build confidently. Whether you're copy-pasting a dohicky or designing a full microsite, this
+              page
+              is your launchpad.</p>
+
+            <p class="mt-4"><strong>Let’s get building.</strong> Your microsite journey starts here.</p>
+          </div>
+        </div>
+      </div>
+      <!-- ============================================ -->
+      <!-- ====== GUIDE SECTION BUTTONS & MODALS ====== -->
+      <!-- ============================================ -->
+      <div class="row">
+        <div class="col-md">
+          <!-- Microsite Developer User Manual -->
+          <button class="btn btn-primary w-100 text-start mb-2" data-bs-toggle="modal"
+            data-bs-target="#outstandingTrainingModal">
+            Microsite Developer User Manual
+          </button>
+          <div class="modal fade" id="outstandingTrainingModal" tabindex="-1"
+            aria-labelledby="outstandingTrainingModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header btn btn-primary d-flex justify-content-between align-items-center">
+                  <h5 class="modal-title mb-0" id="outstandingTrainingModalLabel">
+                    Microsite Developer User Manual
+                  </h5>
+                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+                </div>
+                <div class="card-body">
+                  <iframe src="Assets/Microsite UM.pdf" width="100%" height="800" allowfullscreen style="
+                        aspect-ratio: 16 / 12;
+                        border: 0;
+                        min-height: 480px;
+                      "></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Wireframe Template -->
+          <a class="btn btn-primary w-100 text-start mb-2" href="Assets/Pages Wireframe v3.pptx">
+            Wireframe Template to Support MicroSite Development
+          </a>
+          <!-- Wireframe Template -->
+          <a class="btn btn-primary w-100 text-start mb-2"
+            href="https://my.esr.nhs.uk/dashboard/documents/portlet_file_entry/2068929650/Portal%20Administration%20Webinar%20v3.0.pdf/8a2dda3d-65cc-f4f6-8fa7-7279b9a1d049?status=0&download=true">
+            Portal Administration Webinar
+          </a>
+          <!-- ESR Usermanual -->
+          <a class="btn btn-primary w-100 text-start mb-2"
+            href="https://my.esr.nhs.uk/dashboard/web/usermanual/home/-/knowledge_base/esr-user-manual/esr-portal">
+            ESR User Manual for the ESR Portal
+          </a>
+          <!-- ESR Education -->
+          <a class="btn btn-primary w-100 text-start mb-2"
+            href="https://my.esr.nhs.uk/dashboard/web/esredu/home/-/knowledge_base/esr-education/esr-education-online-learning">
+            ESR Education for the ESR Portal
+          </a>
+
+          <!-- ESR Portal Scribe -->
+          <button class="btn btn-primary w-100 text-start mb-2" data-bs-toggle="modal"
+            data-bs-target="#playCoursesModal">
+            Scribe Guide to ESR Portal
+          </button>
+          <div class="modal fade" id="playCoursesModal" tabindex="-1" aria-labelledby="playCoursesModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header btn btn-primary d-flex justify-content-between align-items-center">
+                  <h5 class="modal-title mb-0" id="playCoursesModalLabel">
+                    Scribe Guide to ESR Portal
+                  </h5>
+                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+                </div>
+                <div class="card-body">
+                  <iframe src="https://scribehow.com/embed/ESR_Portal_Admin__KpQqGTY2Qhq4a0i0eEPW_Q" width="100%"
+                    height="800" allowfullscreen style="
+                        aspect-ratio: 16 / 12;
+                        border: 0;
+                        min-height: 480px;
+                      "></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- End of Cards -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- =============================== -->
+  <!-- ====== FAQS PAGE SECTION ====== -->
+  <!-- =============================== -->
+  <div id="faqs" class="page">
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient Title -->
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center">
+          <h3 class="gradient-text">FAQs</h3>
+        </div>
+        <!-- FAQ Introduction -->
+        <div class="col-md-8">
+          <div class="faq-intro text-center py-4 px-3">
+            <h1 class="gradient-text mb-3">❓ MicroSiteKit FAQs</h1>
+            <p class="lead">Got questions? You’re in the right place. This page is your friendly companion through the
+              world of microsite building.</p>
+
+            <p><strong>MicroSiteKit</strong> is packed with modular snippets, layout scaffolds, and contributor-first
+              tools—but even the most joyful toolkit sparks a few “how do I…” moments. That’s where this FAQ page
+              comes
+              in.</p>
+
+            <h5 class="mt-4">🧭 What You’ll Find Here</h5>
+            <ul class="text-start d-inline-block">
+              <li><strong>What is a microsite?</strong> And why are they so brilliant for onboarding and training</li>
+              <li><strong>How do I use the snippets?</strong> Copy-paste guidance and layout tips</li>
+              <li><strong>Can I customise them?</strong> Absolutely—warm scaffolding included</li>
+              <li><strong>Is it accessible?</strong> Yes! With flags, toggles, and theme-safe styling</li>
+              <li><strong>Do I need special software?</strong> Nope—just your code editor and a spark of joy</li>
+            </ul>
+
+            <p class="mt-4">Whether you’re launching your first microsite or refining a role-based dashboard, these
+              FAQs
+              are here to guide you with clarity, warmth, and a few cheeky dohickies along the way.</p>
+
+            <p class="mt-4"><strong>Let’s demystify the magic.</strong> Scroll down and explore the answers.</p>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-md">
+          <!-- FAQ 1 -->
+          <button class="btn btn-primary w-100 text-start mb-2" data-bs-toggle="modal"
+            data-bs-target="#whatIsMicroSiteKit">
+            What is MicroSiteKit?
+          </button>
+          <div class="modal fade" id="whatIsMicroSiteKit" tabindex="-1" aria-labelledby="whatIsMicroSiteKitLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header btn btn-primary d-flex justify-content-between align-items-center">
+                  <h5 class="modal-title mb-0" id="whatIsMicroSiteKitLabel">MicroSiteKit Overview</h5>
+                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+                </div>
+                <div class="card-body">
+                  <p>MicroSiteKit is a modular resource hub for building microsites—pages that are lightweight,
+                    focused, and full of contributor-first scaffolding. It includes reusable snippets, layout
+                    templates,
+                    and accessibility tools to help you build with clarity and joy.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <button class="btn btn-primary w-100 text-start mb-2" data-bs-toggle="modal" data-bs-target="#whatCanIBuild">
+            What can I build with it?
+          </button>
+          <div class="modal fade" id="whatCanIBuild" tabindex="-1" aria-labelledby="whatCanIBuildLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header btn btn-primary d-flex justify-content-between align-items-center">
+                  <h5 class="modal-title mb-0" id="whatCanIBuildLabel">Build Possibilities</h5>
+                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+                </div>
+                <div class="card-body">
+                  <ul>
+                    <li>Role-based onboarding pages</li>
+                    <li>Training dashboards</li>
+                    <li>Snippet libraries and launchers</li>
+                    <li>Support request portals</li>
+                    <li>Contributor shout-out walls</li>
+                    <li>Theme-safe microsite layouts with headers, footers, and navigation</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <button class="btn btn-primary w-100 text-start mb-2" data-bs-toggle="modal" data-bs-target="#needCMS">
+            Do I need a CMS or special software?
+          </button>
+          <div class="modal fade" id="needCMS" tabindex="-1" aria-labelledby="needCMSLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header btn btn-primary d-flex justify-content-between align-items-center">
+                  <h5 class="modal-title mb-0" id="needCMSLabel">CMS Requirements</h5>
+                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+                </div>
+                <div class="card-body">
+                  <p>Nope! MicroSiteKit is designed to be copy-paste friendly. You can drop snippets directly into
+                    your
+                    microsite codebase—no CMS, no plugins, just modular HTML/CSS/JS goodness.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <button class="btn btn-primary w-100 text-start mb-2" data-bs-toggle="modal" data-bs-target="#whoIsItFor">
+            Who is MicroSiteKit for?
+          </button>
+          <div class="modal fade" id="whoIsItFor" tabindex="-1" aria-labelledby="whoIsItForLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header btn btn-primary d-flex justify-content-between align-items-center">
+                  <h5 class="modal-title mb-0" id="whoIsItForLabel">Audience</h5>
+                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+                </div>
+                <div class="card-body">
+                  <p>It’s for anyone building or maintaining microsites:</p>
+                  <ul>
+                    <li>Developers and implementers</li>
+                    <li>Learning and development teams</li>
+                    <li>Contributors and content designers</li>
+                    <li>Anyone who wants to scaffold pages with clarity and warmth</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 5 -->
+          <button class="btn btn-primary w-100 text-start mb-2" data-bs-toggle="modal"
+            data-bs-target="#whatIsMicrosite">
+            What’s a microsite, exactly?
+          </button>
+          <div class="modal fade" id="whatIsMicrosite" tabindex="-1" aria-labelledby="whatIsMicrositeLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header btn btn-primary d-flex justify-content-between align-items-center">
+                  <h5 class="modal-title mb-0" id="whatIsMicrositeLabel">Microsite Defined</h5>
+                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+                </div>
+                <div class="card-body">
+                  <p>A microsite is a standalone page or mini-hub focused on a specific purpose—like onboarding,
+                    training, or role guidance. It’s fast-loading, easy to navigate, and designed to guide
+                    contributors
+                    without overwhelming them.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===================================== -->
+  <!-- ============= Modal ============= -->
+  <!-- ===================================== -->
+
+  <div id="Modal" class="page"> <!--* Replace the # with the page ID *-->
+
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient -->
+
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+          <h3 class="gradient-text">Modals</h3> <!--* Replace the # with the page title *-->
+
+        </div>
+
+
+        <div class="col-md-8">
+          <h4>🪄 Modals</h4>
+          <p>Modals are magical pop-up panels that appear over your page like a dramatic stage entrance. Perfect for
+            onboarding tips, changelogs, contributor shout-outs, or surprise cat memes. They’re triggered by buttons
+            and
+            vanish with a click—like a well-trained wizard.</p>
+          <ul>
+            <li>✨ Fully theme-safe and Bootstrap-powered</li>
+            <li>🎯 Ideal for focused content without page clutter</li>
+            <li>🧼 Dismissible, accessible, and joyfully modular</li>
+          </ul>
+          <p>Use them to deliver wisdom, warnings, or whimsical nonsense—your call.</p>
+
+
+
+        </div>
+      </div>
+      <!-- Page full width content -->
+
+      <div class="row mt-4">
+        <div class="col-md">
+
+          <button class="btn btn-primary w-100 text-start mb-2" data-bs-toggle="modal" data-bs-target="#modalMystery">
+            🕵️ Reveal the Secret
+          </button>
+
+          <div class="modal fade" id="modalMystery" tabindex="-1" aria-labelledby="modalMysteryLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header btn btn-primary">
+                  <h5 class="modal-title mb-0" id="modalMysteryLabel">🧠 Contributor Wisdom</h5>
+                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="card-body">
+                  <ul>
+                    <li>✨ Feature, not a bug</li>
+                    <li>🧪 Experimental joy</li>
+                    <li>🧼 Clean code, clean conscience</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-md">
+
+          <h5 class="mt-4 mb-2">🧩 Modal Snippet: Deploy with Drama</h5>
+          <ul>
+            <li><strong>Replace <code>#modalMystery</code></strong> with a unique ID for each modal. This ensures
+              buttons and modals don’t clash.</li>
+            <li><strong>Update the button label</strong> (e.g. <code>🕵️ Reveal the Secret</code>) to reflect what the
+              modal reveals—tips, updates, memes, etc.</li>
+            <li><strong>Change the modal title</strong> inside <code>&lt;h5 id="modalMysteryLabel"&gt;</code> to match
+              your content theme.</li>
+            <li><strong>Drop your content</strong> into the <code>.card-body</code>—lists, onboarding notes,
+              changelogs,
+              or contributor shout-outs.</li>
+            <li><strong>Duplicate the whole block</strong> for multiple modals—just make sure each ID is unique!</li>
+          </ul>
+          <pre><code>
+&lt;button class=&quot;btn btn-primary w-100 text-start mb-2&quot; data-bs-toggle=&quot;modal&quot; data-bs-target=&quot;#modalMystery&quot;&gt;
+  🕵️ Reveal the Secret
+&lt;/button&gt;
+
+&lt;div class=&quot;modal fade&quot; id=&quot;modalMystery&quot; tabindex=&quot;-1&quot; aria-labelledby=&quot;modalMysteryLabel&quot; aria-hidden=&quot;true&quot;&gt;
+  &lt;div class=&quot;modal-dialog modal-xl modal-dialog-centered&quot;&gt;
+    &lt;div class=&quot;modal-content&quot;&gt;
+      &lt;div class=&quot;modal-header btn btn-primary&quot;&gt;
+        &lt;h5 class=&quot;modal-title mb-0&quot; id=&quot;modalMysteryLabel&quot;&gt;🧠 Contributor Wisdom&lt;/h5&gt;
+        &lt;button type=&quot;button&quot; class=&quot;btn-close btn-close-white&quot; data-bs-dismiss=&quot;modal&quot;&gt;&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;card-body&quot;&gt;
+        &lt;ul&gt;
+          &lt;li&gt;✨ Feature, not a bug&lt;/li&gt;
+          &lt;li&gt;🧪 Experimental joy&lt;/li&gt;
+          &lt;li&gt;🧼 Clean code, clean conscience&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+          <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <!-- ===================================== -->
+  <!-- ============= Toggle Section  ============= -->
+  <!-- ===================================== -->
+
+  <div id="ToggleSection" class="page"> <!--* Replace the # with the page ID *-->
+
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient -->
+
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+          <h3 class="gradient-text">Toggle Section</h3> <!--* Replace the # with the page title *-->
+
+        </div>
+
+
+        <div class="col-md-8">
+
+          <p>The Toggle Section is a joyful little switcheroo—click the button and voilà! A hidden panel appears with
+            onboarding tips, contributor wisdom, or delightful nonsense. It’s perfect for keeping pages clean while
+            still
+            offering depth, context, or surprises on demand.</p>
+
+          <ul>
+            <li>🧼 Keeps content tidy and collapsible</li>
+            <li>🛠 Ideal for FAQs, onboarding notes, or hidden gems</li>
+            <li>🎯 Fully modular—just change the ID and button label</li>
+          </ul>
+
+          <p>Use it to tuck away tips, reveal role-specific guidance, or deliver a punchline with perfect timing.</p>
+
+        </div>
+      </div>
+
+
+
+
+      <div class="row mt-4">
+        <div class="col-md">
+
+          <button class="btn btn-primary w-100 text-start mb-2" onclick="toggleSection('toggleJoy')">
+            🎯 Show Me the Joy
+          </button>
+
+          <div id="toggleJoy" style="display:none;" class="mt-3">
+            <p>This section reveals modular magic, contributor clarity, and a sprinkle of onboarding delight.</p>
+          </div>
+
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-md">
+          <h5 class="mt-4 mb-2">🎯 Toggle Section Snippet: Click to Reveal Joy</h5>
+          <ul>
+            <li><strong>Change the button label</strong> (e.g. <code>🎯 Show Me the Joy</code>) to match the tone or
+              purpose of your toggle—tips, updates, memes, etc.</li>
+            <li><strong>Replace <code>'toggleJoy'</code></strong> with a unique ID for each toggle section. This links
+              the button to the content it reveals.</li>
+            <li><strong>Drop your content</strong> inside the <code>&lt;div id="toggleJoy"&gt;</code>—text, images,
+              dohickies, or onboarding magic.</li>
+            <li><strong>Duplicate the whole block</strong> for multiple toggles—just make sure each ID is unique and
+              descriptive.</li>
+            <li><strong>Optional:</strong> Add a little animation or transition class if you want the reveal to feel
+              extra snazzy.</li>
+          </ul>
+          <pre><code id="toggleSnippet" class="snippet language-html">
+&lt;button class=&quot;btn btn-primary w-100 text-start mb-2&quot; onclick=&quot;toggleSection('toggleJoy')&quot;&gt;
+  🎯 Show Me the Joy
+&lt;/button&gt;
+
+&lt;div id=&quot;toggleJoy&quot; style=&quot;display:none;&quot; class=&quot;mt-3&quot;&gt;
+  &lt;p&gt;This section reveals modular magic, contributor clarity, and a sprinkle of onboarding delight.&lt;/p&gt;
+&lt;/div&gt;
+    </code></pre>
+          <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+
+
+
+  <!-- ===================================== -->
+  <!-- ============= Alerts  ============= -->
+  <!-- ===================================== -->
+
+  <div id="Alerts" class="page"> <!--* Replace the # with the page ID *-->
+
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient -->
+
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+          <h3 class="gradient-text">Alerts</h3> <!--* Replace the # with the page title *-->
+
+        </div>
+        <!-- Page Introduction -->
+
+        <div class="col-md-8">
+
+          <p>Alerts are your go-to snippet for grabbing attention—whether you're flagging a system update, sharing a
+            success, or gently warning contributors about something quirky. They’re modular, theme-safe, and easy to
+            drop into any page for instant clarity.</p>
+
+          <ul>
+            <li>🔔 Use for updates, warnings, confirmations, or onboarding nudges</li>
+            <li>🎨 Fully theme-safe—styled to harmonise across microsites</li>
+            <li>🧱 Modular and stackable—combine with icons, links, or dohickies</li>
+            <li>🧼 Keeps pages clean while surfacing key info</li>
+          </ul>
+
+          <p>Whether it’s “New feature live!”, “Heads-up: system flicker expected”, or “Success! Your changes are
+            saved”—alerts help contributors stay informed and empowered.</p>
+
+        </div>
+      </div>
+      <!-- Page full width content -->
+
+      <div class="row mt-4">
+        <div class="col-md">
+
+          <!-- ✅ Success Alert -->
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Success!</strong> Your dohicky deployed without a hitch.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+
+          <!-- ⚠️ Warning Alert -->
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Heads up!</strong> This feature is experimental—use with joyful caution.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+
+          <!-- ❌ Danger Alert -->
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Oh no!</strong> Something went sideways. Check your scroll-collapse logic.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+
+          <!-- ℹ️ Info Alert -->
+          <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <strong>FYI:</strong> This microsite supports keyboard navigation and high contrast themes.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+
+          <!-- 🔵 Primary Alert -->
+          <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            <strong>Notice:</strong> A new dohicky has landed—check the snippet library!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+
+          <!-- ⚪ Secondary Alert -->
+          <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+            <strong>Reminder:</strong> Modular code is your onboarding superpower.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+
+          <!-- 🖤 Dark Alert -->
+          <div class="alert alert-dark alert-dismissible fade show" role="alert">
+            <strong>Low light mode:</strong> This alert is theme-safe and ready for dark mode.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+
+          <!-- ⚪ Light Alert -->
+          <div class="alert alert-light alert-dismissible fade show" role="alert">
+            <strong>Gentle nudge:</strong> You can customize this alert with any message you like.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-md">
+          <h5 class="mt-4 mb-2">🚨 Alert Snippets: Style Your Signals</h5>
+          <ul>
+            <li><strong>Choose your alert type:</strong> Swap <code>alert-success</code>, <code>alert-warning</code>,
+              <code>alert-danger</code>, etc. to match the tone—success, caution, error, info, or themed nudges.
+            </li>
+            <li><strong>Update the message:</strong> Change the bolded lead-in (e.g.
+              <code>&lt;strong&gt;Success!&lt;/strong&gt;</code>) and the follow-up text to suit your context.
+            </li>
+            <li><strong>Make it dismissible:</strong> Keep the <code>btn-close</code> and <code>fade show</code>
+              classes
+              to allow contributors to close the alert manually.</li>
+            <li><strong>Stack multiple alerts:</strong> Just drop them in sequence—Bootstrap handles spacing and
+              stacking beautifully.</li>
+            <li><strong>Theme-safe styling:</strong> All variants harmonise with NHS microsite palettes. No extra
+              overrides needed!</li>
+            <li><strong>Optional:</strong> Add icons, links, or dohickies inside the alert for extra clarity or
+              interactivity.</li>
+          </ul>
+
+          <pre><code id="alertSnippet" class="snippet language-html">
+&lt;!-- ✅ Success Alert --&gt;
+&lt;div class=&quot;alert alert-success alert-dismissible fade show&quot; role=&quot;alert&quot;&gt;
+  &lt;strong&gt;Success!&lt;/strong&gt; Your dohicky deployed without a hitch.
+  &lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- ⚠️ Warning Alert --&gt;
+&lt;div class=&quot;alert alert-warning alert-dismissible fade show&quot; role=&quot;alert&quot;&gt;
+  &lt;strong&gt;Heads up!&lt;/strong&gt; This feature is experimental—use with joyful caution.
+  &lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- ❌ Danger Alert --&gt;
+&lt;div class=&quot;alert alert-danger alert-dismissible fade show&quot; role=&quot;alert&quot;&gt;
+  &lt;strong&gt;Oh no!&lt;/strong&gt; Something went sideways. Check your scroll-collapse logic.
+  &lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- ℹ️ Info Alert --&gt;
+&lt;div class=&quot;alert alert-info alert-dismissible fade show&quot; role=&quot;alert&quot;&gt;
+  &lt;strong&gt;FYI:&lt;/strong&gt; This microsite supports keyboard navigation and high contrast themes.
+  &lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- 🔵 Primary Alert --&gt;
+&lt;div class=&quot;alert alert-primary alert-dismissible fade show&quot; role=&quot;alert&quot;&gt;
+  &lt;strong&gt;Notice:&lt;/strong&gt; A new dohicky has landed—check the snippet library!
+  &lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- ⚪ Secondary Alert --&gt;
+&lt;div class=&quot;alert alert-secondary alert-dismissible fade show&quot; role=&quot;alert&quot;&gt;
+  &lt;strong&gt;Reminder:&lt;/strong&gt; Modular code is your onboarding superpower.
+  &lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- 🖤 Dark Alert --&gt;
+&lt;div class=&quot;alert alert-dark alert-dismissible fade show&quot; role=&quot;alert&quot;&gt;
+  &lt;strong&gt;Low light mode:&lt;/strong&gt; This alert is theme-safe and ready for dark mode.
+  &lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- ⚪ Light Alert --&gt;
+&lt;div class=&quot;alert alert-light alert-dismissible fade show&quot; role=&quot;alert&quot;&gt;
+  &lt;strong&gt;Gentle nudge:&lt;/strong&gt; You can customize this alert with any message you like.
+  &lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+&lt;/div&gt;
+    </code></pre>
+          <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===================================== -->
+  <!-- ============= Tabs ============= -->
+  <!-- ===================================== -->
+
+  <div id="Tabs" class="page"> <!--* Replace the # with the page ID *-->
+
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient -->
+
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+          <h3 class="gradient-text">Tabs</h3> <!--* Replace the # with the page title *-->
+
+        </div>
+        <!-- Page Introduction -->
+
+        <div class="col-md-8">
+
+          <p>Tabs are your modular magic wand for taming content chaos. They let you group related info into neat,
+            clickable sections—ideal for onboarding guides, role-based layouts, or showcasing multiple dohickies
+            without
+            overwhelming the page.</p>
+
+          <ul>
+            <li>🧭 Great for navigation between related content blocks</li>
+            <li>🎨 Theme-safe and responsive—works beautifully across microsites</li>
+            <li>🧱 Fully modular—just update tab labels and content panes</li>
+            <li>🧼 Keeps pages clean, scannable, and contributor-friendly</li>
+          </ul>
+
+          <p>Use tabs to guide contributors through layered content, toggle between roles, or showcase feature
+            variants—all with clarity and charm.</p>
+
+        </div>
+      </div>
+      <!-- Page full width content -->
+
+      <div class="row mt-4">
+        <div class="col-md">
+
+          <ul class="nav nav-tabs" id="tabNav01" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="tabBtn01a" data-bs-toggle="tab" data-bs-target="#tabPane01a"
+                type="button" role="tab" aria-controls="tabPane01a" aria-selected="true">Tab 01A</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="tabBtn01b" data-bs-toggle="tab" data-bs-target="#tabPane01b" type="button"
+                role="tab" aria-controls="tabPane01b" aria-selected="false">Tab 01B</button>
+            </li>
+          </ul>
+
+          <div class="tab-content" id="tabContent01">
+            <div class="tab-pane fade show active" id="tabPane01a" role="tabpanel" aria-labelledby="tabBtn01a">
+              <p>Content for Tab 01A. Could be onboarding tips, contributor shout-outs, or a haiku about modularity.
+              </p>
+            </div>
+            <div class="tab-pane fade" id="tabPane01b" role="tabpanel" aria-labelledby="tabBtn01b">
+              <p>Content for Tab 01B. Maybe a changelog. Maybe a list of things that aren’t bugs.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-md">
+          <h5 class="mt-4 mb-2">🗂 Tab Snippet Panel: Click Between Worlds</h5>
+          <ul>
+            <li><strong>Change tab labels:</strong> Update <code>Tab 01A</code>, <code>Tab 01B</code>, etc. to reflect
+              your content—roles, features, onboarding steps, or whimsical categories.</li>
+            <li><strong>Update content panes:</strong> Drop your content inside each <code>.tab-pane</code>—text,
+              images, dohickies, or contributor shout-outs.</li>
+            <li><strong>Ensure unique IDs:</strong> Each tab button and pane must have a matching, unique ID pair
+              (e.g.
+              <code>tabBtn01a</code> ↔ <code>tabPane01a</code>).
+            </li>
+            <li><strong>Set the default tab:</strong> Add <code>active</code> to the tab button and
+              <code>show active</code> to the corresponding pane you want visible on load.
+            </li>
+            <li><strong>Stack or nest tabs:</strong> You can place tabs inside modals, cards, or even other tabs—just
+              keep the IDs tidy and scoped.</li>
+            <li><strong>Optional:</strong> Add icons, emojis, or tooltips to tab labels for extra clarity or charm.
+            </li>
+          </ul>
+          <pre><code id="tabSnippet" class="snippet language-html">
+&lt;ul class=&quot;nav nav-tabs&quot; id=&quot;tabNav01&quot; role=&quot;tablist&quot;&gt;
+  &lt;li class=&quot;nav-item&quot; role=&quot;presentation&quot;&gt;
+    &lt;button class=&quot;nav-link active&quot; id=&quot;tabBtn01a&quot; data-bs-toggle=&quot;tab&quot; data-bs-target=&quot;#tabPane01a&quot;
+      type=&quot;button&quot; role=&quot;tab&quot; aria-controls=&quot;tabPane01a&quot; aria-selected=&quot;true&quot;&gt;Tab 01A&lt;/button&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item&quot; role=&quot;presentation&quot;&gt;
+    &lt;button class=&quot;nav-link&quot; id=&quot;tabBtn01b&quot; data-bs-toggle=&quot;tab&quot; data-bs-target=&quot;#tabPane01b&quot;
+      type=&quot;button&quot; role=&quot;tab&quot; aria-controls=&quot;tabPane01b&quot; aria-selected=&quot;false&quot;&gt;Tab 01B&lt;/button&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;tab-content&quot; id=&quot;tabContent01&quot;&gt;
+  &lt;div class=&quot;tab-pane fade show active&quot; id=&quot;tabPane01a&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;tabBtn01a&quot;&gt;
+    &lt;p&gt;Content for Tab 01A. Could be onboarding tips, contributor shout-outs, or a haiku about modularity.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;tab-pane fade&quot; id=&quot;tabPane01b&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;tabBtn01b&quot;&gt;
+    &lt;p&gt;Content for Tab 01B. Maybe a changelog. Maybe a list of things that aren’t bugs.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+    </code></pre>
+          <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===================================== -->
+  <!-- ============= Breadcrumbs ============= -->
+  <!-- ===================================== -->
+
+  <div id="Breadcrumbs" class="page"> <!--* Replace the # with the page ID *-->
+
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient -->
+
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+          <h3 class="gradient-text">Breadcrumbs</h3> <!--* Replace the # with the page title *-->
+
+        </div>
+        <!-- Page Introduction -->
+
+        <div class="col-md-8">
+
+          <p>Breadcrumbs are your gentle guide through the microsite maze. They show contributors where they are, how
+            they got there, and how to hop back—without ever feeling lost. Perfect for layered layouts, role-based
+            navigation, or multi-step onboarding flows.</p>
+
+          <ul>
+            <li>🧭 Helps contributors orient themselves within nested content</li>
+            <li>🔗 Provides quick links back to parent pages or sections</li>
+            <li>🎨 Theme-safe and accessible—works across microsite palettes</li>
+            <li>🧱 Modular and easy to drop into headers, cards, or dohickies</li>
+          </ul>
+
+          <p>Whether you're guiding someone from “Home → Onboarding → Role Cards” or “Library → Snippets → Tabs”,
+            breadcrumbs keep the journey clear and joyful.</p>
+
+        </div>
+      </div>
+      <!-- Page full width content -->
+
+      <div class="row mt-4">
+        <div class="col-md">
+
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a onclick="showPage('home')">Home</a></li>
+              <li class="breadcrumb-item"><a onclick="showPage('CC')">Catalogue</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Statutory Training</li>
+            </ol>
+          </nav>
+
+
+        </div>
+      </div>
+
+
+      <div class="row mt-4">
+        <div class="col-md">
+          <h5 class="mt-4 mb-2">🍞 Breadcrumb Snippet Panel: Trace the Trail</h5>
+          <ul>
+            <li><strong>Update the trail:</strong> Change each <code>&lt;li&gt;</code> label to reflect your page
+              hierarchy—e.g. <code>Home → Library → Tabs</code> or <code>Dashboard → Role Cards → Editor</code>.</li>
+            <li><strong>Control interactivity:</strong> Use <code>onclick="showPage('X')"</code> or
+              <code>href="..."</code> depending on whether you're using JavaScript routing or standard links.
+            </li>
+            <li><strong>Mark the current page:</strong> Add <code>active</code> and <code>aria-current="page"</code>
+              to
+              the final breadcrumb item to signal where the user is.</li>
+            <li><strong>Theme-safe by default:</strong> No extra styling needed—just drop it into any microsite
+              layout and it’ll harmonise beautifully.</li>
+            <li><strong>Optional:</strong> Add icons, emojis, or role-based labels to make the trail more expressive
+              (e.g. <code>🏠 Home</code>, <code>🧑‍💼 Role Cards</code>).</li>
+          </ul>
+          <pre><code id="breadcrumbSnippet" class="snippet language-html">
+&lt;nav aria-label=&quot;breadcrumb&quot;&gt;
+  &lt;ol class=&quot;breadcrumb&quot;&gt;
+    &lt;li class=&quot;breadcrumb-item&quot;&gt;&lt;a onclick=&quot;showPage('home')&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li class=&quot;breadcrumb-item&quot;&gt;&lt;a onclick=&quot;showPage('CC')&quot;&gt;Catalogue&lt;/a&gt;&lt;/li&gt;
+    &lt;li class=&quot;breadcrumb-item active&quot; aria-current=&quot;page&quot;&gt;Statutory Training&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/nav&gt;
+    </code></pre>
+          <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <!-- ===================================== -->
+  <!-- ============= Carousel ============= -->
+  <!-- ===================================== -->
+
+  <div id="Carousel" class="page"> <!--* Replace the # with the page ID *-->
+
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient -->
+
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+          <h3 class="gradient-text">Carousel</h3> <!--* Replace the # with the page title *-->
+
+        </div>
+        <!-- Page Introduction -->
+
+        <div class="col-md-8">
+
+          <p>Carousels are your dynamic display shelf—ideal for rotating dohickies, spotlighting contributors, or
+            guiding users through onboarding steps with visual flair. They keep content compact, interactive, and full
+            of movement.</p>
+
+          <ul>
+            <li>🖼 Great for showcasing images, feature highlights, or modular walkthroughs</li>
+            <li>🎨 Theme-safe and responsive—works beautifully across microsites</li>
+            <li>🧱 Modular and stackable—add as many slides as you need</li>
+            <li>🧼 Keeps pages clean while adding expressive motion</li>
+          </ul>
+
+          <p>Whether it’s “Slide 1: Meet the team”, “Slide 2: Deploy your dohicky”, or “Slide 3: Celebrate
+            success”—carousels help contributors explore with clarity and charm.</p>
+
+        </div>
+      </div>
+      <!-- Page full width content -->
+
+      <div class="row mt-4">
+        <div class="col-md">
+
+          <div id="carouselJoy" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselJoy" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselJoy" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselJoy" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="https://www.rd.com/wp-content/uploads/2020/07/02_Meowed-Final-1.jpg" class="d-block w-100"
+                  alt="Cat with dramatic stare">
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>“I debugged your code… emotionally.”</h5>
+                  <p>When the cat understands modularity better than your team lead.</p>
+                </div>
+              </div>
+
+              <div class="carousel-item">
+                <img src="https://c8.alamy.com/comp/C84GNX/funny-puppy-in-sunglasses-wearing-a-necktie-C84GNX.jpg"
+                  class="d-block w-100" alt="Dog in sunglasses and tie">
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>“I’m not just a good boy—I’m a contributor.”</h5>
+                  <p>Ready to refactor your onboarding flow and fetch your slippers.</p>
+                </div>
+              </div>
+
+              <div class="carousel-item">
+                <img
+                  src="https://cdn2.vectorstock.com/i/1000x1000/62/31/funny-penguin-sliding-down-ice-hill-vector-33966231.jpg"
+                  class="d-block w-100" alt="Penguin slipping on ice">
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>“Scroll-collapse logic? I’m sliding right past it.”</h5>
+                  <p>Penguin dev in training. Still learning about buffer zones.</p>
+                </div>
+              </div>
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselJoy" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselJoy" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-md">
+          <h5 class="mt-4 mb-2">🎠 Carousel Snippet Panel: Rotate with Delight</h5>
+          <ul>
+            <li><strong>Swap the images:</strong> Replace each <code>src="..."</code> with your own image URLs—real
+              contributors, feature screenshots, or expressive mascots.</li>
+            <li><strong>Update captions:</strong> Edit the <code>&lt;h5&gt;</code> and <code>&lt;p&gt;</code> inside
+              each <code>.carousel-caption</code> to match your message—onboarding tips, changelogs, or modular
+              haikus.
+            </li>
+            <li><strong>Control the ride:</strong> Use <code>data-bs-ride="carousel"</code> for auto-slide, or remove
+              it
+              for manual-only navigation.</li>
+            <li><strong>Set the default slide:</strong> Add <code>active</code> to the first
+              <code>.carousel-item</code>
+              and its corresponding indicator button.
+            </li>
+            <li><strong>Add or remove slides:</strong> Duplicate or delete <code>.carousel-item</code> blocks as
+              needed—just keep the indicators in sync!</li>
+            <li><strong>Optional:</strong> Add emojis, dohickies, or interactive buttons inside captions for extra
+              charm
+              and clarity.</li>
+          </ul>
+
+          <pre><code id="carouselSnippet" class="snippet language-html">
+&lt;div id=&quot;carouselJoy&quot; class=&quot;carousel slide&quot; data-bs-ride=&quot;carousel&quot;&gt;
+  &lt;div class=&quot;carousel-indicators&quot;&gt;
+    &lt;button type=&quot;button&quot; data-bs-target=&quot;#carouselJoy&quot; data-bs-slide-to=&quot;0&quot; class=&quot;active&quot;
+      aria-current=&quot;true&quot; aria-label=&quot;Slide 1&quot;&gt;&lt;/button&gt;
+    &lt;button type=&quot;button&quot; data-bs-target=&quot;#carouselJoy&quot; data-bs-slide-to=&quot;1&quot; aria-label=&quot;Slide 2&quot;&gt;&lt;/button&gt;
+    &lt;button type=&quot;button&quot; data-bs-target=&quot;#carouselJoy&quot; data-bs-slide-to=&quot;2&quot; aria-label=&quot;Slide 3&quot;&gt;&lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;carousel-inner&quot;&gt;
+    &lt;div class=&quot;carousel-item active&quot;&gt;
+      &lt;img src=&quot;https://www.rd.com/wp-content/uploads/2020/07/02_Meowed-Final-1.jpg&quot; class=&quot;d-block w-100&quot;
+        alt=&quot;Cat with dramatic stare&quot;&gt;
+      &lt;div class=&quot;carousel-caption d-none d-md-block&quot;&gt;
+        &lt;h5&gt;“I debugged your code… emotionally.”&lt;/h5&gt;
+        &lt;p&gt;When the cat understands modularity better than your team lead.&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;carousel-item&quot;&gt;
+      &lt;img src=&quot;https://c8.alamy.com/comp/C84GNX/funny-puppy-in-sunglasses-wearing-a-necktie-C84GNX.jpg&quot;
+        class=&quot;d-block w-100&quot; alt=&quot;Dog in sunglasses and tie&quot;&gt;
+      &lt;div class=&quot;carousel-caption d-none d-md-block&quot;&gt;
+        &lt;h5&gt;“I’m not just a good boy—I’m a contributor.”&lt;/h5&gt;
+        &lt;p&gt;Ready to refactor your onboarding flow and fetch your slippers.&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;carousel-item&quot;&gt;
+      &lt;img src=&quot;https://cdn2.vectorstock.com/i/1000x1000/62/31/funny-penguin-sliding-down-ice-hill-vector-33966231.jpg&quot;
+        class=&quot;d-block w-100&quot; alt=&quot;Penguin slipping on ice&quot;&gt;
+      &lt;div class=&quot;carousel-caption d-none d-md-block&quot;&gt;
+        &lt;h5&gt;“Scroll-collapse logic? I’m sliding right past it.”&lt;/h5&gt;
+        &lt;p&gt;Penguin dev in training. Still learning about buffer zones.&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;button class=&quot;carousel-control-prev&quot; type=&quot;button&quot; data-bs-target=&quot;#carouselJoy&quot; data-bs-slide=&quot;prev&quot;&gt;
+    &lt;span class=&quot;carousel-control-prev-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+    &lt;span class=&quot;visually-hidden&quot;&gt;Previous&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;button class=&quot;carousel-control-next&quot; type=&quot;button&quot; data-bs-target=&quot;#carouselJoy&quot; data-bs-slide=&quot;next&quot;&gt;
+    &lt;span class=&quot;carousel-control-next-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+    &lt;span class=&quot;visually-hidden&quot;&gt;Next&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+    </code></pre>
+          <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===================================== -->
+  <!-- ============= Responsive Image ============= -->
+  <!-- ===================================== -->
+
+  <div id="Image" class="page"> <!--* Replace the # with the page ID *-->
+
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient -->
+
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+          <h3 class="gradient-text">Responsive Image Embed</h3> <!--* Replace the # with the page title *-->
+
+        </div>
+        <!-- Page Introduction -->
+
+        <div class="col-md-8">
+
+          <p>Responsive images are your visual chameleons—scaling beautifully across desktops, tablets, and mobiles
+            without breaking layout or clarity. Whether you're showcasing a dohicky, spotlighting a contributor, or
+            adding expressive flair, this snippet keeps your visuals crisp and accessible.</p>
+
+          <ul>
+            <li>📱 Automatically resizes to fit any screen size</li>
+            <li>🎨 Theme-safe and layout-friendly—no overflow, no flicker</li>
+            <li>🧱 Modular and drop-in ready for cards, modals, or onboarding flows</li>
+            <li>🧼 Keeps your microsite clean, fast, and visually joyful</li>
+          </ul>
+
+          <p>Use it for avatars, diagrams, mascots, or mood-lifting memes—your contributors will thank you for the
+            clarity and charm.</p>
+
+        </div>
+      </div>
+      <!-- Page full width content -->
+
+      <div class="row mt-4">
+        <div class="col-md">
+
+          <div class="text-center">
+            <img src="https://cdn.ebaumsworld.com/mediaFiles/picture/2475828/85493615.jpg"
+              alt="Dog with a suspicious stare" class="img-fluid rounded shadow-sm"
+              style="max-width: 100%; height: auto;">
+            <small class="d-block mt-2 text-muted">“When someone says ‘just one more tweak’ to the scroll-collapse
+              logic.”</small>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-md">
+          <h5 class="mt-4 mb-2">🖼 Responsive Image Panel: Scale with Grace</h5>
+          <ul>
+            <li><strong>Swap the image:</strong> Replace the <code>src="..."</code> with your own image URL—whether
+              it’s
+              a mascot, diagram, contributor photo, or onboarding meme.</li>
+            <li><strong>Update the alt text:</strong> Make sure <code>alt="..."</code> clearly describes the image for
+              accessibility and screen readers.</li>
+            <li><strong>Adjust styling:</strong> Tweak <code>class="img-fluid rounded shadow-sm"</code> to add or
+              remove
+              effects like <code>border</code>, <code>img-thumbnail</code>, or <code>mx-auto</code> for layout
+              control.
+            </li>
+            <li><strong>Control size:</strong> The <code>style="max-width: 100%; height: auto;"</code> ensures
+              responsive scaling—feel free to add <code>max-height</code> or <code>width</code> constraints if needed.
+            </li>
+            <li><strong>Caption it:</strong> Edit the <code>&lt;small&gt;</code> text to match your tone—whether it’s
+              a
+              contributor quote, a modular haiku, or a scroll-collapse joke.</li>
+            <li><strong>Optional:</strong> Wrap the image in a <code>&lt;a href="..."&gt;</code> tag to make it
+              clickable, or nest it inside a card or dohicky for extra flair.</li>
+          </ul>
+          <pre><code id="responsiveImageSnippet" class="snippet language-html">
+&lt;div class=&quot;text-center&quot;&gt;
+  &lt;img src=&quot;https://cdn.ebaumsworld.com/mediaFiles/picture/2475828/85493615.jpg&quot;
+    alt=&quot;Dog with a suspicious stare&quot; class=&quot;img-fluid rounded shadow-sm&quot;
+    style=&quot;max-width: 100%; height: auto;&quot;&gt;
+  &lt;small class=&quot;d-block mt-2 text-muted&quot;&gt;“When someone says ‘just one more tweak’ to the scroll-collapse logic.”&lt;/small&gt;
+&lt;/div&gt;
+    </code></pre>
+          <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===================================== -->
+  <!-- ============= Did You Know ============= -->
+  <!-- ===================================== -->
+
+  <div id="DYK" class="page"> <!--* Replace the # with the page ID *-->
+
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient -->
+
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+          <h3 class="gradient-text">Did You Know</h3> <!--* Replace the # with the page title *-->
+
+        </div>
+        <!-- Page Introduction -->
+
+        <div class="col-md-8">
+
+          <p>“Did You Know” boxes are your playful knowledge nudges—ideal for surfacing hidden features, contributor
+            tips, or delightful facts that make onboarding memorable. They add warmth, clarity, and a touch of
+            surprise
+            to any layout.</p>
+
+          <ul>
+            <li>✨ Great for highlighting lesser-known features or contributor wisdom</li>
+            <li>🎨 Theme-safe and modular—styled to harmonise across microsites</li>
+            <li>🧱 Drop-in ready for cards, modals, tabs, or onboarding flows</li>
+            <li>🧼 Keeps content light, engaging, and scannable</li>
+          </ul>
+
+          <p>Use them to say “Did you know you can drag modals?”, “Did you know this dohicky works in dark mode?”, or
+            “Did you know penguins debug with their flippers?”—whatever sparks joy and clarity.</p>
+
+        </div>
+      </div>
+      <!-- Page full width content -->
+
+      <div class="row mt-4">
+        <div class="col-md">
+
+          <details class="did-you-know">
+            <summary>💡 Did you know?</summary>
+            <p>This microsite supports keyboard navigation and high contrast themes for accessibility.</p>
+          </details>
+
+
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-md">
+          <h5 class="mt-4 mb-2">💡 Did You Know Panel: Whisper a Tip</h5>
+          <ul>
+            <li><strong>Update the tip:</strong> Replace the <code>&lt;p&gt;</code> content with your own joyful fact,
+              feature highlight, or contributor wisdom.</li>
+            <li><strong>Change the label:</strong> Edit the <code>&lt;summary&gt;</code> to match your tone—e.g.
+              <code>💡 Did you know?</code>, <code>🧠 Contributor tip</code>, or <code>🎉 Surprise insight</code>.
+            </li>
+            <li><strong>Style it safely:</strong> The <code>.did-you-know</code> class is theme-safe—add
+              <code>border</code>, <code>bg-light</code>, or <code>rounded</code> if you want extra flair.
+            </li>
+            <li><strong>Make it interactive:</strong> Use <code>&lt;details&gt;</code> to keep the layout
+              clean—contributors can expand when curious, skip when focused.</li>
+            <li><strong>Optional:</strong> Add emojis, links, or dohickies inside the tip to make it more expressive
+              or
+              actionable.</li>
+          </ul>
+          <pre><code id="didYouKnowSnippet" class="snippet language-html">
+&lt;details class=&quot;did-you-know&quot;&gt;
+  &lt;summary&gt;💡 Did you know?&lt;/summary&gt;
+  &lt;p&gt;This microsite supports keyboard navigation and high contrast themes for accessibility.&lt;/p&gt;
+&lt;/details&gt;
+    </code></pre>
+          <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===================================== -->
+  <!-- ============= Shout Out Card ============= -->
+  <!-- ===================================== -->
+
+  <div id="SOC" class="page"> <!--* Replace the # with the page ID *-->
+
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient -->
+
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+          <h3 class="gradient-text">Shout Out Card</h3> <!--* Replace the # with the page title *-->
+
+        </div>
+        <!-- Page Introduction -->
+
+        <div class="col-md-8">
+
+          <p>Shout-out cards are your spotlight stage—perfect for recognising contributors, surfacing team wins, or
+            adding a burst of appreciation to your microsite. They bring warmth, visibility, and a personal touch to
+            technical spaces.</p>
+
+          <ul>
+            <li>🎉 Great for celebrating achievements, milestones, or helpful nudges</li>
+            <li>🧱 Modular and drop-in ready for dashboards, onboarding flows, or role-based layouts</li>
+            <li>🎨 Theme-safe and expressive—styled to harmonise across microsites</li>
+            <li>🧼 Keeps recognition visible, joyful, and scannable</li>
+          </ul>
+
+          <p>Use them to say “Shout-out to Sam for debugging the modal flicker!”, “Thanks to Priya for refactoring the
+            dohicky!”, or “Big ups to the penguin dev who slid past scroll-collapse logic.”</p>
+
+        </div>
+      </div>
+      <!-- Page full width content -->
+
+      <div class="row mt-4">
+        <div class="col-md">
+
+          <div class="shout-card">
+            <strong>🌟 Shout-out:</strong> Thanks to <em>Bronwyn</em> for refactoring the scroll-collapse logic!
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-md">
+          <h5 class="mt-4 mb-2">📣 Shout-Out Panel: Shine the Spotlight</h5>
+          <ul>
+            <li><strong>Change the message:</strong> Edit the text inside the card to spotlight a different
+              contributor,
+              achievement, or joyful moment.</li>
+            <li><strong>Swap the emoji:</strong> Replace <code>🌟</code> with <code>🎉</code>, <code>👏</code>,
+              <code>🧠</code>, or any expressive icon that suits your tone.
+            </li>
+            <li><strong>Style it safely:</strong> Add theme-safe classes like <code>bg-light</code>,
+              <code>border</code>, <code>rounded</code>, or <code>shadow-sm</code> to harmonise with your microsite.
+            </li>
+            <li><strong>Make it modular:</strong> Nest it inside a card, grid, or carousel to rotate shout-outs by
+              role,
+              team, or onboarding step.</li>
+            <li><strong>Optional:</strong> Add a photo, link, or dohicky next to the name for extra flair—e.g.
+              <code>&lt;img&gt;</code> avatar or <code>&lt;a&gt;</code> to their contribution.
+            </li>
+          </ul>
+          <pre><code id="shoutOutSnippet" class="snippet language-html">
+&lt;div class=&quot;shout-card&quot;&gt;
+  &lt;strong&gt;🌟 Shout-out:&lt;/strong&gt; Thanks to &lt;em&gt;Bronwyn&lt;/em&gt; for refactoring the scroll-collapse logic!
+&lt;/div&gt;
+    </code></pre>
+          <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===================================== -->
+  <!-- ============= Quote ============= -->
+  <!-- ===================================== -->
+
+  <div id="Quote" class="page"> <!--* Replace the # with the page ID *-->
+
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient -->
+
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+          <h3 class="gradient-text">Quote</h3> <!--* Replace the # with the page title *-->
+
+        </div>
+        <!-- Page Introduction -->
+
+        <div class="col-md-8">
+
+          <p>Quote boxes are your expressive echoes—ideal for surfacing contributor wisdom, onboarding mantras, or
+            playful commentary that adds personality to your layout. They bring clarity, warmth, and a touch of
+            humanity
+            to technical spaces.</p>
+
+          <ul>
+            <li>🧠 Great for highlighting tips, reflections, or onboarding encouragement</li>
+            <li>🎨 Theme-safe and modular—styled to harmonise across microsites</li>
+            <li>🧱 Drop-in ready for cards, modals, tabs, or role-based layouts</li>
+            <li>🧼 Keeps content scannable, expressive, and contributor-first</li>
+          </ul>
+
+          <p>Use them to say “Modularity is kindness,” “Scroll-collapse logic is a journey,” or “Every dohicky
+            deserves
+            a warm welcome.” Whether it’s a real quote or a playful nudge, it adds voice to your vision.</p>
+
+        </div>
+      </div>
+      <!-- Page full width content -->
+
+      <div class="row mt-4">
+        <div class="col-md">
+
+          <blockquote class="quote-box">
+            <p>“Modular code isn’t just tidy—it’s empowering.”</p>
+            <footer>— Bronwyn, Implementation Advisor</footer>
+          </blockquote>
+
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-md">
+          <h5 class="mt-4 mb-2">🗣️ Quote Panel: Share a Voice</h5>
+          <ul>
+            <li><strong>Change the quote:</strong> Edit the <code>&lt;p&gt;</code> to reflect a new insight,
+              onboarding
+              mantra, or contributor reflection.</li>
+            <li><strong>Update the attribution:</strong> Modify the <code>&lt;footer&gt;</code> to credit a different
+              contributor, role, or team.</li>
+            <li><strong>Style it safely:</strong> Use theme-safe classes like <code>quote-box</code>,
+              <code>border</code>, <code>rounded</code>, or <code>shadow-sm</code> to harmonise with your microsite.
+            </li>
+            <li><strong>Make it modular:</strong> Nest inside cards, tabs, or onboarding flows—quotes add warmth and
+              clarity wherever they land.</li>
+            <li><strong>Optional:</strong> Add emojis, avatars, or dohickies to visually enhance the quote or
+              spotlight
+              the contributor.</li>
+          </ul>
+          <pre><code id="quoteSnippet" class="snippet language-html">
+&lt;blockquote class=&quot;quote-box&quot;&gt;
+  &lt;p&gt;“Modular code isn’t just tidy—it’s empowering.”&lt;/p&gt;
+  &lt;footer&gt;— Bronwyn, Implementation Advisor&lt;/footer&gt;
+&lt;/blockquote&gt;
+    </code></pre>
+          <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===================================== -->
+  <!-- ============= Tip Box ============= -->
+  <!-- ===================================== -->
+
+  <div id="TipBox" class="page"> <!--* Replace the # with the page ID *-->
+
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient -->
+
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+          <h3 class="gradient-text">Tip Box</h3> <!--* Replace the # with the page title *-->
+
+        </div>
+        <!-- Page Introduction -->
+
+        <div class="col-md-8">
+
+          <p>Tip boxes are your onboarding whispers—perfect for surfacing smart moves, hidden shortcuts, or
+            contributor-friendly nudges that make technical spaces feel welcoming. They offer clarity without clutter
+            and empower contributors to explore with confidence.</p>
+
+          <ul>
+            <li>🎯 Great for sharing modular tricks, role-based guidance, or CMS-safe workarounds</li>
+            <li>🧱 Modular and drop-in ready for dashboards, onboarding flows, or dohicky grids</li>
+            <li>🎨 Theme-safe and expressive—styled to harmonise across microsites</li>
+            <li>🧼 Keeps tips scannable, optional, and contributor-friendly</li>
+          </ul>
+
+          <p>Use them to say “Use <code>.dohicky-*</code> classes to drop in modular features,” “Check
+            <code>onboarding.js</code> for scroll-collapse logic,” or “Role cards work best inside a grid”—whatever
+            sparks clarity and contributor joy.
+          </p>
+
+        </div>
+      </div>
+      <!-- Page full width content -->
+
+      <div class="row mt-4">
+        <div class="col-md">
+
+          <details class="tip-box">
+            <summary>🛠 Contributor Tip</summary>
+            <p>Use `.dohicky-*` classes to drop in modular features without touching the CMS.</p>
+          </details>
+
+
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-md">
+          <h5 class="mt-4 mb-2">🛠 Tip Box Panel: Nudge with Know-How</h5>
+          <ul>
+            <li><strong>Change the tip:</strong> Edit the <code>&lt;p&gt;</code> to share a new insight, shortcut, or
+              contributor-friendly trick.</li>
+            <li><strong>Update the label:</strong> Modify the <code>&lt;summary&gt;</code> to match your tone—e.g.
+              <code>🛠 Contributor Tip</code>, <code>🧠 Smart Move</code>, or <code>🎯 Quick Win</code>.
+            </li>
+            <li><strong>Style it safely:</strong> Use theme-safe classes like <code>tip-box</code>,
+              <code>border</code>,
+              <code>bg-light</code>, or <code>rounded</code> to harmonise with your microsite.
+            </li>
+            <li><strong>Make it modular:</strong> Nest inside cards, tabs, or onboarding flows—tips add clarity
+              wherever
+              contributors need it.</li>
+            <li><strong>Optional:</strong> Add emojis, links, or dohickies inside the tip to make it more expressive
+              or
+              actionable.</li>
+          </ul>
+          <pre><code id="tipBoxSnippet" class="snippet language-html">
+&lt;details class=&quot;tip-box&quot;&gt;
+  &lt;summary&gt;🛠 Contributor Tip&lt;/summary&gt;
+  &lt;p&gt;Use <code>.dohicky-*</code> classes to drop in modular features without touching the CMS.&lt;/p&gt;
+&lt;/details&gt;
+    </code></pre>
+          <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===================================== -->
+  <!-- ============= Fact Box ============= -->
+  <!-- ===================================== -->
+
+  <div id="FactBox" class="page"> <!--* Replace the # with the page ID *-->
+
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient -->
+
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+          <h3 class="gradient-text">Fact Box</h3> <!--* Replace the # with the page title *-->
+
+        </div>
+        <!-- Page Introduction -->
+
+        <div class="col-md-8">
+
+          <p>Fact boxes are your microsite’s anchor points—ideal for surfacing technical truths, onboarding insights,
+            or
+            contributor-friendly reminders. They add clarity, confidence, and a touch of expressive structure to any
+            layout.</p>
+
+          <ul>
+            <li>🧠 Great for highlighting modular features, accessibility support, or onboarding logic</li>
+            <li>🧱 Modular and drop-in ready for dashboards, tip flows, or role-based layouts</li>
+            <li>🎨 Theme-safe and expressive—styled to harmonise across microsites</li>
+            <li>🧼 Keeps facts scannable, stable, and contributor-friendly</li>
+          </ul>
+
+          <p>Use them to say “This microsite uses modular dohickies,” “Scroll-collapse logic is flicker-free,” or
+            “Accessibility flags are active”—whatever helps contributors feel informed and empowered.</p>
+
+        </div>
+      </div>
+      <!-- Page full width content -->
+
+      <div class="row mt-4">
+        <div class="col-md">
+
+          <div class="factbox">
+            <strong>📦 Fact:</strong> This microsite uses modular dohickies to make onboarding joyful.
+          </div>
+
+
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-md">
+          <h5 class="mt-4 mb-2">📦 Fact Box Panel: Drop in the Truth</h5>
+          <ul>
+            <li><strong>Change the fact:</strong> Edit the text to highlight a new technical insight, onboarding
+              feature, or contributor-friendly truth.</li>
+            <li><strong>Swap the emoji:</strong> Replace <code>📦</code> with <code>🧠</code>, <code>🔍</code>,
+              <code>🧱</code>, or any expressive icon that suits your tone.
+            </li>
+            <li><strong>Style it safely:</strong> Use theme-safe classes like <code>factbox</code>,
+              <code>border</code>,
+              <code>bg-light</code>, or <code>rounded</code> to harmonise with your microsite.
+            </li>
+            <li><strong>Make it modular:</strong> Nest inside cards, tabs, or onboarding flows—fact boxes add clarity
+              wherever contributors need it.</li>
+            <li><strong>Optional:</strong> Add links, dohickies, or hover effects to make the fact interactive or
+              expandable.</li>
+          </ul>
+          <pre><code id="factBoxSnippet" class="snippet language-html">
+&lt;div class=&quot;factbox&quot;&gt;
+  &lt;strong&gt;📦 Fact:&lt;/strong&gt; This microsite uses modular dohickies to make onboarding joyful.
+&lt;/div&gt;
+    </code></pre>
+          <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- ===================================== -->
+  <!-- =========== Role Card ============== -->
+  <!-- ===================================== -->
+
+  <div id="RoleCardDev" class="page">
+
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient -->
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+          <h3 class="gradient-text">Role Card</h3>
+        </div>
+
+        <!-- Page Introduction -->
+        <div class="col-md-8">
+          <p>Role cards are your onboarding compass—ideal for giving contributors tailored guidance based on their
+            role,
+            mindset, or starting point. They help each persona feel seen, supported, and empowered to dive in with
+            clarity.</p>
+
+          <ul>
+            <li>🎯 Great for developers, maintainers, editors, educators, and more</li>
+            <li>🧱 Modular and drop-in ready for dashboards, onboarding flows, or role-based layouts</li>
+            <li>🎨 Theme-safe and expressive—styled to harmonise across microsites</li>
+            <li>🧼 Keeps guidance scannable, role-specific, and contributor-friendly</li>
+          </ul>
+
+          <p>Use them to say “Start with the dohickies,” “Check the scroll-collapse logic,” or “Review the
+            accessibility
+            flags”—whatever helps each contributor find their flow.</p>
+        </div>
+      </div>
+
+      <!-- Page full width content -->
+      <div class="row mt-4">
+        <div class="col-md">
+
+          <div class="role-card">
+            <h3>🧑‍💻 Developer</h3>
+            <p>Start with the modular dohickies and check the scroll-collapse logic in `onboarding.js`.</p>
+          </div>
+
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-md">
+          <h5 class="mt-4 mb-2">🧑‍💻 Role Card Panel: Guide by Persona</h5>
+          <ul>
+            <li><strong>Change the role:</strong> Edit the <code>&lt;h3&gt;</code> to match the contributor’s
+              persona—e.g. <code>🧑‍💻 Developer</code>, <code>🧑‍🏫 Educator</code>, or
+              <code>🧑‍🔧 Maintainer</code>.
+            </li>
+            <li><strong>Update the guidance:</strong> Modify the <code>&lt;p&gt;</code> to share role-specific tips,
+              starting points, or onboarding nudges.</li>
+            <li><strong>Style it safely:</strong> Use theme-safe classes like <code>role-card</code>,
+              <code>border</code>, <code>bg-light</code>, or <code>rounded</code> to harmonise with your microsite.
+            </li>
+            <li><strong>Make it modular:</strong> Stack multiple role cards in a grid, carousel, or tabbed layout to
+              guide contributors by context.</li>
+            <li><strong>Optional:</strong> Add emojis, links, or dohickies to make the card more expressive or
+              interactive.</li>
+          </ul>
+          <pre><code id="roleCardSnippet" class="snippet language-html">
+&lt;div class=&quot;role-card&quot;&gt;
+  &lt;h3&gt;🧑‍💻 Developer&lt;/h3&gt;
+  &lt;p&gt;Start with the modular dohickies and check the scroll-collapse logic in <code>onboarding.js</code>.&lt;/p&gt;
+&lt;/div&gt;
+    </code></pre>
+          <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================== -->
+  <!-- ======= Accessibility Flag ========= -->
+  <!-- ===================================== -->
+
+  <div id="AccessibilityFlag" class="page">
+
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient -->
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+          <h3 class="gradient-text">Accessibility</h3>
+        </div>
+
+        <!-- Page Introduction -->
+        <div class="col-md-8">
+          <p>Accessibility flags are your microsite’s promise of inclusion—perfect for highlighting features that
+            support diverse contributor needs. They bring visibility to thoughtful design choices and help
+            contributors
+            feel seen, supported, and empowered.</p>
+
+          <ul>
+            <li>🔍 Great for surfacing keyboard navigation, screen reader support, high contrast themes, and skip
+              links
+            </li>
+            <li>🧱 Modular and drop-in ready for cards, dashboards, or onboarding flows</li>
+            <li>🎨 Theme-safe and expressive—styled to harmonise across microsites</li>
+            <li>🧼 Keeps accessibility features visible, scannable, and contributor-friendly</li>
+          </ul>
+
+          <p>Use them to say “This section supports keyboard navigation,” “Screen reader labels are active,” or “Skip
+            links are available for fast navigation”—whatever signals thoughtful, inclusive scaffolding.</p>
+        </div>
+      </div>
+
+      <!-- Page full width content -->
+      <div class="row mt-4">
+        <div class="col-md">
+
+          <div class="accessibility-flag">
+            <strong>♿ Accessibility:</strong> This section supports keyboard navigation and screen readers.
+          </div>
+
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-md">
+          <h5 class="mt-4 mb-2">♿ Accessibility Flag Panel: Signal Inclusive Support</h5>
+          <ul>
+            <li><strong>Change the message:</strong> Edit the text to highlight specific accessibility features—e.g.
+              keyboard navigation, screen reader support, high contrast themes, or skip links.</li>
+            <li><strong>Swap the emoji:</strong> Replace <code>♿</code> with <code>🦮</code>, <code>🧏</code>,
+              <code>🔊</code>, or any expressive icon that suits your accessibility tone.
+            </li>
+            <li><strong>Style it safely:</strong> Use theme-safe classes like <code>accessibility-flag</code>,
+              <code>border</code>, <code>bg-light</code>, or <code>rounded</code> to harmonise with your microsite.
+            </li>
+            <li><strong>Make it modular:</strong> Drop it into cards, modals, or onboarding flows—accessibility flags
+              help contributors feel seen and supported.</li>
+            <li><strong>Optional:</strong> Add links to accessibility docs, toggle buttons, or dohickies that activate
+              inclusive features.</li>
+          </ul>
+          <pre><code id="accessibilityFlagSnippet" class="snippet language-html">
+&lt;div class=&quot;accessibility-flag&quot;&gt;
+  &lt;strong&gt;♿ Accessibility:&lt;/strong&gt; This section supports keyboard navigation and screen readers.
+&lt;/div&gt;
+    </code></pre>
+          <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================== -->
+  <!-- =========== Update Banner ========== -->
+  <!-- ===================================== -->
+
+  <div id="UpdateBanner" class="page">
+
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient -->
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+          <h3 class="gradient-text">Update Log</h3>
+        </div>
+
+        <!-- Page Introduction -->
+        <div class="col-md-8">
+          <p>Update banners are your changelog cheerleaders—ideal for announcing fixes, feature releases, or
+            behind-the-scenes improvements that make the contributor experience smoother. They keep your microsite
+            transparent, joyful, and flicker-free.</p>
+
+          <ul>
+            <li>🚀 Great for surfacing bug fixes, refactors, and new dohickies</li>
+            <li>🧱 Modular and drop-in ready for dashboards, onboarding flows, or role-based layouts</li>
+            <li>🎨 Theme-safe and expressive—styled to harmonise across microsites</li>
+            <li>🧼 Keeps updates visible, scannable, and contributor-friendly</li>
+          </ul>
+
+          <p>Use them to say “Scroll-collapse logic refactored for flicker-free transitions,” “New tip-box added for
+            maintainers,” or “Factbox now supports emoji!”—whatever sparks clarity and celebration.</p>
+        </div>
+      </div>
+
+      <!-- Page full width content -->
+      <div class="row mt-4">
+        <div class="col-md">
+
+          <div class="update-banner">
+            <strong>🔄 Update:</strong> Scroll-collapse logic refactored for flicker-free transitions.
+          </div>
+
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-md">
+          <h5 class="mt-4 mb-2">🔄 Update Banner Panel: Surface the Change</h5>
+          <ul>
+            <li><strong>Change the message:</strong> Edit the text to reflect a new update, bug fix, or feature
+              release—keep it clear and contributor-friendly.</li>
+            <li><strong>Swap the emoji:</strong> Replace <code>🔄</code> with <code>🚀</code>, <code>🐛</code>,
+              <code>🎯</code>, or any expressive icon that suits your changelog tone.
+            </li>
+            <li><strong>Style it safely:</strong> Use theme-safe classes like <code>update-banner</code>,
+              <code>border</code>, <code>bg-light</code>, or <code>rounded</code> to harmonise with your microsite.
+            </li>
+            <li><strong>Make it modular:</strong> Drop into cards, dashboards, or onboarding flows—update banners help
+              contributors stay informed with joy.</li>
+            <li><strong>Optional:</strong> Add links to release notes, dohickies, or role-based highlights for deeper
+              context.</li>
+          </ul>
+          <pre><code id="updateBannerSnippet" class="snippet language-html">
+&lt;div class=&quot;update-banner&quot;&gt;
+  &lt;strong&gt;🔄 Update:&lt;/strong&gt; Scroll-collapse logic refactored for flicker-free transitions.
+&lt;/div&gt;
+    </code></pre>
+          <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===================================== -->
+  <!-- ========== Dohicky Grid ============ -->
+  <!-- ===================================== -->
+
+  <div id="DohickyGrid" class="page">
+
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient -->
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+          <h3 class="gradient-text">Dohicky Grid</h3>
+        </div>
+
+        <!-- Page Introduction -->
+        <div class="col-md-8">
+          <p>The Dohicky Grid is your visual index of delight—perfect for surfacing modular features, onboarding
+            snippets, and contributor-friendly tools in one tidy layout. It invites exploration, sparks curiosity, and
+            keeps your microsite scannable and joyful.</p>
+
+          <ul>
+            <li>🎯 Great for listing dohickies like tip boxes, shout cards, fact flags, and more</li>
+            <li>🧱 Modular and stackable—add, remove, or reorder items with ease</li>
+            <li>🎨 Theme-safe and layout-friendly—harmonises across microsites</li>
+            <li>🧼 Keeps content clean, clickable, and contributor-first</li>
+          </ul>
+
+          <p>Use it to say “Here’s what you can drop in,” “Pick your onboarding tools,” or “Explore the dohicky
+            buffet”—whatever sparks clarity and modular joy.</p>
+        </div>
+      </div>
+
+      <!-- Page full width content -->
+      <div class="row mt-4">
+        <div class="col-md">
+
+          <div class="dohicky-grid">
+            <div class="dohicky-item">🎉 Did You Know</div>
+            <div class="dohicky-item">📦 Factbox</div>
+            <div class="dohicky-item">🌟 Shout Card</div>
+            <div class="dohicky-item">🛠 Tip Box</div>
+          </div>
+
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-md">
+          <h5 class="mt-4 mb-2">🧩 Dohicky Grid Panel: Showcase with Joy</h5>
+          <ul>
+            <li><strong>Change the items:</strong> Edit each <code>&lt;div class="dohicky-item"&gt;</code> to
+              spotlight
+              different snippets—e.g. <code>🗣️ Quote</code>, <code>♿ Accessibility Flag</code>, or
+              <code>🔄 Update Banner</code>.
+            </li>
+            <li><strong>Reorder or expand:</strong> Add, remove, or rearrange items to suit your layout—grids scale
+              beautifully across roles and themes.</li>
+            <li><strong>Style it safely:</strong> Use theme-safe classes like <code>dohicky-grid</code>,
+              <code>border</code>, <code>bg-light</code>, or <code>rounded</code> to harmonise with your microsite.
+            </li>
+            <li><strong>Make it modular:</strong> Drop into onboarding flows, dashboards, or contributor portals—grids
+              help users scan and explore with clarity.</li>
+            <li><strong>Optional:</strong> Add hover effects, links, or dohicky previews inside each item for extra
+              interactivity.</li>
+          </ul>
+          <pre><code id="dohickyGridSnippet" class="snippet language-html">
+&lt;div class=&quot;dohicky-grid&quot;&gt;
+  &lt;div class=&quot;dohicky-item&quot;&gt;🎉 Did You Know&lt;/div&gt;
+  &lt;div class=&quot;dohicky-item&quot;&gt;📦 Factbox&lt;/div&gt;
+  &lt;div class=&quot;dohicky-item&quot;&gt;🌟 Shout Card&lt;/div&gt;
+  &lt;div class=&quot;dohicky-item&quot;&gt;🛠 Tip Box&lt;/div&gt;
+&lt;/div&gt;
+    </code></pre>
+          <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================== -->
+  <!-- ============ Page Code ============== -->
+  <!-- ===================================== -->
+
+
+
+
+  <div id="PageCode" class="page">
+
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient -->
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+          <h3 class="gradient-text">Page Code</h3>
+        </div>
+
+        <!-- Page Introduction -->
+        <div class="col-md-8">
+          <p>This page scaffold is your layout launcher—perfect for building modular, theme-safe microsite pages with
+            expressive sidebars, warm introductions, and full-width content zones. It’s the dohicky behind the
+            dohickies.</p>
+
+          <ul>
+            <li>🧱 Modular and reusable—drop in any snippet, layout, or onboarding flow</li>
+            <li>🎨 Theme-safe and layout-friendly—harmonises across microsites</li>
+            <li>🧼 Keeps structure clean, scannable, and contributor-first</li>
+            <li>🧩 Supports gradient sidebars, intro blocks, and full-width content zones</li>
+          </ul>
+
+          <p>Use it to say “Here’s a role card page,” “This one’s for tip boxes,” or “Let’s build a dohicky
+            dashboard”—whatever sparks clarity and modular joy.</p>
+        </div>
+      </div>
+
+      <!-- Page full width content -->
+      <div class="row mt-4">
+        <div class="col-md">
+          <h5 class="mt-4 mb-2">🧱 Page Scaffold Panel: Build with Clarity</h5>
+          <ul>
+            <li><strong>Set the page ID:</strong> Replace <code>#</code> in
+              <code>&lt;div id="#" class="page"&gt;</code>
+              with a unique, descriptive ID like <code>FactBox</code>, <code>TipBox</code>, or <code>RoleCard</code>.
+            </li>
+            <li><strong>Update the title:</strong> Change the sidebar heading
+              <code>&lt;h3 class="gradient-text"&gt;#&lt;/h3&gt;</code> to match your snippet name—this anchors the
+              page
+              visually.
+            </li>
+            <li><strong>Write your intro:</strong> Use the <code>&lt;p&gt;</code> and <code>&lt;ul&gt;</code> blocks
+              to
+              explain what the snippet does, why it matters, and how contributors can use it.</li>
+            <li><strong>Drop in your snippet:</strong> Paste the dohicky code into the full-width section below—this
+              is
+              where the magic lives.</li>
+            <li><strong>Style it safely:</strong> Use theme-safe classes like <code>gradient-col</code>,
+              <code>bg-light</code>, <code>rounded</code>, or <code>shadow-sm</code> to harmonise with your microsite.
+            </li>
+            <li><strong>Optional:</strong> Add a second full-width section for advanced usage, variations, or carousel
+              layouts.</li>
+          </ul>
+          <p>This panel is the launchpad for every snippet page—modular, expressive, and ready to empower contributors
+            with clarity and joy.</p>
+
+          <p>This panel is the launchpad for every snippet page—modular, expressive, and ready to empower contributors
+            with clarity and joy.</p>
+          <pre><code id="pageCodeSnippet" class="snippet language-html">
+&lt;!-- ===================================== --&gt;
+&lt;!-- ============= PAGE NAME ============= --&gt;
+&lt;!-- ===================================== --&gt;
+
+&lt;div id=&quot;#&quot; class=&quot;page&quot;&gt;
+
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;!-- Sidebar Gradient --&gt;
+      &lt;div class=&quot;col-md-4 gradient-col d-flex align-items-center justify-content-center&quot;&gt;
+        &lt;h3 class=&quot;gradient-text&quot;&gt;#&lt;/h3&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Page Introduction --&gt;
+      &lt;div class=&quot;col-md-8&quot;&gt;
+        &lt;!-- Put your page content here --&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Page full width content --&gt;
+    &lt;div class=&quot;row mt-4&quot;&gt;
+      &lt;div class=&quot;col-md&quot;&gt;
+        &lt;!-- Secondary full page section if required --&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+        </code></pre>
+          <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ===================================== -->
+  <!-- ===== Open New Page Button ========= -->
+  <!-- ===================================== -->
+
+  <div id="OpenNewPageButton" class="page">
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient Title -->
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+          <h3 class="gradient-text">Open New Page Button</h3>
+        </div>
+        <!-- Main Welcome Text -->
+        <div class="col-md-8">
+
+          <p>This button is your microsite’s modular navigator—perfect for launching snippet pages, onboarding flows,
+            or
+            dohicky dashboards with clarity and ease. It’s expressive, accessible, and contributor-friendly.</p>
+
+          <ul>
+            <li>🧭 Great for linking to snippet pages like <code>FactBox</code>, <code>TipBox</code>, or
+              <code>RoleCard</code>
+            </li>
+            <li>🧱 Modular and stackable—drop into grids, menus, or onboarding flows</li>
+            <li>🎨 Theme-safe and layout-friendly—styled with <code>btn-primary</code> and <code>w-100</code> for
+              full-width clarity</li>
+            <li>🧼 Keeps navigation clean, scannable, and contributor-first</li>
+          </ul>
+
+          <p>Use it to say “Open the Tip Box page,” “Launch the Accessibility Flag panel,” or “Explore the Dohicky
+            Grid”—whatever sparks modular joy and onboarding clarity.</p>
+        </div>
+      </div>
+
+      <!-- Page full width content -->
+      <div class="row mt-4">
+        <div class="col-md">
+
+          <button class="btn btn-primary w-100 text-start mb-2" onclick="showPage('FactBox')">📦 Fact Box</button>
+          <button class="btn btn-primary w-100 text-start mb-2" onclick="showPage('TipBox')">🛠 Tip Box</button>
+          <button class="btn btn-primary w-100 text-start mb-2" onclick="showPage('RoleCard')">🧑‍💻 Role
+            Card</button>
+          <button class="btn btn-primary w-100 text-start mb-2" onclick="showPage('AccessibilityFlag')">♿
+            Accessibility
+            Flag</button>
+
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-md">
+          <h5 class="mt-4 mb-2">🧭 Open New Page Button Panel: Navigate with Joy</h5>
+          <ul>
+            <li><strong>Change the label:</strong> Replace <code>#</code> with the button text—e.g.
+              <code>📦 Fact Box</code>, <code>🛠 Tip Box</code>, or <code>🧩 Dohicky Grid</code>.
+            </li>
+            <li><strong>Set the target:</strong> Replace <code>ID</code> in <code>showPage('ID')</code> with the
+              unique
+              ID of the page you want to open.</li>
+            <li><strong>Style it safely:</strong> Use theme-safe classes like <code>btn-primary</code>,
+              <code>w-100</code>, <code>text-start</code>, or <code>mb-2</code> to harmonise with your microsite.
+            </li>
+            <li><strong>Make it modular:</strong> Stack buttons in a grid, sidebar, or dohicky dashboard to guide
+              contributors with clarity.</li>
+            <li><strong>Optional:</strong> Add emojis, icons, or hover effects to make navigation expressive and
+              joyful.
+            </li>
+          </ul>
+          <pre><code id="openPageButtonSnippet" class="snippet language-html">
+&lt;button class=&quot;btn btn-primary w-100 text-start mb-2&quot; onclick=&quot;showPage('FactBox')&quot;&gt;📦 Fact Box&lt;/button&gt;
+        </code></pre>
+          <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ===================================== -->
+  <!-- ===== Pop-Out Page Button ========== -->
+  <!-- ===================================== -->
+
+  <div id="PopOutPageButton" class="page">
+
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient -->
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+          <h3 class="gradient-text">Pop-Out Page Button</h3>
+        </div>
+
+        <!-- Page Introduction -->
+        <div class="col-md-8">
+          <p>This button is your microsite’s external launcher—perfect for opening snippet previews, contributor
+            demos,
+            or external resources in a new window. It’s modular, expressive, and keeps your layout clean and focused.
+          </p>
+
+          <ul>
+            <li>🌐 Great for linking to external pages, live demos, or preview panels</li>
+            <li>🧱 Modular and stackable—drop into dashboards, dohicky grids, or onboarding flows</li>
+            <li>🎨 Theme-safe and layout-friendly—styled with <code>btn-primary</code>, <code>w-100</code>, and
+              <code>text-start</code> for full-width clarity
+            </li>
+            <li>🧼 Keeps navigation clean, scannable, and contributor-first</li>
+          </ul>
+
+          <p>Use it to say “Preview the scroll-collapse demo,” “Open the accessibility checklist,” or “Launch the
+            dohicky playground”—whatever sparks modular joy and contributor clarity.</p>
+        </div>
+      </div>
+
+      <!-- Page full width content -->
+      <div class="row mt-4">
+        <div class="col-md">
+
+          <a class="btn btn-primary w-100 text-start mb-2" href="#"
+            onclick="openPopup('https://example.com/factbox-demo')">📦 Fact Box Demo</a>
+          <a class="btn btn-primary w-100 text-start mb-2" href="#"
+            onclick="openPopup('https://example.com/tipbox-preview')">🛠 Tip Box Preview</a>
+          <a class="btn btn-primary w-100 text-start mb-2" href="#"
+            onclick="openPopup('https://example.com/rolecard-playground')">🧑‍💻 Role Card Playground</a>
+
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-md">
+          <h5 class="mt-4 mb-2">🌐 Pop-Out Page Button Panel: Launch with Clarity</h5>
+          <ul>
+            <li><strong>Change the label:</strong> Replace <code>Button</code> with expressive text—e.g.
+              <code>📦 Fact Box Demo</code>, <code>🛠 Tip Box Preview</code>, or <code>🧩 Dohicky Playground</code>.
+            </li>
+            <li><strong>Set the target URL:</strong> Replace <code>'URL'</code> in <code>openPopup('URL')</code> with
+              the full link to the page you want to open.</li>
+            <li><strong>Style it safely:</strong> Use theme-safe classes like <code>btn-primary</code>,
+              <code>w-100</code>, <code>text-start</code>, or <code>mb-2</code> to harmonise with your microsite.
+            </li>
+            <li><strong>Make it modular:</strong> Stack buttons in a grid, sidebar, or dohicky dashboard to guide
+              contributors with clarity.</li>
+            <li><strong>Optional:</strong> Add emojis, icons, or hover effects to make navigation expressive and
+              joyful.
+            </li>
+          </ul>
+          <pre><code id="popOutButtonSnippet" class="snippet language-html">
+&lt;a class=&quot;btn btn-primary w-100 text-start mb-2&quot; href=&quot;#&quot; onclick=&quot;openPopup('https://example.com/factbox-demo')&quot;&gt;📦 Fact Box Demo&lt;/a&gt;
+        </code></pre>
+          <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ===================================== -->
+  <!-- ======= Main Navigation Panel ======= -->
+  <!-- ===================================== -->
+
+  <div id="MainNavigation" class="page">
+
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient -->
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+          <h3 class="gradient-text">Main Navigation</h3>
+        </div>
+
+        <!-- Page Introduction -->
+        <div class="col-md-8">
+          <p>The main navigation bar is your microsite’s modular map—perfect for guiding contributors through snippet
+            pages, training modules, and support tools with clarity and joy. It’s responsive, accessible, and
+            theme-safe, with dropdowns, submenus, and built-in accessibility controls.</p>
+
+          <ul>
+            <li>🧭 Great for organising pages like <code>Home</code>, <code>Guides</code>, <code>FAQs</code>, and
+              <code>Support</code>
+            </li>
+            <li>📁 Supports dropdowns and nested submenus for training catalogues and snippet libraries</li>
+            <li>🎨 Theme-safe and layout-friendly—styled with Bootstrap classes for full responsiveness</li>
+            <li>♿ Built-in accessibility controls for theme, text size, and dark mode</li>
+            <li>🔍 Includes search inputs for desktop and mobile views</li>
+          </ul>
+
+          <p>Use it to say “Explore the snippet library,” “Browse training modules,” or “Switch to high contrast
+            mode”—whatever sparks clarity and contributor empowerment.</p>
+        </div>
+      </div>
+
+      <!-- Page full width content -->
+      <div class="row mt-4">
+        <div class="col-md">
+          <!-- ================================= -->
+          <!-- ====== MAIN NAVIGATION BAR ====== -->
+          <!-- ================================= -->
+          <div id="desktop-nav-toolbar">
+            <nav class="navbar navbar-expand-lg mt-3">
+              <div class="container">
+                <!-- Button for toggling the menu on mobile -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Menu container -->
+                <div class="collapse navbar-collapse" id="navMenu">
+                  <ul class="navbar-nav mx-auto">
+                    <!-- ==== ADD A SINGLE SECTION ==== -->
+                    <!-- To add a new section (simple link), copy and update one of the lines below -->
+                    <li class="nav-item">
+                      <a class="nav-link" onclick="showPage('home')">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" onclick="showPage('guides')">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" onclick="showPage('faqs')">FAQs</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" onclick="showPage('SUP')">Support Request</a>
+                    </li>
+
+                    <!-- ==== ADD A DROPDOWN MENU ==== -->
+                    <!-- To create a dropdown menu, use this structure -->
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
+                        onclick="showPage('CC')">Catalogue</a>
+                      <ul class="dropdown-menu">
+                        <!-- ==== ADD A NORMAL DROPDOWN ITEM ==== -->
+                        <!-- Each dropdown item below links to a page -->
+                        <li>
+                          <a class="dropdown-item btn btn-block btn-primary" onclick="showPage('SaMT')">Statutory and
+                            Mandatory Training</a>
+                        </li>
+
+                        <!-- ==== ADD A SUBMENU ==== -->
+                        <!-- To add a submenu (nested within dropdown), use this structure -->
+                        <li class="dropdown-submenu">
+                          <a class="dropdown-item submenu-toggle" href="#" onclick="showPage('NSMT')">Non Statutory
+                            and
+                            Mandatory Training</a>
+                          <ul class="dropdown-menu">
+                            <li>
+                              <a class="dropdown-item btn btn-block btn-primary" onclick="showPage('NSaMT1')">eLearning
+                                Modules</a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item btn btn-block btn-primary"
+                                onclick="showPage('NSaMT2')">Workshops</a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item btn btn-block btn-primary" onclick="showPage('NSaMT3')">Coaching
+                                Sessions</a>
+                            </li>
+                          </ul>
+                        </li>
+                        <!-- ==== END SUBMENU ==== -->
+                      </ul>
+                    </li>
+                    <!-- ==== END DROPDOWN MENU ==== -->
+                    <!-- ==== ADD A DROPDOWN MENU ==== -->
+                    <!-- To create a dropdown menu, use this structure -->
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Snippet Examples</a>
+                      <ul class="dropdown-menu">
+                        <!-- ==== ADD A NORMAL DROPDOWN ITEM ==== -->
+                        <!-- Each dropdown item below links to a page -->
+                        <li>
+                          <a class="dropdown-item btn btn-block btn-primary" onclick="showPage('Modal')">Modal</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item btn btn-block btn-primary" onclick="showPage('ToggleSection')">Toggle
+                            Section</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item btn btn-block btn-primary" onclick="showPage('Alerts')">Alerts</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item btn btn-block btn-primary" onclick="showPage('Tabs')">Tabs</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item btn btn-block btn-primary"
+                            onclick="showPage('Breadcrumbs')">Breadcrumbs</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item btn btn-block btn-primary" onclick="showPage('Carousel')">Carousel</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item btn btn-block btn-primary" onclick="showPage('Image')">Image</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item btn btn-block btn-primary" onclick="showPage('DYK')">Did You
+                            Know?</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item btn btn-block btn-primary" onclick="showPage('SOC')">Shout Out
+                            Card</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item btn btn-block btn-primary" onclick="showPage('Quote')">Quote</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item btn btn-block btn-primary" onclick="showPage('FactBox')">Fact
+                            Box</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item btn btn-block btn-primary" onclick="showPage('TipBox')">Tip Box</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item btn btn-block btn-primary" onclick="showPage('RoleCardDev')">Role
+                            Card</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item btn btn-block btn-primary"
+                            onclick="showPage('AccessibilityFlag')">Accessibility</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item btn btn-block btn-primary" onclick="showPage('UpdateBanner')">Update
+                            Banner</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item btn btn-block btn-primary" onclick="showPage('DohickyGrid')">Dohicky
+                            Grid</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item btn btn-block btn-primary" onclick="showPage('PageCode')">Page
+                            Code</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item btn btn-block btn-primary"
+                            onclick="showPage('OpenNewPageButton')">Open New Page
+                            Button</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item btn btn-block btn-primary" onclick="showPage('PopOutPageButton')">Pop
+                            Out Page Button</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item btn btn-block btn-primary"
+                            onclick="showPage('NavigationMenu')">Navigation Menu</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <!-- ==== END DROPDOWN MENU ==== -->
+                  </ul>
+                  <div>
+
+                  </div>
+                </div>
+              </div>
+            </nav>
+          </div>
+
+          <!-- Page full width content -->
+          <div class="row mt-4">
+            <div class="col-md">
+              <h5 class="mt-4 mb-2">🧭 Main Navigation Panel: Map the Microsite</h5>
+              <ul>
+                <li><strong>Add sections:</strong> Use <code>&lt;li class="nav-item"&gt;</code> for simple links
+                  like
+                  <code>Home</code> or <code>FAQs</code>.
+                </li>
+                <li>
+                  <strongAdd dropdowns:</strong> Use <code>.nav-item.dropdown</code> with
+                    <code>.dropdown-menu</code> to
+                    group related pages.
+                </li>
+                <li><strong>Build submenus:</strong> Nest <code>.dropdown-submenu</code> inside dropdowns for
+                  multi-level
+                  navigation.</li>
+                <li><strong>Enable accessibility:</strong> Use the built-in <code>themeSelectorSidebar</code>,
+                  text size
+                  buttons, and <code>toggleDarkMode()</code> for inclusive control.</li>
+                <li><strong>Style it safely:</strong> Use Bootstrap classes like <code>navbar</code>,
+                  <code>btn-outline-secondary</code>, and <code>form-select-sm</code> to harmonise with your
+                  microsite.
+                </li>
+              </ul>
+              <pre><code class="snippet language-html">
+&lt;ul class=&quot;navbar-nav mx-auto&quot;&gt;
+  &lt;!-- ==== ADD A SINGLE SECTION ==== --&gt;
+  &lt;!-- To add a new section (simple link), copy and update one of the lines below --&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link&quot; onclick=&quot;showPage('home')&quot;&gt;Home&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link&quot; onclick=&quot;showPage('guides')&quot;&gt;Guides&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link&quot; onclick=&quot;showPage('faqs')&quot;&gt;FAQs&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link&quot; onclick=&quot;showPage('SUP')&quot;&gt;Support Request&lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;!-- ==== ADD A DROPDOWN MENU ==== --&gt;
+  &lt;li class=&quot;nav-item dropdown&quot;&gt;
+    &lt;a class=&quot;nav-link dropdown-toggle&quot; href=&quot;#&quot; data-bs-toggle=&quot;dropdown&quot; onclick=&quot;showPage('CC')&quot;&gt;Catalogue&lt;/a&gt;
+    &lt;ul class=&quot;dropdown-menu&quot;&gt;
+      &lt;!-- ==== ADD A NORMAL DROPDOWN ITEM ==== --&gt;
+      &lt;li&gt;
+        &lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('SaMT')&quot;&gt;Statutory and Mandatory Training&lt;/a&gt;
+      &lt;/li&gt;
+
+      &lt;!-- ==== ADD A SUBMENU ==== --&gt;
+      &lt;li class=&quot;dropdown-submenu&quot;&gt;
+        &lt;a class=&quot;dropdown-item submenu-toggle&quot; href=&quot;#&quot; onclick=&quot;showPage('NSMT')&quot;&gt;Non Statutory and Mandatory Training&lt;/a&gt;
+        &lt;ul class=&quot;dropdown-menu&quot;&gt;
+          &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('NSaMT1')&quot;&gt;eLearning Modules&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('NSaMT2')&quot;&gt;Workshops&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('NSaMT3')&quot;&gt;Coaching Sessions&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;!-- ==== END SUBMENU ==== --&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;!-- ==== END DROPDOWN MENU ==== --&gt;
+
+  &lt;!-- ==== ADD A DROPDOWN MENU ==== --&gt;
+  &lt;li class=&quot;nav-item dropdown&quot;&gt;
+    &lt;a class=&quot;nav-link dropdown-toggle&quot; href=&quot;#&quot; data-bs-toggle=&quot;dropdown&quot;&gt;Snippet Examples&lt;/a&gt;
+    &lt;ul class=&quot;dropdown-menu&quot;&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('Modal')&quot;&gt;Modal&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('ToggleSection')&quot;&gt;Toggle Section&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('Alerts')&quot;&gt;Alerts&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('Tabs')&quot;&gt;Tabs&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;!-- ==== END DROPDOWN MENU ==== --&gt;
+&lt;/ul&gt;
+</code></pre>
+              <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================== -->
+  <!-- ========= Side Menu Panel ========== -->
+  <!-- ===================================== -->
+
+  <div id="SideMenuPanel" class="page">
+
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient -->
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+          <h3 class="gradient-text">Side Menu</h3>
+        </div>
+
+        <!-- Page Introduction -->
+        <div class="col-md-8">
+          <p>This vertical side menu is your microsite’s modular navigator—perfect for guiding contributors through
+            training modules, snippet libraries, and support tools with clarity and structure. It supports nested
+            submenus, dropdowns, and expressive toggles.</p>
+
+          <ul>
+            <li>📚 Great for contributor dashboards, role-based layouts, and onboarding portals</li>
+            <li>🧱 Modular and stackable—supports nested submenus and dropdowns</li>
+            <li>🎨 Theme-safe and layout-friendly—uses Bootstrap classes for vertical alignment</li>
+            <li>🧼 Keeps navigation clean, scannable, and contributor-first</li>
+            <li>🧩 Easily integrates with dohicky launchers and page scaffolds</li>
+          </ul>
+
+          <p>Use it to say “Explore training modules,” “Browse snippet examples,” or “Launch onboarding flows by
+            role”—whatever sparks clarity and modular joy.</p>
+        </div>
+      </div>
+
+      <!-- Page full width content -->
+      <div class="row mt-4">
+        <div class="col-md">
+          <h5 class="mt-4 mb-2">🧭 Side Menu Panel: Navigate with Clarity</h5>
+          <ul>
+            <li><strong>Add sections:</strong> Use <code>&lt;li class="nav-item"&gt;</code> with
+              <code>&lt;a class="nav-link"&gt;</code> for simple vertical links like <code>Home</code> or
+              <code>FAQs</code>.
+            </li>
+
+            <li><strong>Create collapsible groups:</strong> Use <code>&lt;button class="toggle-submenu"&gt;</code> to
+              reveal nested lists with <code>&lt;ul class="submenu"&gt;</code>.</li>
+
+            <li><strong>Nest submenus:</strong> Stack multiple levels using <code>.submenu</code> and
+              <code>.ms-3</code>
+              for indentation and clarity. This helps contributors scan and explore with ease.
+            </li>
+
+            <li><strong>Use dropdowns:</strong> For Bootstrap-style dropdowns, use <code>.nav-item.dropdown</code>
+              with
+              <code>.dropdown-menu</code> and <code>.dropdown-item</code> to group snippet links.
+            </li>
+
+            <li><strong>Style it safely:</strong> Use theme-safe classes like <code>flex-column</code>,
+              <code>w-100</code>, <code>text-start</code>, <code>list-unstyled</code>, and <code>ms-3</code> to
+              harmonise with your microsite layout.
+            </li>
+
+            <li><strong>Make it modular:</strong> Drop this menu into any sidebar, dashboard, or role-based layout. It
+              scales beautifully across contributor types and screen sizes.</li>
+          </ul>
+          <p>This panel helps contributors explore with confidence—whether they’re launching snippet pages, browsing
+            training modules, or navigating onboarding flows.</p>
+          <pre><code class="snippet language-html">
+&lt;ul class=&quot;nav navbar-nav flex-column&quot;&gt;
+  &lt;!-- Simple Links --&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link&quot; onclick=&quot;showPage('home')&quot;&gt;Home&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link&quot; onclick=&quot;showPage('guides')&quot;&gt;Guides&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link&quot; onclick=&quot;showPage('faqs')&quot;&gt;FAQs&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;a class=&quot;nav-link&quot; onclick=&quot;showPage('SUP')&quot;&gt;Support Request&lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;!-- Top-Level Dropdown --&gt;
+  &lt;li class=&quot;nav-item&quot;&gt;
+    &lt;button class=&quot;nav-link toggle-submenu w-100 text-start&quot;&gt;Catalogue ▾&lt;/button&gt;
+    &lt;ul class=&quot;submenu list-unstyled ms-3&quot;&gt;
+      &lt;li&gt;
+        &lt;a class=&quot;nav-link&quot; onclick=&quot;showPage('SaMT')&quot;&gt;Statutory &amp; Mandatory Training&lt;/a&gt;
+      &lt;/li&gt;
+
+      &lt;!-- Nested Submenu --&gt;
+      &lt;li&gt;
+        &lt;button class=&quot;nav-link toggle-submenu w-100 text-start&quot;&gt;Non Statutory ▾&lt;/button&gt;
+        &lt;ul class=&quot;submenu list-unstyled ms-3&quot;&gt;
+          &lt;li&gt;&lt;a class=&quot;nav-link&quot; onclick=&quot;showPage('NSaMT1')&quot;&gt;eLearning Modules&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a class=&quot;nav-link&quot; onclick=&quot;showPage('NSaMT2')&quot;&gt;Workshops&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a class=&quot;nav-link&quot; onclick=&quot;showPage('NSaMT3')&quot;&gt;Coaching Sessions&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+
+  &lt;!-- Snippet Dropdown --&gt;
+  &lt;li class=&quot;nav-item dropdown&quot;&gt;
+    &lt;a class=&quot;nav-link dropdown-toggle&quot; href=&quot;#&quot; data-bs-toggle=&quot;dropdown&quot;&gt;Snippet Examples&lt;/a&gt;
+    &lt;ul class=&quot;dropdown-menu&quot;&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('Modal')&quot;&gt;Modal&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('ToggleSection')&quot;&gt;Toggle Section&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('Alerts')&quot;&gt;Alerts&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('Tabs')&quot;&gt;Tabs&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('Breadcrumbs')&quot;&gt;Breadcrumbs&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('Carousel')&quot;&gt;Carousel&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('Image')&quot;&gt;Image&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('DYK')&quot;&gt;Did You Know?&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('SOC')&quot;&gt;Shout Out Card&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('Quote')&quot;&gt;Quote&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('FactBox')&quot;&gt;Fact Box&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('TipBox')&quot;&gt;Tip Box&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('RoleCardDev')&quot;&gt;Role Card&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('AccessibilityFlag')&quot;&gt;Accessibility&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('UpdateBanner')&quot;&gt;Update Banner&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('DohickyGrid')&quot;&gt;Dohicky Grid&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('PageCode')&quot;&gt;Page Code&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('OpenNewPageButton')&quot;&gt;Open New Page Button&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;dropdown-item&quot; onclick=&quot;showPage('PopOutPageButton')&quot;&gt;Pop Out Page Button&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+        </code></pre>
+          <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================== -->
+  <!-- ========= Header Section Panel ====== -->
+  <!-- ===================================== -->
+
+  <div id="HeaderSectionPanel" class="page">
+
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient -->
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+          <h3 class="gradient-text">Header Section</h3>
+        </div>
+
+        <!-- Page Introduction -->
+        <div class="col-md-8">
+          <p>This header scaffold anchors your microsite with expressive branding, intuitive navigation, and
+            contributor-first clarity. It includes a responsive menu toggle, site title, logo cluster, and a hero
+            banner
+            with overlay text.</p>
+
+          <ul>
+            <li>🧭 Great for microsite homepages, dashboards, and landing pages</li>
+            <li>🧱 Modular and responsive—uses Bootstrap flex utilities and offcanvas toggles</li>
+            <li>🎨 Theme-safe and layout-friendly—harmonises with branding</li>
+            <li>🖼️ Includes hero banner with overlay text for trust identity</li>
+            <li>🧼 Keeps structure clean, scannable, and contributor-first</li>
+          </ul>
+
+          <p>Use it to say “Welcome to the Learning Hub,” “Explore your training tools,” or “Launch your onboarding
+            journey”—whatever sparks clarity and modular joy.</p>
+        </div>
+      </div>
+
+      <!-- Page full width content -->
+      <div class="row mt-4">
+        <div class="col-md">
+          <h5 class="mt-4 mb-2">🎯 Header Section Panel: Brand with Clarity</h5>
+          <ul>
+            <li><strong>Change the site title:</strong> Update the text inside <code>&lt;h1 class="mb-0"&gt;</code> to
+              reflect your microsite name or purpose.
+              <br><code>&lt;h1 class="mb-0"&gt;MicroSiteKit&lt;/h1&gt;</code>
+            </li>
+
+            <li><strong>Update the logos:</strong> Replace the <code>src</code> attributes in the
+              <code>&lt;img&gt;</code> tags with your own logo URLs.
+              <br><code>&lt;img src="your-logo.jpg" alt="Your Logo" class="logo custom" /&gt;</code>
+            </li>
+
+            <li><strong>Change the banner image:</strong> Swap the <code>src</code> in <code>.Banner_image</code> to
+              use
+              your own hero banner.
+              <br><code>&lt;img src="your-banner.png" alt="Welcome Banner" class="Banner_image w-100" /&gt;</code>
+            </li>
+
+            <li><strong>Edit the overlay text:</strong> Update the heading inside <code>.banner-text-overlay</code> to
+              reflect your trust or team name.
+              <br><code>&lt;h1&gt;Lady Elizabeth Ann NHS Trust&lt;/h1&gt;</code>
+            </li>
+
+            <li><strong>Style it safely:</strong> Use Bootstrap classes like <code>d-flex</code>,
+              <code>justify-content-between</code>, <code>px-3</code>, and <code>py-2</code> to maintain responsive
+              layout and spacing.
+            </li>
+
+            <li><strong>Make it modular:</strong> Drop this header into any page scaffold or layout. It pairs
+              beautifully with side menus, navigation bars, and onboarding flows.</li>
+          </ul>
+          <p>This header helps contributors feel grounded and welcomed—whether they’re launching training, browsing
+            resources, or exploring new dohickies.</p>
+          <pre><code class="snippet language-html">
+&lt;div class=&quot;header-bar d-flex align-items-center justify-content-between px-3 py-2 position-relative&quot;&gt;
+  &lt;!-- Menu Button (Left) --&gt;
+  &lt;div class=&quot;menu-button-wrapper&quot;&gt;
+    &lt;button class=&quot;btn btn-primary&quot; type=&quot;button&quot; data-bs-toggle=&quot;offcanvas&quot; data-bs-target=&quot;#sidebarMenu&quot; aria-controls=&quot;sidebarMenu&quot;&gt;
+      ☰ Menu
+    &lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Site Title (Center) --&gt;
+  &lt;div class=&quot;center-heading text-center flex-grow-1&quot;&gt;
+    &lt;h1 class=&quot;mb-0&quot;&gt;MicroSiteKit&lt;/h1&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Logos (Right) --&gt;
+  &lt;div class=&quot;logo-container d-flex align-items-center gap-2&quot;&gt;
+    &lt;img src=&quot;https://assets.codepen.io/8889025/ESR_Logo.jpg&quot; alt=&quot;ESR Logo&quot; class=&quot;logo esr&quot; /&gt;
+    &lt;img src=&quot;https://assets.codepen.io/8889025/NHS_Logo.svg&quot; alt=&quot;NHS Logo&quot; class=&quot;logo nhs&quot; /&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Hero Banner --&gt;
+&lt;div class=&quot;banner-wrapper text-center position-relative&quot;&gt;
+  &lt;img src=&quot;https://assets.codepen.io/8889025/LEA_Banner3.png&quot; alt=&quot;Welcome Hub Banner&quot; class=&quot;Banner_image w-100&quot; /&gt;
+  &lt;div class=&quot;banner-text-overlay&quot;&gt;
+    &lt;h1&gt;Lady Elizabeth Ann NHS Trust&lt;/h1&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+        </code></pre>
+          <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ===================================== -->
+  <!-- ============ Footer Panel =========== -->
+  <!-- ===================================== -->
+
+  <div id="FooterPanel" class="page">
+
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient -->
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+          <h3 class="gradient-text">Footer</h3>
+        </div>
+
+        <!-- Page Introduction -->
+        <div class="col-md-8">
+          <p>This footer scaffold anchors your microsite with trust identity, support contact, and contributor-first
+            clarity. It’s simple, expressive, and theme-safe—perfect for closing any page with warmth and
+            professionalism.</p>
+
+          <ul>
+            <li>🧭 Great for homepages, dashboards, and snippet pages</li>
+            <li>📮 Includes contact link for technical support</li>
+            <li>🎨 Theme-safe and layout-friendly—uses Bootstrap spacing and border utilities</li>
+            <li>🧼 Keeps structure clean, scannable, and contributor-first</li>
+            <li>🧩 Easily pairs with headers, menus, and dohicky layouts</li>
+          </ul>
+
+          <p>Use it to say “This page belongs to the Lady Elizabeth Ann NHS Trust,” “Need help? Contact us,” or
+            “Thanks
+            for visiting”—whatever sparks clarity and closure.</p>
+        </div>
+      </div>
+
+      <!-- Page full width content -->
+      <div class="row mt-4">
+        <div class="col-md">
+          <h5 class="mt-4 mb-2">📮 Footer Code</h5>
+          <ul>
+            <li><strong>Update the organisation name:</strong> Change the text inside <code>&lt;p&gt;</code> to
+              reflect
+              your trust, team, or microsite name.
+              <br><code>&lt;p&gt;&amp;copy; 2025 Your Organisation Name. Your Microsite Title.&lt;/p&gt;</code>
+            </li>
+
+            <li><strong>Change the support contact:</strong> Replace the email address in the
+              <code>&lt;a href="mailto:"&gt;</code> tag with your own support inbox.
+              <br><code>&lt;a href="mailto:support@example.nhs.uk"&gt;support@example.nhs.uk&lt;/a&gt;</code>
+            </li>
+
+            <li><strong>Style it safely:</strong> Use Bootstrap classes like <code>text-center</code>,
+              <code>py-4</code>, <code>mt-5</code>, and <code>border-top</code> to maintain spacing and visual
+              harmony.
+            </li>
+
+            <li><strong>Make it modular:</strong> Drop this footer into any page scaffold. It pairs beautifully with
+              headers, menus, and dohicky dashboards.</li>
+
+            <li><strong>Optional:</strong> Add links to privacy policies, accessibility statements, or contributor
+              credits using additional <code>&lt;small&gt;</code> or <code>&lt;a&gt;</code> tags.</li>
+          </ul>
+
+          <p>This footer helps contributors feel supported and grounded—whether they’re finishing a training module,
+            submitting a support request, or exploring new dohickies.</p>
+
+          <pre><code class="snippet language-html">
+&lt;!-- ================================= --&gt;
+&lt;!-- ============ FOOTER ============= --&gt;
+&lt;!-- ================================= --&gt;
+&lt;footer class=&quot;text-center py-4 mt-5 border-top&quot;&gt;
+  &lt;p class=&quot;mb-0&quot;&gt;
+    &amp;copy; 2025 Lady Elizabeth Ann NHS Trust. MicroSiteKit.
+  &lt;/p&gt;
+  &lt;small&gt;For technical support, contact
+    &lt;a href=&quot;mailto:LEA_LD@nhs.net&quot;&gt;LEA_LD@nhs.net&lt;/a&gt;.&lt;/small&gt;
+&lt;/footer&gt;
+        </code></pre>
+          <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================== -->
+  <!-- ========== Process Flow Page ========= -->
+  <!-- ===================================== -->
+
+  <div id="ProcessFlow" class="page">
+
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient -->
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+          <h3 class="gradient-text">Process</h3>
+        </div>
+
+        <!-- Page Introduction -->
+        <div class="col-md-8">
+          <p>This page visualises the Reasonable Adjustments Plan (RAP) process using a clear, contributor-first
+            flowchart. It’s built with <code>mermaid.js</code> and styled for clarity, accessibility, and modular
+            reuse.
+          </p>
+
+          <ul>
+            <li>🧠 Helps contributors understand the RAP journey at a glance</li>
+            <li>📄 Uses Mermaid syntax for editable, version-controlled diagrams</li>
+            <li>🎨 Theme-safe and layout-friendly—uses Bootstrap spacing and Mermaid container</li>
+            <li>🧩 Easily pairs with toolkit links, onboarding strips, and mascot guidance</li>
+            <li>🛠️ Fully editable—just update the Mermaid block below</li>
+          </ul>
+
+          <p>Use this page to support onboarding, clarify responsibilities, or embed in wider wellbeing and inclusion
+            resources.</p>
+        </div>
+      </div>
+
+
+
+      <!-- Page full width content -->
+      <div class="row mt-4">
+        <div class="col-md">
+          <h5 class="mt-4 mb-2">🗺️ RAP Process Flow</h5>
+
+          <div class="mermaid">
+            flowchart TD
+
+            %% === ENTRY POINT ===
+            Start["<div class='flow-box'>
+              <h3>🚪 Entry Node</h3>
+              <h5>Contributor enters the Engine. Mascot greets them with a pun and a scroll.</h5>
+            </div>"]:::entry
+
+            %% === ROLE SPLIT ===
+            Split["<div class='flow-box'>
+              <h3>🧬 Role Splitter</h3>
+              <h5>Contributor is sorted into one or more roles:</h5>
+              <ul>
+                <li>🧠 Architect</li>
+                <li>🎨 Designer</li>
+                <li>🛠️ Builder</li>
+                <li>📣 Communicator</li>
+              </ul>
+            </div>"]:::role
+
+            Architect["<div class='flow-box'>
+              <h3>🧠 Architect</h3>
+              <h5>Scaffolds the onboarding space. Defines dohicky zones and mascot habitats.</h5>
+            </div>"]:::role
+
+            Designer["<div class='flow-box'>
+              <h3>🎨 Designer</h3>
+              <h5>Creates visual language, sticker packs, and theme-safe layouts.</h5>
+            </div>"]:::role
+
+            Builder["<div class='flow-box'>
+              <h3>🛠️ Builder</h3>
+              <h5>Codes the dohickies. Comments everything. Makes onboarding joyful.</h5>
+            </div>"]:::role
+
+            Communicator["<div class='flow-box'>
+              <h3>📣 Communicator</h3>
+              <h5>Writes lore, guides, and mascot scripts. Translates chaos into clarity.</h5>
+            </div>"]:::role
+
+            %% === TRIALS ===
+            TrialA["<div class='flow-box'>
+              <h3>🧪 Trial of Modularity</h3>
+              <h5>Refactor a spaghetti snippet into a reusable dohicky.</h5>
+            </div>"]:::trial
+
+            TrialB["<div class='flow-box'>
+              <h3>🧪 Trial of Empathy</h3>
+              <h5>Explain a tooltip to a confused dragon.</h5>
+            </div>"]:::trial
+
+            TrialC["<div class='flow-box'>
+              <h3>🧪 Trial of Clarity</h3>
+              <h5>Fix a broken link in a legacy onboarding strip.</h5>
+            </div>"]:::trial
+
+            %% === CHAOS EVENTS ===
+            Chaos1["<div class='flow-box'>
+              <h3>🔥 Chaos Event: Role Redefinition</h3>
+              <h5>Contributor’s role is reshaped mid-flow. Must advocate for joy and clarity.</h5>
+            </div>"]:::chaos
+
+            Chaos2["<div class='flow-box'>
+              <h3>🌪️ Chaos Event: Acronym Storm</h3>
+              <h5>Contributor is bombarded with unexplained abbreviations. Must decode or reroute.</h5>
+            </div>"]:::chaos
+
+            %% === LOOPS ===
+            Loop1["<div class='flow-box'>
+              <h3>🔁 Feedback Loop</h3>
+              <h5>Contributor receives feedback, iterates, and re-shares.</h5>
+            </div>"]:::loop
+
+            Loop2["<div class='flow-box'>
+              <h3>🔁 Lore Loop</h3>
+              <h5>Contributor discovers ancient onboarding scrolls and updates the microsite mythos.</h5>
+            </div>"]:::lore
+
+            %% === FUSION ===
+            Fusion["<div class='flow-box'>
+              <h3>🧩 Role Fusion</h3>
+              <h5>Contributor merges roles. Becomes a hybrid onboarding guardian.</h5>
+            </div>"]:::fusion
+
+            %% === FINAL FORM ===
+            Final["<div class='flow-box'>
+              <h3>🌟 Final Form</h3>
+              <h5>Contributor achieves onboarding enlightenment. Mascot weeps with pride.</h5>
+            </div>"]:::final
+
+            %% === FLOW ===
+            Start --> Split
+            Split --> Architect --> TrialA
+            Split --> Designer --> TrialB
+            Split --> Builder --> TrialC
+            Split --> Communicator --> TrialB
+
+            TrialA --> Loop1 --> Fusion
+            TrialB --> Loop2 --> Fusion
+            TrialC --> Loop1
+
+            Fusion --> Chaos1 --> Loop2
+            Fusion --> Chaos2 --> Loop1
+
+            Chaos1 --> Communicator
+            Chaos2 --> Architect
+
+            Fusion --> Final
+            Final --> Start
+          </div>
+
+
+          <!-- Page full width content -->
+          <div class="row mt-4">
+            <div class="col-md">
+              <h5 class="mt-4 mb-2">🧠 Contributor Engine Code</h5>
+              <ul>
+
+                <li><strong>Customise the Mermaid diagram:</strong> Add, remove, or rename nodes inside the
+                  <code>&lt;div class="mermaid"&gt;</code> block. Use <code>&lt;div class='flow-box'&gt;</code> for
+                  consistent styling and HTML formatting.
+                  <br><code>&lt;div class="mermaid"&gt;flowchart TD ...&lt;/div&gt;</code>
+                </li>
+
+                <li><strong>Style it safely:</strong> Use Bootstrap classes like <code>mt-4</code>, <code>mb-2</code>,
+                  and
+                  <code>col-md</code> to maintain layout harmony. Style <code>.flow-box</code> in your CSS for visual
+                  joy.
+                </li>
+
+                <li><strong>Make it modular:</strong> Drop this scaffold into any page. It pairs beautifully with
+                  headers,
+                  menus, mascot strips, and dohicky dashboards.
+                </li>
+
+                <li><strong>Optional:</strong> Add a “Back to Toolkit” button, lore panel, or collapsible dohicky
+                  below
+                  the
+                  diagram for extra clarity and contributor delight.
+                </li>
+              </ul>
+
+              <p>This scaffold helps contributors visualise complex onboarding systems with clarity, recursion, and
+                mascot-powered joy—whether they’re navigating role redefinition, building dohickies, or documenting
+                lore.
+              </p>
+
+              <h5 class="mt-4 mb-2">🔍 Mermaid Font Size & Complexity</h5>
+
+              <p>Mermaid diagrams are brilliant for visualising flows, but they do have a few quirks—especially when
+                things
+                get big, bold, and beautifully complex. Here’s what contributors should know:</p>
+
+              <ul>
+                <li><strong>📏 Font size may shrink automatically:</strong> Mermaid tries to fit the entire diagram
+                  into
+                  the
+                  available space. If your chart is large or dense, it may reduce the font size to avoid overflow.
+                </li>
+
+                <li><strong>🧠 Complexity affects readability:</strong> Charts with lots of nodes, embedded HTML, or
+                  deep
+                  branching structures are more likely to trigger auto-scaling. Even if you set a larger font size,
+                  Mermaid
+                  may override it.</li>
+
+                <li><strong>🧩 Break big charts into chunks:</strong> For better readability and contributor joy,
+                  split
+                  complex flows into smaller Mermaid blocks. You can group them by theme, role, or phase—like “Manager
+                  Flow,” “Contributor Journey,” or “Mascot Trials.”</li>
+
+                <li><strong>🎨 Style your content safely:</strong> Use a custom CSS class like <code>.flow-box</code>
+                  to
+                  control font size, spacing, and layout inside Mermaid nodes. This gives you more control than
+                  Mermaid’s
+                  built-in settings.</li>
+
+                <li><strong>🔍 Zoom with CSS:</strong> You can apply <code>transform: scale(1.2)</code> to the Mermaid
+                  container to visually enlarge the whole diagram. This is great for accessibility mode or
+                  presentation
+                  views.</li>
+              </ul>
+
+              <p>Remember: clarity beats complexity. If your diagram starts feeling like a spaghetti monster, break it
+                into
+                themed chunks and let your mascot guide the way!</p>
+
+              <pre><code class="snippet language-html">
+&lt;!-- ===================================== --&gt;
+&lt;!-- ======= Contributor Engine Page ======= --&gt;
+&lt;!-- ===================================== --&gt;
+
+&lt;div id=&quot;ContributorEngine&quot; class=&quot;page&quot;&gt;
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-md-4 gradient-col d-flex align-items-center justify-content-center text-start&quot;&gt;
+        &lt;h3 class=&quot;gradient-text&quot;&gt;Contributor Engine&lt;/h3&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;col-md-8&quot;&gt;
+        &lt;p&gt;This flowchart visualises a modular onboarding engine powered by joy, recursion, and mascot magic.&lt;/p&gt;
+        &lt;ul&gt;
+          &lt;li&gt;🧬 Role-based branching and fusion&lt;/li&gt;
+          &lt;li&gt;🌀 Chaos events and feedback loops&lt;/li&gt;
+          &lt;li&gt;📚 Lore discovery and onboarding evolution&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;row mt-4&quot;&gt;
+      &lt;div class=&quot;col-md&quot;&gt;
+        &lt;h5 class=&quot;mt-4 mb-2&quot;&gt;🧠 Contributor Engine Flowchart&lt;/h5&gt;
+        &lt;div class=&quot;mermaid&quot;&gt;
+flowchart TD
+Start[&quot;&lt;div class='flow-box'&gt;&lt;h3&gt;🚪 Entry Node&lt;/h3&gt;&lt;p&gt;Contributor enters the Engine...&lt;/p&gt;&lt;/div&gt;&quot;]
+Split[&quot;&lt;div class='flow-box'&gt;&lt;h3&gt;🧬 Role Splitter&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;Architect&lt;/li&gt;&lt;li&gt;Designer&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&quot;]
+Architect[&quot;&lt;div class='flow-box'&gt;&lt;h3&gt;🧠 Architect&lt;/h3&gt;&lt;/div&gt;&quot;]
+Designer[&quot;&lt;div class='flow-box'&gt;&lt;h3&gt;🎨 Designer&lt;/h3&gt;&lt;/div&gt;&quot;]
+TrialA[&quot;&lt;div class='flow-box'&gt;&lt;h3&gt;🧪 Trial of Modularity&lt;/h3&gt;&lt;/div&gt;&quot;]
+Loop1[&quot;&lt;div class='flow-box'&gt;&lt;h3&gt;🔁 Feedback Loop&lt;/h3&gt;&lt;/div&gt;&quot;]
+Fusion[&quot;&lt;div class='flow-box'&gt;&lt;h3&gt;🧩 Role Fusion&lt;/h3&gt;&lt;/div&gt;&quot;]
+Final[&quot;&lt;div class='flow-box'&gt;&lt;h3&gt;🌟 Final Form&lt;/h3&gt;&lt;/div&gt;&quot;]
+
+Start --> Split
+Split --> Architect --> TrialA --> Loop1 --> Fusion --> Final --> Start
+Split --> Designer --> TrialA
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+    </code></pre>
+              <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ===================================== -->
+  <!-- ======= Sequence Diagram Page ======= -->
+  <!-- ===================================== -->
+
+  <div id="SequenceDiagramPanel" class="page">
+
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient -->
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+          <h3 class="gradient-text">Sequence Diagram</h3>
+        </div>
+
+        <!-- Page Introduction -->
+        <div class="col-md-8">
+          <p>This example shows how to use Mermaid syntax to create a sequence diagram directly in your microsite.
+            It’s editable, theme-safe, and perfect for visualising contributor journeys, system interactions, or
+            onboarding flows.</p>
+
+          <ul>
+            <li>🧠 Mermaid syntax lives inside the site—no external rendering needed</li>
+            <li>🎨 Theme-safe and layout-friendly—uses Bootstrap spacing</li>
+            <li>🧩 Modular and editable—great for onboarding, guides, and walkthroughs</li>
+            <li>📋 Includes copy-to-clipboard button for easy reuse</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Page full width content -->
+      <div class="row mt-4">
+        <div class="col-md">
+          <h5 class="mt-4 mb-2">📊 Sequence Diagram Example</h5>
+          <p>This Mermaid block renders a sequence diagram showing a generic contributor interaction flow. You can
+            customise the roles, actions, and messages to suit your own process.</p>
+
+          <!-- Mermaid Diagram Block -->
+          <pre class="mermaid snippet">
+sequenceDiagram
+  participant Contributor
+  participant Microsite
+  participant Guide
+  participant SupportTeam
+
+  Contributor->>Microsite: Opens diagram page
+  Microsite->>Guide: Loads Mermaid block
+  Guide-->>Contributor: Shows interaction flow
+  Contributor->>Microsite: Copies diagram snippet
+  Microsite->>SupportTeam: Sends contact request
+  SupportTeam-->>Contributor: Responds with support
+        </pre>
+
+
+
+          <!-- Customisation Tips -->
+          <div class="mt-4">
+            <h6>🛠️ How to Customise</h6>
+            <ul>
+              <li><strong>Change roles:</strong> Replace <code>Contributor</code>, <code>Microsite</code>, etc. with
+                your own actors</li>
+              <li><strong>Update messages:</strong> Edit the arrows (<code>->></code>) to reflect your process steps
+              </li>
+              <li><strong>Add or remove participants:</strong> Use <code>participant</code> to define who’s involved
+              </li>
+              <li><strong>Style it:</strong> Mermaid supports themes and configuration via
+                <code>mermaid.initialize()</code>
+              </li>
+            </ul>
+            <pre><code class="snippet language-html">
+&lt;div class=&quot;mermaid snippet&quot;&gt;
+sequenceDiagram
+  participant Contributor
+  participant Microsite
+  participant Guide
+  participant SupportTeam
+
+  Contributor-&gt;&gt;Microsite: Opens diagram page
+  Microsite-&gt;&gt;Guide: Loads Mermaid block
+  Guide--&gt;&gt;Contributor: Shows interaction flow
+  Contributor-&gt;&gt;Microsite: Copies diagram snippet
+  Microsite-&gt;&gt;SupportTeam: Sends contact request
+  SupportTeam--&gt;&gt;Contributor: Responds with support
+&lt;/div&gt;
+</code></pre>
+            <!-- Copy Button -->
+            <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ===================================== -->
+  <!-- ======== Class Diagram Page ========= -->
+  <!-- ===================================== -->
+
+  <div id="ClassDiagramPanel" class="page">
+
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient -->
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+          <h3 class="gradient-text">Class Diagram</h3>
+        </div>
+
+        <!-- Page Introduction -->
+        <div class="col-md-8">
+          <p>This example shows how to use Mermaid syntax to create a class diagram directly in your microsite.
+            It’s editable, theme-safe, and perfect for visualising modular components, plugin relationships, or
+            contributor-first architecture.</p>
+
+          <ul>
+            <li>🧠 Mermaid syntax lives inside the site—no external rendering needed</li>
+            <li>🎨 Theme-safe and layout-friendly—uses Bootstrap spacing</li>
+            <li>🧩 Modular and editable—great for onboarding, guides, and system mapping</li>
+            <li>📋 Includes copy-to-clipboard button for easy reuse</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Page full width content -->
+      <div class="row mt-4">
+        <div class="col-md">
+          <h5 class="mt-4 mb-2">📊 Class Diagram Example</h5>
+          <p>This Mermaid block renders a class diagram showing how a microsite might relate to plugins and snippets.
+            You can customise the classes, methods, and relationships to suit your own architecture.</p>
+
+          <!-- Mermaid Diagram Block -->
+          <pre class="mermaid snippet">
+classDiagram
+  class Microsite {
+    +showPage()
+    +copySnippet()
+  }
+
+  class Plugin {
+    +activate()
+    +deactivate()
+  }
+
+  class Snippet {
+    +language
+    +copyToClipboard()
+  }
+
+  Microsite --> Plugin : loads
+  Microsite --> Snippet : contains
+  Plugin <|-- CopyButton
+  Plugin <|-- Mermaid
+  Plugin <|-- PlantUML
+        </pre>
+
+          <!-- Customisation Tips -->
+          <div class="mt-4">
+            <h6>🛠️ How to Customise</h6>
+            <ul>
+              <li><strong>Change class names:</strong> Replace <code>Microsite</code>, <code>Plugin</code>, etc. with
+                your own components</li>
+              <li><strong>Update methods and properties:</strong> Add or remove lines inside each class block</li>
+              <li><strong>Define relationships:</strong> Use arrows like <code>--&gt;</code>, <code>&lt;|--</code>,
+                <code>..&gt;</code> to show inheritance, usage, or association
+              </li>
+              <li><strong>Style it:</strong> Mermaid supports themes and configuration via
+                <code>mermaid.initialize()</code>
+              </li>
+            </ul>
+
+            <pre><code class="snippet language-html">
+&lt;div class=&quot;mermaid snippet&quot;&gt;
+classDiagram
+  class Microsite {
+    +showPage()
+    +copySnippet()
+  }
+
+  class Plugin {
+    +activate()
+    +deactivate()
+  }
+
+  class Snippet {
+    +language
+    +copyToClipboard()
+  }
+
+  Microsite --&gt; Plugin : loads
+  Microsite --&gt; Snippet : contains
+  Plugin &lt;|-- CopyButton
+  Plugin &lt;|-- Mermaid
+  Plugin &lt;|-- PlantUML
+&lt;/div&gt;
+</code></pre>
+
+            <!-- Copy Button -->
+            <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ===================================== -->
+  <!-- ========= State Diagram Page ========= -->
+  <!-- ===================================== -->
+
+  <div id="StateDiagramPanel" class="page">
+
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient -->
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+          <h3 class="gradient-text">State Diagram</h3>
+        </div>
+
+        <!-- Page Introduction -->
+        <div class="col-md-8">
+          <p>This example shows how to use Mermaid syntax to create a state diagram directly in your microsite.
+            It’s editable, theme-safe, and perfect for visualising contributor journeys, UI states, or process
+            transitions.</p>
+
+          <ul>
+            <li>🧠 Mermaid syntax lives inside the site—no external rendering needed</li>
+            <li>🎨 Theme-safe and layout-friendly—uses Bootstrap spacing</li>
+            <li>🧩 Modular and editable—great for onboarding, guides, and state machines</li>
+            <li>📋 Includes copy-to-clipboard button for easy reuse</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Page full width content -->
+      <div class="row mt-4">
+        <div class="col-md">
+          <h5 class="mt-4 mb-2">📊 State Diagram Example</h5>
+          <p>This Mermaid block renders a state diagram showing a contributor’s journey through a microsite. You can
+            customise the states, transitions, and labels to suit your own flow.</p>
+
+          <!-- Mermaid Diagram Block -->
+          <pre class="mermaid snippet">
+stateDiagram-v2
+  [*] --> Landing
+  Landing --> Exploring : clicks "Start"
+  Exploring --> Copying : selects snippet
+  Copying --> Contacting : needs help
+  Contacting --> Supported : receives support
+  Supported --> Exploring : continues journey
+  Exploring --> [*] : exits microsite
+        </pre>
+
+          <!-- Customisation Tips -->
+          <div class="mt-4">
+            <h6>🛠️ How to Customise</h6>
+            <ul>
+              <li><strong>Change states:</strong> Replace <code>Landing</code>, <code>Exploring</code>, etc. with your
+                own process steps</li>
+              <li><strong>Update transitions:</strong> Use <code>--&gt;</code> and labels to show how contributors move
+                between states</li>
+              <li><strong>Define start/end:</strong> Use <code>[*]</code> for initial and terminal states</li>
+              <li><strong>Style it:</strong> Mermaid supports themes and configuration via
+                <code>mermaid.initialize()</code>
+              </li>
+            </ul>
+
+            <pre><code class="snippet language-html">
+&lt;div class=&quot;mermaid snippet&quot;&gt;
+stateDiagram-v2
+  [*] --&gt; Landing
+  Landing --&gt; Exploring : clicks &quot;Start&quot;
+  Exploring --&gt; Copying : selects snippet
+  Copying --&gt; Contacting : needs help
+  Contacting --&gt; Supported : receives support
+  Supported --&gt; Exploring : continues journey
+  Exploring --&gt; [*] : exits microsite
+&lt;/div&gt;
+</code></pre>
+
+            <!-- Copy Button -->
+            <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================== -->
+  <!-- ===== Entity Relationship Page ====== -->
+  <!-- ===================================== -->
+
+  <div id="ERDiagramPanel" class="page">
+
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar Gradient -->
+        <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+          <h3 class="gradient-text">Entity Relationship</h3>
+        </div>
+
+        <!-- Page Introduction -->
+        <div class="col-md-8">
+          <p>This example shows how to use Mermaid syntax to create an entity relationship (ER) diagram directly in your
+            microsite.
+            It’s editable, theme-safe, and perfect for visualising data models, contributor records, or system schemas.
+          </p>
+
+          <ul>
+            <li>🧠 Mermaid syntax lives inside the site—no external rendering needed</li>
+            <li>🎨 Theme-safe and layout-friendly—uses Bootstrap spacing</li>
+            <li>🧩 Modular and editable—great for onboarding, data mapping, and system design</li>
+            <li>📋 Includes copy-to-clipboard button for easy reuse</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Page full width content -->
+      <div class="row mt-4">
+        <div class="col-md">
+          <h5 class="mt-4 mb-2">📊 Entity Relationship Diagram Example</h5>
+          <p>This Mermaid block renders an ER diagram showing how contributors, roles, and teams relate. You can
+            customise the entities, fields, and relationships to suit your own data model.</p>
+
+          <!-- Mermaid Diagram Block -->
+          <pre class="mermaid snippet">
+erDiagram
+  CONTRIBUTORS ||--o{ ROLES : has
+  CONTRIBUTORS {
+    string id
+    string name
+    string email
+  }
+  ROLES {
+    string id
+    string title
+    string description
+  }
+  TEAMS ||--|{ CONTRIBUTORS : includes
+  TEAMS {
+    string id
+    string name
+    string mascot
+  }
+        </pre>
+
+          <!-- Customisation Tips -->
+          <div class="mt-4">
+            <h6>🛠️ How to Customise</h6>
+            <ul>
+              <li><strong>Change entity names:</strong> Replace <code>CONTRIBUTORS</code>, <code>ROLES</code>, etc. with
+                your own data tables or objects</li>
+              <li><strong>Update fields:</strong> Add or remove field definitions inside each entity block</li>
+              <li><strong>Define relationships:</strong> Use <code>||--o{</code>, <code>|o--o|</code>, etc. to show
+                cardinality</li>
+              <li><strong>Style it:</strong> Mermaid supports themes and configuration via
+                <code>mermaid.initialize()</code></li>
+            </ul>
+
+            <pre><code class="snippet language-html">
+&lt;div class=&quot;mermaid snippet&quot;&gt;
+erDiagram
+  CONTRIBUTORS ||--o{ ROLES : has
+  CONTRIBUTORS {
+    string id
+    string name
+    string email
+  }
+  ROLES {
+    string id
+    string title
+    string description
+  }
+  TEAMS ||--|{ CONTRIBUTORS : includes
+  TEAMS {
+    string id
+    string name
+    string mascot
+  }
+&lt;/div&gt;
+</code></pre>
+
+            <!-- Copy Button -->
+            <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================= -->
+  <!-- ============ FOOTER ============= -->
+  <!-- ================================= -->
+  <footer class="text-center py-4 mt-5 border-top">
+    <p class="mb-0">
+      &copy; 2025 Microsite Services. MicroSiteKit: proudly held together with snippets, dohickies, and sheer
+      determination.
+    </p>
+    <small>
+      Found a bug? Confused by a toggle? Need emotional support from a modal?
+      Contact <a href="mailto:Bronwyn.Driver@nhsbsa.nhs.uk">Bronwyn.Driver@nhsbsa.nhs.uk</a> and we’ll send
+      biscuits.*
+    </small>
+  </footer>
+  <!-- ================================= -->
+  <!-- ====== JAVASCRIPT INCLUDES ====== -->
+  <!-- ================================= -->
+  <!-- Bootstrap 5 Bundle (with Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom Script File -->
+  <script src="script.js"></script>
+</body>
+
+</html>

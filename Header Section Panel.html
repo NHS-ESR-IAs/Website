@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MicroSiteKit – Header Section Panel</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom Styles -->
+    <link href="Assets/css/style.css" rel="stylesheet" />
+
+    <!-- Mermaid Setup -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script type="module">
+        import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+        mermaid.initialize({ startOnLoad: false });
+        window.mermaid = mermaid;
+    </script>
+</head>
+
+<body class="glass">
+    <!-- Injected Partials -->
+    <div id="shared-header"></div>
+    <div id="main-nav"></div>
+    <div id="sidebar-nav"></div>
+
+    <!-- Page-Specific Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center">
+                <h3 class="gradient-text">Header Section Panel</h3>
+            </div>
+            <div class="col-md-8">
+                <div class="page-intro text-center py-4 px-3">
+                    <!-- Replace this block with your page-specific content -->
+                    <p>This header scaffold anchors your microsite with expressive branding, intuitive navigation, and
+                        contributor-first clarity. It includes a responsive menu toggle, site title, logo cluster, and a
+                        hero
+                        banner
+                        with overlay text.</p>
+
+                    <ul>
+                        <li>🧭 Great for microsite homepages, dashboards, and landing pages</li>
+                        <li>🧱 Modular and responsive—uses Bootstrap flex utilities and offcanvas toggles</li>
+                        <li>🎨 Theme-safe and layout-friendly—harmonises with branding</li>
+                        <li>🖼️ Includes hero banner with overlay text for trust identity</li>
+                        <li>🧼 Keeps structure clean, scannable, and contributor-first</li>
+                    </ul>
+
+                    <p>Use it to say “Welcome to the Learning Hub,” “Explore your training tools,” or “Launch your
+                        onboarding
+                        journey”—whatever sparks clarity and modular joy.</p>
+                </div>
+            </div>
+
+            <!-- Page full width content -->
+            <div class="row mt-4">
+                <div class="col-md">
+                    <h5 class="mt-4 mb-2">🎯 Header Section Panel: Brand with Clarity</h5>
+                    <ul>
+                        <li><strong>Change the site title:</strong> Update the text inside
+                            <code>&lt;h1 class="mb-0"&gt;</code> to
+                            reflect your microsite name or purpose.
+                            <br><code>&lt;h1 class="mb-0"&gt;MicroSiteKit&lt;/h1&gt;</code>
+                        </li>
+
+                        <li><strong>Update the logos:</strong> Replace the <code>src</code> attributes in the
+                            <code>&lt;img&gt;</code> tags with your own logo URLs.
+                            <br><code>&lt;img src="your-logo.jpg" alt="Your Logo" class="logo custom" /&gt;</code>
+                        </li>
+
+                        <li><strong>Change the banner image:</strong> Swap the <code>src</code> in
+                            <code>.Banner_image</code> to
+                            use
+                            your own hero banner.
+                            <br><code>&lt;img src="your-banner.png" alt="Welcome Banner" class="Banner_image w-100" /&gt;</code>
+                        </li>
+
+                        <li><strong>Edit the overlay text:</strong> Update the heading inside
+                            <code>.banner-text-overlay</code> to
+                            reflect your trust or team name.
+                            <br><code>&lt;h1&gt;Lady Elizabeth Ann NHS Trust&lt;/h1&gt;</code>
+                        </li>
+
+                        <li><strong>Style it safely:</strong> Use Bootstrap classes like <code>d-flex</code>,
+                            <code>justify-content-between</code>, <code>px-3</code>, and <code>py-2</code> to maintain
+                            responsive
+                            layout and spacing.
+                        </li>
+
+                        <li><strong>Make it modular:</strong> Drop this header into any page scaffold or layout. It
+                            pairs
+                            beautifully with side menus, navigation bars, and onboarding flows.</li>
+                    </ul>
+                    <p>This header helps contributors feel grounded and welcomed—whether they’re launching training,
+                        browsing
+                        resources, or exploring new dohickies.</p>
+                    <pre><code class="snippet language-html">
+&lt;div class=&quot;header-bar d-flex align-items-center justify-content-between px-3 py-2 position-relative&quot;&gt;
+  &lt;!-- Menu Button (Left) --&gt;
+  &lt;div class=&quot;menu-button-wrapper&quot;&gt;
+    &lt;button class=&quot;btn btn-primary&quot; type=&quot;button&quot; data-bs-toggle=&quot;offcanvas&quot; data-bs-target=&quot;#sidebarMenu&quot; aria-controls=&quot;sidebarMenu&quot;&gt;
+      ☰ Menu
+    &lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Site Title (Center) --&gt;
+  &lt;div class=&quot;center-heading text-center flex-grow-1&quot;&gt;
+    &lt;h1 class=&quot;mb-0&quot;&gt;MicroSiteKit&lt;/h1&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Logos (Right) --&gt;
+  &lt;div class=&quot;logo-container d-flex align-items-center gap-2&quot;&gt;
+    &lt;img src=&quot;https://assets.codepen.io/8889025/ESR_Logo.jpg&quot; alt=&quot;ESR Logo&quot; class=&quot;logo esr&quot; /&gt;
+    &lt;img src=&quot;https://assets.codepen.io/8889025/NHS_Logo.svg&quot; alt=&quot;NHS Logo&quot; class=&quot;logo nhs&quot; /&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Hero Banner --&gt;
+&lt;div class=&quot;banner-wrapper text-center position-relative&quot;&gt;
+  &lt;img src=&quot;https://assets.codepen.io/8889025/LEA_Banner3.png&quot; alt=&quot;Welcome Hub Banner&quot; class=&quot;Banner_image w-100&quot; /&gt;
+  &lt;div class=&quot;banner-text-overlay&quot;&gt;
+    &lt;h1&gt;Lady Elizabeth Ann NHS Trust&lt;/h1&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+        </code></pre>
+                    <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="shared-footer"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="Assets/js/script.js"></script>
+</body>
+
+</html>

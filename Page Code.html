@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MicroSiteKit – Page Code</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom Styles -->
+    <link href="Assets/css/style.css" rel="stylesheet" />
+
+    <!-- Mermaid Setup -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script type="module">
+        import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+        mermaid.initialize({ startOnLoad: false });
+        window.mermaid = mermaid;
+    </script>
+</head>
+
+<body class="glass">
+    <!-- Injected Partials -->
+    <div id="shared-header"></div>
+    <div id="main-nav"></div>
+    <div id="sidebar-nav"></div>
+
+    <!-- Page-Specific Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center">
+                <h3 class="gradient-text">Page Code</h3>
+            </div>
+            <div class="col-md-8">
+                <div class="page-intro text-center py-4 px-3">
+                    <!-- Replace this block with your page-specific content -->
+                    <p>This page scaffold is your layout launcher—perfect for building modular, theme-safe microsite
+                        pages with
+                        expressive sidebars, warm introductions, and full-width content zones. It’s the dohicky behind
+                        the
+                        dohickies.</p>
+
+                    <ul>
+                        <li>🧱 Modular and reusable—drop in any snippet, layout, or onboarding flow</li>
+                        <li>🎨 Theme-safe and layout-friendly—harmonises across microsites</li>
+                        <li>🧼 Keeps structure clean, scannable, and contributor-first</li>
+                        <li>🧩 Supports gradient sidebars, intro blocks, and full-width content zones</li>
+                    </ul>
+
+                    <p>Use it to say “Here’s a role card page,” “This one’s for tip boxes,” or “Let’s build a dohicky
+                        dashboard”—whatever sparks clarity and modular joy.</p>
+                </div>
+            </div>
+
+            <!-- Page full width content -->
+            <div class="row mt-4">
+                <div class="col-md">
+                    <h5 class="mt-4 mb-2">🧱 Page Scaffold Panel: Build with Clarity</h5>
+                    <ul>
+                        <li><strong>Set the page ID:</strong> Replace <code>#</code> in
+                            <code>&lt;div id="#" class="page"&gt;</code>
+                            with a unique, descriptive ID like <code>FactBox</code>, <code>TipBox</code>, or
+                            <code>RoleCard</code>.
+                        </li>
+                        <li><strong>Update the title:</strong> Change the sidebar heading
+                            <code>&lt;h3 class="gradient-text"&gt;#&lt;/h3&gt;</code> to match your snippet name—this
+                            anchors the
+                            page
+                            visually.
+                        </li>
+                        <li><strong>Write your intro:</strong> Use the <code>&lt;p&gt;</code> and
+                            <code>&lt;ul&gt;</code> blocks
+                            to
+                            explain what the snippet does, why it matters, and how contributors can use it.</li>
+                        <li><strong>Drop in your snippet:</strong> Paste the dohicky code into the full-width section
+                            below—this
+                            is
+                            where the magic lives.</li>
+                        <li><strong>Style it safely:</strong> Use theme-safe classes like <code>gradient-col</code>,
+                            <code>bg-light</code>, <code>rounded</code>, or <code>shadow-sm</code> to harmonise with
+                            your microsite.
+                        </li>
+                        <li><strong>Optional:</strong> Add a second full-width section for advanced usage, variations,
+                            or carousel
+                            layouts.</li>
+                    </ul>
+                    <p>This panel is the launchpad for every snippet page—modular, expressive, and ready to empower
+                        contributors
+                        with clarity and joy.</p>
+
+                    <p>This panel is the launchpad for every snippet page—modular, expressive, and ready to empower
+                        contributors
+                        with clarity and joy.</p>
+                    <pre><code id="pageCodeSnippet" class="snippet language-html">
+&lt;!-- ===================================== --&gt;
+&lt;!-- ============= PAGE NAME ============= --&gt;
+&lt;!-- ===================================== --&gt;
+
+&lt;div id=&quot;#&quot; class=&quot;page&quot;&gt;
+
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;!-- Sidebar Gradient --&gt;
+      &lt;div class=&quot;col-md-4 gradient-col d-flex align-items-center justify-content-center&quot;&gt;
+        &lt;h3 class=&quot;gradient-text&quot;&gt;#&lt;/h3&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Page Introduction --&gt;
+      &lt;div class=&quot;col-md-8&quot;&gt;
+        &lt;!-- Put your page content here --&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Page full width content --&gt;
+    &lt;div class=&quot;row mt-4&quot;&gt;
+      &lt;div class=&quot;col-md&quot;&gt;
+        &lt;!-- Secondary full page section if required --&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+        </code></pre>
+                    <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="shared-footer"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="Assets/js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MicroSiteKit – Open New Page Button</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom Styles -->
+    <link href="Assets/css/style.css" rel="stylesheet" />
+
+    <!-- Mermaid Setup -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script type="module">
+        import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+        mermaid.initialize({ startOnLoad: false });
+        window.mermaid = mermaid;
+    </script>
+</head>
+
+<body class="glass">
+    <!-- Injected Partials -->
+    <div id="shared-header"></div>
+    <div id="main-nav"></div>
+    <div id="sidebar-nav"></div>
+
+    <!-- Page-Specific Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center">
+                <h3 class="gradient-text">Open New Page Button</h3>
+            </div>
+            <div class="col-md-8">
+                <div class="page-intro text-center py-4 px-3">
+                    <!-- Replace this block with your page-specific content -->
+                    <p>This button is your microsite’s modular navigator—perfect for launching snippet pages, onboarding
+                        flows,
+                        or
+                        dohicky dashboards with clarity and ease. It’s expressive, accessible, and contributor-friendly.
+                    </p>
+
+                    <ul>
+                        <li>🧭 Great for linking to snippet pages like <code>FactBox</code>, <code>TipBox</code>, or
+                            <code>RoleCard</code>
+                        </li>
+                        <li>🧱 Modular and stackable—drop into grids, menus, or onboarding flows</li>
+                        <li>🎨 Theme-safe and layout-friendly—styled with <code>btn-primary</code> and
+                            <code>w-100</code> for
+                            full-width clarity</li>
+                        <li>🧼 Keeps navigation clean, scannable, and contributor-first</li>
+                    </ul>
+
+                    <p>Use it to say “Open the Tip Box page,” “Launch the Accessibility Flag panel,” or “Explore the
+                        Dohicky
+                        Grid”—whatever sparks modular joy and onboarding clarity.</p>
+                </div>
+            </div>
+
+            <!-- Page full width content -->
+            <div class="row mt-4">
+                <div class="col-md">
+
+                    <button class="btn btn-primary w-100 text-start mb-2" onclick="showPage('FactBox')">📦 Fact
+                        Box</button>
+                    <button class="btn btn-primary w-100 text-start mb-2" onclick="showPage('TipBox')">🛠 Tip
+                        Box</button>
+                    <button class="btn btn-primary w-100 text-start mb-2" onclick="showPage('RoleCard')">🧑‍💻 Role
+                        Card</button>
+                    <button class="btn btn-primary w-100 text-start mb-2" onclick="showPage('AccessibilityFlag')">♿
+                        Accessibility
+                        Flag</button>
+
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md">
+                    <h5 class="mt-4 mb-2">🧭 Open New Page Button Panel: Navigate with Joy</h5>
+                    <ul>
+                        <li><strong>Change the label:</strong> Replace <code>#</code> with the button text—e.g.
+                            <code>📦 Fact Box</code>, <code>🛠 Tip Box</code>, or <code>🧩 Dohicky Grid</code>.
+                        </li>
+                        <li><strong>Set the target:</strong> Replace <code>ID</code> in <code>showPage('ID')</code> with
+                            the
+                            unique
+                            ID of the page you want to open.</li>
+                        <li><strong>Style it safely:</strong> Use theme-safe classes like <code>btn-primary</code>,
+                            <code>w-100</code>, <code>text-start</code>, or <code>mb-2</code> to harmonise with your
+                            microsite.
+                        </li>
+                        <li><strong>Make it modular:</strong> Stack buttons in a grid, sidebar, or dohicky dashboard to
+                            guide
+                            contributors with clarity.</li>
+                        <li><strong>Optional:</strong> Add emojis, icons, or hover effects to make navigation expressive
+                            and
+                            joyful.
+                        </li>
+                    </ul>
+                    <pre><code id="openPageButtonSnippet" class="snippet language-html">
+&lt;button class=&quot;btn btn-primary w-100 text-start mb-2&quot; onclick=&quot;showPage('FactBox')&quot;&gt;📦 Fact Box&lt;/button&gt;
+        </code></pre>
+                    <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="shared-footer"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="Assets/js/script.js"></script>
+</body>
+
+</html>

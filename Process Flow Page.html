@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MicroSiteKit – Process Flow Page</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom Styles -->
+    <link href="Assets/css/style.css" rel="stylesheet" />
+
+    <!-- Mermaid Setup -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script type="module">
+        import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+        mermaid.initialize({ startOnLoad: false });
+        window.mermaid = mermaid;
+    </script>
+</head>
+
+<body class="glass">
+    <!-- Injected Partials -->
+    <div id="shared-header"></div>
+    <div id="main-nav"></div>
+    <div id="sidebar-nav"></div>
+
+    <!-- Page-Specific Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center">
+                <h3 class="gradient-text">Process Flow Page</h3>
+            </div>
+            <div class="col-md-8">
+                <div class="page-intro text-center py-4 px-3">
+                    <p>This page visualises the Reasonable Adjustments Plan (RAP) process using a clear,
+                        contributor-first
+                        flowchart. It’s built with <code>mermaid.js</code> and styled for clarity, accessibility, and
+                        modular
+                        reuse.
+                    </p>
+
+                    <ul>
+                        <li>🧠 Helps contributors understand the RAP journey at a glance</li>
+                        <li>📄 Uses Mermaid syntax for editable, version-controlled diagrams</li>
+                        <li>🎨 Theme-safe and layout-friendly—uses Bootstrap spacing and Mermaid container</li>
+                        <li>🧩 Easily pairs with toolkit links, onboarding strips, and mascot guidance</li>
+                        <li>🛠️ Fully editable—just update the Mermaid block below</li>
+                    </ul>
+
+                    <p>Use this page to support onboarding, clarify responsibilities, or embed in wider wellbeing and
+                        inclusion
+                        resources.</p>
+                </div>
+            </div>
+
+
+
+            <!-- Page full width content -->
+            <div class="row mt-4">
+                <div class="col-md">
+                    <h5 class="mt-4 mb-2">🗺️ RAP Process Flow</h5>
+
+                    <div class="mermaid">
+                        flowchart TD
+
+                        %% === ENTRY POINT ===
+                        Start["<div class='flow-box'>
+                            <h3>🚪 Entry Node</h3>
+                            <h5>Contributor enters the Engine. Mascot greets them with a pun and a scroll.</h5>
+                        </div>"]:::entry
+
+                        %% === ROLE SPLIT ===
+                        Split["<div class='flow-box'>
+                            <h3>🧬 Role Splitter</h3>
+                            <h5>Contributor is sorted into one or more roles:</h5>
+                            <ul>
+                                <li>🧠 Architect</li>
+                                <li>🎨 Designer</li>
+                                <li>🛠️ Builder</li>
+                                <li>📣 Communicator</li>
+                            </ul>
+                        </div>"]:::role
+
+                        Architect["<div class='flow-box'>
+                            <h3>🧠 Architect</h3>
+                            <h5>Scaffolds the onboarding space. Defines dohicky zones and mascot habitats.</h5>
+                        </div>"]:::role
+
+                        Designer["<div class='flow-box'>
+                            <h3>🎨 Designer</h3>
+                            <h5>Creates visual language, sticker packs, and theme-safe layouts.</h5>
+                        </div>"]:::role
+
+                        Builder["<div class='flow-box'>
+                            <h3>🛠️ Builder</h3>
+                            <h5>Codes the dohickies. Comments everything. Makes onboarding joyful.</h5>
+                        </div>"]:::role
+
+                        Communicator["<div class='flow-box'>
+                            <h3>📣 Communicator</h3>
+                            <h5>Writes lore, guides, and mascot scripts. Translates chaos into clarity.</h5>
+                        </div>"]:::role
+
+                        %% === TRIALS ===
+                        TrialA["<div class='flow-box'>
+                            <h3>🧪 Trial of Modularity</h3>
+                            <h5>Refactor a spaghetti snippet into a reusable dohicky.</h5>
+                        </div>"]:::trial
+
+                        TrialB["<div class='flow-box'>
+                            <h3>🧪 Trial of Empathy</h3>
+                            <h5>Explain a tooltip to a confused dragon.</h5>
+                        </div>"]:::trial
+
+                        TrialC["<div class='flow-box'>
+                            <h3>🧪 Trial of Clarity</h3>
+                            <h5>Fix a broken link in a legacy onboarding strip.</h5>
+                        </div>"]:::trial
+
+                        %% === CHAOS EVENTS ===
+                        Chaos1["<div class='flow-box'>
+                            <h3>🔥 Chaos Event: Role Redefinition</h3>
+                            <h5>Contributor’s role is reshaped mid-flow. Must advocate for joy and clarity.</h5>
+                        </div>"]:::chaos
+
+                        Chaos2["<div class='flow-box'>
+                            <h3>🌪️ Chaos Event: Acronym Storm</h3>
+                            <h5>Contributor is bombarded with unexplained abbreviations. Must decode or reroute.</h5>
+                        </div>"]:::chaos
+
+                        %% === LOOPS ===
+                        Loop1["<div class='flow-box'>
+                            <h3>🔁 Feedback Loop</h3>
+                            <h5>Contributor receives feedback, iterates, and re-shares.</h5>
+                        </div>"]:::loop
+
+                        Loop2["<div class='flow-box'>
+                            <h3>🔁 Lore Loop</h3>
+                            <h5>Contributor discovers ancient onboarding scrolls and updates the microsite mythos.</h5>
+                        </div>"]:::lore
+
+                        %% === FUSION ===
+                        Fusion["<div class='flow-box'>
+                            <h3>🧩 Role Fusion</h3>
+                            <h5>Contributor merges roles. Becomes a hybrid onboarding guardian.</h5>
+                        </div>"]:::fusion
+
+                        %% === FINAL FORM ===
+                        Final["<div class='flow-box'>
+                            <h3>🌟 Final Form</h3>
+                            <h5>Contributor achieves onboarding enlightenment. Mascot weeps with pride.</h5>
+                        </div>"]:::final
+
+                        %% === FLOW ===
+                        Start --> Split
+                        Split --> Architect --> TrialA
+                        Split --> Designer --> TrialB
+                        Split --> Builder --> TrialC
+                        Split --> Communicator --> TrialB
+
+                        TrialA --> Loop1 --> Fusion
+                        TrialB --> Loop2 --> Fusion
+                        TrialC --> Loop1
+
+                        Fusion --> Chaos1 --> Loop2
+                        Fusion --> Chaos2 --> Loop1
+
+                        Chaos1 --> Communicator
+                        Chaos2 --> Architect
+
+                        Fusion --> Final
+                        Final --> Start
+                    </div>
+
+
+                    <!-- Page full width content -->
+                    <div class="row mt-4">
+                        <div class="col-md">
+                            <h5 class="mt-4 mb-2">🧠 Contributor Engine Code</h5>
+                            <ul>
+
+                                <li><strong>Customise the Mermaid diagram:</strong> Add, remove, or rename nodes inside
+                                    the
+                                    <code>&lt;div class="mermaid"&gt;</code> block. Use
+                                    <code>&lt;div class='flow-box'&gt;</code> for
+                                    consistent styling and HTML formatting.
+                                    <br><code>&lt;div class="mermaid"&gt;flowchart TD ...&lt;/div&gt;</code>
+                                </li>
+
+                                <li><strong>Style it safely:</strong> Use Bootstrap classes like <code>mt-4</code>,
+                                    <code>mb-2</code>,
+                                    and
+                                    <code>col-md</code> to maintain layout harmony. Style <code>.flow-box</code> in your
+                                    CSS for visual
+                                    joy.
+                                </li>
+
+                                <li><strong>Make it modular:</strong> Drop this scaffold into any page. It pairs
+                                    beautifully with
+                                    headers,
+                                    menus, mascot strips, and dohicky dashboards.
+                                </li>
+
+                                <li><strong>Optional:</strong> Add a “Back to Toolkit” button, lore panel, or
+                                    collapsible dohicky
+                                    below
+                                    the
+                                    diagram for extra clarity and contributor delight.
+                                </li>
+                            </ul>
+
+                            <p>This scaffold helps contributors visualise complex onboarding systems with clarity,
+                                recursion, and
+                                mascot-powered joy—whether they’re navigating role redefinition, building dohickies, or
+                                documenting
+                                lore.
+                            </p>
+
+                            <h5 class="mt-4 mb-2">🔍 Mermaid Font Size & Complexity</h5>
+
+                            <p>Mermaid diagrams are brilliant for visualising flows, but they do have a few
+                                quirks—especially when
+                                things
+                                get big, bold, and beautifully complex. Here’s what contributors should know:</p>
+
+                            <ul>
+                                <li><strong>📏 Font size may shrink automatically:</strong> Mermaid tries to fit the
+                                    entire diagram
+                                    into
+                                    the
+                                    available space. If your chart is large or dense, it may reduce the font size to
+                                    avoid overflow.
+                                </li>
+
+                                <li><strong>🧠 Complexity affects readability:</strong> Charts with lots of nodes,
+                                    embedded HTML, or
+                                    deep
+                                    branching structures are more likely to trigger auto-scaling. Even if you set a
+                                    larger font size,
+                                    Mermaid
+                                    may override it.</li>
+
+                                <li><strong>🧩 Break big charts into chunks:</strong> For better readability and
+                                    contributor joy,
+                                    split
+                                    complex flows into smaller Mermaid blocks. You can group them by theme, role, or
+                                    phase—like “Manager
+                                    Flow,” “Contributor Journey,” or “Mascot Trials.”</li>
+
+                                <li><strong>🎨 Style your content safely:</strong> Use a custom CSS class like
+                                    <code>.flow-box</code>
+                                    to
+                                    control font size, spacing, and layout inside Mermaid nodes. This gives you more
+                                    control than
+                                    Mermaid’s
+                                    built-in settings.</li>
+
+                                <li><strong>🔍 Zoom with CSS:</strong> You can apply <code>transform: scale(1.2)</code>
+                                    to the Mermaid
+                                    container to visually enlarge the whole diagram. This is great for accessibility
+                                    mode or
+                                    presentation
+                                    views.</li>
+                            </ul>
+
+                            <p>Remember: clarity beats complexity. If your diagram starts feeling like a spaghetti
+                                monster, break it
+                                into
+                                themed chunks and let your mascot guide the way!</p>
+
+                            <pre><code class="snippet language-html">
+&lt;!-- ===================================== --&gt;
+&lt;!-- ======= Contributor Engine Page ======= --&gt;
+&lt;!-- ===================================== --&gt;
+
+&lt;div id=&quot;ContributorEngine&quot; class=&quot;page&quot;&gt;
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-md-4 gradient-col d-flex align-items-center justify-content-center text-start&quot;&gt;
+        &lt;h3 class=&quot;gradient-text&quot;&gt;Contributor Engine&lt;/h3&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;col-md-8&quot;&gt;
+        &lt;p&gt;This flowchart visualises a modular onboarding engine powered by joy, recursion, and mascot magic.&lt;/p&gt;
+        &lt;ul&gt;
+          &lt;li&gt;🧬 Role-based branching and fusion&lt;/li&gt;
+          &lt;li&gt;🌀 Chaos events and feedback loops&lt;/li&gt;
+          &lt;li&gt;📚 Lore discovery and onboarding evolution&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;row mt-4&quot;&gt;
+      &lt;div class=&quot;col-md&quot;&gt;
+        &lt;h5 class=&quot;mt-4 mb-2&quot;&gt;🧠 Contributor Engine Flowchart&lt;/h5&gt;
+        &lt;div class=&quot;mermaid&quot;&gt;
+flowchart TD
+Start[&quot;&lt;div class='flow-box'&gt;&lt;h3&gt;🚪 Entry Node&lt;/h3&gt;&lt;p&gt;Contributor enters the Engine...&lt;/p&gt;&lt;/div&gt;&quot;]
+Split[&quot;&lt;div class='flow-box'&gt;&lt;h3&gt;🧬 Role Splitter&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;Architect&lt;/li&gt;&lt;li&gt;Designer&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&quot;]
+Architect[&quot;&lt;div class='flow-box'&gt;&lt;h3&gt;🧠 Architect&lt;/h3&gt;&lt;/div&gt;&quot;]
+Designer[&quot;&lt;div class='flow-box'&gt;&lt;h3&gt;🎨 Designer&lt;/h3&gt;&lt;/div&gt;&quot;]
+TrialA[&quot;&lt;div class='flow-box'&gt;&lt;h3&gt;🧪 Trial of Modularity&lt;/h3&gt;&lt;/div&gt;&quot;]
+Loop1[&quot;&lt;div class='flow-box'&gt;&lt;h3&gt;🔁 Feedback Loop&lt;/h3&gt;&lt;/div&gt;&quot;]
+Fusion[&quot;&lt;div class='flow-box'&gt;&lt;h3&gt;🧩 Role Fusion&lt;/h3&gt;&lt;/div&gt;&quot;]
+Final[&quot;&lt;div class='flow-box'&gt;&lt;h3&gt;🌟 Final Form&lt;/h3&gt;&lt;/div&gt;&quot;]
+
+Start --> Split
+Split --> Architect --> TrialA --> Loop1 --> Fusion --> Final --> Start
+Split --> Designer --> TrialA
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+    </code></pre>
+                            <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div id="shared-footer"></div>
+
+            <!-- Bootstrap JS -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+
+            <!-- Custom JS -->
+            <script src="Assets/js/script.js"></script>
+</body>
+
+</html>

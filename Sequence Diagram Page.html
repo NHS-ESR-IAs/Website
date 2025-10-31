@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MicroSiteKit – Sequence Diagram Page</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom Styles -->
+    <link href="Assets/css/style.css" rel="stylesheet" />
+
+    <!-- Mermaid Setup -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script type="module">
+        import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+        mermaid.initialize({ startOnLoad: false });
+        window.mermaid = mermaid;
+    </script>
+</head>
+
+<body class="glass">
+    <!-- Injected Partials -->
+    <div id="shared-header"></div>
+    <div id="main-nav"></div>
+    <div id="sidebar-nav"></div>
+
+    <!-- Page-Specific Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center">
+                <h3 class="gradient-text">Sequence Diagram Page</h3>
+            </div>
+            <div class="col-md-8">
+                <div class="page-intro text-center py-4 px-3">
+                    <p>This example shows how to use Mermaid syntax to create a sequence diagram directly in your
+                        microsite.
+                        It’s editable, theme-safe, and perfect for visualising contributor journeys, system
+                        interactions, or
+                        onboarding flows.</p>
+
+                    <ul>
+                        <li>🧠 Mermaid syntax lives inside the site—no external rendering needed</li>
+                        <li>🎨 Theme-safe and layout-friendly—uses Bootstrap spacing</li>
+                        <li>🧩 Modular and editable—great for onboarding, guides, and walkthroughs</li>
+                        <li>📋 Includes copy-to-clipboard button for easy reuse</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Page full width content -->
+            <div class="row mt-4">
+                <div class="col-md">
+                    <h5 class="mt-4 mb-2">📊 Sequence Diagram Example</h5>
+                    <p>This Mermaid block renders a sequence diagram showing a generic contributor interaction flow. You
+                        can
+                        customise the roles, actions, and messages to suit your own process.</p>
+
+                    <!-- Mermaid Diagram Block -->
+                    <pre class="mermaid snippet">
+sequenceDiagram
+  participant Contributor
+  participant Microsite
+  participant Guide
+  participant SupportTeam
+
+  Contributor->>Microsite: Opens diagram page
+  Microsite->>Guide: Loads Mermaid block
+  Guide-->>Contributor: Shows interaction flow
+  Contributor->>Microsite: Copies diagram snippet
+  Microsite->>SupportTeam: Sends contact request
+  SupportTeam-->>Contributor: Responds with support
+        </pre>
+
+
+
+                    <!-- Customisation Tips -->
+                    <div class="mt-4">
+                        <h6>🛠️ How to Customise</h6>
+                        <ul>
+                            <li><strong>Change roles:</strong> Replace <code>Contributor</code>, <code>Microsite</code>,
+                                etc. with
+                                your own actors</li>
+                            <li><strong>Update messages:</strong> Edit the arrows (<code>->></code>) to reflect your
+                                process steps
+                            </li>
+                            <li><strong>Add or remove participants:</strong> Use <code>participant</code> to define
+                                who’s involved
+                            </li>
+                            <li><strong>Style it:</strong> Mermaid supports themes and configuration via
+                                <code>mermaid.initialize()</code>
+                            </li>
+                        </ul>
+                        <pre><code class="snippet language-html">
+&lt;div class=&quot;mermaid snippet&quot;&gt;
+sequenceDiagram
+  participant Contributor
+  participant Microsite
+  participant Guide
+  participant SupportTeam
+
+  Contributor-&gt;&gt;Microsite: Opens diagram page
+  Microsite-&gt;&gt;Guide: Loads Mermaid block
+  Guide--&gt;&gt;Contributor: Shows interaction flow
+  Contributor-&gt;&gt;Microsite: Copies diagram snippet
+  Microsite-&gt;&gt;SupportTeam: Sends contact request
+  SupportTeam--&gt;&gt;Contributor: Responds with support
+&lt;/div&gt;
+</code></pre>
+                        <!-- Copy Button -->
+                        <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div id="shared-footer"></div>
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Custom JS -->
+        <script src="Assets/js/script.js"></script>
+</body>
+
+</html>

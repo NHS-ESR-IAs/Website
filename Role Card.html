@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MicroSiteKit – Role Card</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom Styles -->
+    <link href="Assets/css/style.css" rel="stylesheet" />
+
+    <!-- Mermaid Setup -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script type="module">
+        import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+        mermaid.initialize({ startOnLoad: false });
+        window.mermaid = mermaid;
+    </script>
+</head>
+
+<body class="glass">
+    <!-- Injected Partials -->
+    <div id="shared-header"></div>
+    <div id="main-nav"></div>
+    <div id="sidebar-nav"></div>
+
+    <!-- Page-Specific Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center">
+                <h3 class="gradient-text">Role Card</h3>
+            </div>
+            <div class="col-md-8">
+                <div class="page-intro text-center py-4 px-3">
+                    <p>Role cards are your onboarding compass—ideal for giving contributors tailored guidance based on
+                        their
+                        role,
+                        mindset, or starting point. They help each persona feel seen, supported, and empowered to dive
+                        in with
+                        clarity.</p>
+
+                    <ul>
+                        <li>🎯 Great for developers, maintainers, editors, educators, and more</li>
+                        <li>🧱 Modular and drop-in ready for dashboards, onboarding flows, or role-based layouts</li>
+                        <li>🎨 Theme-safe and expressive—styled to harmonise across microsites</li>
+                        <li>🧼 Keeps guidance scannable, role-specific, and contributor-friendly</li>
+                    </ul>
+
+                    <p>Use them to say “Start with the dohickies,” “Check the scroll-collapse logic,” or “Review the
+                        accessibility
+                        flags”—whatever helps each contributor find their flow.</p>
+                </div>
+            </div>
+
+            <!-- Page full width content -->
+            <div class="row mt-4">
+                <div class="col-md">
+
+                    <div class="role-card">
+                        <h3>🧑‍💻 Developer</h3>
+                        <p>Start with the modular dohickies and check the scroll-collapse logic in `onboarding.js`.</p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md">
+                    <h5 class="mt-4 mb-2">🧑‍💻 Role Card Panel: Guide by Persona</h5>
+                    <ul>
+                        <li><strong>Change the role:</strong> Edit the <code>&lt;h3&gt;</code> to match the
+                            contributor’s
+                            persona—e.g. <code>🧑‍💻 Developer</code>, <code>🧑‍🏫 Educator</code>, or
+                            <code>🧑‍🔧 Maintainer</code>.
+                        </li>
+                        <li><strong>Update the guidance:</strong> Modify the <code>&lt;p&gt;</code> to share
+                            role-specific tips,
+                            starting points, or onboarding nudges.</li>
+                        <li><strong>Style it safely:</strong> Use theme-safe classes like <code>role-card</code>,
+                            <code>border</code>, <code>bg-light</code>, or <code>rounded</code> to harmonise with your
+                            microsite.
+                        </li>
+                        <li><strong>Make it modular:</strong> Stack multiple role cards in a grid, carousel, or tabbed
+                            layout to
+                            guide contributors by context.</li>
+                        <li><strong>Optional:</strong> Add emojis, links, or dohickies to make the card more expressive
+                            or
+                            interactive.</li>
+                    </ul>
+                    <pre><code id="roleCardSnippet" class="snippet language-html">
+&lt;div class=&quot;role-card&quot;&gt;
+  &lt;h3&gt;🧑‍💻 Developer&lt;/h3&gt;
+  &lt;p&gt;Start with the modular dohickies and check the scroll-collapse logic in <code>onboarding.js</code>.&lt;/p&gt;
+&lt;/div&gt;
+    </code></pre>
+                    <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="shared-footer"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="Assets/js/script.js"></script>
+</body>
+
+</html>
