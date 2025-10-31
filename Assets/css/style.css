@@ -1835,27 +1835,14 @@ body.scale-xlarge {
 ============================================================ */
 
 .control-toolbar {
-  position: absolute;
-  /* Float it above the layout */
-  top: 0.5rem;
-  /* Slight offset from top */
-  right: 0.5rem;
-  /* Align to right edge */
+  display: inline-flex;
+  /* shrink to fit contents */
+  flex-wrap: wrap;
+  gap: 0.5rem;
   background-color: rgba(255, 255, 255, 0.9);
   border: 1px solid #dee2e6;
   border-radius: 0.5rem;
   padding: 0.5rem;
-  z-index: 1000;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  width: auto;
-  /* Prevent full-width stretch */
-  max-width: 90vw;
-  /* Optional: keep it responsive */
-  right: 150px;
-  top: 15px;
-  /* 👈 Push left by 110px */
 }
 
 body.dark-mode .control-toolbar {

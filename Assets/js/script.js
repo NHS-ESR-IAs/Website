@@ -362,3 +362,45 @@ loadPartial("shared-header", "partials/header.html").then(() => {
 
   applyMermaidTheme();
 });
+
+async function initHeaderSearch() {
+  try {
+    const res = await fetch("data/pages.json");
+    if (!res.ok) throw new Error("pages.json not found");
+    const pages = await res.json();
+
+    // Configure Fuse
+    const fuse = new Fuse(pages, {
+      keys: ["title", "description"],
+      threshold: 0.3,
+    });
+
+    const input = document.getElementById("headerSearch");
+    const resultsList = document.getElementById("headerSearchResults");
+
+    if (!input || !resultsList) return; // header not loaded yet
+
+    input.addEventListener("input", () => {
+      const query = input.value.trim();
+      resultsList.innerHTML = "";
+
+      if (query.length > 1) {
+        const results = fuse.search(query).slice(0, 5); // top 5
+        results.forEach((r) => {
+          const li = document.createElement("li");
+          li.className = "list-group-item";
+          li.innerHTML = `
+            <a href="${r.item.url}" class="fw-bold">${r.item.title}</a>
+            <div class="small text-muted">${r.item.description}</div>
+          `;
+          resultsList.appendChild(li);
+        });
+      }
+    });
+  } catch (err) {
+    console.error("Search init failed:", err);
+  }
+}
+
+// Call this after your header partial has been injected
+initHeaderSearch();
