@@ -160,10 +160,46 @@ function markActiveLinks() {
 }
 
 // ===============================
-// Header Search (Fuse.js)
+// Search (Fuse.js) – works for header + sidebar
 // ===============================
 
-async function initHeaderSearch() {
+function initSearchBox(inputId, resultsId, fuse) {
+  const input = document.getElementById(inputId);
+  const resultsList = document.getElementById(resultsId);
+  if (!input || !resultsList) return;
+
+  input.addEventListener("input", () => {
+    const query = input.value.trim();
+    resultsList.innerHTML = "";
+    resultsList.classList.remove("show");
+
+    if (query.length > 1) {
+      const results = fuse.search(query).slice(0, 7);
+      results.forEach((r) => {
+        const li = document.createElement("li");
+        li.className = "search-result";
+        li.innerHTML = `
+          <a href="${r.item.url}" class="btn btn-primary w-100 text-start mb-2">
+            <div class="fw-bold">${r.item.title}</div>
+            <div class="small opacity-75">${r.item.description}</div>
+          </a>
+        `;
+        resultsList.appendChild(li);
+      });
+      if (results.length) resultsList.classList.add("show");
+    }
+  });
+
+  // Hide results when clicking outside this search form
+  document.addEventListener("click", (e) => {
+    const form = input.closest("form,[role='search']");
+    if (form && !form.contains(e.target)) {
+      resultsList.classList.remove("show");
+    }
+  });
+}
+
+async function initSearch() {
   try {
     const res = await fetch("data/pages.json");
     if (!res.ok) throw new Error("pages.json not found");
@@ -174,50 +210,29 @@ async function initHeaderSearch() {
       threshold: 0.3,
     });
 
-    const input = document.getElementById("headerSearch");
-    const resultsList = document.getElementById("headerSearchResults");
-    if (!input || !resultsList) return;
-
-    input.addEventListener("input", () => {
-      const query = input.value.trim();
-      resultsList.innerHTML = "";
-      resultsList.classList.remove("show");
-
-      if (query.length > 1) {
-        const results = fuse.search(query).slice(0, 7);
-        results.forEach((r) => {
-          const li = document.createElement("li");
-          // give the li a neutral wrapper class if you want, or none at all
-          li.className = "search-result";
-
-          // make the link itself look like a themed button
-          li.innerHTML = `
-      <a href="${r.item.url}" class="btn btn-primary w-100 text-start mb-2">
-        <div class="fw-bold">${r.item.title}</div>
-        <div class="small opacity-75">${r.item.description}</div>
-      </a>
-    `;
-          resultsList.appendChild(li);
-        });
-        if (results.length) resultsList.classList.add("show");
-      }
-    });
-
-    document.addEventListener("click", (e) => {
-      const form = document.querySelector('[role="search"]');
-      if (!form?.contains(e.target)) resultsList.classList.remove("show");
-    });
+    // Initialise both header and sidebar searches
+    initSearchBox("headerSearch", "headerSearchResults", fuse);
+    initSearchBox("sidebarSearch", "sidebarSearchResults", fuse);
   } catch (err) {
     console.error("Search init failed:", err);
   }
 }
 
-function openSearchPage() {
-  const input = document.getElementById("headerSearch");
+function openSearchPage(inputId = "headerSearch") {
+  const input = document.getElementById(inputId);
   if (!input) return;
   const q = input.value.trim();
   if (q) window.location.href = `SiteMap.html?q=${encodeURIComponent(q)}`;
 }
+
+// ===============================
+// Initialise everything on DOM ready
+// ===============================
+
+document.addEventListener("DOMContentLoaded", () => {
+  buildMenusWithFallback();
+  initSearch();
+});
 
 // ===============================
 // Theme & Dark Mode
@@ -296,7 +311,15 @@ function initScrollCollapse() {
     }
   });
 }
-
+function setTextSize(scaleClass) {
+  document.body.classList.remove(
+    "scale-small",
+    "scale-medium",
+    "scale-large",
+    "scale-xlarge"
+  );
+  document.body.classList.add(scaleClass);
+}
 // ===============================
 // Boot Sequence
 // ===============================
@@ -304,7 +327,7 @@ function initScrollCollapse() {
 // === Boot sequence
 document.addEventListener("DOMContentLoaded", () => {
   loadPartial("shared-header", "partials/header.html").then(() => {
-    initHeaderSearch(); // now the input exists
+    initSearch(); // now the input exists
     buildMenusWithFallback();
     initThemeControls();
     initScrollCollapse();

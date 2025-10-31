@@ -125,6 +125,37 @@
             <label for="sidebarSearch" class="form-label">Search</label>
             <input id="sidebarSearch" class="form-control form-control-sm" type="search" placeholder="Search snippets…"
                 autocomplete="off" />
+            <!-- Add a results container just like the header -->
+            <ul id="sidebarSearchResults" class="list-group mt-2"></ul>
+            <!-- Theme Selector -->
+            <label for="themeSelectorHeader" class="visually-hidden">Choose Theme</label>
+            <select id="themeSelectorHeader" class="form-select form-select-sm w-100 theme-selector"
+                aria-label="Choose Theme">
+                <option value="">Select Theme</option>
+                <option value="blue">NHS Blue</option>
+                <option value="green">NHS Green</option>
+                <option value="grey">NHS Grey</option>
+                <option value="pink">NHS Pink</option>
+                <option value="purple">NHS Purple</option>
+                <option value="red">NHS Red</option>
+                <option value="yellow">NHS Yellow</option>
+                <option value="calm">Light Grey</option>
+                <option value="contrast">High Contrast</option>
+            </select>
+
+            <!-- Text Size Buttons -->
+            <div class="btn-group btn-group-sm" role="group" aria-label="Text Size">
+                <button type="button" onclick="setTextSize('scale-small')" class="btn btn-outline-secondary">A-</button>
+                <button type="button" onclick="setTextSize('scale-medium')" class="btn btn-outline-secondary">A</button>
+                <button type="button" onclick="setTextSize('scale-large')" class="btn btn-outline-secondary">A+</button>
+                <button type="button" onclick="setTextSize('scale-xlarge')"
+                    class="btn btn-outline-secondary">A++</button>
+            </div>
+
+            <!-- Dark Mode Toggle -->
+            <button type="button" class="btn btn-sm btn-outline-primary toggle-dark" aria-pressed="false">
+                Dark Mode
+            </button>
         </div>
     </div>
 </div>
