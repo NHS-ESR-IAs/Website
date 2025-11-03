@@ -163,6 +163,24 @@ function markActiveLinks() {
 // Search (Fuse.js) – works for header + sidebar
 // ===============================
 
+// Utility: flatten hierarchical manifest into a flat array of pages
+function flattenManifest(nodes, flat = []) {
+  nodes.forEach((node) => {
+    if (node.href) {
+      flat.push({
+        title: node.title || node.label,
+        description: node.description || "",
+        url: node.href,
+        category: node.category || "",
+      });
+    }
+    if (node.children) {
+      flattenManifest(node.children, flat);
+    }
+  });
+  return flat;
+}
+
 function initSearchBox(inputId, resultsId, fuse) {
   const input = document.getElementById(inputId);
   const resultsList = document.getElementById(resultsId);
@@ -179,12 +197,12 @@ function initSearchBox(inputId, resultsId, fuse) {
         const li = document.createElement("li");
         li.className = "search-result";
         li.innerHTML = `
-  <a href="${r.item.url}" class="btn btn-primary w-100 text-start mb-2">
-    <div class="fw-bold">${r.item.title}</div>
-    <div class="small opacity-75">${r.item.description}</div>
-    <div class="small text-muted">${r.item.category}</div>
-  </a>
-`;
+          <a href="${r.item.url}" class="btn btn-primary w-100 text-start mb-2">
+            <div class="fw-bold">${r.item.title}</div>
+            <div class="small opacity-75">${r.item.description}</div>
+            <div class="small text-muted">${r.item.category}</div>
+          </a>
+        `;
         resultsList.appendChild(li);
       });
       if (results.length) resultsList.classList.add("show");
@@ -203,8 +221,11 @@ function initSearchBox(inputId, resultsId, fuse) {
 async function initSearch() {
   try {
     const res = await fetch("data/Menu Manifest.json");
-    if (!res.ok) throw new Error("pages.json not found");
-    const pages = await res.json();
+    if (!res.ok) throw new Error("Menu Manifest.json not found");
+    const manifest = await res.json();
+
+    // Flatten the hierarchical manifest
+    const pages = flattenManifest(manifest);
 
     const fuse = new Fuse(pages, {
       keys: ["title", "description", "category"],
