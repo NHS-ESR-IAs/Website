@@ -5,22 +5,23 @@
     "url": "index.html",
     "category": "Meta / Index"
   },
+
   {
     "title": "Site Map",
-    "description": "Search and browse all MicroSiteKit pages in one place.",
+    "description": "Browse the complete MicroSiteKit library in one place.",
     "url": "SiteMap.html",
-    "category": "Accessibility & Utilities"
+    "category": "All Pages"
   },
   {
     "title": "Guides & Docs",
     "description": "Contributor-first handbook with scaffold tips, snippet walkthroughs, and ESR support resources.",
-    "url": "GuidesAndDocs.html",
+    "url": "resources.html",
     "category": "Accessibility & Utilities"
   },
   {
     "title": "Responsive Image",
     "description": "Visual chameleons for avatars, diagrams, and memes—scales beautifully across all devices.",
-    "url": "resources.html",
+    "url": "Responsive Image.html",
     "category": "Accessibility & Utilities"
   },
   {
@@ -144,7 +145,7 @@
   {
     "title": "Toggle Section",
     "description": "Collapsible content blocks for onboarding tips, contributor wisdom, and delightful surprises on demand.",
-    "url": "Toggle Section.html",
+    "url": "Toggle.html",
     "category": "Interactive Dohickies"
   },
   {
@@ -193,49 +194,49 @@
   {
     "title": "C4 Diagram",
     "description": "Editable Mermaid C4 diagrams for modelling people, systems, and relationships—ideal for architecture and contributor-first clarity.",
-    "url": "C4 Diagram Page.html",
+    "url": "C4 Diagram.html",
     "category": "Mermaid Diagrams"
   },
   {
     "title": "Gantt Chart",
     "description": "Editable Mermaid Gantt charts for visualising project timelines, milestones, and dependencies—theme-safe, modular, and contributor-friendly.",
-    "url": "Gantt Chart Page.html",
+    "url": "Gantt chart.html",
     "category": "Mermaid Diagrams"
   },
   {
     "title": "Git Graph",
     "description": "Editable Mermaid Git Graphs for visualising branches, commits, merges, and tagged releases—ideal for sprint planning and repo clarity.",
-    "url": "Git Graph Page.html",
+    "url": "Git graph.html",
     "category": "Mermaid Diagrams"
   },
   {
     "title": "Mindmap",
     "description": "Editable Mermaid mindmaps for brainstorming, structuring ideas, and mapping contributor journeys—theme-safe, modular, and easy to customise.",
-    "url": "Mindmap Page.html",
+    "url": "Mindmap.html",
     "category": "Mermaid Diagrams"
   },
   {
     "title": "Pie Chart",
     "description": "Editable Mermaid pie charts for visualising proportions, survey results, and contributor breakdowns—simple, modular, and theme-safe.",
-    "url": "Pie Chart Page.html",
+    "url": "Pie chart.html",
     "category": "Mermaid Diagrams"
   },
   {
     "title": "Timeline",
     "description": "Editable Mermaid timelines for visualising historical events, project milestones, and sequential phases—theme-safe, modular, and easy to customise.",
-    "url": "Timeline Page.html",
+    "url": "Timeline diagram.html",
     "category": "Mermaid Diagrams"
   },
   {
     "title": "User Journey Diagram",
     "description": "Editable Mermaid user journey diagrams for mapping contributor experiences, onboarding flows, and service pathways—theme-safe, modular, and easy to customise.",
-    "url": "User Journey Diagram Page.html",
+    "url": "User journey diagram.html",
     "category": "Mermaid Diagrams"
   },
   {
     "title": "XY Chart",
     "description": "Editable Mermaid XY charts (beta) for combining bar and line views—ideal for comparing datasets, visualising trends, and modular analysis.",
-    "url": "XY Chart Page.html",
+    "url": "XY Chart.html",
     "category": "Mermaid Diagrams"
   }
 ]

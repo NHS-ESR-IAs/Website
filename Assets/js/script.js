@@ -179,11 +179,12 @@ function initSearchBox(inputId, resultsId, fuse) {
         const li = document.createElement("li");
         li.className = "search-result";
         li.innerHTML = `
-          <a href="${r.item.url}" class="btn btn-primary w-100 text-start mb-2">
-            <div class="fw-bold">${r.item.title}</div>
-            <div class="small opacity-75">${r.item.description}</div>
-          </a>
-        `;
+  <a href="${r.item.url}" class="btn btn-primary w-100 text-start mb-2">
+    <div class="fw-bold">${r.item.title}</div>
+    <div class="small opacity-75">${r.item.description}</div>
+    <div class="small text-muted">${r.item.category}</div>
+  </a>
+`;
         resultsList.appendChild(li);
       });
       if (results.length) resultsList.classList.add("show");
@@ -206,7 +207,7 @@ async function initSearch() {
     const pages = await res.json();
 
     const fuse = new Fuse(pages, {
-      keys: ["title", "description"],
+      keys: ["title", "description", "category"],
       threshold: 0.3,
     });
 
@@ -335,3 +336,123 @@ document.addEventListener("DOMContentLoaded", () => {
 
   loadPartial("shared-footer", "partials/footer.html");
 });
+
+// ===============================
+// Dynamic Breadcrumbs
+// ===============================
+
+async function buildBreadcrumb() {
+  try {
+    const res = await fetch("data/pages.json");
+    const pages = await res.json();
+
+    const currentFile = decodeURIComponent(location.pathname.split("/").pop());
+    console.log("Looking for:", currentFile);
+
+    const page = pages.find((p) => p.url === currentFile);
+    console.log("Found page:", page);
+
+    if (!page) return;
+
+    const breadcrumb = document.getElementById("breadcrumb");
+    if (!breadcrumb) return;
+
+    breadcrumb.innerHTML = `
+      <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+      <li class="breadcrumb-item">
+        <a href="SiteMap.html?category=${encodeURIComponent(page.category)}">${
+      page.category
+    }</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">${page.title}</li>
+    `;
+  } catch (err) {
+    console.error("Breadcrumb build failed:", err);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", buildBreadcrumb);
+
+// ===============================
+// Site Map Filtering
+// ===============================
+
+async function renderSiteMap() {
+  try {
+    const res = await fetch("data/pages.json");
+    if (!res.ok) throw new Error("pages.json not found");
+    const pages = await res.json();
+
+    const params = new URLSearchParams(window.location.search);
+    const categoryFilter = params.get("category");
+
+    let filtered = pages;
+    if (categoryFilter && categoryFilter !== "All Pages") {
+      filtered = pages.filter((p) => p.category === categoryFilter);
+    }
+
+    const pageList = document.getElementById("pageList");
+    pageList.innerHTML = "";
+
+    // --- Case 1: All Pages or no filter → group by category ---
+    if (!categoryFilter || categoryFilter === "All Pages") {
+      const categories = [...new Set(pages.map((p) => p.category))];
+      categories.forEach((cat) => {
+        const catHeader = document.createElement("h4");
+        catHeader.className = "mt-4 mb-3 gradient-text";
+        catHeader.textContent = cat;
+        pageList.appendChild(catHeader);
+
+        const catRow = document.createElement("div");
+        catRow.className = "row";
+        pages
+          .filter((p) => p.category === cat)
+          .forEach((p) => {
+            const col = document.createElement("div");
+            col.className = "col-md-6 mb-3";
+            col.innerHTML = `
+            <div class="card shadow-sm h-100">
+              <div class="card-body">
+                <h5 class="mt-2 mb-3">📣 ${p.title}</h5>
+                <p class="small opacity-75">${p.description}</p>
+                <a href="${p.url}" class="btn btn-primary w-100 d-block mx-auto mt-3">Open Page</a>
+              </div>
+            </div>
+          `;
+            catRow.appendChild(col);
+          });
+        pageList.appendChild(catRow);
+      });
+    }
+
+    // --- Case 2: Specific category filter ---
+    else {
+      const catHeader = document.createElement("h4");
+      catHeader.className = "mt-4 mb-3 gradient-text";
+      catHeader.textContent = categoryFilter;
+      pageList.appendChild(catHeader);
+
+      const catRow = document.createElement("div");
+      catRow.className = "row";
+      filtered.forEach((p) => {
+        const col = document.createElement("div");
+        col.className = "col-md-6 mb-3";
+        col.innerHTML = `
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <h5 class="mt-2 mb-3">📣 ${p.title}</h5>
+              <p class="small opacity-75">${p.description}</p>
+              <a href="${p.url}" class="btn btn-primary w-100 d-block mx-auto mt-3">Open Page</a>
+            </div>
+          </div>
+        `;
+        catRow.appendChild(col);
+      });
+      pageList.appendChild(catRow);
+    }
+  } catch (err) {
+    console.error("Site Map render failed:", err);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", renderSiteMap);
