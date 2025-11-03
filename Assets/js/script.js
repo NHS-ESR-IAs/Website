@@ -431,6 +431,7 @@ function flattenManifest(nodes, flat = []) {
         description: node.description || "",
         url: node.href,
         category: node.category || "",
+        preview: node.preview || "",
       });
     }
     if (node.children) {
@@ -479,14 +480,24 @@ async function renderSiteMap() {
             const col = document.createElement("div");
             col.className = "col-md-6 mb-3";
             col.innerHTML = `
-            <div class="card shadow-sm h-100">
-              <div class="card-body">
-                <h5 class="mt-2 mb-3">📣 ${p.title}</h5>
-                <p class="small opacity-75">${p.description}</p>
-                <a href="${p.url}" class="btn btn-primary w-100 d-block mx-auto mt-3">Open Page</a>
-              </div>
-            </div>
-          `;
+  <div class="card shadow-sm h-100">
+    <div class="card-body d-flex flex-column">
+      <h5 class="mt-2 mb-3">📣 ${p.title}</h5>
+      <p class="small opacity-75">${p.description}</p>
+      ${
+        p.preview
+          ? `
+        <div class="preview-wrapper my-2">
+          <img src="${p.preview}" alt="${p.title} preview" class="card-preview" loading="lazy">
+        </div>`
+          : ""
+      }
+      <a href="${
+        p.url
+      }" class="btn btn-primary w-100 d-block mx-auto mt-auto">Open Page</a>
+    </div>
+  </div>
+`;
             catRow.appendChild(col);
           });
         pageList.appendChild(catRow);

@@ -31,6 +31,7 @@
             "label": "Page Code",
             "href": "Page Code.html",
             "title": "Page Code",
+            "preview": "Assets/Images/Page Code.png",
             "description": "Modular layout scaffold for building expressive, theme-safe microsite pages with clarity and joy.",
             "category": "Main Structure and Navigation"
           },
@@ -38,6 +39,7 @@
             "label": "Header Section Panel",
             "href": "Header Section Panel.html",
             "title": "Header Section",
+            "preview": "Assets/Images/Header.png",
             "description": "Expressive header scaffold with logo cluster, menu toggle, and hero banner for trust identity.",
             "category": "Main Structure and Navigation"
           },
@@ -45,6 +47,7 @@
             "label": "Main Navigation",
             "href": "Main Navigation Panel.html",
             "title": "Main Navigation",
+            "preview": "Assets/Images/Menu.png",
             "description": "Modular map-based navigation with dropdowns, submenus, and built-in accessibility controls.",
             "category": "Main Structure and Navigation"
           },
@@ -52,6 +55,7 @@
             "label": "Side Menu Panel",
             "href": "Side Menu Panel.html",
             "title": "Side Menu Panel",
+            "preview": "Assets/Images/Side Menu.png",
             "description": "Modular vertical navigator with nested submenus, dropdowns, and expressive toggles for contributor clarity.",
             "category": "Main Structure and Navigation"
           },
@@ -59,6 +63,7 @@
             "label": "Footer Panel",
             "href": "Footer Panel.html",
             "title": "Footer Panel",
+            "preview": "Assets/Images/Footer.png",
             "description": "Theme-safe footer scaffold for trust identity, support contact, and contributor-first closure.",
             "category": "Main Structure and Navigation"
           }
@@ -71,6 +76,7 @@
             "label": "Breadcrumbs",
             "href": "Breadcrumbs.html",
             "title": "Breadcrumbs",
+            "preview": "Assets/Images/Breadcrumb.png",
             "description": "Gentle navigation trails to help contributors stay oriented and hop back with ease.",
             "category": "Other Navigational Tools"
           },
@@ -78,6 +84,7 @@
             "label": "Open New Page Button",
             "href": "Open New Page Button.html",
             "title": "Open New Page Button",
+            "preview": "Assets/Images/Navigation Button.png",
             "description": "Modular navigation buttons for launching snippet pages, dashboards, and onboarding flows with clarity.",
             "category": "Other Navigational Tools"
           },
@@ -85,6 +92,7 @@
             "label": "Pop-Out Page Button",
             "href": "Pop-Out Page Button.html",
             "title": "Pop-Out Page Button",
+            "preview": "Assets/Images/Pop Out Button.png",
             "description": "External launcher for demos, previews, and resources—modular, expressive, and layout-safe.",
             "category": "Other Navigational Tools"
           }
@@ -97,6 +105,7 @@
             "label": "Modal",
             "href": "Modals.html",
             "title": "Modals",
+            "preview": "Assets/Images/Modal.png",
             "description": "Magical pop-up panels for onboarding tips and contributor shout-outs.",
             "category": "Content Blocks"
           },
@@ -104,6 +113,7 @@
             "label": "Toggle Section",
             "href": "Toggle.html",
             "title": "Toggle Section",
+            "preview": "Assets/Images/Toggle.png",
             "description": "Collapsible content blocks for onboarding tips, contributor wisdom, and delightful surprises on demand.",
             "category": "Content Blocks"
           },
@@ -111,6 +121,7 @@
             "label": "Alerts",
             "href": "alerts.html",
             "title": "Alerts",
+            "preview": "Assets/Images/Alert.png",
             "description": "Drop-in messages for success, warnings, nudges, and contributor clarity.",
             "category": "Content Blocks"
           },
@@ -118,6 +129,7 @@
             "label": "Tabs",
             "href": "tabs.html",
             "title": "Tabs",
+            "preview": "Assets/Images/Tabs.png",
             "description": "Modular tabbed layout for grouping content—ideal for onboarding guides, role views, and snippet variants.",
             "category": "Content Blocks"
           },
@@ -125,6 +137,7 @@
             "label": "Carousel",
             "href": "Carousel.html",
             "title": "Carousel",
+            "preview": "Assets/Images/Carousel.png",
             "description": "Swipeable panels for showcasing features, onboarding flows, or contributor shout-outs.",
             "category": "Content Blocks"
           },
@@ -132,6 +145,7 @@
             "label": "Image",
             "href": "Responsive Image.html",
             "title": "Responsive Image",
+            "preview": "Assets/Images/Image.png",
             "description": "Visual chameleons for avatars, diagrams, and memes—scales beautifully across all devices.",
             "category": "Content Blocks"
           },
@@ -139,6 +153,7 @@
             "label": "Did You Know?",
             "href": "Did You Know.html",
             "title": "Did You Know",
+            "preview": "Assets/Images/Did you know.png",
             "description": "Playful tip boxes for surfacing hidden features, contributor wisdom, and onboarding joy.",
             "category": "Content Blocks"
           },
@@ -146,6 +161,7 @@
             "label": "Shout Out Card",
             "href": "Shout Out Card.html",
             "title": "Shout Out Card",
+            "preview": "Assets/Images/Shout Out.png",
             "description": "Spotlight contributors with joyful, modular shout-outs—ideal for dashboards, onboarding, and team wins.",
             "category": "Content Blocks"
           },
@@ -153,6 +169,7 @@
             "label": "Quote",
             "href": "Quote.html",
             "title": "Quote",
+            "preview": "Assets/Images/Quote.png",
             "description": "Expressive quote boxes for contributor wisdom, onboarding mantras, and playful layout commentary.",
             "category": "Content Blocks"
           },
@@ -160,6 +177,7 @@
             "label": "Fact Box",
             "href": "Fact Box.html",
             "title": "Fact Box",
+            "preview": "Assets/Images/Fact.png",
             "description": "Anchor points for technical truths, onboarding insights, and contributor-friendly clarity.",
             "category": "Content Blocks"
           },
@@ -167,6 +185,7 @@
             "label": "Tip Box",
             "href": "Tip Box.html",
             "title": "Tip Box",
+            "preview": "Assets/Images/Tips.png",
             "description": "Onboarding whispers for smart moves, modular tricks, and contributor-friendly nudges.",
             "category": "Content Blocks"
           },
@@ -174,6 +193,7 @@
             "label": "Role Card",
             "href": "Role Card.html",
             "title": "Role Card",
+            "preview": "Assets/Images/Card.png",
             "description": "Onboarding compass for tailored contributor guidance—modular, expressive, and persona-friendly.",
             "category": "Content Blocks"
           },
@@ -181,6 +201,7 @@
             "label": "Accessibility",
             "href": "Accessibility Flag.html",
             "title": "Accessibility Flag",
+            "preview": "Assets/Images/Accessibility.png",
             "description": "Signal inclusive design with modular flags for keyboard navigation, screen readers, and more.",
             "category": "Content Blocks"
           },
@@ -188,6 +209,7 @@
             "label": "Update Banner",
             "href": "Update Banner.html",
             "title": "Update Banner",
+            "preview": "Assets/Images/Update.png",
             "description": "Changelog cheerleaders for fixes, features, and joyful transparency—modular and contributor-friendly.",
             "category": "Content Blocks"
           },
@@ -195,6 +217,7 @@
             "label": "Dohicky Grid",
             "href": "Dohicky Grid.html",
             "title": "Dohicky Grid",
+            "preview": "Assets/Images/Grid.png",
             "description": "Visual index of modular snippets—perfect for onboarding tools, tip boxes, and contributor joy.",
             "category": "Content Blocks"
           }
@@ -207,6 +230,7 @@
             "label": "Process Map",
             "href": "Process Flow Page.html",
             "title": "Process Flow",
+            "preview": "Assets/Images/Flow.png",
             "description": "Visualise contributor-first workflows with editable Mermaid diagrams—ideal for RAP journeys and modular clarity.",
             "category": "Diagrams"
           },
@@ -214,6 +238,7 @@
             "label": "Sequence Diagram",
             "href": "Sequence Diagram Page.html",
             "title": "Sequence Diagram",
+            "preview": "Assets/Images/Sequence.png",
             "description": "Editable Mermaid diagrams for contributor journeys, system interactions, and onboarding flows.",
             "category": "Diagrams"
           },
@@ -221,6 +246,7 @@
             "label": "Class Diagram",
             "href": "Class Diagram Page.html",
             "title": "Class Diagram",
+            "preview": "Assets/Images/Class.png",
             "description": "Visualise modular architecture with editable Mermaid class diagrams and contributor-first structure.",
             "category": "Diagrams"
           },
@@ -228,6 +254,7 @@
             "label": "State Diagram",
             "href": "State Diagram Page.html",
             "title": "State Diagram",
+            "preview": "Assets/Images/State.png",
             "description": "Editable Mermaid diagrams for contributor journeys, UI states, and process transitions—modular and theme-safe.",
             "category": "Diagrams"
           },
@@ -235,6 +262,7 @@
             "label": "Entity Relationship",
             "href": "Entity Relationship Page.html",
             "title": "Entity Relationship",
+            "preview": "Assets/Images/Entity.png",
             "description": "Editable Mermaid diagrams for visualising data models, contributor records, and system schemas.",
             "category": "Diagrams"
           },
@@ -242,6 +270,7 @@
             "label": "User Journey Diagram",
             "href": "User journey diagram.html",
             "title": "User Journey Diagram",
+            "preview": "Assets/Images/User Journey.png",
             "description": "Editable Mermaid user journey diagrams for mapping contributor experiences, onboarding flows, and service pathways—theme-safe, modular, and easy to customise.",
             "category": "Diagrams"
           },
@@ -249,6 +278,7 @@
             "label": "Mindmap",
             "href": "Mindmap.html",
             "title": "Mindmap",
+            "preview": "Assets/Images/Mindmap.png",
             "description": "Editable Mermaid mindmaps for brainstorming, structuring ideas, and mapping contributor journeys—theme-safe, modular, and easy to customise.",
             "category": "Diagrams"
           },
@@ -256,6 +286,7 @@
             "label": "Gantt Chart",
             "href": "Gantt chart.html",
             "title": "Gantt Chart",
+            "preview": "Assets/Images/GANTT.png",
             "description": "Editable Mermaid Gantt charts for visualising project timelines, milestones, and dependencies—theme-safe, modular, and contributor-friendly.",
             "category": "Diagrams"
           },
@@ -263,6 +294,7 @@
             "label": "Timeline Diagram",
             "href": "Timeline diagram.html",
             "title": "Timeline",
+            "preview": "Assets/Images/Timeline.png",
             "description": "Editable Mermaid timelines for visualising historical events, project milestones, and sequential phases—theme-safe, modular, and easy to customise.",
             "category": "Diagrams"
           },
@@ -270,6 +302,7 @@
             "label": "Git Graph",
             "href": "Git graph.html",
             "title": "Git Graph",
+            "preview": "Assets/Images/GitGraph.png",
             "description": "Editable Mermaid Git Graphs for visualising branches, commits, merges, and tagged releases—ideal for sprint planning and repo clarity.",
             "category": "Diagrams"
           },
@@ -277,6 +310,7 @@
             "label": "Pie Chart",
             "href": "Pie chart.html",
             "title": "Pie Chart",
+            "preview": "Assets/Images/Pie.png",
             "description": "Editable Mermaid pie charts for visualising proportions, survey results, and contributor breakdowns—simple, modular, and theme-safe.",
             "category": "Diagrams"
           },
@@ -284,6 +318,7 @@
             "label": "C4 Diagram",
             "href": "C4 Diagram.html",
             "title": "C4 Diagram",
+            "preview": "Assets/Images/C4.png",
             "description": "Editable Mermaid C4 diagrams for modelling people, systems, and relationships—ideal for architecture and contributor-first clarity.",
             "category": "Diagrams"
           },
@@ -291,6 +326,7 @@
             "label": "XY Chart",
             "href": "XY Chart.html",
             "title": "XY Chart",
+            "preview": "Assets/Images/XY.png",
             "description": "Editable Mermaid XY charts (beta) for combining bar and line views—ideal for comparing datasets, visualising trends, and modular analysis.",
             "category": "Diagrams"
           }

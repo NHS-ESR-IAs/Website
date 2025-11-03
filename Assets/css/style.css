@@ -2849,3 +2849,21 @@ body.theme-contrast .flow-box h5 {
   background-color: color-mix(in srgb, var(--accent-color) 95%, var(--bg-color));
   color: var(--text-color);
 }
+
+.card-img-top {
+  height: 120px;
+  object-fit: cover;
+}
+
+.card-preview {
+  display: block;
+  width: 100%;
+  height: 120px;
+  /* fixed height for consistency */
+  object-fit: contain;
+  /* show the whole image, no cropping */
+  background: #f8f9fa;
+  /* optional: neutral background behind transparent images */
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+}
