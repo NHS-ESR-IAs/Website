@@ -202,7 +202,7 @@ function initSearchBox(inputId, resultsId, fuse) {
 
 async function initSearch() {
   try {
-    const res = await fetch("data/pages.json");
+    const res = await fetch("data/Menu Manifest.json");
     if (!res.ok) throw new Error("pages.json not found");
     const pages = await res.json();
 
@@ -341,12 +341,37 @@ document.addEventListener("DOMContentLoaded", () => {
 // Dynamic Breadcrumbs
 // ===============================
 
+// Utility: flatten hierarchical manifest into a flat array of pages
+function flattenManifest(nodes, flat = []) {
+  nodes.forEach((node) => {
+    if (node.href) {
+      flat.push({
+        title: node.title || node.label,
+        description: node.description || "",
+        url: node.href,
+        category: node.category || "",
+      });
+    }
+    if (node.children) {
+      flattenManifest(node.children, flat);
+    }
+  });
+  return flat;
+}
+
 async function buildBreadcrumb() {
   try {
-    const res = await fetch("data/pages.json");
-    const pages = await res.json();
+    const res = await fetch("data/Menu Manifest.json");
+    if (!res.ok) throw new Error("Manifest not found");
+    const manifest = await res.json();
 
-    const currentFile = decodeURIComponent(location.pathname.split("/").pop());
+    // Flatten the hierarchical manifest
+    const pages = flattenManifest(manifest);
+
+    // Current file name (strip query string)
+    const currentFile = decodeURIComponent(
+      location.pathname.split("/").pop().split("?")[0]
+    );
     console.log("Looking for:", currentFile);
 
     const page = pages.find((p) => p.url === currentFile);
@@ -360,9 +385,9 @@ async function buildBreadcrumb() {
     breadcrumb.innerHTML = `
       <li class="breadcrumb-item"><a href="index.html">Home</a></li>
       <li class="breadcrumb-item">
-        <a href="SiteMap.html?category=${encodeURIComponent(page.category)}">${
-      page.category
-    }</a>
+        <a href="SiteMap.html?category=${encodeURIComponent(page.category)}">
+          ${page.category}
+        </a>
       </li>
       <li class="breadcrumb-item active" aria-current="page">${page.title}</li>
     `;
@@ -372,20 +397,42 @@ async function buildBreadcrumb() {
 }
 
 document.addEventListener("DOMContentLoaded", buildBreadcrumb);
-
 // ===============================
 // Site Map Filtering
 // ===============================
 
+// Utility: flatten hierarchical manifest into a flat array of pages
+function flattenManifest(nodes, flat = []) {
+  nodes.forEach((node) => {
+    if (node.href) {
+      flat.push({
+        title: node.title || node.label,
+        description: node.description || "",
+        url: node.href,
+        category: node.category || "",
+      });
+    }
+    if (node.children) {
+      flattenManifest(node.children, flat);
+    }
+  });
+  return flat;
+}
+
 async function renderSiteMap() {
   try {
-    const res = await fetch("data/pages.json");
-    if (!res.ok) throw new Error("pages.json not found");
-    const pages = await res.json();
+    const res = await fetch("data/Menu Manifest.json");
+    if (!res.ok) throw new Error("Manifest not found");
+    const manifest = await res.json();
 
+    // Flatten the hierarchical manifest
+    const pages = flattenManifest(manifest);
+
+    // Read ?category= from the URL
     const params = new URLSearchParams(window.location.search);
     const categoryFilter = params.get("category");
 
+    // Apply filter (special case for "All Pages")
     let filtered = pages;
     if (categoryFilter && categoryFilter !== "All Pages") {
       filtered = pages.filter((p) => p.category === categoryFilter);
@@ -394,7 +441,7 @@ async function renderSiteMap() {
     const pageList = document.getElementById("pageList");
     pageList.innerHTML = "";
 
-    // --- Case 1: All Pages or no filter → group by category ---
+    // Case 1: All Pages or no filter → group by category
     if (!categoryFilter || categoryFilter === "All Pages") {
       const categories = [...new Set(pages.map((p) => p.category))];
       categories.forEach((cat) => {
@@ -425,7 +472,7 @@ async function renderSiteMap() {
       });
     }
 
-    // --- Case 2: Specific category filter ---
+    // Case 2: Specific category filter
     else {
       const catHeader = document.createElement("h4");
       catHeader.className = "mt-4 mb-3 gradient-text";
@@ -449,6 +496,13 @@ async function renderSiteMap() {
         catRow.appendChild(col);
       });
       pageList.appendChild(catRow);
+
+      // Optional: add a "Show all pages" button
+      const clearBtn = document.createElement("a");
+      clearBtn.href = "SiteMap.html?category=All Pages";
+      clearBtn.className = "btn btn-outline-secondary mt-4";
+      clearBtn.textContent = "🔄 Show All Pages";
+      pageList.appendChild(clearBtn);
     }
   } catch (err) {
     console.error("Site Map render failed:", err);
