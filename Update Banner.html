@@ -96,6 +96,39 @@
                     <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
                 </div>
             </div>
+            <div class="row mt-4">
+                <div class="col-md border border-warning rounded p-3">
+                    <section class="playground mt-5">
+                        <h3>🔄 Update Banner Playground</h3>
+
+                        <form id="playgroundForm" class="mb-3 row g-3">
+                            <div class="col-12">
+                                <label for="bannerText" class="form-label">Update text</label>
+                                <textarea class="form-control" id="bannerText" rows="2">
+Scroll-collapse logic refactored for flicker-free transitions.
+          </textarea>
+                            </div>
+                        </form>
+
+                        <div class="mb-3">
+                            <button type="button" id="generateBtn" class="btn btn-primary">Generate Code</button>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-md-6 border border-warning rounded p-3">
+                                <h5>Generated Code</h5>
+                                <pre><code id="output"></code></pre>
+                                <button type="button" class="btn btn-primary mt-2" onclick="copyCode()">Copy to
+                                    Clipboard</button>
+                            </div>
+                            <div class="col-md-6 border border-warning rounded p-3">
+                                <h5>Live Preview</h5>
+                                <div id="previewArea"></div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -107,6 +140,27 @@
     <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
     <!-- Custom JS -->
     <script src="Assets/js/script.js"></script>
+    <script src="Assets/js/templates.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const textEl = document.getElementById("bannerText");
+            const outputEl = document.getElementById("output");
+            const previewEl = document.getElementById("previewArea");
+
+            document.getElementById("generateBtn").onclick = () => {
+                const values = { text: textEl.value.trim() };
+                const code = templates.updateBanner(values);
+                outputEl.textContent = code.trim();
+                previewEl.innerHTML = code;
+            };
+        });
+
+        function copyCode() {
+            const text = document.getElementById("output").textContent;
+            navigator.clipboard.writeText(text);
+            alert("Code copied!");
+        }
+    </script>
 </body>
 
 </html>

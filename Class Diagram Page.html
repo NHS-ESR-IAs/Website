@@ -135,17 +135,140 @@ classDiagram
                         <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
                     </div>
                 </div>
-            </div>
+                <!-- Playground -->
+                <div class="row mt-4">
+                    <div class="col-md border border-secondary rounded p-3">
+                        <section class="playground mt-5">
+                            <h3>📐 Class Diagram Playground</h3>
+
+                            <h5>Classes</h5>
+                            <div id="classesForm"></div>
+                            <button type="button" id="addClassBtn" class="btn btn-success btn-sm mb-3">+ Add
+                                Class</button>
+
+                            <h5>Relationships</h5>
+                            <div id="relsForm"></div>
+                            <button type="button" id="addRelBtn" class="btn btn-success btn-sm mb-3">+ Add
+                                Relationship</button>
+                            <br>
+                            <button type="button" id="generateBtn" class="btn btn-primary">Generate Code</button>
+
+                            <div class="row mt-4">
+                                <div class="col-md-6 border border-secondary rounded p-3">
+                                    <h5>Generated Code</h5>
+                                    <pre><code id="output"></code></pre>
+                                    <button type="button" class="btn btn-primary mt-2" onclick="copyCode()">Copy to
+                                        Clipboard</button>
+                                </div>
+                                <div class="col-md-6 border border-secondary rounded p-3">
+                                    <h5>Live Preview</h5>
+                                    <div id="previewArea"></div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div id="shared-footer"></div>
+
+                <!-- Bootstrap JS + Custom Script -->
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+                <script src="Assets/js/script.js"></script>
+                <script src="Assets/js/templates.js"></script>
+                <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                        const classesForm = document.getElementById("classesForm");
+                        const relsForm = document.getElementById("relsForm");
+
+                        function createClassRow(defaults = { name: "", attrs: [""], methods: [""] }) {
+                            const wrapper = document.createElement("div");
+                            wrapper.className = "class-row border rounded p-2 mb-2";
+                            wrapper.innerHTML = `
+        <label>Class Name</label>
+        <input type="text" class="form-control mb-2" name="name" value="${defaults.name}">
+        <label>Attributes (one per line)</label>
+        <textarea class="form-control mb-2" name="attrs">${defaults.attrs.join("\n")}</textarea>
+        <label>Methods (one per line)</label>
+        <textarea class="form-control mb-2" name="methods">${defaults.methods.join("\n")}</textarea>
+        <button type="button" class="btn btn-sm btn-danger removeBtn">Remove Class</button>
+      `;
+                            classesForm.appendChild(wrapper);
+                        }
+
+                        function createRelRow(defaults = { from: "", type: "-->", to: "", label: "" }) {
+                            const wrapper = document.createElement("div");
+                            wrapper.className = "rel-row border rounded p-2 mb-2";
+                            wrapper.innerHTML = `
+        <div class="row g-2">
+          <div class="col"><input type="text" class="form-control" name="from" placeholder="From" value="${defaults.from}"></div>
+          <div class="col">
+            <select class="form-select" name="type">
+              <option value="-->" ${defaults.type === "-->" ? "selected" : ""}>Association (--&gt;)</option>
+              <option value="<|--" ${defaults.type === "<|--" ? "selected" : ""}>Inheritance (&lt;|--)</option>
+              <option value="*--" ${defaults.type === "*--" ? "selected" : ""}>Composition (*--)</option>
+              <option value="o--" ${defaults.type === "o--" ? "selected" : ""}>Aggregation (o--)</option>
+            </select>
+          </div>
+          <div class="col"><input type="text" class="form-control" name="to" placeholder="To" value="${defaults.to}"></div>
+          <div class="col"><input type="text" class="form-control" name="label" placeholder="Label" value="${defaults.label}"></div>
+          <div class="col-auto"><button type="button" class="btn btn-sm btn-danger removeBtn">Remove</button></div>
         </div>
+      `;
+                            relsForm.appendChild(wrapper);
+                        }
 
-        <!-- Footer -->
-        <div id="shared-footer"></div>
+                        // Initial examples
+                        createClassRow({ name: "Microsite", attrs: [], methods: ["+showPage()", "+copySnippet()"] });
+                        createClassRow({ name: "Plugin", attrs: [], methods: ["+activate()", "+deactivate()"] });
+                        createClassRow({ name: "Snippet", attrs: ["+language"], methods: ["+copyToClipboard()"] });
+                        createRelRow({ from: "Microsite", type: "-->", to: "Plugin", label: "loads" });
+                        createRelRow({ from: "Microsite", type: "-->", to: "Snippet", label: "contains" });
+                        createRelRow({ from: "Plugin", type: "<|--", to: "CopyButton" });
+                        createRelRow({ from: "Plugin", type: "<|--", to: "Mermaid" });
+                        createRelRow({ from: "Plugin", type: "<|--", to: "PlantUML" });
 
-        <!-- Bootstrap JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
-        <!-- Custom JS -->
-        <script src="Assets/js/script.js"></script>
+                        // Add buttons
+                        document.getElementById("addClassBtn").onclick = () => createClassRow();
+                        document.getElementById("addRelBtn").onclick = () => createRelRow();
+
+                        // Remove
+                        document.body.addEventListener("click", e => {
+                            if (e.target.classList.contains("removeBtn")) {
+                                e.target.closest(".class-row, .rel-row").remove();
+                            }
+                        });
+
+                        // Generate
+                        document.getElementById("generateBtn").onclick = () => {
+                            const classes = [...classesForm.querySelectorAll(".class-row")].map(r => ({
+                                name: r.querySelector('[name="name"]').value,
+                                attrs: r.querySelector('[name="attrs"]').value.split("\n"),
+                                methods: r.querySelector('[name="methods"]').value.split("\n")
+                            }));
+                            const rels = [...relsForm.querySelectorAll(".rel-row")].map(r => ({
+                                from: r.querySelector('[name="from"]').value,
+                                type: r.querySelector('[name="type"]').value,
+                                to: r.querySelector('[name="to"]').value,
+                                label: r.querySelector('[name="label"]').value
+                            }));
+
+                            const code = templates.classDiagram({ classes, rels });
+                            document.getElementById("output").textContent = code.trim();
+                            document.getElementById("previewArea").innerHTML = code;
+                            if (window.mermaid) mermaid.init(undefined, document.querySelectorAll(".mermaid"));
+                        };
+                    });
+
+                    function copyCode() {
+                        const text = document.getElementById("output").textContent;
+                        navigator.clipboard.writeText(text);
+                        alert("Code copied!");
+                    }
+                </script>
+
+
 </body>
 
 </html>

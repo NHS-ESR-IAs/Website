@@ -116,6 +116,53 @@ sequenceDiagram
                         <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
                     </div>
                 </div>
+                <div class="row mt-4">
+                    <div class="col-md border border-primary rounded p-3">
+                        <section class="playground mt-5">
+                            <h3>📜 Sequence Diagram Playground</h3>
+
+                            <!-- Participants -->
+                            <h5>Participants</h5>
+                            <div class="row fw-bold mb-1">
+                                <div class="col-md-10">Name</div>
+                                <div class="col-md-2">Action</div>
+                            </div>
+                            <div id="participantsForm"></div>
+                            <button type="button" id="addParticipantBtn" class="btn btn-success mb-3">+ Add
+                                Participant</button>
+
+                            <!-- Messages -->
+                            <h5>Messages</h5>
+                            <div class="row fw-bold mb-1">
+                                <div class="col-md-3">From</div>
+                                <div class="col-md-3">To</div>
+                                <div class="col-md-2">Arrow</div>
+                                <div class="col-md-3">Text</div>
+                                <div class="col-md-1">Action</div>
+                            </div>
+                            <div id="messagesForm"></div>
+                            <button type="button" id="addMessageBtn" class="btn btn-success mb-3">+ Add Message</button>
+
+                            <!-- Generate -->
+                            <div class="mb-3">
+                                <button type="button" id="generateBtn" class="btn btn-primary">Generate Code</button>
+                            </div>
+
+                            <div class="row mt-4">
+                                <div class="col-md-6 border border-primary rounded p-3">
+                                    <h5>Generated Code</h5>
+                                    <pre><code id="output"></code></pre>
+                                    <button type="button" class="btn btn-primary mt-2" onclick="copyCode()">Copy to
+                                        Clipboard</button>
+                                </div>
+                                <div class="col-md-6 border border-primary rounded p-3">
+                                    <h5>Live Preview</h5>
+                                    <div id="previewArea"></div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -127,6 +174,80 @@ sequenceDiagram
         <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
         <!-- Custom JS -->
         <script src="Assets/js/script.js"></script>
+        <script src="Assets/js/templates.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const participantsForm = document.getElementById("participantsForm");
+                const messagesForm = document.getElementById("messagesForm");
+
+                function addParticipant(defaults = { name: "" }) {
+                    const row = document.createElement("div");
+                    row.className = "row g-2 mb-2 participant-row";
+                    row.innerHTML = `
+      <div class="col-md-10"><input type="text" class="form-control" name="name" placeholder="Participant name" value="${defaults.name}"></div>
+      <div class="col-md-2"><button type="button" class="btn btn-danger btn-sm removeBtn">Remove</button></div>
+    `;
+                    row.querySelector(".removeBtn").onclick = () => row.remove();
+                    participantsForm.appendChild(row);
+                }
+
+                function addMessage(defaults = { from: "", to: "", arrow: "->>", text: "" }) {
+                    const row = document.createElement("div");
+                    row.className = "row g-2 mb-2 message-row";
+                    row.innerHTML = `
+      <div class="col-md-3"><input type="text" class="form-control" name="from" placeholder="From" value="${defaults.from}"></div>
+      <div class="col-md-3"><input type="text" class="form-control" name="to" placeholder="To" value="${defaults.to}"></div>
+      <div class="col-md-2">
+        <select class="form-select" name="arrow">
+          <option value="->>" ${defaults.arrow === "->>" ? "selected" : ""}>Solid</option>
+          <option value="-->>" ${defaults.arrow === "-->>" ? "selected" : ""}>Dashed</option>
+          <option value="->" ${defaults.arrow === "->" ? "selected" : ""}>Open</option>
+          <option value="-->" ${defaults.arrow === "-->" ? "selected" : ""}>Open Dashed</option>
+        </select>
+      </div>
+      <div class="col-md-3"><input type="text" class="form-control" name="text" placeholder="Message text" value="${defaults.text}"></div>
+      <div class="col-md-1"><button type="button" class="btn btn-danger btn-sm removeBtn">Remove</button></div>
+    `;
+                    row.querySelector(".removeBtn").onclick = () => row.remove();
+                    messagesForm.appendChild(row);
+                }
+
+                // Seed with your example
+                ["Contributor", "Microsite", "Guide", "SupportTeam"].forEach(n => addParticipant({ name: n }));
+                addMessage({ from: "Contributor", to: "Microsite", arrow: "->>", text: "Opens diagram page" });
+                addMessage({ from: "Microsite", to: "Guide", arrow: "->>", text: "Loads Mermaid block" });
+                addMessage({ from: "Guide", to: "Contributor", arrow: "-->>", text: "Shows interaction flow" });
+                addMessage({ from: "Contributor", to: "Microsite", arrow: "->>", text: "Copies diagram snippet" });
+                addMessage({ from: "Microsite", to: "SupportTeam", arrow: "->>", text: "Sends contact request" });
+                addMessage({ from: "SupportTeam", to: "Contributor", arrow: "-->>", text: "Responds with support" });
+
+                document.getElementById("addParticipantBtn").onclick = () => addParticipant();
+                document.getElementById("addMessageBtn").onclick = () => addMessage();
+
+                document.getElementById("generateBtn").onclick = () => {
+                    const participants = [...document.querySelectorAll(".participant-row")].map(r => ({
+                        name: r.querySelector('[name="name"]').value.trim()
+                    }));
+                    const messages = [...document.querySelectorAll(".message-row")].map(r => ({
+                        from: r.querySelector('[name="from"]').value.trim(),
+                        to: r.querySelector('[name="to"]').value.trim(),
+                        arrow: r.querySelector('[name="arrow"]').value,
+                        text: r.querySelector('[name="text"]').value.trim()
+                    }));
+
+                    const code = templates.sequenceDiagram({ participants, messages });
+                    document.getElementById("output").textContent = code;
+                    document.getElementById("previewArea").innerHTML = code;
+                    if (window.mermaid) mermaid.init(undefined, document.querySelectorAll(".mermaid"));
+                };
+            });
+
+            function copyCode() {
+                const text = document.getElementById("output").textContent;
+                navigator.clipboard.writeText(text);
+                alert("Code copied!");
+            }
+        </script>
 </body>
 
 </html>

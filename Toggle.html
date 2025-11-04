@@ -54,13 +54,18 @@
         <!-- Toggle Section -->
         <div class="row mt-4">
             <div class="col-md">
-                <button class="btn btn-primary w-100 text-start mb-2" onclick="toggleSection('toggleJoy')">
+                <!-- Toggle Button -->
+                <button class="btn btn-primary w-100 text-start mb-2" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#joyCollapse" aria-expanded="false" aria-controls="joyCollapse">
                     🎯 Show Me the Joy
                 </button>
 
-                <div id="toggleJoy" style="display:none;" class="mt-3">
-                    <p>This section reveals modular magic, contributor clarity, and a sprinkle of onboarding delight.
-                    </p>
+                <!-- Collapsible Content -->
+                <div class="collapse mt-3" id="joyCollapse">
+                    <div class="card card-body">
+                        This section reveals modular magic, contributor clarity,
+                        and a sprinkle of onboarding delight.
+                    </div>
                 </div>
             </div>
         </div>
@@ -85,9 +90,61 @@
 &lt;div id=&quot;toggleJoy&quot; style=&quot;display:none;&quot; class=&quot;mt-3&quot;&gt;
   &lt;p&gt;This section reveals modular magic, contributor clarity, and a sprinkle of onboarding delight.&lt;/p&gt;
 &lt;/div&gt;
-        </code></pre>
+
+&lt;script&gt;
+  function toggleSection(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const isHidden = window.getComputedStyle(el).display === &quot;none&quot;;
+    el.style.display = isHidden ? &quot;block&quot; : &quot;none&quot;;
+  }
+&lt;/script&gt;
+</code></pre>
 
                 <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md border border-info rounded p-3">
+                <section class="playground mt-5">
+                    <h3>Bootstrap Collapse Playground</h3>
+
+                    <form id="playgroundForm" class="mb-3 row g-3">
+                        <div class="col-md-3">
+                            <label for="collapseId" class="form-label">Unique ID</label>
+                            <input type="text" class="form-control" id="collapseId" value="joyCollapse">
+                            <div class="form-text">Use a unique ID for each collapse block (e.g., joyCollapse,
+                                tipsCollapse).</div>
+                        </div>
+                        <div class="col-md-9">
+                            <label for="collapseLabel" class="form-label">Button label</label>
+                            <input type="text" class="form-control" id="collapseLabel" value="🎯 Show Me the Joy">
+                        </div>
+                        <div class="col-12">
+                            <label for="collapseContent" class="form-label">Collapsible content</label>
+                            <textarea class="form-control" id="collapseContent"
+                                rows="3">This section reveals modular magic, contributor clarity, and a sprinkle of onboarding delight.</textarea>
+                        </div>
+                    </form>
+
+                    <div class="mb-3">
+                        <button type="button" id="generateBtn" class="btn btn-primary">Generate code</button>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6 border border-info rounded p-3">
+                            <h5>Generated code</h5>
+                            <pre><code id="output"></code></pre>
+                            <button type="button" class="btn btn-primary mt-2" onclick="copyCode()">Copy to
+                                clipboard</button>
+                        </div>
+                        <div class="col-md-6 border border-info rounded p-3">
+                            <h5>Live preview</h5>
+                            <div id="previewArea"></div>
+
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
     </div>
@@ -100,6 +157,47 @@
     <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
     <!-- Custom JS -->
     <script src="Assets/js/script.js"></script>
+    <script src="Assets/js/templates.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const idEl = document.getElementById("collapseId");
+            const labelEl = document.getElementById("collapseLabel");
+            const contentEl = document.getElementById("collapseContent");
+            const outputEl = document.getElementById("output");
+            const previewEl = document.getElementById("previewArea");
+
+            document.getElementById("generateBtn").onclick = () => {
+                const values = {
+                    id: idEl.value.trim() || "joyCollapse",
+                    label: labelEl.value.trim() || "🎯 Show Me the Joy",
+                    content: contentEl.value.trim() || "Content goes here."
+                };
+
+                const code = templates.collapseSection(values);
+                outputEl.textContent = code.trim();
+
+                // Render preview
+                previewEl.innerHTML = code;
+
+                // Optional: reset collapse state for preview (if Bootstrap JS is present)
+                if (window.bootstrap) {
+                    const target = previewEl.querySelector(`#${CSS.escape(values.id)}`);
+                    if (target) {
+                        try {
+                            const collapse = bootstrap.Collapse.getOrCreateInstance(target, { toggle: false });
+                            collapse.hide();
+                        } catch (e) { /* ignore */ }
+                    }
+                }
+            };
+        });
+
+        function copyCode() {
+            const text = document.getElementById("output").textContent;
+            navigator.clipboard.writeText(text);
+            alert("Code copied!");
+        }
+    </script>
 </body>
 
 </html>

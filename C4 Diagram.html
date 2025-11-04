@@ -98,17 +98,146 @@ C4Context
                         <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
                     </div>
                 </div>
+                <!-- Playground -->
+                <div class="row mt-4">
+                    <div class="col-md border border-dark rounded p-3">
+                        <section class="playground mt-5">
+                            <h3>🏗 C4 Context Diagram Playground</h3>
+
+                            <div class="mb-3">
+                                <label class="form-label">Diagram Title</label>
+                                <input type="text" id="diagramTitle" class="form-control"
+                                    value="System Context diagram for Internet Banking System">
+                            </div>
+
+                            <h5>People</h5>
+                            <div id="peopleForm"></div>
+                            <button type="button" id="addPersonBtn" class="btn btn-success btn-sm mb-3">+ Add
+                                Person</button>
+
+                            <h5>Systems</h5>
+                            <div id="systemsForm"></div>
+                            <button type="button" id="addSystemBtn" class="btn btn-success btn-sm mb-3">+ Add
+                                System</button>
+
+                            <h5>External Systems</h5>
+                            <div id="externalsForm"></div>
+                            <button type="button" id="addExternalBtn" class="btn btn-success btn-sm mb-3">+ Add
+                                External</button>
+
+                            <h5>Relationships</h5>
+                            <div id="relsForm"></div>
+                            <button type="button" id="addRelBtn" class="btn btn-success btn-sm mb-3">+ Add
+                                Relationship</button>
+
+                            <button type="button" id="generateBtn" class="btn btn-primary">Generate Code</button>
+
+                            <div class="row mt-4">
+                                <div class="col-md-6 border border-dark rounded p-3">
+                                    <h5>Generated Code</h5>
+                                    <pre><code id="output"></code></pre>
+                                    <button type="button" class="btn btn-primary mt-2" onclick="copyCode()">Copy to
+                                        Clipboard</button>
+                                </div>
+                                <div class="col-md-6 border border-dark rounded p-3">
+                                    <h5>Live Preview</h5>
+                                    <div id="previewArea"></div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div id="shared-footer"></div>
+
+                <!-- Bootstrap JS + Custom Script -->
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+                <script src="Assets/js/script.js"></script>
+                <script src="Assets/js/templates.js"></script>
+                <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                        const peopleForm = document.getElementById("peopleForm");
+                        const systemsForm = document.getElementById("systemsForm");
+                        const externalsForm = document.getElementById("externalsForm");
+                        const relsForm = document.getElementById("relsForm");
+
+                        function createRow(container, fields, defaults = {}) {
+                            const row = document.createElement("div");
+                            row.className = "row g-2 mb-2";
+                            row.innerHTML = fields.map(f => `
+        <div class="col">
+          <input type="text" class="form-control" placeholder="${f}" name="${f}" value="${defaults[f] || ""}">
+        </div>`).join("") +
+                                `<div class="col-auto"><button type="button" class="btn btn-sm btn-danger removeBtn">Remove</button></div>`;
+                            container.appendChild(row);
+                        }
+
+                        // Add initial examples
+                        createRow(peopleForm, ["id", "label", "desc"], { id: "customer", label: "Customer", desc: "A customer of the bank" });
+                        createRow(systemsForm, ["id", "label", "desc"], { id: "banking_system", label: "Internet Banking System", desc: "Allows customers to view info and make payments" });
+                        createRow(externalsForm, ["id", "label", "desc"], { id: "mail_system", label: "E-mail system", desc: "Internal Exchange" });
+                        createRow(externalsForm, ["id", "label", "desc"], { id: "mainframe", label: "Mainframe Banking System", desc: "Stores all customer info" });
+                        createRow(relsForm, ["type", "from", "to", "label"], { type: "Rel", from: "customer", to: "banking_system", label: "Uses" });
+                        createRow(relsForm, ["type", "from", "to", "label"], { type: "Rel_Back", from: "banking_system", to: "mail_system", label: "Sends e-mails using" });
+                        createRow(relsForm, ["type", "from", "to", "label"], { type: "Rel", from: "banking_system", to: "mainframe", label: "Uses for core banking data" });
+
+                        // Add buttons
+                        document.getElementById("addPersonBtn").onclick = () => createRow(peopleForm, ["id", "label", "desc"]);
+                        document.getElementById("addSystemBtn").onclick = () => createRow(systemsForm, ["id", "label", "desc"]);
+                        document.getElementById("addExternalBtn").onclick = () => createRow(externalsForm, ["id", "label", "desc"]);
+                        document.getElementById("addRelBtn").onclick = () => createRow(relsForm, ["type", "from", "to", "label"]);
+
+                        // Remove row
+                        document.body.addEventListener("click", e => {
+                            if (e.target.classList.contains("removeBtn")) {
+                                e.target.closest(".row").remove();
+                            }
+                        });
+
+                        // Generate
+                        document.getElementById("generateBtn").onclick = () => {
+                            const title = document.getElementById("diagramTitle").value;
+                            const people = [...peopleForm.querySelectorAll(".row")].map(r => ({
+                                id: r.querySelector('[name="id"]').value,
+                                label: r.querySelector('[name="label"]').value,
+                                desc: r.querySelector('[name="desc"]').value
+                            }));
+                            const systems = [...systemsForm.querySelectorAll(".row")].map(r => ({
+                                id: r.querySelector('[name="id"]').value,
+                                label: r.querySelector('[name="label"]').value,
+                                desc: r.querySelector('[name="desc"]').value
+                            }));
+                            const externals = [...externalsForm.querySelectorAll(".row")].map(r => ({
+                                id: r.querySelector('[name="id"]').value,
+                                label: r.querySelector('[name="label"]').value,
+                                desc: r.querySelector('[name="desc"]').value
+                            }));
+                            const rels = [...relsForm.querySelectorAll(".row")].map(r => ({
+                                type: r.querySelector('[name="type"]').value,
+                                from: r.querySelector('[name="from"]').value,
+                                to: r.querySelector('[name="to"]').value,
+                                label: r.querySelector('[name="label"]').value
+                            }));
+
+                            const code = templates.c4context({ title, people, systems, externals, rels });
+                            document.getElementById("output").textContent = code.trim();
+                            document.getElementById("previewArea").innerHTML = code;
+                            if (window.mermaid) mermaid.init(undefined, document.querySelectorAll(".mermaid"));
+                        };
+                    });
+
+                    function copyCode() {
+                        const text = document.getElementById("output").textContent;
+                        navigator.clipboard.writeText(text);
+                        alert("Code copied!");
+                    }
+                </script>
+
             </div>
         </div>
 
-        <!-- Footer -->
-        <div id="shared-footer"></div>
-
-        <!-- Bootstrap JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
-        <!-- Custom JS -->
-        <script src="Assets/js/script.js"></script>
 </body>
 
 </html>

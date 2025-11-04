@@ -115,6 +115,31 @@ gitGraph
                         <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
                     </div>
                 </div>
+                <div class="row mt-4">
+                    <div class="col-md border border-dark rounded p-3">
+                        <section class="playground mt-5">
+                            <h3>🌳 Git Graph Playground</h3>
+
+                            <div id="stepsForm"></div>
+                            <button type="button" id="addStepBtn" class="btn btn-success mb-3">+ Add Step</button>
+                            <br>
+                            <button type="button" id="generateBtn" class="btn btn-primary">Generate Code</button>
+
+                            <div class="row mt-4">
+                                <div class="col-md-6 border border-dark rounded p-3">
+                                    <h5>Generated Code</h5>
+                                    <pre><code id="output"></code></pre>
+                                    <button type="button" class="btn btn-primary mt-2" onclick="copyCode()">Copy to
+                                        Clipboard</button>
+                                </div>
+                                <div class="col-md-6 border border-dark rounded p-3">
+                                    <h5>Live Preview</h5>
+                                    <div id="previewArea"></div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -126,6 +151,92 @@ gitGraph
         <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
         <!-- Custom JS -->
         <script src="Assets/js/script.js"></script>
+        <script src="Assets/js/templates.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const stepsForm = document.getElementById("stepsForm");
+
+                function createStep(defaults = { type: "commit", id: "", tag: "", branch: "" }) {
+                    const wrapper = document.createElement("div");
+                    wrapper.className = "step-row border rounded p-2 mb-2";
+
+                    wrapper.innerHTML = `
+        <div class="row g-2 align-items-end">
+          <div class="col-md-2">
+            <label class="form-label">Type</label>
+            <select class="form-select" name="type">
+              <option value="commit" ${defaults.type === "commit" ? "selected" : ""}>Commit</option>
+              <option value="branch" ${defaults.type === "branch" ? "selected" : ""}>Branch</option>
+              <option value="checkout" ${defaults.type === "checkout" ? "selected" : ""}>Checkout</option>
+              <option value="merge" ${defaults.type === "merge" ? "selected" : ""}>Merge</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label class="form-label">ID</label>
+            <input type="text" class="form-control" name="id" value="${defaults.id}">
+          </div>
+          <div class="col-md-2">
+            <label class="form-label">Tag</label>
+            <input type="text" class="form-control" name="tag" value="${defaults.tag}">
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Branch</label>
+            <input type="text" class="form-control" name="branch" value="${defaults.branch}">
+          </div>
+          <div class="col-md-2 d-flex">
+            <button type="button" class="btn btn-danger btn-sm removeStepBtn ms-auto">Remove</button>
+          </div>
+        </div>
+      `;
+
+                    wrapper.querySelector(".removeStepBtn").onclick = () => wrapper.remove();
+                    stepsForm.appendChild(wrapper);
+                }
+
+                // Seed with your example
+                createStep({ type: "commit", id: "init" });
+                createStep({ type: "commit", tag: "v1.0.0" });
+                createStep({ type: "branch", branch: "feature/auth" });
+                createStep({ type: "checkout", branch: "feature/auth" });
+                createStep({ type: "commit", id: "auth-1" });
+                createStep({ type: "commit", id: "auth-2" });
+                createStep({ type: "checkout", branch: "main" });
+                createStep({ type: "merge", branch: "feature/auth", tag: "v1.1.0" });
+                createStep({ type: "branch", branch: "hotfix/login" });
+                createStep({ type: "checkout", branch: "hotfix/login" });
+                createStep({ type: "commit", id: "hotfix-1" });
+                createStep({ type: "checkout", branch: "main" });
+                createStep({ type: "merge", branch: "hotfix/login", tag: "v1.1.1" });
+                createStep({ type: "branch", branch: "feature/ui" });
+                createStep({ type: "checkout", branch: "feature/ui" });
+                createStep({ type: "commit", id: "ui-1" });
+                createStep({ type: "commit", id: "ui-2" });
+                createStep({ type: "checkout", branch: "main" });
+                createStep({ type: "merge", branch: "feature/ui", tag: "v1.2.0" });
+
+                document.getElementById("addStepBtn").onclick = () => createStep();
+
+                document.getElementById("generateBtn").onclick = () => {
+                    const steps = [...stepsForm.querySelectorAll(".step-row")].map(r => ({
+                        type: r.querySelector('[name="type"]').value,
+                        id: r.querySelector('[name="id"]').value,
+                        tag: r.querySelector('[name="tag"]').value,
+                        branch: r.querySelector('[name="branch"]').value
+                    }));
+
+                    const code = templates.gitGraph({ steps });
+                    document.getElementById("output").textContent = code.trim();
+                    document.getElementById("previewArea").innerHTML = code;
+                    if (window.mermaid) mermaid.init(undefined, document.querySelectorAll(".mermaid"));
+                };
+            });
+
+            function copyCode() {
+                const text = document.getElementById("output").textContent;
+                navigator.clipboard.writeText(text);
+                alert("Code copied!");
+            }
+        </script>
 </body>
 
 </html>

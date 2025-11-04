@@ -52,14 +52,6 @@
             "category": "Main Structure and Navigation"
           },
           {
-            "label": "Side Menu Panel",
-            "href": "Side Menu Panel.html",
-            "title": "Side Menu Panel",
-            "preview": "Assets/Images/Side Menu.png",
-            "description": "Modular vertical navigator with nested submenus, dropdowns, and expressive toggles for contributor clarity.",
-            "category": "Main Structure and Navigation"
-          },
-          {
             "label": "Footer Panel",
             "href": "Footer Panel.html",
             "title": "Footer Panel",

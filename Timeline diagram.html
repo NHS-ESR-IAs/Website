@@ -95,6 +95,48 @@ timeline
                         <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
                     </div>
                 </div>
+                <div class="row mt-4">
+                    <div class="col-md border border-primary rounded p-3">
+                        <section class="playground mt-5">
+                            <h3>🗓️ Timeline Playground</h3>
+
+                            <!-- Title -->
+                            <div class="mb-3">
+                                <label class="form-label">Timeline Title</label>
+                                <input type="text" id="timelineTitle" class="form-control"
+                                    value="Microsite Project Timeline">
+                            </div>
+
+                            <!-- Events -->
+                            <h5>Events</h5>
+                            <div class="row fw-bold mb-1">
+                                <div class="col-md-3">Date (YYYY-MM-DD)</div>
+                                <div class="col-md-7">Event Text</div>
+                                <div class="col-md-2">Action</div>
+                            </div>
+                            <div id="eventsForm"></div>
+                            <button type="button" id="addEventBtn" class="btn btn-success mb-3">+ Add Event</button>
+
+                            <!-- Generate -->
+                            <div class="mb-3">
+                                <button type="button" id="generateBtn" class="btn btn-primary">Generate Code</button>
+                            </div>
+
+                            <div class="row mt-4">
+                                <div class="col-md-6 border border-primary rounded p-3">
+                                    <h5>Generated Code</h5>
+                                    <pre><code id="output"></code></pre>
+                                    <button type="button" class="btn btn-primary mt-2" onclick="copyCode()">Copy to
+                                        Clipboard</button>
+                                </div>
+                                <div class="col-md-6 border border-primary rounded p-3">
+                                    <h5>Live Preview</h5>
+                                    <div id="previewArea"></div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -106,6 +148,53 @@ timeline
         <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
         <!-- Custom JS -->
         <script src="Assets/js/script.js"></script>
+        <script src="Assets/js/templates.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const eventsForm = document.getElementById("eventsForm");
+
+                function addEvent(defaults = { date: "", text: "" }) {
+                    const row = document.createElement("div");
+                    row.className = "row g-2 mb-2 event-row";
+                    row.innerHTML = `
+      <div class="col-md-3"><input type="text" class="form-control" name="date" placeholder="YYYY-MM-DD" value="${defaults.date}"></div>
+      <div class="col-md-7"><input type="text" class="form-control" name="text" placeholder="Event text" value="${defaults.text}"></div>
+      <div class="col-md-2"><button type="button" class="btn btn-danger btn-sm removeBtn">Remove</button></div>
+    `;
+                    row.querySelector(".removeBtn").onclick = () => row.remove();
+                    eventsForm.appendChild(row);
+                }
+
+                // Seed with your example
+                addEvent({ date: "2025-10-01", text: "Kickoff meeting" });
+                addEvent({ date: "2025-10-05", text: "Requirements gathered" });
+                addEvent({ date: "2025-10-12", text: "Wireframes completed" });
+                addEvent({ date: "2025-10-20", text: "Development started" });
+                addEvent({ date: "2025-10-28", text: "Testing phase begins" });
+                addEvent({ date: "2025-10-31", text: "Launch 🎉" });
+
+                document.getElementById("addEventBtn").onclick = () => addEvent();
+
+                document.getElementById("generateBtn").onclick = () => {
+                    const title = document.getElementById("timelineTitle").value.trim();
+                    const events = [...document.querySelectorAll(".event-row")].map(r => ({
+                        date: r.querySelector('[name="date"]').value.trim(),
+                        text: r.querySelector('[name="text"]').value.trim()
+                    }));
+
+                    const code = templates.timelineDiagram({ title, events });
+                    document.getElementById("output").textContent = code;
+                    document.getElementById("previewArea").innerHTML = code;
+                    if (window.mermaid) mermaid.init(undefined, document.querySelectorAll(".mermaid"));
+                };
+            });
+
+            function copyCode() {
+                const text = document.getElementById("output").textContent;
+                navigator.clipboard.writeText(text);
+                alert("Code copied!");
+            }
+        </script>
 </body>
 
 </html>

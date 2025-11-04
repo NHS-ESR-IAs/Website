@@ -97,6 +97,45 @@ pie showData
                         <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
                     </div>
                 </div>
+                <div class="row mt-4">
+                    <div class="col-md border border-info rounded p-3">
+                        <section class="playground mt-5">
+                            <h3>🥧 Pie Chart Playground</h3>
+
+                            <div class="mb-3">
+                                <label class="form-label">Chart Title</label>
+                                <input type="text" id="pieTitle" class="form-control" value="Contributor Roles">
+                            </div>
+
+                            <h5>Slices</h5>
+                            <div class="row fw-bold mb-1">
+                                <div class="col-md-5">Label</div>
+                                <div class="col-md-5">Value</div>
+                                <div class="col-md-2">Action</div>
+                            </div>
+                            <div id="slicesForm"></div>
+                            <button type="button" id="addSliceBtn" class="btn btn-success mb-3">+ Add Slice</button>
+
+                            <!-- Generate button always on its own line -->
+                            <div class="mb-3">
+                                <button type="button" id="generateBtn" class="btn btn-primary">Generate Code</button>
+                            </div>
+
+                            <div class="row mt-4">
+                                <div class="col-md-6 border border-info rounded p-3">
+                                    <h5>Generated Code</h5>
+                                    <pre><code id="output"></code></pre>
+                                    <button type="button" class="btn btn-primary mt-2" onclick="copyCode()">Copy to
+                                        Clipboard</button>
+                                </div>
+                                <div class="col-md-6 border border-info rounded p-3">
+                                    <h5>Live Preview</h5>
+                                    <div id="previewArea"></div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -108,6 +147,57 @@ pie showData
         <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
         <!-- Custom JS -->
         <script src="Assets/js/script.js"></script>
+        <script src="Assets/js/templates.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const slicesForm = document.getElementById("slicesForm");
+
+                function createSlice(defaults = { label: "", value: "" }) {
+                    const row = document.createElement("div");
+                    row.className = "slice-row row g-2 mb-2";
+                    row.innerHTML = `
+        <div class="col-md-5">
+          <input type="text" class="form-control" name="label" placeholder="Slice label" value="${defaults.label}">
+        </div>
+        <div class="col-md-5">
+          <input type="number" class="form-control" name="value" placeholder="Value" value="${defaults.value}">
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-danger btn-sm removeSliceBtn">Remove</button>
+        </div>
+      `;
+                    row.querySelector(".removeSliceBtn").onclick = () => row.remove();
+                    slicesForm.appendChild(row);
+                }
+
+                // Seed with your example
+                createSlice({ label: "Writers", value: 40 });
+                createSlice({ label: "Designers", value: 25 });
+                createSlice({ label: "Developers", value: 20 });
+                createSlice({ label: "Support", value: 15 });
+
+                document.getElementById("addSliceBtn").onclick = () => createSlice();
+
+                document.getElementById("generateBtn").onclick = () => {
+                    const title = document.getElementById("pieTitle").value;
+                    const slices = [...slicesForm.querySelectorAll(".slice-row")].map(r => ({
+                        label: r.querySelector('[name="label"]').value,
+                        value: r.querySelector('[name="value"]').value
+                    }));
+
+                    const code = templates.pieChart({ title, slices });
+                    document.getElementById("output").textContent = code.trim();
+                    document.getElementById("previewArea").innerHTML = code;
+                    if (window.mermaid) mermaid.init(undefined, document.querySelectorAll(".mermaid"));
+                };
+            });
+
+            function copyCode() {
+                const text = document.getElementById("output").textContent;
+                navigator.clipboard.writeText(text);
+                alert("Code copied!");
+            }
+        </script>
 </body>
 
 </html>

@@ -113,17 +113,101 @@
 
                 </div>
             </div>
+            <!-- Playground -->
+            <div class="row mt-4">
+                <div class="col-md border border-info rounded p-3">
+                    <section class="playground mt-5">
+                        <h3>🧭 Breadcrumb Playground</h3>
+
+                        <div id="breadcrumbForm"></div>
+                        <button type="button" id="addCrumbBtn" class="btn btn-success mb-3">+ Add Link</button><br>
+                        <button type="button" id="generateBtn" class="btn btn-primary">Generate Code</button>
+
+                        <div class="row mt-4">
+                            <div class="col-md-6 border border-info rounded p-3">
+                                <h5>Generated Code</h5>
+                                <pre><code id="output"></code></pre>
+                                <button type="button" class="btn btn-primary mt-2" onclick="copyCode()">Copy to
+                                    Clipboard</button>
+                            </div>
+                            <div class="col-md-6 border border-info rounded p-3">
+                                <h5>Live Preview</h5>
+                                <div id="previewArea"></div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div id="shared-footer"></div>
+
+            <!-- Bootstrap JS + Custom Script -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+            <script src="Assets/js/script.js"></script>
+            <script src="Assets/js/templates.js"></script>
+            <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                    const form = document.getElementById("breadcrumbForm");
+                    const addBtn = document.getElementById("addCrumbBtn");
+
+                    function createCrumb(defaults = { label: "", url: "" }) {
+                        const row = document.createElement("div");
+                        row.className = "crumb-row border rounded p-2 mb-2";
+
+                        row.innerHTML = `
+        <div class="row g-2">
+          <div class="col-md-5">
+            <label class="form-label">Label</label>
+            <input type="text" class="form-control" name="label" value="${defaults.label}">
+          </div>
+          <div class="col-md-5">
+            <label class="form-label">URL/Page Key</label>
+            <input type="text" class="form-control" name="url" value="${defaults.url}">
+          </div>
+          <div class="col-md-2 d-flex align-items-end">
+            <button type="button" class="btn btn-sm btn-danger removeCrumbBtn">Remove</button>
+          </div>
         </div>
-    </div>
+      `;
 
-    <!-- Footer -->
-    <div id="shared-footer"></div>
+                        form.appendChild(row);
+                    }
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
-    <!-- Custom JS -->
-    <script src="Assets/js/script.js"></script>
+                    // Initial crumbs
+                    createCrumb({ label: "Home", url: "home" });
+                    createCrumb({ label: "Catalogue", url: "CC" });
+                    createCrumb({ label: "Statutory Training", url: "" });
+
+                    addBtn.addEventListener("click", () => createCrumb());
+
+                    form.addEventListener("click", e => {
+                        if (e.target.classList.contains("removeCrumbBtn")) {
+                            e.target.closest(".crumb-row").remove();
+                        }
+                    });
+
+                    document.getElementById("generateBtn").onclick = () => {
+                        const items = [...form.querySelectorAll(".crumb-row")].map(row => {
+                            return {
+                                label: row.querySelector('[name="label"]').value,
+                                url: row.querySelector('[name="url"]').value
+                            };
+                        });
+
+                        const code = templates.breadcrumb({ items });
+                        document.getElementById("output").textContent = code.trim();
+                        document.getElementById("previewArea").innerHTML = code;
+                    };
+                });
+
+                function copyCode() {
+                    const text = document.getElementById("output").textContent;
+                    navigator.clipboard.writeText(text);
+                    alert("Code copied!");
+                }
+            </script>
 </body>
 
 </html>

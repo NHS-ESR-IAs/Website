@@ -61,76 +61,75 @@
 
             <!-- Page full width content -->
             <div class="row mt-4">
-                <div class="col-md">
-                    <h5 class="mt-4 mb-2">🎯 Header Section Panel: Brand with Clarity</h5>
-                    <ul>
-                        <li><strong>Change the site title:</strong> Update the text inside
-                            <code>&lt;h1 class="mb-0"&gt;</code> to
-                            reflect your microsite name or purpose.
-                            <br><code>&lt;h1 class="mb-0"&gt;MicroSiteKit&lt;/h1&gt;</code>
-                        </li>
+                <div class="col-md border border-primary rounded p-3">
+                    <section class="playground mt-5">
+                        <h3>🧩 Header Playground</h3>
 
-                        <li><strong>Update the logos:</strong> Replace the <code>src</code> attributes in the
-                            <code>&lt;img&gt;</code> tags with your own logo URLs.
-                            <br><code>&lt;img src="your-logo.jpg" alt="Your Logo" class="logo custom" /&gt;</code>
-                        </li>
+                        <form id="headerOptions" class="mb-3">
+                            <!-- Toggles -->
+                            <h5>Toggle Elements</h5>
+                            <div class="form-check"><input class="form-check-input" type="checkbox" id="showMenuBtn"
+                                    checked><label class="form-check-label" for="showMenuBtn">Show Menu Button</label>
+                            </div>
+                            <div class="form-check"><input class="form-check-input" type="checkbox" id="showTitle"
+                                    checked><label class="form-check-label" for="showTitle">Show Site Title</label>
+                            </div>
+                            <div class="form-check"><input class="form-check-input" type="checkbox" id="showLogos"
+                                    checked><label class="form-check-label" for="showLogos">Show Logos</label></div>
+                            <div class="form-check"><input class="form-check-input" type="checkbox" id="showBanner"
+                                    checked><label class="form-check-label" for="showBanner">Show Hero Banner</label>
+                            </div>
+                            <div class="form-check"><input class="form-check-input" type="checkbox" id="showToolbar"
+                                    checked><label class="form-check-label" for="showToolbar">Show Toolbar (theme, text
+                                    size, dark mode, search)</label></div>
+                            <div class="form-check"><input class="form-check-input" type="checkbox" id="showSidebar"
+                                    checked><label class="form-check-label" for="showSidebar">Show Sidebar</label></div>
 
-                        <li><strong>Change the banner image:</strong> Swap the <code>src</code> in
-                            <code>.Banner_image</code> to
-                            use
-                            your own hero banner.
-                            <br><code>&lt;img src="your-banner.png" alt="Welcome Banner" class="Banner_image w-100" /&gt;</code>
-                        </li>
+                            <!-- Editable fields -->
+                            <h5 class="mt-3">Editable Content</h5>
+                            <div class="mb-2">
+                                <label class="form-label">Site Title</label>
+                                <input type="text" id="siteTitle" class="form-control" value="MicroSiteKit">
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Banner Text</label>
+                                <input type="text" id="bannerText" class="form-control" value="Microsite Services">
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Logo 1 URL</label>
+                                <input type="text" id="logo1" class="form-control" value="Assets/Images/Logo1.png">
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Logo 2 URL</label>
+                                <input type="text" id="logo2" class="form-control" value="Assets/Images/Logo2.png">
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Banner Image URL</label>
+                                <input type="text" id="bannerImg" class="form-control" value="Assets/Images/Banner.png">
+                            </div>
+                        </form>
 
-                        <li><strong>Edit the overlay text:</strong> Update the heading inside
-                            <code>.banner-text-overlay</code> to
-                            reflect your trust or team name.
-                            <br><code>&lt;h1&gt;Lady Elizabeth Ann NHS Trust&lt;/h1&gt;</code>
-                        </li>
 
-                        <li><strong>Style it safely:</strong> Use Bootstrap classes like <code>d-flex</code>,
-                            <code>justify-content-between</code>, <code>px-3</code>, and <code>py-2</code> to maintain
-                            responsive
-                            layout and spacing.
-                        </li>
+                        <div class="row mt-4">
+                            <div class="mb-3">
+                                <button type="button" id="generateBtn" class="btn btn-primary">Generate Code</button>
+                            </div>
 
-                        <li><strong>Make it modular:</strong> Drop this header into any page scaffold or layout. It
-                            pairs
-                            beautifully with side menus, navigation bars, and onboarding flows.</li>
-                    </ul>
-                    <p>This header helps contributors feel grounded and welcomed—whether they’re launching training,
-                        browsing
-                        resources, or exploring new dohickies.</p>
-                    <pre><code class="snippet language-html">
-&lt;div class=&quot;header-bar d-flex align-items-center justify-content-between px-3 py-2 position-relative&quot;&gt;
-  &lt;!-- Menu Button (Left) --&gt;
-  &lt;div class=&quot;menu-button-wrapper&quot;&gt;
-    &lt;button class=&quot;btn btn-primary&quot; type=&quot;button&quot; data-bs-toggle=&quot;offcanvas&quot; data-bs-target=&quot;#sidebarMenu&quot; aria-controls=&quot;sidebarMenu&quot;&gt;
-      ☰ Menu
-    &lt;/button&gt;
-  &lt;/div&gt;
+                            <!-- Generated code first -->
+                            <div class="border border-secondary rounded p-3 mb-3">
+                                <h5>Generated Code</h5>
+                                <pre><code id="output"></code></pre>
+                                <button type="button" class="btn btn-primary mt-2" onclick="copyCode()">Copy to
+                                    Clipboard</button>
+                            </div>
 
-  &lt;!-- Site Title (Center) --&gt;
-  &lt;div class=&quot;center-heading text-center flex-grow-1&quot;&gt;
-    &lt;h1 class=&quot;mb-0&quot;&gt;MicroSiteKit&lt;/h1&gt;
-  &lt;/div&gt;
-
-  &lt;!-- Logos (Right) --&gt;
-  &lt;div class=&quot;logo-container d-flex align-items-center gap-2&quot;&gt;
-    &lt;img src=&quot;https://assets.codepen.io/8889025/ESR_Logo.jpg&quot; alt=&quot;ESR Logo&quot; class=&quot;logo esr&quot; /&gt;
-    &lt;img src=&quot;https://assets.codepen.io/8889025/NHS_Logo.svg&quot; alt=&quot;NHS Logo&quot; class=&quot;logo nhs&quot; /&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- Hero Banner --&gt;
-&lt;div class=&quot;banner-wrapper text-center position-relative&quot;&gt;
-  &lt;img src=&quot;https://assets.codepen.io/8889025/LEA_Banner3.png&quot; alt=&quot;Welcome Hub Banner&quot; class=&quot;Banner_image w-100&quot; /&gt;
-  &lt;div class=&quot;banner-text-overlay&quot;&gt;
-    &lt;h1&gt;Lady Elizabeth Ann NHS Trust&lt;/h1&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-        </code></pre>
-                    <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+                            <!-- Then preview on a new line -->
+                            <div class="border border-secondary rounded p-3">
+                                <h5>Live Preview</h5>
+                                <div id="previewArea"></div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
             </div>
         </div>
@@ -144,6 +143,65 @@
     <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
     <!-- Custom JS -->
     <script src="Assets/js/script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const outputEl = document.getElementById("output");
+            const previewEl = document.getElementById("previewArea");
+
+            document.getElementById("generateBtn").onclick = () => {
+                const opts = {
+                    showMenuBtn: document.getElementById("showMenuBtn").checked,
+                    showTitle: document.getElementById("showTitle").checked,
+                    showLogos: document.getElementById("showLogos").checked,
+                    showBanner: document.getElementById("showBanner").checked,
+                    showToolbar: document.getElementById("showToolbar").checked,
+                    showSidebar: document.getElementById("showSidebar").checked,
+                    siteTitle: document.getElementById("siteTitle").value,
+                    bannerText: document.getElementById("bannerText").value,
+                    logo1: document.getElementById("logo1").value,
+                    logo2: document.getElementById("logo2").value,
+                    bannerImg: document.getElementById("bannerImg").value
+                };
+
+                // Build HTML string
+                let html = `<header class="nhs-header">\n  <div class="header-bar d-flex align-items-center justify-content-between px-3 py-2 position-relative">\n`;
+
+                if (opts.showMenuBtn) {
+                    html += `    <div class="menu-button-wrapper">\n      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">☰ Menu</button>\n    </div>\n`;
+                }
+                if (opts.showTitle) {
+                    html += `    <div class="center-heading text-center flex-grow-1"><h1 class="mb-0">${opts.siteTitle}</h1></div>\n`;
+                }
+                if (opts.showLogos) {
+                    html += `    <div class="logo-container d-flex align-items-center gap-2">\n      <img src="${opts.logo1}" alt="Logo 1" class="logo esr"/>\n      <img src="${opts.logo2}" alt="Logo 2" class="logo nhs"/>\n    </div>\n`;
+                }
+                html += `  </div>\n`;
+
+                if (opts.showBanner) {
+                    html += `  <div class="banner-wrapper text-center position-relative">\n    <img src="${opts.bannerImg}" alt="Banner" class="Banner_image w-100"/>\n    <div class="banner-text-overlay"><h1>${opts.bannerText}</h1></div>\n  </div>\n`;
+                }
+
+                if (opts.showToolbar) {
+                    html += `  <div id="desktop-nav-toolbar">\n    <nav class="navbar navbar-expand-lg mt-3">\n      <div class="container flex-column">\n        <div class="d-flex w-100 justify-content-between align-items-center">\n          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">\n            <span class="navbar-toggler-icon"></span>\n          </button>\n          <div class="collapse navbar-collapse" id="navMenu">\n            <ul id="main-nav" class="navbar-nav mx-auto"></ul>\n          </div>\n        </div>\n        <div class="d-flex justify-content-center mt-2">\n          <div class="control-toolbar d-flex flex-wrap gap-2 p-2 rounded justify-content-center w-100 mt-2">\n            <!-- Theme selector, text size, dark mode, search -->\n          </div>\n        </div>\n      </div>\n    </nav>\n  </div>\n`;
+                }
+
+                html += `</header>\n`;
+
+                if (opts.showSidebar) {
+                    html += `<div class="offcanvas offcanvas-start sidebar theme-bg" id="sidebarMenu">\n  <div class="offcanvas-header"><h5>${opts.siteTitle}</h5></div>\n  <div class="offcanvas-body"><ul id="sidebar-nav" class="nav navbar-nav flex-column"></ul></div>\n</div>\n`;
+                }
+
+                outputEl.textContent = html;
+                previewEl.innerHTML = html;
+            };
+        });
+
+        function copyCode() {
+            const text = document.getElementById("output").textContent;
+            navigator.clipboard.writeText(text);
+            alert("Code copied!");
+        }
+    </script>
 </body>
 
 </html>

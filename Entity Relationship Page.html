@@ -129,6 +129,38 @@ erDiagram
                         <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
                     </div>
                 </div>
+                <div class="row mt-4">
+                    <div class="col-md border border-success rounded p-3">
+                        <section class="playground mt-5">
+                            <h3>🧭 ER Diagram Playground</h3>
+
+                            <h5>Entities</h5>
+                            <div id="entitiesForm"></div>
+                            <button type="button" id="addEntityBtn" class="btn btn-success btn-sm mb-3">+ Add
+                                Entity</button>
+
+                            <h5>Relationships</h5>
+                            <div id="relationsForm"></div>
+                            <button type="button" id="addRelationBtn" class="btn btn-success btn-sm mb-3">+ Add
+                                Relationship</button>
+                            <br>
+                            <button type="button" id="generateBtn" class="btn btn-primary">Generate Code</button>
+
+                            <div class="row mt-4">
+                                <div class="col-md-6 border border-success rounded p-3">
+                                    <h5>Generated Code</h5>
+                                    <pre><code id="output"></code></pre>
+                                    <button type="button" class="btn btn-primary mt-2" onclick="copyCode()">Copy
+                                        to Clipboard</button>
+                                </div>
+                                <div class="col-md-6 border border-success rounded p-3">
+                                    <h5>Live Preview</h5>
+                                    <div id="previewArea"></div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -140,6 +172,121 @@ erDiagram
         <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
         <!-- Custom JS -->
         <script src="Assets/js/script.js"></script>
+        <script src="Assets/js/templates.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const entitiesForm = document.getElementById("entitiesForm");
+                const relationsForm = document.getElementById("relationsForm");
+
+                function createEntityRow(defaults = { name: "", attrs: ["string id"] }) {
+                    const wrapper = document.createElement("div");
+                    wrapper.className = "entity-row border rounded p-2 mb-2";
+
+                    wrapper.innerHTML = `
+        <div class="row g-2">
+          <div class="col-md-4">
+            <label class="form-label">Entity name</label>
+            <input type="text" class="form-control" name="name" value="${defaults.name}">
+          </div>
+          <div class="col-md-8">
+            <label class="form-label">Attributes (one per line, e.g. "string id")</label>
+            <textarea class="form-control" name="attrs" rows="4">${(defaults.attrs || []).join("\n")}</textarea>
+          </div>
+          <div class="col-12 mt-2">
+            <button type="button" class="btn btn-sm btn-danger removeEntityBtn">Remove Entity</button>
+          </div>
+        </div>
+      `;
+                    entitiesForm.appendChild(wrapper);
+                }
+
+                function createRelationRow(defaults = { left: "", cardinality: "||--o{", right: "", label: "has" }) {
+                    const wrapper = document.createElement("div");
+                    wrapper.className = "relation-row border rounded p-2 mb-2";
+
+                    wrapper.innerHTML = `
+        <div class="row g-2">
+          <div class="col-md-3">
+            <label class="form-label">Left entity</label>
+            <input type="text" class="form-control" name="left" value="${defaults.left}">
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Cardinality</label>
+            <select class="form-select" name="cardinality">
+              <option value="||--||" ${defaults.cardinality === "||--||" ? "selected" : ""}>one-to-one (||--||)</option>
+              <option value="||--o{" ${defaults.cardinality === "||--o{" ? "selected" : ""}>one-to-many (||--o{)</option>
+              <option value="}|--||" ${defaults.cardinality === "}|--||" ? "selected" : ""}>many-to-one (}|--||)</option>
+              <option value="}|--o{" ${defaults.cardinality === "}|--o{" ? "selected" : ""}>many-to-many (}|--o{)</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Right entity</label>
+            <input type="text" class="form-control" name="right" value="${defaults.right}">
+          </div>
+          <div class="col-md-2">
+            <label class="form-label">Label</label>
+            <input type="text" class="form-control" name="label" value="${defaults.label}">
+          </div>
+          <div class="col-md-1 d-flex align-items-end">
+            <button type="button" class="btn btn-sm btn-danger removeRelationBtn">Remove</button>
+          </div>
+        </div>
+      `;
+                    relationsForm.appendChild(wrapper);
+                }
+
+                // Seed with your example
+                createEntityRow({ name: "CONTRIBUTORS", attrs: ["string id", "string name", "string email"] });
+                createEntityRow({ name: "ROLES", attrs: ["string id", "string title", "string description"] });
+                createEntityRow({ name: "TEAMS", attrs: ["string id", "string name", "string mascot"] });
+
+                createRelationRow({ left: "CONTRIBUTORS", cardinality: "||--o{", right: "ROLES", label: "has" });
+                createRelationRow({ left: "TEAMS", cardinality: "||--|{", right: "CONTRIBUTORS", label: "includes" });
+
+                // Add buttons
+                document.getElementById("addEntityBtn").onclick = () => createEntityRow();
+                document.getElementById("addRelationBtn").onclick = () => createRelationRow();
+
+                // Remove handlers
+                document.body.addEventListener("click", e => {
+                    if (e.target.classList.contains("removeEntityBtn")) {
+                        e.target.closest(".entity-row").remove();
+                    }
+                    if (e.target.classList.contains("removeRelationBtn")) {
+                        e.target.closest(".relation-row").remove();
+                    }
+                });
+
+                // Generate
+                document.getElementById("generateBtn").onclick = () => {
+                    const entities = [...entitiesForm.querySelectorAll(".entity-row")].map(r => ({
+                        name: r.querySelector('[name="name"]').value.trim(),
+                        attrs: r.querySelector('[name="attrs"]').value.split("\n")
+                    })).filter(e => e.name);
+
+                    const relations = [...relationsForm.querySelectorAll(".relation-row")].map(r => ({
+                        left: r.querySelector('[name="left"]').value.trim(),
+                        cardinality: r.querySelector('[name="cardinality"]').value,
+                        right: r.querySelector('[name="right"]').value.trim(),
+                        label: r.querySelector('[name="label"]').value.trim()
+                    })).filter(rel => rel.left && rel.right);
+
+                    const code = templates.erDiagram({ entities, relations });
+                    document.getElementById("output").textContent = code.trim();
+                    document.getElementById("previewArea").innerHTML = code;
+
+                    if (window.mermaid) {
+                        mermaid.init(undefined, document.querySelectorAll(".mermaid"));
+                    }
+                };
+            });
+
+            function copyCode() {
+                const text = document.getElementById("output").textContent;
+                navigator.clipboard.writeText(text);
+                alert("Code copied!");
+            }
+        </script>
 </body>
 
 </html>

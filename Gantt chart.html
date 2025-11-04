@@ -121,6 +121,45 @@ gantt
                         <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
                     </div>
                 </div>
+                <div class="row mt-4">
+                    <div class="col-md border border-dark rounded p-3">
+                        <section class="playground mt-5">
+                            <h3>📅 Gantt Chart Playground</h3>
+
+                            <div class="mb-3">
+                                <label class="form-label">Chart Title</label>
+                                <input type="text" id="ganttTitle" class="form-control" value="Microsite Launch Plan">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Date Format</label>
+                                <input type="text" id="ganttDateFormat" class="form-control" value="YYYY-MM-DD">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Axis Format</label>
+                                <input type="text" id="ganttAxisFormat" class="form-control" value="%d-%b">
+                            </div>
+
+                            <h5>Sections</h5>
+                            <div id="sectionsForm"></div>
+                            <button type="button" id="addSectionBtn" class="btn btn-success mb-3">+ Add Section</button>
+                            <br>
+                            <button type="button" id="generateBtn" class="btn btn-primary">Generate Code</button>
+
+                            <div class="row mt-4">
+                                <div class="col-md-6 border border-dark rounded p-3">
+                                    <h5>Generated Code</h5>
+                                    <pre><code id="output"></code></pre>
+                                    <button type="button" class="btn btn-primary mt-2" onclick="copyCode()">Copy to
+                                        Clipboard</button>
+                                </div>
+                                <div class="col-md-6 border border-dark rounded p-3">
+                                    <h5>Live Preview</h5>
+                                    <div id="previewArea"></div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -132,6 +171,142 @@ gantt
         <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
         <!-- Custom JS -->
         <script src="Assets/js/script.js"></script>
+        <script src="Assets/js/templates.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const sectionsForm = document.getElementById("sectionsForm");
+
+                function createSection(defaults = { name: "", tasks: [] }) {
+                    const wrapper = document.createElement("div");
+                    wrapper.className = "section border rounded p-2 mb-3";
+
+                    wrapper.innerHTML = `
+  <label class="form-label">Section Name</label>
+  <input type="text" class="form-control mb-2" name="sectionName" value="${defaults.name}">
+
+  <div class="row fw-bold mb-1">
+    <div class="col-md-3">Label</div>
+    <div class="col-md-2">Status</div>
+    <div class="col-md-2">ID</div>
+    <div class="col-md-2">Start Date</div>
+    <div class="col-md-2">Duration</div>
+    <div class="col-md-1">Action</div>
+  </div>
+
+  <div class="tasks"></div>
+  <button type="button" class="btn btn-success btn-sm addTaskBtn mb-2">+ Add Task</button>
+  <button type="button" class="btn btn-danger btn-sm removeSectionBtn">Remove Section</button>
+`;
+
+                    const tasksContainer = wrapper.querySelector(".tasks");
+                    defaults.tasks.forEach(t => addTask(tasksContainer, t));
+
+                    wrapper.querySelector(".addTaskBtn").onclick = () => addTask(tasksContainer);
+                    wrapper.querySelector(".removeSectionBtn").onclick = () => wrapper.remove();
+
+                    sectionsForm.appendChild(wrapper);
+                }
+
+                function addTask(container, defaults = { label: "", status: "", id: "", start: "", duration: "" }) {
+                    const row = document.createElement("div");
+                    row.className = "task-row row g-2 mb-2 align-items-end";
+
+                    row.innerHTML = `
+    <div class="col-md-3">
+      <input type="text" class="form-control" name="label" placeholder="Task label" value="${defaults.label}">
+    </div>
+    <div class="col-md-2">
+      <select class="form-select" name="status">
+        <option value="" ${defaults.status === "" ? "selected" : ""}>—</option>
+        <option value="done" ${defaults.status === "done" ? "selected" : ""}>Done</option>
+        <option value="active" ${defaults.status === "active" ? "selected" : ""}>Active</option>
+        <option value="milestone" ${defaults.status === "milestone" ? "selected" : ""}>Milestone</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <input type="text" class="form-control" name="id" placeholder="ID" value="${defaults.id}">
+    </div>
+    <div class="col-md-2">
+      <input type="date" class="form-control" name="start" value="${defaults.start}">
+    </div>
+    <div class="col-md-2">
+      <input type="text" class="form-control" name="duration" placeholder="e.g. 5d or 2025-10-05" value="${defaults.duration}">
+    </div>
+    <div class="col-md-1">
+      <button type="button" class="btn btn-danger btn-sm removeTaskBtn">Remove</button>
+    </div>
+  `;
+
+                    row.querySelector(".removeTaskBtn").onclick = () => row.remove();
+                    container.appendChild(row);
+                }
+
+                // Seed with your example
+                createSection({
+                    name: "Planning",
+                    tasks: [
+                        { label: "Define requirements", status: "done", id: "des1", start: "2025-10-01", duration: "2025-10-05" },
+                        { label: "Design wireframes", status: "active", id: "des2", start: "2025-10-06", duration: "5d" }
+                    ]
+                });
+                createSection({
+                    name: "Development",
+                    tasks: [
+                        { label: "Build frontend", id: "des3", start: "2025-10-12", duration: "7d" },
+                        { label: "Integrate backend", id: "des4", start: "after des3", duration: "5d" }
+                    ]
+                });
+                createSection({
+                    name: "Testing",
+                    tasks: [
+                        { label: "Unit testing", id: "des5", start: "after des4", duration: "3d" },
+                        { label: "User acceptance testing", id: "des6", start: "after des5", duration: "4d" }
+                    ]
+                });
+                createSection({
+                    name: "Launch",
+                    tasks: [
+                        { label: "Final review", id: "des7", start: "2025-10-28", duration: "2d" },
+                        { label: "Go live", status: "milestone", id: "des8", start: "2025-10-31", duration: "0d" }
+                    ]
+                });
+
+                document.getElementById("generateBtn").onclick = () => {
+                    const title = document.getElementById("ganttTitle").value;
+                    const dateFormat = document.getElementById("ganttDateFormat").value;
+                    const axisFormat = document.getElementById("ganttAxisFormat").value;
+
+                    const fallbackDate = "2025-10-01"; // or new Date().toISOString().slice(0,10)
+
+                    const sections = [...sectionsForm.querySelectorAll(".section")].map(sec => {
+                        const name = sec.querySelector('[name="sectionName"]').value;
+                        const tasks = [...sec.querySelectorAll(".task-row")].map(r => {
+                            let start = r.querySelector('[name="start"]').value.trim();
+                            if (!start) start = fallbackDate; // auto‑fill if blank
+                            return {
+                                label: r.querySelector('[name="label"]').value,
+                                status: r.querySelector('[name="status"]').value,
+                                id: r.querySelector('[name="id"]').value,
+                                start,
+                                duration: r.querySelector('[name="duration"]').value
+                            };
+                        });
+                        return { name, tasks };
+                    });
+
+                    const code = templates.gantt({ title, dateFormat, axisFormat, sections });
+                    document.getElementById("output").textContent = code.trim();
+                    document.getElementById("previewArea").innerHTML = code;
+                    if (window.mermaid) mermaid.init(undefined, document.querySelectorAll(".mermaid"));
+                };
+            });
+
+            function copyCode() {
+                const text = document.getElementById("output").textContent;
+                navigator.clipboard.writeText(text);
+                alert("Code copied!");
+            }
+        </script>
 </body>
 
 </html>

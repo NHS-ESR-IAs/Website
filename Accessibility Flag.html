@@ -103,6 +103,33 @@
                     <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
                 </div>
             </div>
+            <!-- Playground -->
+            <div class="row mt-4">
+                <div class="col-md border border-primary rounded p-3">
+                    <section class="playground mt-5">
+                        <h3>♿ Accessibility Flag Playground</h3>
+
+                        <form id="playgroundForm" class="mb-3 row g-3">
+                            <!-- Fields will be injected here -->
+                        </form>
+
+                        <button type="button" id="generateBtn" class="btn btn-primary">Generate Code</button>
+
+                        <div class="row mt-4">
+                            <div class="col-md-6 border border-primary rounded p-3">
+                                <h5>Generated Code</h5>
+                                <pre><code id="output"></code></pre>
+                                <button type="button" class="btn btn-primary mt-2" onclick="copyCode()">Copy to
+                                    Clipboard</button>
+                            </div>
+                            <div class="col-md-6 border border-primary rounded p-3">
+                                <h5>Live Preview</h5>
+                                <div id="previewArea"></div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -114,6 +141,24 @@
     <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
     <!-- Custom JS -->
     <script src="Assets/js/script.js"></script>
+    <script src="Assets/js/templates.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const config = {
+                fields: [
+                    { id: "flagText", label: "Accessibility Message", type: "textarea", default: "This section supports keyboard navigation and screen readers." }
+                ],
+                template: "accessibilityFlag"
+            };
+            renderPlayground(config);
+        });
+
+        function copyCode() {
+            const text = document.getElementById("output").textContent;
+            navigator.clipboard.writeText(text);
+            alert("Code copied!");
+        }
+    </script>
 </body>
 
 </html>

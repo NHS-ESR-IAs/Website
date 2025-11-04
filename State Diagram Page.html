@@ -107,6 +107,52 @@ stateDiagram-v2
                         <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
                     </div>
                 </div>
+                <div class="row mt-4">
+                    <div class="col-md border border-primary rounded p-3">
+                        <section class="playground mt-5">
+                            <h3>🔄 State Diagram Playground</h3>
+
+                            <!-- States -->
+                            <h5>States</h5>
+                            <div class="row fw-bold mb-1">
+                                <div class="col-md-9">State Name</div>
+                                <div class="col-md-3">Action</div>
+                            </div>
+                            <div id="statesForm"></div>
+                            <button type="button" id="addStateBtn" class="btn btn-success mb-3">+ Add State</button>
+
+                            <!-- Transitions -->
+                            <h5>Transitions</h5>
+                            <div class="row fw-bold mb-1">
+                                <div class="col-md-3">From</div>
+                                <div class="col-md-3">To</div>
+                                <div class="col-md-3">Label (optional)</div>
+                                <div class="col-md-3">Action</div>
+                            </div>
+                            <div id="transitionsForm"></div>
+                            <button type="button" id="addTransitionBtn" class="btn btn-success mb-3">+ Add
+                                Transition</button>
+
+                            <!-- Generate -->
+                            <div class="mb-3">
+                                <button type="button" id="generateBtn" class="btn btn-primary">Generate Code</button>
+                            </div>
+
+                            <div class="row mt-4">
+                                <div class="col-md-6 border border-primary rounded p-3">
+                                    <h5>Generated Code</h5>
+                                    <pre><code id="output"></code></pre>
+                                    <button type="button" class="btn btn-primary mt-2" onclick="copyCode()">Copy to
+                                        Clipboard</button>
+                                </div>
+                                <div class="col-md-6 border border-primary rounded p-3">
+                                    <h5>Live Preview</h5>
+                                    <div id="previewArea"></div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -118,6 +164,78 @@ stateDiagram-v2
         <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
         <!-- Custom JS -->
         <script src="Assets/js/script.js"></script>
+        <script src="Assets/js/templates.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const statesForm = document.getElementById("statesForm");
+                const transitionsForm = document.getElementById("transitionsForm");
+
+                function addState(defaults = { name: "" }) {
+                    const row = document.createElement("div");
+                    row.className = "row g-2 mb-2 state-row";
+                    row.innerHTML = `
+      <div class="col-md-9"><input type="text" class="form-control" name="name" placeholder="State name" value="${defaults.name}"></div>
+      <div class="col-md-3"><button type="button" class="btn btn-danger btn-sm removeBtn">Remove</button></div>
+    `;
+                    row.querySelector(".removeBtn").onclick = () => row.remove();
+                    statesForm.appendChild(row);
+                }
+
+                function addTransition(defaults = { from: "", to: "", label: "" }) {
+                    const row = document.createElement("div");
+                    row.className = "row g-2 mb-2 transition-row";
+                    row.innerHTML = `
+      <div class="col-md-3"><input type="text" class="form-control" name="from" placeholder="From" value="${defaults.from}"></div>
+      <div class="col-md-3"><input type="text" class="form-control" name="to" placeholder="To" value="${defaults.to}"></div>
+      <div class="col-md-3"><input type="text" class="form-control" name="label" placeholder="Label (optional)" value="${defaults.label}"></div>
+      <div class="col-md-3"><button type="button" class="btn btn-danger btn-sm removeBtn">Remove</button></div>
+    `;
+                    row.querySelector(".removeBtn").onclick = () => row.remove();
+                    transitionsForm.appendChild(row);
+                }
+
+                // Seed with your example
+                addState({ name: "[*]" });
+                addState({ name: "Landing" });
+                addState({ name: "Exploring" });
+                addState({ name: "Copying" });
+                addState({ name: "Contacting" });
+                addState({ name: "Supported" });
+
+                addTransition({ from: "[*]", to: "Landing" });
+                addTransition({ from: "Landing", to: "Exploring", label: 'clicks "Start"' });
+                addTransition({ from: "Exploring", to: "Copying", label: "selects snippet" });
+                addTransition({ from: "Copying", to: "Contacting", label: "needs help" });
+                addTransition({ from: "Contacting", to: "Supported", label: "receives support" });
+                addTransition({ from: "Supported", to: "Exploring", label: "continues journey" });
+                addTransition({ from: "Exploring", to: "[*]", label: "exits microsite" });
+
+                document.getElementById("addStateBtn").onclick = () => addState();
+                document.getElementById("addTransitionBtn").onclick = () => addTransition();
+
+                document.getElementById("generateBtn").onclick = () => {
+                    const states = [...document.querySelectorAll(".state-row")].map(r => ({
+                        name: r.querySelector('[name="name"]').value.trim()
+                    }));
+                    const transitions = [...document.querySelectorAll(".transition-row")].map(r => ({
+                        from: r.querySelector('[name="from"]').value.trim(),
+                        to: r.querySelector('[name="to"]').value.trim(),
+                        label: r.querySelector('[name="label"]').value.trim()
+                    }));
+
+                    const code = templates.stateDiagram({ states, transitions });
+                    document.getElementById("output").textContent = code;
+                    document.getElementById("previewArea").innerHTML = code;
+                    if (window.mermaid) mermaid.init(undefined, document.querySelectorAll(".mermaid"));
+                };
+            });
+
+            function copyCode() {
+                const text = document.getElementById("output").textContent;
+                navigator.clipboard.writeText(text);
+                alert("Code copied!");
+            }
+        </script>
 </body>
 
 </html>

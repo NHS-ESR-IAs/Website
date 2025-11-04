@@ -102,6 +102,40 @@ mindmap
                         <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
                     </div>
                 </div>
+                <div class="row mt-4">
+                    <div class="col-md border border-success rounded p-3">
+                        <section class="playground mt-5">
+                            <h3>🧠 Mindmap Playground</h3>
+
+                            <div class="mb-3">
+                                <label class="form-label">Root Label</label>
+                                <input type="text" id="mindmapRoot" class="form-control" value="Contributor Journey">
+                            </div>
+
+                            <h5>Branches</h5>
+                            <div id="branchesForm"></div>
+                            <button type="button" id="addBranchBtn" class="btn btn-success mb-3">+ Add Branch</button>
+
+                            <!-- Generate button always on its own line -->
+                            <div class="mb-3">
+                                <button type="button" id="generateBtn" class="btn btn-primary">Generate Code</button>
+                            </div>
+
+                            <div class="row mt-4">
+                                <div class="col-md-6 border border-success rounded p-3">
+                                    <h5>Generated Code</h5>
+                                    <pre><code id="output"></code></pre>
+                                    <button type="button" class="btn btn-primary mt-2" onclick="copyCode()">Copy to
+                                        Clipboard</button>
+                                </div>
+                                <div class="col-md-6 border border-success rounded p-3">
+                                    <h5>Live Preview</h5>
+                                    <div id="previewArea"></div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -113,6 +147,74 @@ mindmap
         <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
         <!-- Custom JS -->
         <script src="Assets/js/script.js"></script>
+        <script src="Assets/js/templates.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const branchesForm = document.getElementById("branchesForm");
+
+                function createBranch(defaults = { label: "", children: [] }) {
+                    const wrapper = document.createElement("div");
+                    wrapper.className = "branch border rounded p-2 mb-2";
+                    wrapper.innerHTML = `
+        <label class="form-label">Branch label</label>
+        <input type="text" class="form-control mb-2" name="branchLabel" value="${(defaults.label || "")}">
+        <div class="row fw-bold mb-1">
+          <div class="col">Child label</div>
+          <div class="col-auto">Action</div>
+        </div>
+        <div class="children"></div>
+        <button type="button" class="btn btn-success btn-sm addChildBtn mb-2">+ Add Child</button>
+        <button type="button" class="btn btn-danger btn-sm removeBranchBtn">Remove Branch</button>
+      `;
+                    const childrenContainer = wrapper.querySelector(".children");
+                    (defaults.children || []).forEach(c => addChild(childrenContainer, c));
+                    wrapper.querySelector(".addChildBtn").onclick = () => addChild(childrenContainer);
+                    wrapper.querySelector(".removeBranchBtn").onclick = () => wrapper.remove();
+                    branchesForm.appendChild(wrapper);
+                }
+
+                function addChild(container, defaults = { label: "" }) {
+                    const row = document.createElement("div");
+                    row.className = "child-row d-flex mb-2";
+                    row.innerHTML = `
+        <input type="text" class="form-control me-2" name="childLabel" placeholder="Child label" value="${(defaults.label || "")}">
+        <button type="button" class="btn btn-danger btn-sm removeChildBtn">Remove</button>
+      `;
+                    row.querySelector(".removeChildBtn").onclick = () => row.remove();
+                    container.appendChild(row);
+                }
+
+                // Seed with your example
+                createBranch({ label: "Awareness", children: [{ label: "Discover microsite" }, { label: "Browse resources" }] });
+                createBranch({ label: "Engagement", children: [{ label: "Sign up for updates" }, { label: "Join community space" }] });
+                createBranch({ label: "Support", children: [{ label: "Request help" }, { label: "Receive guidance" }] });
+                createBranch({ label: "Mastery", children: [{ label: "Complete training" }, { label: "Share feedback" }] });
+
+                document.getElementById("addBranchBtn").onclick = () => createBranch();
+
+                document.getElementById("generateBtn").onclick = () => {
+                    const root = document.getElementById("mindmapRoot").value.trim();
+                    const branches = [...branchesForm.querySelectorAll(".branch")].map(b => {
+                        const label = b.querySelector('[name="branchLabel"]').value.trim();
+                        const children = [...b.querySelectorAll('.child-row')].map(r => ({
+                            label: r.querySelector('[name="childLabel"]').value.trim()
+                        }));
+                        return { label, children };
+                    });
+
+                    const code = templates.mindmap({ root, branches });
+                    document.getElementById("output").textContent = code;
+                    document.getElementById("previewArea").innerHTML = code;
+                    if (window.mermaid) mermaid.init(undefined, document.querySelectorAll(".mermaid"));
+                };
+            });
+
+            function copyCode() {
+                const text = document.getElementById("output").textContent;
+                navigator.clipboard.writeText(text);
+                alert("Code copied!");
+            }
+        </script>
 </body>
 
 </html>

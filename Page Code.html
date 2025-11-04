@@ -57,80 +57,75 @@
                 </div>
             </div>
 
-            <!-- Page full width content -->
-            <div class="row mt-4">
-                <div class="col-md">
-                    <h5 class="mt-4 mb-2">🧱 Page Scaffold Panel: Build with Clarity</h5>
-                    <ul>
-                        <li><strong>Set the page ID:</strong> Replace <code>#</code> in
-                            <code>&lt;div id="#" class="page"&gt;</code>
-                            with a unique, descriptive ID like <code>FactBox</code>, <code>TipBox</code>, or
-                            <code>RoleCard</code>.
-                        </li>
-                        <li><strong>Update the title:</strong> Change the sidebar heading
-                            <code>&lt;h3 class="gradient-text"&gt;#&lt;/h3&gt;</code> to match your snippet name—this
-                            anchors the
-                            page
-                            visually.
-                        </li>
-                        <li><strong>Write your intro:</strong> Use the <code>&lt;p&gt;</code> and
-                            <code>&lt;ul&gt;</code> blocks
-                            to
-                            explain what the snippet does, why it matters, and how contributors can use it.
-                        </li>
-                        <li><strong>Drop in your snippet:</strong> Paste the dohicky code into the full-width section
-                            below—this
-                            is
-                            where the magic lives.</li>
-                        <li><strong>Style it safely:</strong> Use theme-safe classes like <code>gradient-col</code>,
-                            <code>bg-light</code>, <code>rounded</code>, or <code>shadow-sm</code> to harmonise with
-                            your microsite.
-                        </li>
-                        <li><strong>Optional:</strong> Add a second full-width section for advanced usage, variations,
-                            or carousel
-                            layouts.</li>
-                    </ul>
-                    <p>This panel is the launchpad for every snippet page—modular, expressive, and ready to empower
-                        contributors
-                        with clarity and joy.</p>
 
-                    <p>This panel is the launchpad for every snippet page—modular, expressive, and ready to empower
-                        contributors
-                        with clarity and joy.</p>
-                    <pre><code id="pageCodeSnippet" class="snippet language-html">
-&lt;!-- ===================================== --&gt;
-&lt;!-- ============= PAGE NAME ============= --&gt;
-&lt;!-- ===================================== --&gt;
+        </div>
+        <div class="row mt-4">
+            <div class="col-md border border-info rounded p-3">
+                <section class="playground mt-5">
+                    <h3>📄 Page Code Playground</h3>
 
-&lt;div id=&quot;#&quot; class=&quot;page&quot;&gt;
+                    <div class="mb-2">
+                        <label class="form-label">Site Title</label>
+                        <input type="text" id="siteTitle" class="form-control" value="MicroSiteKit">
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Gradient Sidebar Title</label>
+                        <input type="text" id="gradientTitle" class="form-control" value="MicroSiteKit">
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Welcome Title</label>
+                        <input type="text" id="welcomeTitle" class="form-control" value="Welcome to MicroSiteKit 🧱✨">
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Lead Text</label>
+                        <textarea id="leadText" class="form-control"
+                            rows="2">Your modular toolkit for building joyful, contributor-first microsites—no CMS stress, no flicker, just pure layout clarity.</textarea>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Intro Text</label>
+                        <textarea id="introText" class="form-control"
+                            rows="3">Whether you're launching a training hub, onboarding portal, or snippet showcase, MicroSiteKit gives you everything you need…</textarea>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Microsite Description</label>
+                        <textarea id="micrositeText" class="form-control"
+                            rows="3">A microsite is a focused, standalone page or mini-hub—perfect for showcasing a role, a resource, or a training journey…</textarea>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Kit Items (one per line)</label>
+                        <textarea id="kitItems" class="form-control" rows="6">🧩 Layout Scaffolds: Header, Footer, Navigation, Side Menu, Page Code
+📦 Content Blocks: Fact Box, Tip Box, Quote, Image, Carousel, Did You Know?
+🧑‍💻 Contributor Cards: Role Card, Shout Out Card
+🎛️ Interactive Dohickies: Modal, Toggle Section, Tabs, Alerts
+♿ Accessibility Tools: Accessibility Flag, Update Banner, Dark Mode Toggle
+🚀 Navigation Launchers: Open New Page Button, Pop Out Page Button</textarea>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Page Full Width Content (HTML allowed)</label>
+                        <textarea id="fullWidthContent" class="form-control" rows="4"><h2 class="text-center">Full Width Content!</h2>
+<p class="text-center">When you need a little more space :)</p></textarea>
+                    </div>
 
-  &lt;div class=&quot;container&quot;&gt;
-    &lt;div class=&quot;row&quot;&gt;
-      &lt;!-- Sidebar Gradient --&gt;
-      &lt;div class=&quot;col-md-4 gradient-col d-flex align-items-center justify-content-center&quot;&gt;
-        &lt;h3 class=&quot;gradient-text&quot;&gt;#&lt;/h3&gt;
-      &lt;/div&gt;
+                    <div class="mb-3">
+                        <button type="button" id="generateBtn" class="btn btn-primary">Generate Code</button>
+                    </div>
 
-      &lt;!-- Page Introduction --&gt;
-      &lt;div class=&quot;col-md-8&quot;&gt;
-        &lt;!-- Put your page content here --&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
+                    <div class="border border-secondary rounded p-3 mb-3">
+                        <h5>Generated Code</h5>
+                        <pre><code id="output"></code></pre>
+                        <button type="button" class="btn btn-primary mt-2" onclick="copyCode()">Copy to
+                            Clipboard</button>
+                    </div>
 
-    &lt;!-- Page full width content --&gt;
-    &lt;div class=&quot;row mt-4&quot;&gt;
-      &lt;div class=&quot;col-md&quot;&gt;
-        &lt;!-- Secondary full page section if required --&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-&lt;/div&gt;
-        </code></pre>
-                    <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
-                </div>
+                    <div class="border border-secondary rounded p-3">
+                        <h5>Live Preview</h5>
+                        <div id="previewArea"></div>
+                    </div>
+                </section>
             </div>
         </div>
+    </div>
+
     </div>
 
     <!-- Footer -->
@@ -141,6 +136,36 @@
     <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
     <!-- Custom JS -->
     <script src="Assets/js/script.js"></script>
+    <script src="Assets/js/templates.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const outputEl = document.getElementById("output");
+            const previewEl = document.getElementById("previewArea");
+
+            document.getElementById("generateBtn").onclick = () => {
+                const values = {
+                    siteTitle: document.getElementById("siteTitle").value.trim(),
+                    gradientTitle: document.getElementById("gradientTitle").value.trim(),
+                    welcomeTitle: document.getElementById("welcomeTitle").value.trim(),
+                    leadText: document.getElementById("leadText").value.trim(),
+                    introText: document.getElementById("introText").value.trim(),
+                    micrositeText: document.getElementById("micrositeText").value.trim(),
+                    kitItems: document.getElementById("kitItems").value.split("\n").map(s => s.trim()),
+                    fullWidthContent: document.getElementById("fullWidthContent").value
+                };
+
+                const code = templates.pageCode(values);
+                document.getElementById("output").textContent = code;
+                document.getElementById("previewArea").innerHTML = code;
+            };
+        });
+
+        function copyCode() {
+            const text = document.getElementById("output").textContent;
+            navigator.clipboard.writeText(text);
+            alert("Code copied!");
+        }
+    </script>
 </body>
 
 </html>

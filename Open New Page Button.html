@@ -67,15 +67,15 @@
             <div class="row mt-4">
                 <div class="col-md">
 
-                    <button class="btn btn-primary w-100 text-start mb-2" onclick="showPage('FactBox')">📦 Fact
-                        Box</button>
-                    <button class="btn btn-primary w-100 text-start mb-2" onclick="showPage('TipBox')">🛠 Tip
-                        Box</button>
-                    <button class="btn btn-primary w-100 text-start mb-2" onclick="showPage('RoleCard')">🧑‍💻 Role
-                        Card</button>
-                    <button class="btn btn-primary w-100 text-start mb-2" onclick="showPage('AccessibilityFlag')">♿
+                    <a class="btn btn-primary w-100 text-start mb-2" href="Fact Box.html">📦 Fact
+                        Box</a>
+                    <a class="btn btn-primary w-100 text-start mb-2" href="Tip Box.html">🛠 Tip
+                        Box</a>
+                    <a class="btn btn-primary w-100 text-start mb-2" href="Role Card.html">🧑‍💻 Role
+                        Card</a>
+                    <a class="btn btn-primary w-100 text-start mb-2" href="Accessibility Flag.html">♿
                         Accessibility
-                        Flag</button>
+                        Flag</a>
 
                 </div>
             </div>
@@ -109,6 +109,33 @@
                     <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
                 </div>
             </div>
+            <div class="row mt-4">
+                <div class="col-md border border-primary rounded p-3">
+                    <section class="playground mt-5">
+                        <h3>🔘 Simple Button Playground</h3>
+
+                        <form id="playgroundForm" class="mb-3 row g-3"></form>
+
+                        <!-- Generate button always on its own line -->
+                        <div class="mb-3">
+                            <button type="button" id="generateBtn" class="btn btn-primary">Generate Code</button>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-md-6 border border-primary rounded p-3">
+                                <h5>Generated Code</h5>
+                                <pre><code id="output"></code></pre>
+                                <button type="button" class="btn btn-primary mt-2" onclick="copyCode()">Copy to
+                                    Clipboard</button>
+                            </div>
+                            <div class="col-md-6 border border-primary rounded p-3">
+                                <h5>Live Preview</h5>
+                                <div id="previewArea"></div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -120,6 +147,35 @@
     <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
     <!-- Custom JS -->
     <script src="Assets/js/script.js"></script>
+    <script src="Assets/js/templates.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const config = {
+                fields: [
+                    { id: "label", label: "Button Label", type: "text", default: "📦 Fact Box" },
+                    { id: "href", label: "Link Target (href)", type: "text", default: "Fact Box.html" },
+                    {
+                        id: "style", label: "Button Style", type: "select", options: [
+                            { value: "btn-primary", label: "Primary (blue)" },
+                            { value: "btn-success", label: "Success (green)" },
+                            { value: "btn-danger", label: "Danger (red)" },
+                            { value: "btn-warning", label: "Warning (yellow)" },
+                            { value: "btn-info", label: "Info (teal)" },
+                            { value: "btn-secondary", label: "Secondary (grey)" }
+                        ], default: "btn-primary"
+                    }
+                ],
+                template: "simpleButton"
+            };
+            renderPlayground(config);
+        });
+
+        function copyCode() {
+            const text = document.getElementById("output").textContent;
+            navigator.clipboard.writeText(text);
+            alert("Code copied!");
+        }
+    </script>
 </body>
 
 </html>

@@ -138,6 +138,41 @@
     </code></pre>
                     <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
                 </div>
+                <div class="row mt-4">
+                    <div class="col-md border border-primary rounded p-3">
+                        <section class="playground mt-5">
+                            <h3>📑 Tabs Playground</h3>
+
+                            <!-- Tabs -->
+                            <h5>Tabs</h5>
+                            <div class="row fw-bold mb-1">
+                                <div class="col-md-3">Label</div>
+                                <div class="col-md-7">Content</div>
+                                <div class="col-md-2">Action</div>
+                            </div>
+                            <div id="tabsForm"></div>
+                            <button type="button" id="addTabBtn" class="btn btn-success mb-3">+ Add Tab</button>
+
+                            <!-- Generate -->
+                            <div class="mb-3">
+                                <button type="button" id="generateBtn" class="btn btn-primary">Generate Code</button>
+                            </div>
+
+                            <div class="row mt-4">
+                                <div class="col-md-6 border border-primary rounded p-3">
+                                    <h5>Generated Code</h5>
+                                    <pre><code id="output"></code></pre>
+                                    <button type="button" class="btn btn-primary mt-2" onclick="copyCode()">Copy to
+                                        Clipboard</button>
+                                </div>
+                                <div class="col-md-6 border border-primary rounded p-3">
+                                    <h5>Live Preview</h5>
+                                    <div id="previewArea"></div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
                 <!-- Footer -->
                 <div id="shared-footer"></div>
 
@@ -146,6 +181,47 @@
                 <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
                 <!-- Custom JS -->
                 <script src="Assets/js/script.js"></script>
+                <script src="Assets/js/templates.js"></script>
+                <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                        const tabsForm = document.getElementById("tabsForm");
+
+                        function addTab(defaults = { label: "", content: "" }) {
+                            const row = document.createElement("div");
+                            row.className = "row g-2 mb-2 tab-row";
+                            row.innerHTML = `
+      <div class="col-md-3"><input type="text" class="form-control" name="label" placeholder="Tab label" value="${defaults.label}"></div>
+      <div class="col-md-7"><input type="text" class="form-control" name="content" placeholder="Tab content" value="${defaults.content}"></div>
+      <div class="col-md-2"><button type="button" class="btn btn-danger btn-sm removeBtn">Remove</button></div>
+    `;
+                            row.querySelector(".removeBtn").onclick = () => row.remove();
+                            tabsForm.appendChild(row);
+                        }
+
+                        // Seed with your example
+                        addTab({ label: "Tab 01A", content: "Content for Tab 01A. Could be onboarding tips, contributor shout-outs, or a haiku about modularity." });
+                        addTab({ label: "Tab 01B", content: "Content for Tab 01B. Maybe a changelog. Maybe a list of things that aren’t bugs." });
+
+                        document.getElementById("addTabBtn").onclick = () => addTab();
+
+                        document.getElementById("generateBtn").onclick = () => {
+                            const tabs = [...document.querySelectorAll(".tab-row")].map(r => ({
+                                label: r.querySelector('[name="label"]').value.trim(),
+                                content: r.querySelector('[name="content"]').value.trim()
+                            }));
+                            const id = "01"; // could randomize or increment for uniqueness
+                            const code = templates.tabs({ id, tabs });
+                            document.getElementById("output").textContent = code;
+                            document.getElementById("previewArea").innerHTML = code;
+                        };
+                    });
+
+                    function copyCode() {
+                        const text = document.getElementById("output").textContent;
+                        navigator.clipboard.writeText(text);
+                        alert("Code copied!");
+                    }
+                </script>
 </body>
 
 </html>

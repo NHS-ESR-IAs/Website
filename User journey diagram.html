@@ -112,6 +112,43 @@ journey
                         <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
                     </div>
                 </div>
+                <div class="row mt-4">
+                    <div class="col-md border border-success rounded p-3">
+                        <section class="playground mt-5">
+                            <h3>🛤️ Journey Diagram Playground</h3>
+
+                            <!-- Title -->
+                            <div class="mb-3">
+                                <label class="form-label">Journey Title</label>
+                                <input type="text" id="journeyTitle" class="form-control"
+                                    value="Contributor Onboarding Journey">
+                            </div>
+
+                            <!-- Sections -->
+                            <h5>Sections</h5>
+                            <div id="sectionsForm"></div>
+                            <button type="button" id="addSectionBtn" class="btn btn-success mb-3">+ Add Section</button>
+
+                            <!-- Generate -->
+                            <div class="mb-3">
+                                <button type="button" id="generateBtn" class="btn btn-primary">Generate Code</button>
+                            </div>
+
+                            <div class="row mt-4">
+                                <div class="col-md-6 border border-success rounded p-3">
+                                    <h5>Generated Code</h5>
+                                    <pre><code id="output"></code></pre>
+                                    <button type="button" class="btn btn-primary mt-2" onclick="copyCode()">Copy to
+                                        Clipboard</button>
+                                </div>
+                                <div class="col-md-6 border border-success rounded p-3">
+                                    <h5>Live Preview</h5>
+                                    <div id="previewArea"></div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -123,6 +160,98 @@ journey
         <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
         <!-- Custom JS -->
         <script src="Assets/js/script.js"></script>
+        <script src="Assets/js/templates.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const sectionsForm = document.getElementById("sectionsForm");
+
+                function addSection(defaults = { name: "", steps: [] }) {
+                    const sectionDiv = document.createElement("div");
+                    sectionDiv.className = "border rounded p-2 mb-3 section-block";
+                    sectionDiv.innerHTML = `
+      <div class="mb-2">
+        <input type="text" class="form-control section-name" placeholder="Section name" value="${defaults.name}">
+      </div>
+      <div class="steps"></div>
+      <button type="button" class="btn btn-sm btn-secondary addStepBtn">+ Add Step</button>
+      <button type="button" class="btn btn-sm btn-danger removeSectionBtn">Remove Section</button>
+    `;
+
+                    const stepsDiv = sectionDiv.querySelector(".steps");
+                    function addStep(step = { text: "", score: "", actor: "" }) {
+                        const row = document.createElement("div");
+                        row.className = "row g-2 mb-2 step-row";
+                        row.innerHTML = `
+        <div class="col-md-5"><input type="text" class="form-control step-text" placeholder="Step text" value="${step.text}"></div>
+        <div class="col-md-2"><input type="number" class="form-control step-score" placeholder="Score" value="${step.score}"></div>
+        <div class="col-md-3"><input type="text" class="form-control step-actor" placeholder="Actor" value="${step.actor}"></div>
+        <div class="col-md-2"><button type="button" class="btn btn-danger btn-sm removeStepBtn">Remove</button></div>
+      `;
+                        row.querySelector(".removeStepBtn").onclick = () => row.remove();
+                        stepsDiv.appendChild(row);
+                    }
+
+                    sectionDiv.querySelector(".addStepBtn").onclick = () => addStep();
+                    sectionDiv.querySelector(".removeSectionBtn").onclick = () => sectionDiv.remove();
+
+                    defaults.steps.forEach(addStep);
+                    sectionsForm.appendChild(sectionDiv);
+                }
+
+                // Seed with your example
+                addSection({
+                    name: "Awareness", steps: [
+                        { text: "Discover microsite", score: "5", actor: "Contributor" },
+                        { text: "Browse resources", score: "4", actor: "Contributor" }
+                    ]
+                });
+                addSection({
+                    name: "Engagement", steps: [
+                        { text: "Sign up for updates", score: "3", actor: "Contributor" },
+                        { text: "Join community space", score: "4", actor: "Contributor" }
+                    ]
+                });
+                addSection({
+                    name: "Support", steps: [
+                        { text: "Request help", score: "2", actor: "Contributor" },
+                        { text: "Receive guidance", score: "5", actor: "SupportTeam" }
+                    ]
+                });
+                addSection({
+                    name: "Mastery", steps: [
+                        { text: "Complete training", score: "4", actor: "Contributor" },
+                        { text: "Share feedback", score: "5", actor: "Contributor" }
+                    ]
+                });
+
+                document.getElementById("addSectionBtn").onclick = () => addSection();
+
+                document.getElementById("generateBtn").onclick = () => {
+                    const title = document.getElementById("journeyTitle").value.trim();
+                    const sections = [...document.querySelectorAll(".section-block")].map(sec => {
+                        return {
+                            name: sec.querySelector(".section-name").value.trim(),
+                            steps: [...sec.querySelectorAll(".step-row")].map(r => ({
+                                text: r.querySelector(".step-text").value.trim(),
+                                score: r.querySelector(".step-score").value.trim(),
+                                actor: r.querySelector(".step-actor").value.trim()
+                            }))
+                        };
+                    });
+
+                    const code = templates.journeyDiagram({ title, sections });
+                    document.getElementById("output").textContent = code;
+                    document.getElementById("previewArea").innerHTML = code;
+                    if (window.mermaid) mermaid.init(undefined, document.querySelectorAll(".mermaid"));
+                };
+            });
+
+            function copyCode() {
+                const text = document.getElementById("output").textContent;
+                navigator.clipboard.writeText(text);
+                alert("Code copied!");
+            }
+        </script>
 </body>
 
 </html>

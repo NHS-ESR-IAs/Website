@@ -78,24 +78,26 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Snippet Guide -->
-        <div class="row mt-4">
-            <div class="col-md">
-                <h5 class="mt-4 mb-2">🧩 Modal Snippet: Deploy with Drama</h5>
-                <ul>
-                    <li><strong>Replace <code>#modalMystery</code></strong> with a unique ID for each modal.</li>
-                    <li><strong>Update the button label</strong> to reflect what the modal reveals.</li>
-                    <li><strong>Change the modal title</strong> inside <code>&lt;h5&gt;</code> to match your content
-                        theme.</li>
-                    <li><strong>Drop your content</strong> into the <code>.card-body</code>.</li>
-                    <li><strong>Duplicate the whole block</strong> for multiple modals—just make sure each ID is unique!
-                    </li>
-                </ul>
 
-                <pre><code class="snippet">&lt;button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalMystery"&gt;
+                <!-- Snippet Guide -->
+                <div class="row mt-4">
+                    <div class="col-md">
+                        <h5 class="mt-4 mb-2">🧩 Modal Snippet: Deploy with Drama</h5>
+                        <ul>
+                            <li><strong>Replace <code>#modalMystery</code></strong> with a unique ID for each modal.
+                            </li>
+                            <li><strong>Update the button label</strong> to reflect what the modal reveals.</li>
+                            <li><strong>Change the modal title</strong> inside <code>&lt;h5&gt;</code> to match your
+                                content
+                                theme.</li>
+                            <li><strong>Drop your content</strong> into the <code>.card-body</code>.</li>
+                            <li><strong>Duplicate the whole block</strong> for multiple modals—just make sure each ID is
+                                unique!
+                            </li>
+                        </ul>
+
+                        <pre><code class="snippet">&lt;button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalMystery"&gt;
   🕵️ Reveal the Secret
 &lt;/button&gt;
 
@@ -118,18 +120,67 @@
 &lt;/div&gt;
 </code></pre>
 
-                <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+                        <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+            <!-- Playground -->
+            <div class="row mt-4">
+                <div class="col-md border border-primary rounded p-3">
+                    <section class="playground mt-5">
+                        <h3>🔧 Playground</h3>
 
-    <!-- Footer -->
-    <div id="shared-footer"></div>
+                        <form id="playgroundForm" class="mb-3 row g-3">
+                            <!-- Fields will be injected here by renderPlayground -->
+                        </form>
 
-    <!-- Bootstrap JS + Custom Script -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
-    <script src="Assets/js/script.js"></script>
+                        <button type="button" id="generateBtn" class="btn btn-primary">Generate Code</button>
+
+                        <div class="row mt-4">
+                            <div class="col-md-6 border border-primary rounded p-3">
+                                <h5>Generated Code</h5>
+                                <pre><code id="output"></code></pre>
+                                <button type="button" class="btn btn-primary mt-2" onclick="copyCode()">Copy to
+                                    Clipboard</button>
+                            </div>
+                            <div class="col-md-6 border border-primary rounded p-3">
+                                <h5>Live Preview</h5>
+                                <div id="previewArea"></div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div id="shared-footer"></div>
+
+            <!-- Bootstrap JS + Custom Script -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+            <script src="Assets/js/script.js"></script>
+            <script src="Assets/js/templates.js"></script>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                    const config = {
+                        fields: [
+                            { id: "modalId", label: "Modal ID", type: "text", default: "modalExample" },
+                            { id: "buttonText", label: "Button Text", type: "text", default: "Open Modal" },
+                            { id: "modalTitle", label: "Modal Title", type: "text", default: "Contributor Wisdom" },
+                            { id: "modalContent", label: "Modal Content", type: "textarea", default: "✨ Feature, not a bug" }
+                        ],
+                        template: "modal"
+                    };
+                    renderPlayground(config);
+                });
+
+                function copyCode() {
+                    const text = document.getElementById("output").textContent;
+                    navigator.clipboard.writeText(text);
+                    alert("Code copied!");
+                }
+            </script>
 </body>
 
 </html>

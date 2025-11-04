@@ -138,6 +138,66 @@ xychart-beta
                     <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
                 </div>
             </div>
+            <div class="row mt-4">
+                <div class="col-md border border-secondary rounded p-3">
+                    <section class="playground mt-5">
+                        <h3>📊 XY Chart Playground</h3>
+
+                        <div class="mb-3">
+                            <label class="form-label">Chart Title</label>
+                            <input type="text" id="chartTitle" class="form-control"
+                                value="Quarterly Revenue (Combined)">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">X-axis Labels (comma separated)</label>
+                            <input type="text" id="xLabels" class="form-control" value="Q1, Q2, Q3, Q4">
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Y-axis Label</label>
+                                <input type="text" id="yLabel" class="form-control" value="Revenue ($)">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Y Min</label>
+                                <input type="number" id="yMin" class="form-control" value="4000">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Y Max</label>
+                                <input type="number" id="yMax" class="form-control" value="11000">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Bar Values (comma separated)</label>
+                            <input type="text" id="barValues" class="form-control" value="5000, 7000, 9500, 10500">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Line Values (comma separated)</label>
+                            <input type="text" id="lineValues" class="form-control" value="4800, 6900, 9100, 10200">
+                        </div>
+
+                        <div class="mb-3">
+                            <button type="button" id="generateBtn" class="btn btn-primary">Generate Code</button>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-md-6 border border-secondary rounded p-3">
+                                <h5>Generated Code</h5>
+                                <pre><code id="output"></code></pre>
+                                <button type="button" class="btn btn-primary mt-2" onclick="copyCode()">Copy to
+                                    Clipboard</button>
+                            </div>
+                            <div class="col-md-6 border border-secondary rounded p-3">
+                                <h5>Live Preview</h5>
+                                <div id="previewArea"></div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -149,6 +209,39 @@ xychart-beta
     <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
     <!-- Custom JS -->
     <script src="Assets/js/script.js"></script>
+    <script src="Assets/js/templates.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const outputEl = document.getElementById("output");
+            const previewEl = document.getElementById("previewArea");
+
+            document.getElementById("generateBtn").onclick = () => {
+                const values = {
+                    title: document.getElementById("chartTitle").value.trim(),
+                    xLabels: document.getElementById("xLabels").value.split(",").map(s => s.trim()),
+                    yLabel: document.getElementById("yLabel").value.trim(),
+                    yMin: document.getElementById("yMin").value.trim(),
+                    yMax: document.getElementById("yMax").value.trim(),
+                    barValues: document.getElementById("barValues").value.split(",").map(s => s.trim()),
+                    lineValues: document.getElementById("lineValues").value.split(",").map(s => s.trim())
+                };
+
+                const code = templates.xyChart(values);
+                outputEl.textContent = code;
+                previewEl.innerHTML = code;
+
+                if (window.mermaid) {
+                    mermaid.init(undefined, previewEl.querySelectorAll(".mermaid"));
+                }
+            };
+        });
+
+        function copyCode() {
+            const text = document.getElementById("output").textContent;
+            navigator.clipboard.writeText(text);
+            alert("Code copied!");
+        }
+    </script>
 </body>
 
 </html>

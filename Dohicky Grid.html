@@ -106,6 +106,30 @@
                     <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
                 </div>
             </div>
+            <div class="row mt-4">
+                <div class="col-md border border-success rounded p-3">
+                    <section class="playground mt-5">
+                        <h3>🧩 Dohicky Grid Playground</h3>
+
+                        <div id="gridForm"></div>
+                        <button type="button" id="addRowBtn" class="btn btn-success mb-3">+ Add Row</button><br>
+                        <button type="button" id="generateBtn" class="btn btn-primary">Generate Code</button>
+
+                        <div class="row mt-4">
+                            <div class="col-md-6 border border-success rounded p-3">
+                                <h5>Generated Code</h5>
+                                <pre><code id="output"></code></pre>
+                                <button type="button" class="btn btn-primary mt-2" onclick="copyCode()">Copy to
+                                    Clipboard</button>
+                            </div>
+                            <div class="col-md-6 border border-success rounded p-3">
+                                <h5>Live Preview</h5>
+                                <div id="previewArea"></div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -117,6 +141,82 @@
     <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
     <!-- Custom JS -->
     <script src="Assets/js/script.js"></script>
+    <script src="Assets/js/templates.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const gridForm = document.getElementById("gridForm");
+            const addRowBtn = document.getElementById("addRowBtn");
+
+            function createRow(defaults = ["🎉 Did You Know", "📦 Factbox"]) {
+                const row = document.createElement("div");
+                row.className = "grid-row border rounded p-2 mb-2";
+
+                const cellsContainer = document.createElement("div");
+                cellsContainer.className = "cells d-flex flex-wrap gap-2";
+
+                defaults.forEach(val => addCell(cellsContainer, val));
+
+                const addCellBtn = document.createElement("button");
+                addCellBtn.type = "button";
+                addCellBtn.className = "btn btn-sm btn-success mt-2";
+                addCellBtn.textContent = "+ Add Column";
+                addCellBtn.onclick = () => addCell(cellsContainer);
+
+                const removeRowBtn = document.createElement("button");
+                removeRowBtn.type = "button";
+                removeRowBtn.className = "btn btn-sm btn-danger mt-2 ms-2";
+                removeRowBtn.textContent = "Remove Row";
+                removeRowBtn.onclick = () => row.remove();
+
+                row.appendChild(cellsContainer);
+                row.appendChild(addCellBtn);
+                row.appendChild(removeRowBtn);
+
+                gridForm.appendChild(row);
+            }
+
+            function addCell(container, value = "") {
+                const wrapper = document.createElement("div");
+                wrapper.className = "cell flex-grow-1";
+
+                const input = document.createElement("input");
+                input.type = "text";
+                input.className = "form-control mb-1";
+                input.value = value;
+
+                const removeBtn = document.createElement("button");
+                removeBtn.type = "button";
+                removeBtn.className = "btn btn-sm btn-danger";
+                removeBtn.textContent = "Remove";
+                removeBtn.onclick = () => wrapper.remove();
+
+                wrapper.appendChild(input);
+                wrapper.appendChild(removeBtn);
+                container.appendChild(wrapper);
+            }
+
+            // Initial row
+            createRow();
+
+            addRowBtn.addEventListener("click", () => createRow());
+
+            document.getElementById("generateBtn").onclick = () => {
+                const rows = [...gridForm.querySelectorAll(".grid-row")].map(row => {
+                    return [...row.querySelectorAll("input")].map(input => input.value);
+                });
+
+                const code = templates.dohickyGrid({ rows });
+                document.getElementById("output").textContent = code.trim();
+                document.getElementById("previewArea").innerHTML = code;
+            };
+        });
+
+        function copyCode() {
+            const text = document.getElementById("output").textContent;
+            navigator.clipboard.writeText(text);
+            alert("Code copied!");
+        }
+    </script>
 </body>
 
 </html>
