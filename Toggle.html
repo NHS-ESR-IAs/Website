@@ -105,7 +105,7 @@
             </div>
         </div>
         <div class="row mt-4">
-            <div class="col-md border border-info rounded p-3">
+            <div class="col-md border border-primary rounded p-3">
                 <section class="playground mt-5">
                     <h3>Bootstrap Collapse Playground</h3>
 
@@ -128,17 +128,26 @@
                     </form>
 
                     <div class="mb-3">
-                        <button type="button" id="generateBtn" class="btn btn-primary">Generate code</button>
+                        <div class="dohicky-grid">
+                            <div class="dohicky-item"><button type="button" id="generateBtn"
+                                    class="btn btn-primary w-100">Generate Code</button></div>
+                            <div class="dohicky-item"><button type="button" class="btn btn-primary w-100"
+                                    onclick="copyCode()">Copy</button></div>
+                            <div class="dohicky-item"><button type="button" class="btn btn-primary w-100"
+                                    onclick="exportConfig()">💾 Save Settings</button></div>
+                            <div class="dohicky-item"> <input type="file" id="configFile" accept=".txt"
+                                    style="display:none" /> <button type="button" class="btn btn-primary w-100"
+                                    onclick="document.getElementById('configFile').click()">📂 Load Settings</button>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="row mt-4">
-                        <div class="col-md-6 border border-info rounded p-3">
+                        <div class="col-md-6 border border-primary rounded p-3">
                             <h5>Generated code</h5>
                             <pre><code id="output"></code></pre>
-                            <button type="button" class="btn btn-primary mt-2" onclick="copyCode()">Copy to
-                                clipboard</button>
                         </div>
-                        <div class="col-md-6 border border-info rounded p-3">
+                        <div class="col-md-6 border border-primary rounded p-3">
                             <h5>Live preview</h5>
                             <div id="previewArea"></div>
 

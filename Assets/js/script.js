@@ -542,3 +542,135 @@ async function renderSiteMap() {
 }
 
 document.addEventListener("DOMContentLoaded", renderSiteMap);
+
+// ===============================
+// Playground Config Utilities
+// ===============================
+
+// Collect all input/select/textarea values into an object
+function collectConfig() {
+  const config = {};
+  document
+    .querySelectorAll("input[id], select[id], textarea[id]")
+    .forEach((el) => {
+      if (el.type === "checkbox") {
+        config[el.id] = el.checked;
+      } else if (el.type === "radio") {
+        if (el.checked) config[el.name] = el.value;
+      } else {
+        config[el.id] = el.value;
+      }
+    });
+  return config;
+}
+
+// Apply a config object back to matching fields
+function applyConfig(config) {
+  Object.keys(config).forEach((id) => {
+    const el =
+      document.getElementById(id) || document.querySelector(`[name="${id}"]`);
+    if (!el) return;
+    if (el.type === "checkbox") {
+      el.checked = !!config[id];
+    } else if (el.type === "radio") {
+      const radio = document.querySelector(
+        `input[name="${id}"][value="${config[id]}"]`
+      );
+      if (radio) radio.checked = true;
+    } else {
+      el.value = config[id];
+    }
+  });
+}
+
+// Get current page name (without extension) for filenames
+function getPageName() {
+  const path = window.location.pathname;
+  const file = path.substring(path.lastIndexOf("/") + 1) || "index.html";
+  return file.replace(/\.[^/.]+$/, "");
+}
+
+// Export current config (and auto‑detect generated code if present) to a TXT file
+function exportConfig() {
+  const values = collectConfig();
+
+  // Try to grab generated code from the output element
+  let generatedCode = null;
+  const outputEl = document.getElementById("output");
+  if (outputEl && outputEl.textContent.trim()) {
+    generatedCode = outputEl.textContent; // keep raw formatting
+  }
+
+  // Build the JSON payload without code
+  const payload = {
+    page: getPageName(),
+    timestamp: new Date().toISOString(),
+    values,
+  };
+
+  // Start with the JSON string
+  let fileContent = JSON.stringify(payload, null, 2);
+
+  // Append the raw code block if it exists
+  if (generatedCode) {
+    fileContent += "\n\n=== GENERATED CODE START ===\n";
+    fileContent += generatedCode;
+    fileContent += "\n=== GENERATED CODE END ===\n";
+  }
+
+  // Create and download the file
+  const blob = new Blob([fileContent], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `${getPageName()}-config.txt`;
+  a.click();
+
+  URL.revokeObjectURL(url);
+}
+
+// Import config from a TXT file and apply it
+function setupConfigImport(fileInputId = "configFile", outputId = "output") {
+  const input = document.getElementById(fileInputId);
+  if (!input) return;
+
+  input.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const text = event.target.result;
+
+        // Split into JSON part and optional code part
+        const marker = "=== GENERATED CODE START ===";
+        let jsonPart = text;
+        let codePart = null;
+
+        if (text.includes(marker)) {
+          const [jsonText, codeText] = text.split(marker);
+          jsonPart = jsonText.trim();
+          // remove the END marker if present
+          codePart = codeText.replace("=== GENERATED CODE END ===", "").trim();
+        }
+
+        const payload = JSON.parse(jsonPart);
+
+        if (payload.values) applyConfig(payload.values);
+
+        if (codePart && outputId) {
+          const out = document.getElementById(outputId);
+          if (out) out.textContent = codePart;
+        }
+
+        console.log(`Config loaded from ${file.name}`);
+      } catch (err) {
+        console.error("Invalid config file", err);
+        alert("The selected file is not a valid config.");
+      }
+    };
+    reader.readAsText(file);
+  });
+}

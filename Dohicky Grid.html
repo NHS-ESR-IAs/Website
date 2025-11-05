@@ -107,22 +107,31 @@
                 </div>
             </div>
             <div class="row mt-4">
-                <div class="col-md border border-success rounded p-3">
+                <div class="col-md border border-primary rounded p-3">
                     <section class="playground mt-5">
                         <h3>🧩 Dohicky Grid Playground</h3>
 
                         <div id="gridForm"></div>
                         <button type="button" id="addRowBtn" class="btn btn-success mb-3">+ Add Row</button><br>
-                        <button type="button" id="generateBtn" class="btn btn-primary">Generate Code</button>
+                        <div class="dohicky-grid">
+                            <div class="dohicky-item"><button type="button" id="generateBtn"
+                                    class="btn btn-primary w-100">Generate Code</button></div>
+                            <div class="dohicky-item"><button type="button" class="btn btn-primary w-100"
+                                    onclick="copyCode()">Copy</button></div>
+                            <div class="dohicky-item"><button type="button" class="btn btn-primary w-100"
+                                    onclick="exportConfig()">💾 Save Settings</button></div>
+                            <div class="dohicky-item"> <input type="file" id="configFile" accept=".txt"
+                                    style="display:none" /> <button type="button" class="btn btn-primary w-100"
+                                    onclick="document.getElementById('configFile').click()">📂 Load Settings</button>
+                            </div>
+                        </div>
 
                         <div class="row mt-4">
-                            <div class="col-md-6 border border-success rounded p-3">
+                            <div class="col-md-6 border border-primary rounded p-3">
                                 <h5>Generated Code</h5>
                                 <pre><code id="output"></code></pre>
-                                <button type="button" class="btn btn-primary mt-2" onclick="copyCode()">Copy to
-                                    Clipboard</button>
                             </div>
-                            <div class="col-md-6 border border-success rounded p-3">
+                            <div class="col-md-6 border border-primary rounded p-3">
                                 <h5>Live Preview</h5>
                                 <div id="previewArea"></div>
                             </div>

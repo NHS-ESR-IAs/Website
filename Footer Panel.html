@@ -116,14 +116,23 @@
                         <h3>📮 Footer Playground</h3>
 
                         <form id="playgroundForm" class="mb-3 row g-3"></form>
-                        <button type="button" id="generateBtn" class="btn btn-primary">Generate Code</button>
+                        <div class="dohicky-grid">
+                            <div class="dohicky-item"><button type="button" id="generateBtn"
+                                    class="btn btn-primary w-100">Generate Code</button></div>
+                            <div class="dohicky-item"><button type="button" class="btn btn-primary w-100"
+                                    onclick="copyCode()">Copy</button></div>
+                            <div class="dohicky-item"><button type="button" class="btn btn-primary w-100"
+                                    onclick="exportConfig()">💾 Save Settings</button></div>
+                            <div class="dohicky-item"> <input type="file" id="configFile" accept=".txt"
+                                    style="display:none" /> <button type="button" class="btn btn-primary w-100"
+                                    onclick="document.getElementById('configFile').click()">📂 Load Settings</button>
+                            </div>
+                        </div>
 
                         <div class="row mt-4">
                             <div class="col-md-6 border border-primary rounded p-3">
                                 <h5>Generated Code</h5>
                                 <pre><code id="output"></code></pre>
-                                <button type="button" class="btn btn-primary mt-2" onclick="copyCode()">Copy to
-                                    Clipboard</button>
                             </div>
                             <div class="col-md-6 border border-primary rounded p-3">
                                 <h5>Live Preview</h5>

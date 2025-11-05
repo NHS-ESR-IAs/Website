@@ -107,14 +107,24 @@
                     </div>
 
                     <div class="mb-3">
-                        <button type="button" id="generateBtn" class="btn btn-primary">Generate Code</button>
+                        <div class="dohicky-grid">
+                            <div class="dohicky-item"><button type="button" id="generateBtn"
+                                    class="btn btn-primary w-100">Generate Code</button></div>
+                            <div class="dohicky-item"><button type="button" class="btn btn-primary w-100"
+                                    onclick="copyCode()">Copy</button></div>
+                            <div class="dohicky-item"><button type="button" class="btn btn-primary w-100"
+                                    onclick="exportConfig()">💾 Save Settings</button></div>
+                            <div class="dohicky-item"> <input type="file" id="configFile" accept=".txt"
+                                    style="display:none" /> <button type="button" class="btn btn-primary w-100"
+                                    onclick="document.getElementById('configFile').click()">📂 Load Settings</button>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="border border-secondary rounded p-3 mb-3">
                         <h5>Generated Code</h5>
                         <pre><code id="output"></code></pre>
-                        <button type="button" class="btn btn-primary mt-2" onclick="copyCode()">Copy to
-                            Clipboard</button>
+
                     </div>
 
                     <div class="border border-secondary rounded p-3">

@@ -124,8 +124,8 @@ sequenceDiagram
                             <!-- Participants -->
                             <h5>Participants</h5>
                             <div class="row fw-bold mb-1">
-                                <div class="col-md-10">Name</div>
-                                <div class="col-md-2">Action</div>
+                                <div class="col-md-11">Name</div>
+                                <div class="col-md-1">Action</div>
                             </div>
                             <div id="participantsForm"></div>
                             <button type="button" id="addParticipantBtn" class="btn btn-success mb-3">+ Add
@@ -145,15 +145,25 @@ sequenceDiagram
 
                             <!-- Generate -->
                             <div class="mb-3">
-                                <button type="button" id="generateBtn" class="btn btn-primary">Generate Code</button>
+                                <div class="dohicky-grid">
+                                    <div class="dohicky-item"><button type="button" id="generateBtn"
+                                            class="btn btn-primary w-100">Generate Code</button></div>
+                                    <div class="dohicky-item"><button type="button" class="btn btn-primary w-100"
+                                            onclick="copyCode()">Copy</button></div>
+                                    <div class="dohicky-item"><button type="button" class="btn btn-primary w-100"
+                                            onclick="exportConfig()">💾 Save Settings</button></div>
+                                    <div class="dohicky-item"> <input type="file" id="configFile" accept=".txt"
+                                            style="display:none" /> <button type="button" class="btn btn-primary w-100"
+                                            onclick="document.getElementById('configFile').click()">📂 Load
+                                            Settings</button>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row mt-4">
                                 <div class="col-md-6 border border-primary rounded p-3">
                                     <h5>Generated Code</h5>
                                     <pre><code id="output"></code></pre>
-                                    <button type="button" class="btn btn-primary mt-2" onclick="copyCode()">Copy to
-                                        Clipboard</button>
                                 </div>
                                 <div class="col-md-6 border border-primary rounded p-3">
                                     <h5>Live Preview</h5>
@@ -184,8 +194,8 @@ sequenceDiagram
                     const row = document.createElement("div");
                     row.className = "row g-2 mb-2 participant-row";
                     row.innerHTML = `
-      <div class="col-md-10"><input type="text" class="form-control" name="name" placeholder="Participant name" value="${defaults.name}"></div>
-      <div class="col-md-2"><button type="button" class="btn btn-danger btn-sm removeBtn">Remove</button></div>
+      <div class="col-md-11"><input type="text" class="form-control" name="name" placeholder="Participant name" value="${defaults.name}"></div>
+      <div class="col-md-1"><button type="button" class="btn btn-danger btn-sm removeBtn">Remove</button></div>
     `;
                     row.querySelector(".removeBtn").onclick = () => row.remove();
                     participantsForm.appendChild(row);

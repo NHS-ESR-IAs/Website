@@ -2,89 +2,89 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>MicroSiteKit – Main Navigation Panel</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MicroSiteKit – Main Navigation Panel</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-    <!-- Custom Styles -->
-    <link href="Assets/css/style.css" rel="stylesheet" />
+  <!-- Custom Styles -->
+  <link href="Assets/css/style.css" rel="stylesheet" />
 
-    <!-- Mermaid Setup -->
-    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-    <script type="module">
-        import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-        mermaid.initialize({ startOnLoad: false });
-        window.mermaid = mermaid;
-    </script>
+  <!-- Mermaid Setup -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: false });
+    window.mermaid = mermaid;
+  </script>
 </head>
 
 <body class="glass">
-    <!-- Injected Partials -->
-    <div id="shared-header"></div>
-    <div id="main-nav"></div>
-    <div id="sidebar-nav"></div>
+  <!-- Injected Partials -->
+  <div id="shared-header"></div>
+  <div id="main-nav"></div>
+  <div id="sidebar-nav"></div>
 
-    <!-- Page-Specific Content -->
-    <div class="container">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb" id="breadcrumb"></ol>
-        </nav>
-        <div class="row">
-            <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center">
-                <h3 class="gradient-text">Main Navigation Panel</h3>
-            </div>
-            <div class="col-md-8">
-                <div class="page-intro text-center py-4 px-3">
-                    <p>The navigation bar is your microsite’s modular map—perfect for guiding contributors through
-                        snippet
-                        pages, training modules, and support tools with clarity and joy. It’s responsive, accessible,
-                        and
-                        theme-safe, with dropdowns, submenus, and built-in accessibility controls.</p>
+  <!-- Page-Specific Content -->
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb" id="breadcrumb"></ol>
+    </nav>
+    <div class="row">
+      <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center">
+        <h3 class="gradient-text">Main Navigation Panel</h3>
+      </div>
+      <div class="col-md-8">
+        <div class="page-intro text-center py-4 px-3">
+          <p>The navigation bar is your microsite’s modular map—perfect for guiding contributors through
+            snippet
+            pages, training modules, and support tools with clarity and joy. It’s responsive, accessible,
+            and
+            theme-safe, with dropdowns, submenus, and built-in accessibility controls.</p>
 
-                    <ul>
-                        <li>🧭 Great for organising pages like <code>Home</code>, <code>Guides</code>,
-                            <code>FAQs</code>, and
-                            <code>Support</code>
-                        </li>
-                        <li>📁 Supports dropdowns and nested submenus for training catalogues and snippet libraries</li>
-                        <li>🎨 Theme-safe and layout-friendly—styled with Bootstrap classes for full responsiveness</li>
-                        <li>♿ Built-in accessibility controls for theme, text size, and dark mode</li>
-                        <li>🔍 Includes search inputs for desktop and mobile views</li>
-                    </ul>
+          <ul>
+            <li>🧭 Great for organising pages like <code>Home</code>, <code>Guides</code>,
+              <code>FAQs</code>, and
+              <code>Support</code>
+            </li>
+            <li>📁 Supports dropdowns and nested submenus for training catalogues and snippet libraries</li>
+            <li>🎨 Theme-safe and layout-friendly—styled with Bootstrap classes for full responsiveness</li>
+            <li>♿ Built-in accessibility controls for theme, text size, and dark mode</li>
+            <li>🔍 Includes search inputs for desktop and mobile views</li>
+          </ul>
 
-                    <p>Use it to say “Explore the snippet library,” “Browse training modules,” or “Switch to high
-                        contrast
-                        mode”—whatever sparks clarity and contributor empowerment.</p>
-                </div>
-            </div>
+          <p>Use it to say “Explore the snippet library,” “Browse training modules,” or “Switch to high
+            contrast
+            mode”—whatever sparks clarity and contributor empowerment.</p>
+        </div>
+      </div>
 
-            <!-- Page full width content -->
-            <div class="row mt-4">
-                <div class="col-md"></div>
+      <!-- Page full width content -->
+      <div class="row mt-4">
+        <div class="col-md"></div>
 
-                <!-- Page full width content -->
-                <div class="row mt-4">
-                    <div class="col-md">
-                        <h5 class="mt-4 mb-2">🧭 Main Navigation Panel: JSON Guide</h5>
-                        <ul>
-                            <li><strong>Add sections:</strong> Use <code>"type": "link"</code> for simple items like
-                                <code>Home</code> or <code>FAQs</code>.
-                            </li>
-                            <li><strong>Add dropdowns:</strong> Use <code>"type": "dropdown"</code> with a
-                                <code>children</code> array to group related pages.
-                            </li>
-                            <li><strong>Build submenus:</strong> Use <code>"type": "submenu"</code> nested inside a
-                                dropdown’s <code>children</code> for multi‑level navigation.</li>
-                            <li><strong>Enable accessibility:</strong> The JSON just defines structure; your renderer
-                                handles features like <code>themeSelectorSidebar</code>, text size, and dark mode.</li>
-                            <li><strong>Style it safely:</strong> Styling comes from Bootstrap classes in your renderer,
-                                not the JSON itself.</li>
-                        </ul>
+        <!-- Page full width content -->
+        <div class="row mt-4">
+          <div class="col-md">
+            <h5 class="mt-4 mb-2">🧭 Main Navigation Panel: JSON Guide</h5>
+            <ul>
+              <li><strong>Add sections:</strong> Use <code>"type": "link"</code> for simple items like
+                <code>Home</code> or <code>FAQs</code>.
+              </li>
+              <li><strong>Add dropdowns:</strong> Use <code>"type": "dropdown"</code> with a
+                <code>children</code> array to group related pages.
+              </li>
+              <li><strong>Build submenus:</strong> Use <code>"type": "submenu"</code> nested inside a
+                dropdown’s <code>children</code> for multi‑level navigation.</li>
+              <li><strong>Enable accessibility:</strong> The JSON just defines structure; your renderer
+                handles features like <code>themeSelectorSidebar</code>, text size, and dark mode.</li>
+              <li><strong>Style it safely:</strong> Styling comes from Bootstrap classes in your renderer,
+                not the JSON itself.</li>
+            </ul>
 
-                        <pre><code class="snippet language-json">[
+            <pre><code class="snippet language-json">[
   {
     "label": "🏠 Home",
     "page": "home",
@@ -139,57 +139,67 @@
   }
 ]</code></pre>
 
-                        <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-4">
-                <div class="col-md border border-dark rounded p-3">
-                    <section class="playground mt-5">
-                        <h3>📑 Navigation JSON Playground</h3>
-
-                        <div id="itemsForm"></div>
-                        <button type="button" id="addItemBtn" class="btn btn-success mb-3">+ Add Item</button>
-
-                        <div class="mb-3">
-                            <button type="button" id="generateBtn" class="btn btn-primary">Generate JSON</button>
-                        </div>
-
-                        <div class="row mt-4">
-                            <div class="col-md-6 border border-dark rounded p-3">
-                                <h5>Generated JSON</h5>
-                                <pre><code id="output"></code></pre>
-                                <button type="button" class="btn btn-primary mt-2" onclick="copyCode()">Copy to
-                                    Clipboard</button>
-                            </div>
-                            <div class="col-md-6 border border-dark rounded p-3">
-                                <h5>Live Preview</h5>
-                                <div id="previewArea"></div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-            </div>
+            <button class="btn btn-primary w-100 mb-2" onclick="copyVisibleSnippet()">Copy</button>
+          </div>
         </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-md border border-primary rounded p-3">
+          <section class="playground mt-5">
+            <h3>📑 Navigation JSON Playground</h3>
+
+            <div id="itemsForm"></div>
+            <button type="button" id="addItemBtn" class="btn btn-success mb-3">+ Add Item</button>
+
+            <div class="mb-3">
+              <div class="dohicky-grid">
+                <div class="dohicky-item"><button type="button" id="generateBtn" class="btn btn-primary w-100">Generate
+                    Code</button></div>
+                <div class="dohicky-item"><button type="button" class="btn btn-primary w-100"
+                    onclick="copyCode()">Copy</button></div>
+                <div class="dohicky-item"><button type="button" class="btn btn-primary w-100"
+                    onclick="exportConfig()">💾 Save Settings</button></div>
+                <div class="dohicky-item"> <input type="file" id="configFile" accept=".txt" style="display:none" />
+                  <button type="button" class="btn btn-primary w-100"
+                    onclick="document.getElementById('configFile').click()">📂 Load Settings</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-4">
+              <div class="col-md-6 border border-primary rounded p-3">
+                <h5>Generated JSON</h5>
+                <pre><code id="output"></code></pre>
+
+              </div>
+              <div class="col-md-6 border border-primary rounded p-3">
+                <h5>Live Preview</h5>
+                <div id="previewArea"></div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Footer -->
-    <div id="shared-footer"></div>
+  <!-- Footer -->
+  <div id="shared-footer"></div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
-    <!-- Custom JS -->
-    <script src="Assets/js/script.js"></script>
-    <script src="Assets/js/templates.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const itemsForm = document.getElementById("itemsForm");
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+  <!-- Custom JS -->
+  <script src="Assets/js/script.js"></script>
+  <script src="Assets/js/templates.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const itemsForm = document.getElementById("itemsForm");
 
-            function addItem(defaults = { label: "", href: "", title: "", preview: "", description: "", category: "", children: [] }) {
-                const div = document.createElement("div");
-                div.className = "border rounded p-2 mb-3 item-block";
-                div.innerHTML = `
+      function addItem(defaults = { label: "", href: "", title: "", preview: "", description: "", category: "", children: [] }) {
+        const div = document.createElement("div");
+        div.className = "border rounded p-2 mb-3 item-block";
+        div.innerHTML = `
       <div class="row g-2 mb-2">
         <div class="col-md-2">
           <label class="form-label">Label</label>
@@ -221,15 +231,15 @@
       <button type="button" class="btn btn-sm btn-danger removeItemBtn">Remove Item</button>
     `;
 
-                // Remove item
-                div.querySelector(".removeItemBtn").onclick = () => div.remove();
+        // Remove item
+        div.querySelector(".removeItemBtn").onclick = () => div.remove();
 
-                // Add child
-                div.querySelector(".addChildBtn").onclick = () => {
-                    const childrenDiv = div.querySelector(".children");
-                    const childBlock = document.createElement("div");
-                    childBlock.className = "border rounded p-2 mb-2 child-block";
-                    childBlock.innerHTML = `
+        // Add child
+        div.querySelector(".addChildBtn").onclick = () => {
+          const childrenDiv = div.querySelector(".children");
+          const childBlock = document.createElement("div");
+          childBlock.className = "border rounded p-2 mb-2 child-block";
+          childBlock.innerHTML = `
         <label class="form-label">Child Item</label>
         <div class="row g-2 mb-2">
           <div class="col-md-3"><input type="text" class="form-control label" placeholder="Label"></div>
@@ -247,57 +257,57 @@
         <button type="button" class="btn btn-sm btn-secondary addChildBtn">+ Add Child</button>
         <button type="button" class="btn btn-sm btn-danger removeChildBtn">Remove Child</button>
       `;
-                    childBlock.querySelector(".removeChildBtn").onclick = () => childBlock.remove();
-                    childBlock.querySelector(".addChildBtn").onclick = () => {
-                        childBlock.querySelector(".children").appendChild(childBlock.cloneNode(true));
-                    };
-                    childrenDiv.appendChild(childBlock);
-                };
+          childBlock.querySelector(".removeChildBtn").onclick = () => childBlock.remove();
+          childBlock.querySelector(".addChildBtn").onclick = () => {
+            childBlock.querySelector(".children").appendChild(childBlock.cloneNode(true));
+          };
+          childrenDiv.appendChild(childBlock);
+        };
 
-                itemsForm.appendChild(div);
-            }
+        itemsForm.appendChild(div);
+      }
 
-            // Seed with one example
-            addItem({
-                label: "🏠 Home",
-                href: "index.html",
-                title: "MicroSiteKit",
-                description: "Your modular toolkit for building joyful, contributor-first microsites—no CMS stress, just layout clarity.",
-                category: "Homepage"
-            });
+      // Seed with one example
+      addItem({
+        label: "🏠 Home",
+        href: "index.html",
+        title: "MicroSiteKit",
+        description: "Your modular toolkit for building joyful, contributor-first microsites—no CMS stress, just layout clarity.",
+        category: "Homepage"
+      });
 
-            document.getElementById("addItemBtn").onclick = () => addItem();
+      document.getElementById("addItemBtn").onclick = () => addItem();
 
-            document.getElementById("generateBtn").onclick = () => {
-                function extract(block) {
-                    const obj = {
-                        label: block.querySelector(".label")?.value.trim() || "",
-                        href: block.querySelector(".href")?.value.trim() || "",
-                        title: block.querySelector(".title")?.value.trim() || "",
-                        preview: block.querySelector(".preview")?.value.trim() || "",
-                        description: block.querySelector(".description")?.value.trim() || "",
-                        category: block.querySelector(".category")?.value.trim() || ""
-                    };
-                    const childrenBlocks = [...block.querySelectorAll(":scope > .children > .child-block")];
-                    if (childrenBlocks.length) {
-                        obj.children = childrenBlocks.map(extract);
-                    }
-                    return obj;
-                }
-
-                const items = [...document.querySelectorAll(".item-block")].map(extract);
-                const code = templates.navJson({ items });
-                document.getElementById("output").textContent = code;
-                document.getElementById("previewArea").textContent = code;
-            };
-        });
-
-        function copyCode() {
-            const text = document.getElementById("output").textContent;
-            navigator.clipboard.writeText(text);
-            alert("JSON copied!");
+      document.getElementById("generateBtn").onclick = () => {
+        function extract(block) {
+          const obj = {
+            label: block.querySelector(".label")?.value.trim() || "",
+            href: block.querySelector(".href")?.value.trim() || "",
+            title: block.querySelector(".title")?.value.trim() || "",
+            preview: block.querySelector(".preview")?.value.trim() || "",
+            description: block.querySelector(".description")?.value.trim() || "",
+            category: block.querySelector(".category")?.value.trim() || ""
+          };
+          const childrenBlocks = [...block.querySelectorAll(":scope > .children > .child-block")];
+          if (childrenBlocks.length) {
+            obj.children = childrenBlocks.map(extract);
+          }
+          return obj;
         }
-    </script>
+
+        const items = [...document.querySelectorAll(".item-block")].map(extract);
+        const code = templates.navJson({ items });
+        document.getElementById("output").textContent = code;
+        document.getElementById("previewArea").textContent = code;
+      };
+    });
+
+    function copyCode() {
+      const text = document.getElementById("output").textContent;
+      navigator.clipboard.writeText(text);
+      alert("JSON copied!");
+    }
+  </script>
 </body>
 
 </html>

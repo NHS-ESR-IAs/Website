@@ -39,16 +39,27 @@ function renderPlayground(config) {
 
   document.getElementById("generateBtn").onclick = () => {
     const values = {};
-    config.fields.forEach(
-      (f) => (values[f.id] = document.getElementById(f.id).value)
-    );
-    const code = templates[config.template](values);
-    document.getElementById("output").textContent = code.trim();
+    config.fields.forEach((f) => {
+      const el = document.getElementById(f.id);
+      values[f.id] = el ? el.value : "";
+    });
 
+    let code = "";
+    try {
+      code = templates[config.template](values) || "";
+    } catch (err) {
+      console.error("Template generation failed:", err);
+    }
+
+    // Update output box if we have code
+    const outputEl = document.getElementById("output");
+    if (outputEl) outputEl.textContent = code.trim();
+
+    // Update preview if we have code
     const previewEl = document.getElementById("previewArea");
-
-    // inject the markup
-    previewEl.innerHTML = code;
+    if (previewEl && code) {
+      previewEl.innerHTML = code;
+    }
   };
 }
 
@@ -777,18 +788,20 @@ templates.fluPortlet = ({
   introText,
   startDate,
   endDate,
+  infoLinkText,
   infoLink,
   countdownDate,
   piePercentage,
   pieColor,
   barChart,
+  bookingLinkText,
   bookingLink,
 }) => {
   const barItems = barChart
     .map(
       (group) => `
-    { label: "${group.label}", value: ${group.value}, color: "${group.color}", delay: "${group.delay}" }
-  `
+        { label: "${group.label}", value: ${group.value}, color: "${group.color}", delay: "${group.delay}" }
+      `
     )
     .join(",");
 
@@ -1086,13 +1099,28 @@ templates.fluPortlet = ({
     <div class="glass-card">
 
       <h1 class="text-center mb-4 Custom_Headings">${campaignTitle}</h1>
+
       <p class="Custom_Text">
         ${introText}
-        <a class="Custom_Link" href="${infoLink}" target="_blank">
-          <span class="Custom_Link">More information about Flu and Myth busters click here.</span>
-        </a>
       </p>
-      <p class="Custom_Text">This year’s Flu campaign will be running from <strong>${startDate}</strong> to <strong>${endDate}</strong>.</p>
+
+      <!-- Info Link  -->
+${
+  infoLink && infoLinkText
+    ? `
+<p class="Custom_Text">
+  <a class="Custom_Link" href="${infoLink}" target="_blank">
+    <span class="Custom_Link">${infoLinkText}</span>
+  </a>
+</p>
+`
+    : ""
+}
+
+      <p class="Custom_Text">
+        This year’s Flu campaign will be running from
+        <strong>${startDate}</strong> to <strong>${endDate}</strong>.
+      </p>
 
       <!-- Countdown -->
       <div class="card-body">
@@ -1119,13 +1147,19 @@ templates.fluPortlet = ({
         <article class="BarChart" id="barChartContainer"></article>
       </section>
 
-      <!-- Booking Button -->
-      <h2 class="mt-5 Custom_Headings">Arranging your vaccination</h2>
-      <p class="Custom_Text">
-        <a class="btn btn-primary btn-block Custom_Link" href="${bookingLink}" target="_blank">
-          Please Book your Flu Jab via the Staff Portal
-        </a>
-      </p>
+      <!-- Booking Button (only if both text + URL provided) -->
+      ${
+        bookingLink && bookingLinkText
+          ? `
+        <h2 class="mt-5 Custom_Headings">Arranging your vaccination</h2>
+        <p class="Custom_Text">
+          <a class="btn btn-primary btn-block Custom_Link" href="${bookingLink}" target="_blank">
+            ${bookingLinkText}
+          </a>
+        </p>
+      `
+          : ""
+      }
 
     </div>
   </div>
