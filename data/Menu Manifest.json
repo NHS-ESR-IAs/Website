@@ -327,6 +327,19 @@
     ]
   },
   {
+    "label": "🧩 ESR Web Portlets",
+    "children": [
+      {
+        "label": "Flu Campaign Portlet",
+        "href": "FluPortlet.html",
+        "title": "Flu Campaign Portlet",
+        "preview": "Assets/Images/FluPortlet.png",
+        "description": "Self-contained seasonal flu campaign portlet with countdown, pie chart, and bar chart, designed for ESR deployment or sandbox preview.",
+        "category": "ESR Web Portlets"
+      }
+    ]
+  },
+  {
     "label": "🗺️ Site Map",
     "href": "SiteMap.html",
     "title": "Site Map",

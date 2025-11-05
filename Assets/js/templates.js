@@ -44,7 +44,11 @@ function renderPlayground(config) {
     );
     const code = templates[config.template](values);
     document.getElementById("output").textContent = code.trim();
-    document.getElementById("previewArea").innerHTML = code;
+
+    const previewEl = document.getElementById("previewArea");
+
+    // inject the markup
+    previewEl.innerHTML = code;
   };
 }
 
@@ -763,4 +767,416 @@ ${fullWidthContent}
   <div id="shared-footer"></div>
 </body>
 </html>`.trim();
+};
+
+// ===============================
+// Flu Campaign Template (full match)
+// ===============================
+templates.fluPortlet = ({
+  campaignTitle,
+  introText,
+  startDate,
+  endDate,
+  infoLink,
+  countdownDate,
+  piePercentage,
+  pieColor,
+  barChart,
+  bookingLink,
+}) => {
+  const barItems = barChart
+    .map(
+      (group) => `
+    { label: "${group.label}", value: ${group.value}, color: "${group.color}", delay: "${group.delay}" }
+  `
+    )
+    .join(",");
+
+  return `
+<div>
+
+<!-- Your Original Styles (Do Not Edit) -->
+<style type="text/css">
+
+ /* Do not edit the css */
+ .Flu_body {
+     margin: 0;
+     font-family: 'Droid Sans', Arial, sans-serif;
+     background: radial-gradient(circle at top left, #005EB8 0%, #003087 100%);
+     color: white;
+ }
+
+ .container {
+     max-width: 960px;
+     margin: auto;
+     padding: 2rem;
+ }
+
+ .Custom_Headings {
+     text-align: center;
+     color: #FAE100;
+     text-shadow: 1px 1px 3px #000;
+ }
+
+ .Custom_Text {
+     font-size: 1rem;
+     line-height: 1.6;
+ }
+
+ .Custom_Link {
+     color: #FAE100;
+     text-decoration: underline;
+ }
+
+ .glass-card {
+     background: rgba(255, 255, 255, 0.1);
+     border-radius: 12px;
+     padding: 1.5rem;
+     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+     backdrop-filter: blur(10px);
+     margin-bottom: 2rem;
+ }
+
+ #countdown {
+     font: 24px 'Droid Sans', Arial, sans-serif;
+     color: white;
+     width: 200px;
+     height: 120px;
+     text-align: center;
+     background: #005EB8;
+     background-image: -webkit-linear-gradient(top, #005EB8, #003087, #003087, #005EB8);
+     background-image: -moz-linear-gradient(top, #005EB8, #003087, #003087, #005EB8);
+     background-image: -ms-linear-gradient(top, #005EB8, #003087, #003087, #005EB8);
+     background-image: -o-linear-gradient(top, #005EB8, #003087, #003087, #005EB8);
+     border: 1px solid #111;
+     border-radius: 5px;
+     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.6);
+     margin: auto;
+     padding: 12px 0;
+     position: relative;
+     top: 0;
+     bottom: 0;
+     left: 0;
+     right: 0;
+ }
+
+ #countdown:before {
+     content: "";
+     width: 8px;
+     height: 60px;
+     background: #444;
+     background-image: -webkit-linear-gradient(top, #555, #41B6E6, #41B6E6, #555);
+     background-image: -moz-linear-gradient(top, #555, #41B6E6, #41B6E6, #555);
+     background-image: -ms-linear-gradient(top, #555, #41B6E6, #41B6E6, #555);
+     background-image: -o-linear-gradient(top, #555, #41B6E6, #41B6E6, #555);
+     border: 1px solid #111;
+     border-top-left-radius: 6px;
+     border-bottom-left-radius: 6px;
+     display: block;
+     position: absolute;
+     top: 20px;
+     left: -8px;
+ }
+
+ #countdown:after {
+     content: "";
+     width: 8px;
+     height: 60px;
+     background: #444;
+     background-image: -webkit-linear-gradient(top, #555, #41B6E6, #41B6E6, #555);
+     background-image: -moz-linear-gradient(top, #555, #41B6E6, #41B6E6, #555);
+     background-image: -ms-linear-gradient(top, #555, #41B6E6, #41B6E6, #555);
+     background-image: -o-linear-gradient(top, #555, #41B6E6, #41B6E6, #555);
+     border: 1px solid #111;
+     border-top-right-radius: 6px;
+     border-bottom-right-radius: 6px;
+     display: block;
+     position: absolute;
+     top: 20px;
+     right: -8px;
+ }
+
+ #countdown #tiles {
+     position: relative;
+     z-index: 1;
+ }
+
+ #countdown #tiles>span {
+     width: 35px;
+     max-width: 35px;
+     font: bold 20px 'Droid Sans', Arial, sans-serif;
+     text-align: center;
+     color: #111;
+     background-color: #ddd;
+     background-image: -webkit-linear-gradient(top, #bbb, #eee);
+     background-image: -moz-linear-gradient(top, #bbb, #eee);
+     background-image: -ms-linear-gradient(top, #bbb, #eee);
+     background-image: -o-linear-gradient(top, #bbb, #eee);
+     border-top: 1px solid #fff;
+     border-radius: 3px;
+     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.7);
+     margin: 0 7px;
+     padding: 4px 0;
+     display: inline-block;
+     position: relative;
+ }
+
+ #countdown #tiles>span:before {
+     content: "";
+     width: 10%;
+     height: 13px;
+     background: #111;
+     display: block;
+     padding: 0 3px;
+     position: absolute;
+     top: 41%;
+     left: -3px;
+     z-index: -1;
+ }
+
+ #countdown #tiles>span:after {
+     content: "";
+     width: 100%;
+     height: 1px;
+     background: #eee;
+     border-top: 1px solid #333;
+     display: block;
+     position: absolute;
+     top: 48%;
+     left: 0;
+ }
+
+ #countdown .CDlabels {
+     width: 120%;
+     height: 25px;
+     text-align: left;
+     position: absolute;
+     bottom: 28px;
+     left: -36px;
+ }
+
+ #countdown .CDlabels li {
+     width: 44px;
+     font: 12px 'Droid Sans', Arial, sans-serif;
+     color: #FAE100;
+     text-shadow: 1px 1px 0px #000;
+     text-align: center;
+     text-transform: uppercase;
+     display: inline-block;
+     left: -40;
+ }
+
+
+ @property --p {
+     syntax: '<number>';
+     inherits: true;
+     initial-value: 0;
+ }
+
+ .piecontainer {
+     margin-left: auto;
+     margin-right: auto;
+     width: 8em
+ }
+
+ .pie {
+     --p: 0;
+     --b: 22px;
+     --c: darkred;
+     --w: 150px;
+
+     width: var(--w);
+     aspect-ratio: 1;
+     position: relative;
+     display: inline-grid;
+     margin: 5px;
+     place-content: center;
+     font-size: 25px;
+     font-weight: bold;
+     font-family: sans-serif;
+
+ }
+
+ .pie:before,
+ .pie:after {
+     content: "";
+     position: absolute;
+     border-radius: 50%;
+ }
+
+ .pie:before {
+     inset: 0;
+     background:
+         radial-gradient(farthest-side, var(--c) 98%, #0000) top/var(--b) var(--b) no-repeat,
+         conic-gradient(var(--c) calc(var(--p)*1%), #0000 0);
+     -webkit-mask: radial-gradient(farthest-side, #0000 calc(99% - var(--b)), #000 calc(100% - var(--b)));
+     mask: radial-gradient(farthest-side, #0000 calc(99% - var(--b)), #000 calc(100% - var(--b)));
+ }
+
+ .pie:after {
+     inset: calc(50% - var(--b)/2);
+     background: var(--c);
+     transform: rotate(calc(var(--p)*3.6deg)) translateY(calc(50% - var(--w)/2));
+ }
+
+ .animate {
+     animation: p 1s .5s both;
+ }
+
+
+
+ @keyframes p {
+     from {
+         --p: 0
+     }
+ }
+
+ .BarChart {
+     animation-name: BarChart;
+ }
+
+ section article.BarChart {
+     width: auto;
+     height: auto;
+ }
+
+ section article.BarChart p {
+     z-index: 2;
+     color: black;
+     mix-blend-mode: difference;
+     padding: 2px;
+     position: relative;
+     box-sizing: content-box;
+     overflow: hidden;
+ }
+
+ section article.BarChart div span:nth-child(2) {
+     z-index: -1;
+     position: absolute;
+     top: 0;
+     bottom: 0;
+     left: 0;
+     right: 0;
+     background: #5E95E8;
+     height: 100%;
+ }
+
+
+ .BarChart {
+     animation: BarChart 1.25s cubic-bezier(0.17, 0.67, 0, 1);
+ }
+
+ @keyframes BarChart {
+     0% {
+         left: -500px;
+         opacity: 0;
+     }
+
+     100% {
+         left: 0;
+         opacity: 1;
+     }
+ }
+                       
+
+</style>
+
+<div class="Flu_body">
+  <div class="container py-5">
+    <div class="glass-card">
+
+      <h1 class="text-center mb-4 Custom_Headings">${campaignTitle}</h1>
+      <p class="Custom_Text">
+        ${introText}
+        <a class="Custom_Link" href="${infoLink}" target="_blank">
+          <span class="Custom_Link">More information about Flu and Myth busters click here.</span>
+        </a>
+      </p>
+      <p class="Custom_Text">This year’s Flu campaign will be running from <strong>${startDate}</strong> to <strong>${endDate}</strong>.</p>
+
+      <!-- Countdown -->
+      <div class="card-body">
+        <div id="countdown">
+          <div id="tiles"></div>
+          <div class="CDlabels">
+            <ul>
+              <li class="Custom_Text">Days</li>
+              <li class="Custom_Text">Hours</li>
+              <li class="Custom_Text">Mins</li>
+              <li class="Custom_Text">Secs</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pie Chart -->
+      <h2 class="mt-5 Custom_Headings">Current Progress for Flu Vaccinations</h2>
+      <p class="Custom_Text">The current uptake is as follows:</p>
+      <div id="pieChartContainer" class="piecontainer text-center"></div>
+
+      <!-- Bar Chart -->
+      <section id="BarChart" class="toad-fullscreen">
+        <article class="BarChart" id="barChartContainer"></article>
+      </section>
+
+      <!-- Booking Button -->
+      <h2 class="mt-5 Custom_Headings">Arranging your vaccination</h2>
+      <p class="Custom_Text">
+        <a class="btn btn-primary btn-block Custom_Link" href="${bookingLink}" target="_blank">
+          Please Book your Flu Jab via the Staff Portal
+        </a>
+      </p>
+
+    </div>
+  </div>
+</div>
+
+<!-- Central Config Object -->
+<script>
+  (() => {
+    const fluConfig = {
+      countdownDate: "${countdownDate}",
+      pieChart: { percentage: ${piePercentage}, color: "${pieColor}" },
+      barChart: [${barItems}]
+    };
+
+    // Countdown
+    const target_date_flu = new Date(fluConfig.countdownDate);
+    const countdown_tiles = document.querySelector("#tiles");
+
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+    function getCountdown(target_date, target_html) {
+      const current_date = new Date().getTime();
+      let seconds_left = (target_date - current_date) / 1000;
+      const days = pad(parseInt(seconds_left / 86400)); seconds_left %= 86400;
+      const hours = pad(parseInt(seconds_left / 3600)); seconds_left %= 3600;
+      const minutes = pad(parseInt(seconds_left / 60));
+      const seconds = pad(parseInt(seconds_left % 60));
+      target_html.innerHTML = \`<span>\${days}</span><span>\${hours}</span><span>\${minutes}</span><span>\${seconds}</span>\`;
+    }
+    getCountdown(target_date_flu, countdown_tiles);
+    setInterval(() => getCountdown(target_date_flu, countdown_tiles), 1000);
+
+    // Pie Chart
+    const pie = document.createElement("div");
+    pie.className = "pie animate";
+    pie.style = \`--p:\${fluConfig.pieChart.percentage};--c:\${fluConfig.pieChart.color}\`;
+    pie.textContent = \`\${fluConfig.pieChart.percentage}%\`;
+    document.getElementById("pieChartContainer").appendChild(pie);
+
+    // Bar Chart
+    const barContainer = document.getElementById("barChartContainer");
+    fluConfig.barChart.forEach(group => {
+      const div = document.createElement("div");
+      div.innerHTML = \`
+        <p class="Custom_Text" style="margin:0;">\${group.label} - \${group.value}%<span></span>
+        <span class="BarChart" style="width:\${group.value}%;animation-delay:\${group.delay};background-color:\${group.color};"></span></p>
+      \`;
+      barContainer.appendChild(div);
+    });
+  })();
+  console.log("IIFE ran")
+  </script>
+</div>
+  `.trim();
 };
