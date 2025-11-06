@@ -99,7 +99,6 @@ templates.accessibilityFlag = ({ flagText }) => `
 templates.alert = ({ alertType, alertTitle, alertMessage }) => `
   <div class="alert alert-${alertType} alert-dismissible fade show" role="alert">
     <strong>${alertTitle}</strong> ${alertMessage}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>`;
 
 // ===============================
@@ -187,42 +186,87 @@ classDiagram
 // Carousel Template (repeatable form)
 // ===============================
 templates.carousel = ({ carouselId, slides }) => {
-  const indicators = slides
+  // Indicators
+  const indicatorsBS5 = slides
     .map(
       (s, i) => `
-      <button type="button" data-bs-target="#${carouselId}" data-bs-slide-to="${i}" 
-        ${
-          i === 0 ? 'class="active" aria-current="true"' : ""
-        } aria-label="Slide ${i + 1}"></button>`
+    <button type="button" data-bs-target="#${carouselId}BS5" data-bs-slide-to="${i}"
+      ${i === 0 ? 'class="active" aria-current="true"' : ""}
+      aria-label="Slide ${i + 1}"></button>`
     )
     .join("");
 
-  const items = slides
+  const indicatorsBS4 = slides
     .map(
       (s, i) => `
-      <div class="carousel-item ${i === 0 ? "active" : ""}">
-        <img src="${s.img}" class="d-block w-100" alt="${s.alt}">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>${s.title}</h5>
-          <p>${s.caption}</p>
-        </div>
-      </div>`
+    <li data-target="#${carouselId}BS4" data-slide-to="${i}" ${
+        i === 0 ? 'class="active"' : ""
+      }></li>`
     )
     .join("");
 
-  return `
-<div id="${carouselId}" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-indicators">${indicators}</div>
-  <div class="carousel-inner">${items}</div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#${carouselId}" data-bs-slide="prev">
+  // Items
+  const itemsBS5 = slides
+    .map(
+      (s, i) => `
+    <div class="carousel-item ${i === 0 ? "active" : ""}">
+      <img src="${s.img}" class="d-block w-100" alt="${s.alt}">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>${s.title}</h5>
+        <p>${s.caption}</p>
+      </div>
+    </div>`
+    )
+    .join("");
+
+  const itemsBS4 = slides
+    .map(
+      (s, i) => `
+    <div class="carousel-item ${i === 0 ? "active" : ""}">
+      <img src="${s.img}" class="d-block w-100" alt="${s.alt}">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>${s.title}</h5>
+        <p>${s.caption}</p>
+      </div>
+    </div>`
+    )
+    .join("");
+
+  return {
+    bs5: `
+<!-- ============================= -->
+<!-- Website (Bootstrap 5) version -->
+<!-- ============================= -->
+<div id="${carouselId}BS5" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">${indicatorsBS5}</div>
+  <div class="carousel-inner">${itemsBS5}</div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#${carouselId}BS5" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
   </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#${carouselId}" data-bs-slide="next">
+  <button class="carousel-control-next" type="button" data-bs-target="#${carouselId}BS5" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
-</div>`;
+</div>`,
+
+    bs4: `
+<!-- ============================= -->
+<!-- ESR (Bootstrap 4) version     -->
+<!-- ============================= -->
+<div id="${carouselId}BS4" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">${indicatorsBS4}</ol>
+  <div class="carousel-inner">${itemsBS4}</div>
+  <a class="carousel-control-prev" href="#${carouselId}BS4" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#${carouselId}BS4" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>`,
+  };
 };
 
 // ===============================
@@ -555,16 +599,17 @@ ${transitionLines}
 // Tabs Template
 // ===============================
 templates.tabs = ({ id, tabs }) => {
-  const navItems = tabs
+  // Build nav items for BS5 (buttons)
+  const navItemsBS5 = tabs
     .map(
       (t, i) => `
     <li class="nav-item" role="presentation">
       <button class="nav-link ${i === 0 ? "active" : ""}" 
-              id="tabBtn${id}${i}" 
+              id="tabBtn${id}BS5${i}" 
               data-bs-toggle="tab" 
-              data-bs-target="#tabPane${id}${i}" 
+              data-bs-target="#tabPane${id}BS5${i}" 
               type="button" role="tab" 
-              aria-controls="tabPane${id}${i}" 
+              aria-controls="tabPane${id}BS5${i}" 
               aria-selected="${i === 0 ? "true" : "false"}">
         ${t.label}
       </button>
@@ -572,26 +617,71 @@ templates.tabs = ({ id, tabs }) => {
     )
     .join("");
 
-  const tabPanes = tabs
+  const tabPanesBS5 = tabs
     .map(
       (t, i) => `
     <div class="tab-pane fade ${i === 0 ? "show active" : ""}" 
-         id="tabPane${id}${i}" 
+         id="tabPane${id}BS5${i}" 
          role="tabpanel" 
-         aria-labelledby="tabBtn${id}${i}">
+         aria-labelledby="tabBtn${id}BS5${i}">
       <p>${t.content}</p>
     </div>`
     )
     .join("");
 
-  return `
-<ul class="nav nav-tabs" id="tabNav${id}" role="tablist">
-  ${navItems}
-</ul>
+  // Build nav items for BS4 (anchors)
+  const navItemsBS4 = tabs
+    .map(
+      (t, i) => `
+    <li class="nav-item">
+      <a class="nav-link ${i === 0 ? "active" : ""}" 
+         id="tabBtn${id}BS4${i}" 
+         data-toggle="tab" 
+         href="#tabPane${id}BS4${i}" 
+         role="tab" 
+         aria-controls="tabPane${id}BS4${i}" 
+         aria-selected="${i === 0 ? "true" : "false"}">
+        ${t.label}
+      </a>
+    </li>`
+    )
+    .join("");
 
-<div class="tab-content" id="tabContent${id}">
-  ${tabPanes}
-</div>`;
+  const tabPanesBS4 = tabs
+    .map(
+      (t, i) => `
+    <div class="tab-pane fade ${i === 0 ? "show active" : ""}" 
+         id="tabPane${id}BS4${i}" 
+         role="tabpanel" 
+         aria-labelledby="tabBtn${id}BS4${i}">
+      <p>${t.content}</p>
+    </div>`
+    )
+    .join("");
+
+  return {
+    bs5: `
+<!-- ============================= -->
+<!-- Website (Bootstrap 5) version -->
+<!-- ============================= -->
+<ul class="nav nav-tabs" id="tabNav${id}BS5" role="tablist">
+  ${navItemsBS5}
+</ul>
+<div class="tab-content" id="tabContent${id}BS5">
+  ${tabPanesBS5}
+</div>`,
+
+    bs4: `
+<!-- ============================= -->
+<!-- ESR (Bootstrap 4) version     -->
+<!-- ============================= -->
+<ul class="nav nav-tabs" id="tabNav${id}BS4" role="tablist">
+  ${navItemsBS4}
+</ul>
+<div class="tab-content" id="tabContent${id}BS4">
+  ${tabPanesBS4}
+</div>`,
+  };
 };
 
 // ===============================
@@ -623,21 +713,38 @@ templates.tipBox = ({ title, body }) => `
 // ===============================
 // Bootstrap Collapse Template
 // ===============================
-templates.collapseSection = ({ id, label, content }) => `
+templates.collapseSection = ({ id, label, content }) => ({
+  bs5: `
+  <!-- ============================================= -->
+<!-- Website (Bootstrap 5) version -->
+<!-- ============================================= -->
 <button class="btn btn-primary w-100 text-start mb-2"
         type="button"
         data-bs-toggle="collapse"
-        data-bs-target="#${id}"
+        data-bs-target="#${id}-bs5"
         aria-expanded="false"
-        aria-controls="${id}">
+        aria-controls="${id}-bs5">
   ${label}
 </button>
-
-<div class="collapse mt-3" id="${id}">
-  <div class="card card-body">
-    ${content}
-  </div>
-</div>`;
+<div class="collapse mt-3" id="${id}-bs5">
+  <div class="card card-body">${content}</div>
+</div>`,
+  bs4: `
+  <!-- ============================================= -->
+<!-- ESR (Bootstrap 4) version  (For use in ESR)   -->
+<!-- ============================================= -->
+<button class="btn btn-primary w-100 text-left mb-2"
+        type="button"
+        data-toggle="collapse"
+        data-target="#${id}-bs4"
+        aria-expanded="false"
+        aria-controls="${id}-bs4">
+  ${label}
+</button>
+<div class="collapse mt-3" id="${id}-bs4">
+  <div class="card card-body">${content}</div>
+</div>`,
+});
 
 // ===============================
 // Update Banner Template

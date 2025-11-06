@@ -220,9 +220,15 @@
                                 content: r.querySelector('[name="content"]').value.trim()
                             }));
                             const id = "01"; // could randomize or increment for uniqueness
-                            const code = templates.tabs({ id, tabs });
-                            document.getElementById("output").textContent = code;
-                            document.getElementById("previewArea").innerHTML = code;
+                            // Our template now returns { bs5: "...", bs4: "..." }
+                            const snippets = templates.tabs({ id, tabs });
+
+                            // Output both versions with headers
+                            document.getElementById("output").textContent =
+                                `${snippets.bs5}\n\n${snippets.bs4}`.trim();
+
+                            // Preview only BS5
+                            document.getElementById("previewArea").innerHTML = snippets.bs5;
                         };
                     });
 

@@ -240,10 +240,14 @@
                 fields: [
                     {
                         id: "alertType", label: "Alert Type", type: "select", options: [
+                            { value: "primary", label: "Primary (blue)" },
+                            { value: "secondary", label: "Secondary (gray)" },
                             { value: "success", label: "Success (green)" },
                             { value: "danger", label: "Danger (red)" },
                             { value: "warning", label: "Warning (yellow)" },
-                            { value: "info", label: "Info (blue)" }
+                            { value: "info", label: "Info (light blue)" },
+                            { value: "light", label: "Light (white/gray)" },
+                            { value: "dark", label: "Dark (black/gray)" }
                         ], default: "success"
                     },
                     { id: "alertTitle", label: "Alert Title", type: "text", default: "Success!" },

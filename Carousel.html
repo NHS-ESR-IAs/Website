@@ -298,9 +298,14 @@
                             };
                         });
 
-                        const code = templates.carousel({ carouselId: "carouselJoy", slides });
-                        document.getElementById("output").textContent = code.trim();
-                        document.getElementById("previewArea").innerHTML = code;
+                        const id = "carousel01";
+                        const snippets = templates.carousel({ carouselId: id, slides });
+
+                        // Output both
+                        document.getElementById("output").textContent = `${snippets.bs5}\n\n${snippets.bs4}`.trim();
+
+                        // Preview only BS5
+                        document.getElementById("previewArea").innerHTML = snippets.bs5;
                     };
                 });
 

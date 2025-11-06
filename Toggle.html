@@ -182,11 +182,13 @@
                     content: contentEl.value.trim() || "Content goes here."
                 };
 
-                const code = templates.collapseSection(values);
-                outputEl.textContent = code.trim();
+                const snippets = templates.collapseSection(values);
 
-                // Render preview
-                previewEl.innerHTML = code;
+                // Output both versions with headers
+                outputEl.textContent = `Website (Bootstrap 5):\n${snippets.bs5}\n\nESR (Bootstrap 4):\n${snippets.bs4}`.trim();
+
+                // Preview only BS5
+                previewEl.innerHTML = snippets.bs5;
 
                 // Optional: reset collapse state for preview (if Bootstrap JS is present)
                 if (window.bootstrap) {
