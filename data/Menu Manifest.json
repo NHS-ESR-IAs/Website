@@ -336,15 +336,15 @@
         "preview": "Assets/Images/FluPortlet.png",
         "description": "Self-contained seasonal flu campaign portlet with countdown, pie chart, and bar chart, designed for ESR deployment or sandbox preview.",
         "category": "ESR Web Portlets"
-      }
+      },
       {
-  "label": "✅Microsite Portlet",
-  "href": "Microsite.html",
-  "title": "✅Microsite Portlet",
-  "preview": "Assets/Images/Microsite.png",
-  "description": "Dynamic microsite generator with launcher, starter page, and contributor-friendly page hierarchy. Includes NHS Blue styling, Bootstrap 4 navbar with dropdowns, and modular layouts for ESR deployment or sandbox preview.",
-  "category": "ESR Web Portlets"
-}
+        "label": "✅Microsite Portlet",
+        "href": "Microsite.html",
+        "title": "✅Microsite Portlet",
+        "preview": "Assets/Images/Microsite.png",
+        "description": "Dynamic microsite generator with launcher, starter page, and contributor-friendly page hierarchy. Includes NHS Blue styling, Bootstrap 4 navbar with dropdowns, and modular layouts for ESR deployment or sandbox preview.",
+        "category": "ESR Web Portlets"
+      }
     ]
   },
   {
