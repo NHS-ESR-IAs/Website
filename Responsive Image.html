@@ -168,7 +168,66 @@
                 fields: [
                     { id: "src", label: "Image URL", type: "text", default: "https://cdn.ebaumsworld.com/mediaFiles/picture/2475828/85493615.jpg" },
                     { id: "alt", label: "Alt Text", type: "text", default: "Dog with a suspicious stare" },
-                    { id: "caption", label: "Caption", type: "text", default: "When someone says ‘just one more tweak’ to the scroll-collapse logic." }
+                    { id: "caption", label: "Caption", type: "text", default: "When someone says ‘just one more tweak’ to the scroll-collapse logic." },
+
+                    // Shape options
+                    {
+                        id: "shape", label: "Shape", type: "select", options: [
+                            { value: "rounded", label: "Rounded corners" },
+                            { value: "rounded-circle", label: "Circle" },
+                            { value: "img-thumbnail", label: "Thumbnail" },
+                            { value: "", label: "None" }
+                        ], default: "rounded"
+                    },
+
+                    // Alignment options
+                    {
+                        id: "alignment", label: "Alignment", type: "select", options: [
+                            { value: "mx-auto d-block", label: "Centered" },
+                            { value: "float-start", label: "Float left" },
+                            { value: "float-end", label: "Float right" }
+                        ], default: "mx-auto d-block"
+                    },
+
+                    // Shadow toggle
+                    {
+                        id: "shadow", label: "Shadow", type: "select", options: [
+                            { value: "", label: "None" },
+                            { value: "shadow-sm", label: "Small shadow" },
+                            { value: "shadow", label: "Regular shadow" },
+                            { value: "shadow-lg", label: "Large shadow" }
+                        ], default: "shadow-sm"
+                    },
+
+                    // Border toggle
+                    {
+                        id: "border", label: "Border", type: "select", options: [
+                            { value: "", label: "None" },
+                            { value: "border", label: "Border (default)" },
+                            { value: "border-primary", label: "Border (primary)" },
+                            { value: "border-secondary", label: "Border (secondary)" }
+                        ], default: ""
+                    },
+
+                    // Max width
+                    { id: "maxWidth", label: "Max Width (%)", type: "text", default: "100" },
+
+                    // Lazy loading
+                    {
+                        id: "lazy", label: "Lazy Loading", type: "select", options: [
+                            { value: "", label: "Disabled" },
+                            { value: "lazy", label: "Enabled" }
+                        ], default: "lazy"
+                    },
+
+                    // Caption style
+                    {
+                        id: "captionStyle", label: "Caption Style", type: "select", options: [
+                            { value: "text-muted", label: "Muted" },
+                            { value: "fw-bold", label: "Bold" },
+                            { value: "text-primary", label: "Primary colour" }
+                        ], default: "text-muted"
+                    }
                 ],
                 template: "imageBlock"
             };

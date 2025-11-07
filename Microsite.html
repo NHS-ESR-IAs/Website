@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MicroSiteKit – Page Code</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom Styles -->
+    <link href="Assets/css/style.css" rel="stylesheet" />
+
+    <!-- Mermaid Setup -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script type="module">
+        import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+        mermaid.initialize({ startOnLoad: false });
+        window.mermaid = mermaid;
+    </script>
+</head>
+
+<body class="glass">
+    <!-- Injected Partials -->
+    <div id="shared-header"></div>
+    <div id="main-nav"></div>
+    <div id="sidebar-nav"></div>
+
+    <!-- Page-Specific Content -->
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" id="breadcrumb"></ol>
+        </nav>
+        <div class="row">
+            <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center">
+                <h3 class="gradient-text">Page Code</h3>
+            </div>
+            <div class="col-md-8">
+                <div class="page-intro text-center py-4 px-3">
+                    <!-- Replace this block with your page-specific content -->
+                    <p>This page scaffold is your layout launcher—perfect for building modular, theme-safe microsite
+                        pages with
+                        expressive sidebars, warm introductions, and full-width content zones. It’s the dohicky behind
+                        the
+                        dohickies.</p>
+
+                    <ul>
+                        <li>🧱 Modular and reusable—drop in any snippet, layout, or onboarding flow</li>
+                        <li>🎨 Theme-safe and layout-friendly—harmonises across microsites</li>
+                        <li>🧼 Keeps structure clean, scannable, and contributor-first</li>
+                        <li>🧩 Supports gradient sidebars, intro blocks, and full-width content zones</li>
+                    </ul>
+
+                    <p>Use it to say “Here’s a role card page,” “This one’s for tip boxes,” or “Let’s build a dohicky
+                        dashboard”—whatever sparks clarity and modular joy.</p>
+                    <p><b>If you don't specify a parent page when creating pages, the playground will render them as
+                            main section headers.</b></p>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- Starter form lives outside pagesContainer -->
+        <div class="col-md border border-info rounded p-3">
+            <section class="playground mt-5">
+                <h3>📄 Page Code Playground</h3>
+
+                <!-- 🚀 Microsite Launcher -->
+                <div class="col-md border border-info rounded p-3 mb-4">
+                    <h3>🚀 Microsite Launcher</h3>
+
+                    <div class="mb-2">
+                        <label class="form-label">Launcher Image URL</label>
+                        <input type="text" id="launcherImage" class="form-control"
+                            value="https://assets.codepen.io/8889025/BSA_Veterans.png">
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label">Launcher Title</label>
+                        <input type="text" id="launcherTitle" class="form-control" value="HM Forces Veterans">
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label">Launcher Intro Text</label>
+                        <textarea id="launcherIntro" class="form-control" rows="3">
+As part of the NHS family, we recognise the invaluable skills and experiences that you, our colleagues who are HM Forces Veterans, bring to our organisation.
+        </textarea>
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label">Launcher Button Label</label>
+                        <input type="text" id="launcherButton" class="form-control" value="HM Forces Veterans">
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label">Launcher Target Page ID</label>
+                        <input type="text" id="launcherTarget" class="form-control" value="ESR_MS">
+                    </div>
+                </div>
+
+                <!-- 📝 Starter Page -->
+                <div class="starter-form">
+                    <div class="mb-2">
+                        <label class="form-label">Page ID</label>
+                        <input type="text" id="PageId" name="pageId" class="form-control" value="ESR_MS">
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label">Parent Page</label>
+                        <select name="parentId" class="form-select">
+                            <option value="">Top-level</option>
+                            <!-- dynamically populate with existing IDs -->
+                        </select>
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label">Banner Title</label>
+                        <input type="text" id="bannerTitle" class="form-control" value="Veterans Hub">
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label">Banner Logo URL</label>
+                        <input type="text" id="bannerLogo" class="form-control"
+                            value="https://assets.codepen.io/8889025/BSA_Veterans.png">
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label">Full Width Section (HTML)</label>
+                        <textarea id="section1" class="form-control" rows="3"><p>Welcome to the hub…</p></textarea>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-md-5">
+                            <label>Left Column (40%)</label>
+                            <textarea name="col40" class="form-control" rows="6"><p>Left column content</p></textarea>
+                        </div>
+                        <div class="col-md-7">
+                            <label>Right Column (60%)</label>
+                            <textarea name="col60" class="form-control" rows="6"><p>Right column content</p></textarea>
+                        </div>
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label">Final Full Width Section (HTML)</label>
+                        <textarea id="section2" class="form-control" rows="3"><p>Closing notes…</p></textarea>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Dynamic pages container -->
+        <div class="row mt-4" id="pagesContainer">
+            <!-- new pages get appended here -->
+        </div>
+        <div class="row mt-4">
+            <div class="col-md border border-info rounded p-3">
+                <div class="mb-3">
+                    <div id="pagesContainer"></div>
+                    <button type="button" class="btn btn-success my-2" id="addPageBtn">➕ Add Page</button>
+                    <div class="dohicky-grid">
+                        <div class="dohicky-item"><button type="button" id="generateBtn"
+                                class="btn btn-primary w-100">Generate Code</button></div>
+                        <div class="dohicky-item"><button type="button" class="btn btn-primary w-100"
+                                onclick="copyCode()">Copy</button></div>
+                        <div class="dohicky-item"><button type="button" class="btn btn-primary w-100"
+                                onclick="exportConfig()">💾 Save Settings</button></div>
+                        <div class="dohicky-item"> <input type="file" id="configFile" accept=".txt"
+                                style="display:none" />
+                            <button type="button" class="btn btn-primary w-100"
+                                onclick="document.getElementById('configFile').click()">📂 Load Settings</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border border-secondary rounded p-3 mb-3">
+                    <h5>Generated Code</h5>
+                    <pre><code id="output"></code></pre>
+
+                </div>
+
+                <div class="border border-secondary rounded p-3">
+                    <h5>Live Preview</h5>
+                    <div id="previewArea"></div>
+                </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div id="shared-footer"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+    <!-- Custom JS -->
+    <script src="Assets/js/templates.js"></script>
+    <script src="Assets/js/script.js"></script>
+
+    <script>
+        // Grab the initial form's Page ID and add it to createdPageIds
+        document.addEventListener("DOMContentLoaded", () => {
+            const starterIdInput = document.querySelector("#PageId"); // your static input
+            if (starterIdInput) {
+                const starterId = starterIdInput.value.trim();
+                if (starterId) {
+                    createdPageIds.push(starterId);
+                }
+            }
+        });
+
+        let pageCounter = 0;
+        const createdPageIds = []; // track all created IDs
+
+        function generatePageId() {
+            pageCounter++;
+            const base = document.getElementById("PageId")?.value.trim() || "Page";
+            return `${base}${String(pageCounter).padStart(2, "0")}`;
+        }
+
+        function addPageForm() {
+            const id = generatePageId();
+            // Now record this new page ID
+            createdPageIds.push(id);
+            const container = document.getElementById("pagesContainer");
+
+            // Build parent options dynamically from existing IDs (before adding this one)
+            const parentOptions = createdPageIds
+                .map(pid => `<option value="${pid}">${pid}</option>`)
+                .join("");
+
+            const formBlock = document.createElement("div");
+            formBlock.className = "border rounded p-3 mb-3";
+            formBlock.innerHTML = `
+    <h5>Page ${id}</h5>
+    <input type="hidden" name="pageId" value="${id}">
+    <div class="mb-2">
+      <label class="form-label">Parent Page ID <span class="text-danger">*</span></label>
+      <select name="parentId" class="form-select" required>
+        <option value="" disabled selected>Select a parent page</option>
+        ${parentOptions}
+      </select>
+    </div>
+    <div class="mb-2">
+      <label>Banner Title</label>
+      <input type="text" name="bannerTitle" class="form-control" value="Veterans Hub">
+    </div>
+    <div class="mb-2">
+      <label>Banner Logo URL</label>
+      <input type="text" name="bannerLogo" class="form-control" value="https://assets.codepen.io/8889025/BSA_Veterans.png">
+    </div>
+    <div class="mb-2">
+      <label>Full Width Section</label>
+      <textarea name="section1" class="form-control" rows="3"><p>Welcome…</p></textarea>
+    </div>
+    <div class="row mb-2">
+      <div class="col-md-5">
+        <label>Left Column (40%)</label>
+        <textarea name="col40" class="form-control" rows="6"><p>Left column content</p></textarea>
+      </div>
+      <div class="col-md-7">
+        <label>Right Column (60%)</label>
+        <textarea name="col60" class="form-control" rows="6"><p>Right column content</p></textarea>
+      </div>
+    </div>
+    <div class="mb-2">
+      <label>Final Full Width Section</label>
+      <textarea name="section2" class="form-control" rows="3"><p>Closing notes…</p></textarea>
+    </div>
+    <button type="button" class="btn btn-danger btn-sm deletePageBtn">🗑 Delete Page</button>
+  `;
+
+            // Delete handler
+            formBlock.querySelector(".deletePageBtn").onclick = () => {
+                container.removeChild(formBlock);
+                const idx = createdPageIds.indexOf(id);
+                if (idx > -1) createdPageIds.splice(idx, 1);
+            };
+
+            container.appendChild(formBlock);
+
+
+        }
+
+        document.getElementById("addPageBtn").onclick = addPageForm;
+
+
+        // Seed createdPageIds with the starter form's ID at load
+        document.addEventListener("DOMContentLoaded", () => {
+            const starterIdInput = document.querySelector("#PageId");
+            if (starterIdInput) {
+                const starterId = starterIdInput.value.trim();
+                if (starterId) createdPageIds.push(starterId);
+            }
+        });
+
+
+
+        const micrositeCSS = `
+<style>
+  .vetContainer {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .vetItem {}
+
+  .vetImage {
+    height: auto;
+    max-width: auto;
+  }
+
+  /*
+
+*/
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1rem;
+  }
+
+  .grid-container2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px));
+  }
+
+  .grid-item {
+    background-color: white;
+    color: black;
+    padding: 2px;
+  }
+
+  .ImgButtons {
+    width: 100px;
+  }
+
+  .sidenav {
+    height: 100%;
+    Display: None;
+    position: fixed;
+    z-index: 10000;
+    top: 0;
+    left: 0;
+    border-style: solid;
+    background-color: white;
+    border-width: thin;
+    border-color: #41B6E6;
+    overflow-x: hidden;
+    transition: 0s;
+    padding-top: 60px;
+    width:100%;
+  }
+
+  .closebtn {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 12px;
+    color: #FFFFFF display: block;
+    transition: 0.3s;
+  }
+
+  .closebtn:hover {
+    color: #f1f1f1;
+  }
+
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0px;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+
+  .Logo {
+    float: left;
+    padding-right: 10px;
+    padding-left: 10px;
+    max-height: 100px;
+  }
+
+  .Nav_Logo {
+    float: left;
+    padding: 10px;
+    max-height: 100px;
+  }
+
+  .NHSEButtons {
+    text-align: left;
+  }
+
+  .dashboard_img {
+    border-radius: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    padding: 5px;
+  }
+
+  .VetIframe {
+    position: relative;
+    height: 600px;
+    width: 100%;
+  }
+
+
+</style>
+`;
+
+        const micrositeJS = `
+<script>
+  function hideElementsByClass(className) {
+    document.querySelectorAll("." + className).forEach(function(element) {
+      element.style.display = "none";
+    });
+  }
+
+  function showElementsByID(IDName) {
+    document.querySelectorAll("#" + IDName).forEach(function(element) {
+      element.style.display = "inline";
+    });
+  }
+
+  document.onreadystatechange = function() {
+    if (document.readyState == "complete") {
+      var contactWidgetLink = document.querySelector("#mpi_ContactModal").getAttribute("href");
+      document.getElementById("VetPersonalDetails").setAttribute("href", contactWidgetLink);
+    }
+  }
+<\/script>
+`;
+
+
+        // Generate button handler
+        document.getElementById("generateBtn").onclick = () => {
+            let code = micrositeCSS + "\n\n";
+
+            // 🚀 Launcher block
+            const launcherValues = {
+                image: document.getElementById("launcherImage")?.value.trim() || "",
+                title: document.getElementById("launcherTitle")?.value.trim() || "",
+                intro: document.getElementById("launcherIntro")?.value.trim() || "",
+                button: document.getElementById("launcherButton")?.value.trim() || "",
+                target: document.getElementById("launcherTarget")?.value.trim() || ""
+            };
+            code += templates.launcher(launcherValues) + "\n\n";
+
+            // 📝 Starter page
+            const starterValues = {
+                id: document.getElementById("PageId")?.value.trim() || "ESR_MS",
+                parentId: document.querySelector("[name='parentId']")?.value || "",
+                bannerTitle: document.getElementById("bannerTitle")?.value.trim() || "",
+                bannerLogo: document.getElementById("bannerLogo")?.value.trim() || "",
+                section1: document.getElementById("section1")?.value || "",
+                col40: document.querySelector("[name='col40']")?.value || "",
+                col60: document.querySelector("[name='col60']")?.value || "",
+                section2: document.getElementById("section2")?.value || ""
+            };
+
+            if (!createdPageIds.includes(starterValues.id)) {
+                createdPageIds.unshift(starterValues.id);
+            }
+
+            // 📄 Collect dynamic pages
+            const dynamicPages = [];
+            const pageForms = document.querySelectorAll("#pagesContainer > div.border");
+            pageForms.forEach(formBlock => {
+                const get = name => formBlock.querySelector(`[name='${name}']`);
+                const values = {
+                    id: get("pageId")?.value?.trim() || "",
+                    parentId: get("parentId")?.value || "",
+                    bannerTitle: get("bannerTitle")?.value?.trim() || "",
+                    bannerLogo: get("bannerLogo")?.value?.trim() || "",
+                    section1: get("section1")?.value || "",
+                    col40: get("col40")?.value || "",
+                    col60: get("col60")?.value || "",
+                    section2: get("section2")?.value || ""
+                };
+
+                if (!values.id) {
+                    alert("Each page must have an ID. Please fill in the Page ID.");
+                    return;
+                }
+
+                dynamicPages.push(values);
+            });
+
+            // 👇 Build allPages once
+            const allPages = [starterValues, ...dynamicPages];
+
+            // Render starter + dynamic pages with navbar
+            code += templates.basicPage(starterValues, allPages) + "\n\n";
+            dynamicPages.forEach(p => {
+                code += templates.basicPage(p, allPages) + "\n\n";
+            });
+
+            // 📜 Append JS
+            code += micrositeJS;
+
+            // Output + Preview
+            document.getElementById("output").textContent = code.trim();
+            document.getElementById("previewArea").innerHTML = code;
+        };
+
+        // Copy helper
+        function copyCode() {
+            const text = document.getElementById("output").textContent;
+            navigator.clipboard.writeText(text);
+            alert("Code copied!");
+        }
+    </script>
+</body>
+
+</html>

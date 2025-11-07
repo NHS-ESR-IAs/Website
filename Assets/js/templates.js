@@ -523,14 +523,28 @@ templates.quoteBox = ({ quote, author }) => `
 // ===============================
 // Image Template
 // ===============================
-templates.imageBlock = ({ src, alt, caption }) => `
+templates.imageBlock = ({
+  src,
+  alt,
+  caption,
+  shape,
+  alignment,
+  shadow,
+  border,
+  maxWidth,
+  lazy,
+  captionStyle,
+}) => `
 <div class="text-center">
   <img src="${src}"
        alt="${alt}"
-       class="img-fluid rounded shadow-sm"
-       style="max-width: 100%; height: auto;">
+       class="img-fluid ${shape} ${alignment} ${shadow} ${border}"
+       style="max-width: ${maxWidth}%; height: auto;"
+       ${lazy ? `loading="${lazy}"` : ""}>
   ${
-    caption ? `<small class="d-block mt-2 text-muted">“${caption}”</small>` : ""
+    caption
+      ? `<small class="d-block mt-2 ${captionStyle}">“${caption}”</small>`
+      : ""
   }
 </div>`;
 
@@ -915,7 +929,6 @@ templates.fluPortlet = ({
   return `
 <div>
 
-<!-- Your Original Styles (Do Not Edit) -->
 <style type="text/css">
 
  /* Do not edit the css */
@@ -1231,7 +1244,7 @@ ${
 
       <!-- Countdown -->
       <div class="card-body">
-        <div id="countdown">
+        <div id="countdown">Countdown
           <div id="tiles"></div>
           <div class="CDlabels">
             <ul>
@@ -1321,3 +1334,131 @@ ${
 </div>
   `.trim();
 };
+
+// Assets/js/templates.js
+window.templates = {};
+
+// Define this once, alongside templates.basicPage
+templates.launcher = ({ image, title, intro, button, target }) => `
+<div class="vetContainer">
+  <div class="vetItem">
+    <img src="${image}" alt="${title}" class="responsive vetImage">
+  </div>
+  <div class="alert alert-primary">
+    <h4 style="text-align:center;">${title}</h4>
+    <p>${intro}</p>
+  </div>
+  <div>
+    <a href="#" onclick="showElementsByID('${target}');"
+       class="btn btn-primary btn-block" role="button">${button}</a>
+  </div>
+</div>
+`;
+
+templates.navbar = (pages) => {
+  // Build a lookup of parent -> children
+  const tree = {};
+  pages.forEach((p) => {
+    const parent = p.parentId || "root";
+    if (!tree[parent]) tree[parent] = [];
+    tree[parent].push(p);
+  });
+
+  // Recursive renderer
+  const renderItems = (parent) => {
+    if (!tree[parent]) return "";
+    return tree[parent]
+      .map((p) => {
+        const children = renderItems(p.id);
+        if (children) {
+          // Dropdown for pages with children
+          return `
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="nav-${p.id}" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                ${p.bannerTitle}
+              </a>
+              <div class="dropdown-menu" aria-labelledby="nav-${p.id}">
+                ${children}
+              </div>
+            </li>
+          `;
+        } else {
+          // Simple link
+          return `
+            <a class="dropdown-item" href="#" onclick="showElementsByID('${p.id}')">${p.bannerTitle}</a>
+          `;
+        }
+      })
+      .join("");
+  };
+
+  // Top-level navbar (BS4)
+  return `
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">${pages[0]?.bannerTitle || "Home"}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarPages"
+                aria-controls="navbarPages" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarPages">
+          <ul class="navbar-nav mr-auto">
+            ${renderItems("root")}
+          </ul>
+        </div>
+      </div>
+    </nav>
+  `;
+};
+
+// basicPage now accepts two arguments: the page values AND allPages
+templates.basicPage = (
+  { id, parentId, bannerTitle, bannerLogo, section1, col40, col60, section2 },
+  allPages
+) => `
+<div class="sidenav" id="${id}">
+  <a class="closebtn" href="#"
+     onclick="hideElementsByClass('sidenav');${
+       parentId ? `showElementsByID('${parentId}')` : ""
+     }">×</a>
+
+  <div class="container LayoutParent">
+    <!-- Header / Banner -->
+    <div class="row">
+      <div class="col-12 Layout1" style="background-color:#005EB8; color:white; padding:1rem; border-radius:4px; text-align:center; box-shadow:0 2px 6px rgba(0,0,0,0.2);">
+        ${
+          bannerLogo
+            ? `<img class="Logo" src="${bannerLogo}" alt="${bannerTitle}">`
+            : ""
+        }
+        <h3>${bannerTitle}</h3>
+        ${templates.navbar(allPages)}
+      </div>
+    </div>
+
+    <!-- Navigation / Intro -->
+    <div class="row">
+      <div class="col-12 Layout2">
+        ${section1}
+      </div>
+    </div>
+
+    <!-- Main content columns -->
+    <div class="row">
+      <div class="col-md-4 Layout3" style="border:3px solid #005EB8; padding:1rem; border-radius:8px; background-color:#f0f8ff; text-align:center; box-shadow:0 4px 10px rgba(0,94,184,0.3);">
+        ${col40}
+      </div>
+      <div class="col-md-8 Layout4">
+        ${col60}
+      </div>
+    </div>
+
+    <!-- Final section -->
+    <div class="row">
+      <div class="col-12 Layout5">
+        ${section2}
+      </div>
+    </div>
+  </div>
+</div>`;
