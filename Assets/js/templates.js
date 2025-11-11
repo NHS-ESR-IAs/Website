@@ -1462,3 +1462,119 @@ templates.basicPage = (
     </div>
   </div>
 </div>`;
+
+// ===============================
+// Full Portlet Template
+// ===============================
+
+templates.portlet = ({
+  title,
+  intro,
+  alertStyle,
+  carousel,
+  imageBlock,
+  belowText,
+  toggleBlocks,
+  standaloneButtons,
+}) => {
+  // 📝 Alert wrapper
+  const hasStyle = alertStyle && alertStyle !== "none";
+  const alertClass = hasStyle
+    ? `class="alert alert-${alertStyle}" role="alert"`
+    : "";
+  const header = `
+  <div ${alertClass}>
+    ${title ? `<h4>${title}</h4>` : ""}
+    ${intro ? `<p>${intro}</p>` : ""}
+  </div>
+`;
+
+  // 🎠 Carousel
+  let carouselHtml = "";
+  if (carousel && carousel.slides?.length) {
+    carouselHtml = templates.carousel({
+      carouselId: carousel.id,
+      slides: carousel.slides,
+    }).bs4;
+  }
+
+  // 🖼️ Image block
+  let imageHtml = "";
+  if (imageBlock && imageBlock.src) {
+    const imgClass = [
+      imageBlock.shape,
+      imageBlock.alignment,
+      imageBlock.shadow,
+      imageBlock.border,
+    ]
+      .filter(Boolean)
+      .join(" ");
+    const imgStyle = `max-width:${imageBlock.maxWidth || 100}%;`;
+    imageHtml = `
+    <img src="${imageBlock.src}" alt="${
+      imageBlock.alt
+    }" class="${imgClass}" style="${imgStyle}" loading="${imageBlock.lazy}">
+    ${
+      imageBlock.caption
+        ? `<p class="${imageBlock.captionStyle}">${imageBlock.caption}</p>`
+        : ""
+    }
+  `;
+  }
+
+  // 🧾 Additional text
+  const extraText = belowText ? `<p>${belowText}</p>` : "";
+
+  // 🔄 Toggle blocks
+  const togglesHtml = toggleBlocks
+    .map((t) => {
+      const buttons = t.buttons
+        .map(
+          (b) =>
+            `<a href="${b.url}" class="btn btn-primary btn-sm me-2" ${
+              b.newTab ? 'target="_blank"' : ""
+            }>${b.label}</a>`
+        )
+        .join("");
+      return `
+      <button class="btn btn-outline-secondary mb-2" type="button" data-toggle="collapse" data-target="#${
+        t.id
+      }" aria-expanded="false" aria-controls="${t.id}">
+        ${t.label}
+      </button>
+      <div class="collapse mb-3" id="${t.id}">
+        <div class="card card-body">
+          ${t.content ? `<p>${t.content}</p>` : ""}
+          ${
+            t.image
+              ? `<img src="${t.image}" alt="${t.alt}" class="img-fluid mb-2">`
+              : ""
+          }
+          ${buttons}
+        </div>
+      </div>
+    `;
+    })
+    .join("");
+
+  // 🔘 Standalone buttons
+  const standaloneHtml = standaloneButtons
+    .map(
+      (b) =>
+        `<a href="${b.url}" class="btn btn-outline-primary me-2" ${
+          b.newTab ? 'target="_blank"' : ""
+        }>${b.label}</a>`
+    )
+    .join("");
+
+  // 🧱 Final output
+  return `
+    ${header}
+      ${carouselHtml}
+      ${imageHtml}
+      ${extraText}
+      ${togglesHtml}
+      ${standaloneHtml}
+    </div>
+  `;
+};

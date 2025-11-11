@@ -344,6 +344,14 @@
         "preview": "Assets/Images/Microsite.png",
         "description": "Dynamic microsite generator with launcher, starter page, and contributor-friendly page hierarchy. Includes NHS Blue styling, Bootstrap 4 navbar with dropdowns, and modular layouts for ESR deployment or sandbox preview.",
         "category": "ESR Web Portlets"
+      },
+      {
+        "label": "🎠 Web Portlet Playground",
+        "href": "PortletComplete.html",
+        "title": "🎠 Web Portlet Playground",
+        "preview": "Assets/Images/WebPortletPlayground.png",
+        "description": "Modular portlet builder with toggleable sections, live preview, and accessible code generation — designed for contributor-led prototyping and ESR deployment.",
+        "category": "ESR Web Portlets"
       }
     ]
   },

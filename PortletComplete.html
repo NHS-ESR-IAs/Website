@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MicroSiteKit – Carousel</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom Styles -->
+    <link href="Assets/css/style.css" rel="stylesheet" />
+
+    <!-- Mermaid Setup -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script type="module">
+        import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+        mermaid.initialize({ startOnLoad: false });
+        window.mermaid = mermaid;
+    </script>
+</head>
+
+<body class="glass">
+    <!-- Injected Partials -->
+    <div id="shared-header"></div>
+    <div id="main-nav"></div>
+    <div id="sidebar-nav"></div>
+
+    <!-- Page-Specific Content -->
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" id="breadcrumb"></ol>
+        </nav>
+        <div class="row">
+            <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center">
+                <h3 class="gradient-text">Complete Web Portlet</h3>
+            </div>
+            <div class="col-md-8">
+                <div class="page-intro text-center py-4 px-3">
+                    <section class="mb-4">
+                        <h2>🎠 Web Portlet Playground</h2>
+                        <p>Welcome to your modular sandbox for building joyful, contributor-friendly portlets. This
+                            playground lets you mix and match sections — from carousel slides and image blocks to
+                            toggleable content and standalone buttons — all with intuitive controls and instant preview.
+                        </p>
+                        <p>Use the checkboxes to include only the sections you need. Add slides, tweak styles, and
+                            personalize your layout without touching a line of code. When you're ready, hit
+                            <strong>Generate Code</strong> to see your creation come to life.</p>
+                        <p>Whether you're prototyping a team announcement, designing a dashboard widget, or just
+                            exploring what's possible, this space is yours to remix. Every block is optional. Every
+                            choice is yours.</p>
+                        <p class="fw-bold">Let’s build something brilliant — one toggle at a time.</p>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Playground -->
+            <div class="row mt-4">
+                <div class="col-md border border-primary rounded p-3">
+                    <section class="playground mt-5">
+                        <h3>🎠 Playground</h3>
+                        <!-- Section Toggles -->
+                        <div class="mb-4">
+                            <h5>🛠️ Section Controls</h5>
+                            <div class="form-check">
+                                <input class="form-check-input section-toggle" type="checkbox" id="toggleTitle" checked>
+                                <label class="form-check-label" for="toggleTitle">Include Portlet Title & Intro</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input section-toggle" type="checkbox" id="toggleCarousel"
+                                    checked>
+                                <label class="form-check-label" for="toggleCarousel">Include Carousel Slides</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input section-toggle" type="checkbox" id="toggleImage" checked>
+                                <label class="form-check-label" for="toggleImage">Include Image Below Carousel</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input section-toggle" type="checkbox" id="toggleText" checked>
+                                <label class="form-check-label" for="toggleText">Include Additional Text</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input section-toggle" type="checkbox" id="toggleToggles"
+                                    checked>
+                                <label class="form-check-label" for="toggleToggles">Include Toggle Blocks</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input section-toggle" type="checkbox" id="toggleButtons"
+                                    checked>
+                                <label class="form-check-label" for="toggleButtons">Include Standalone Buttons</label>
+                            </div>
+                        </div>
+                        <!-- Accordion Wrapper -->
+                        <div class="accordion mb-4" id="portletAccordion">
+
+                            <!-- Section 1: Portlet Title & Intro -->
+                            <div class="accordion-item section-content" data-toggle-id="toggleTitle">
+                                <h2 class="accordion-header" id="headingTitle">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseTitle" aria-expanded="true"
+                                        aria-controls="collapseTitle">
+                                        📝 Portlet Title & Intro
+                                    </button>
+                                </h2>
+                                <div id="collapseTitle" class="accordion-collapse collapse show"
+                                    aria-labelledby="headingTitle" data-bs-parent="#portletAccordion">
+                                    <div class="accordion-body">
+                                        <label for="portletTitle" class="form-label">Portlet Title</label>
+                                        <input type="text" class="form-control" id="portletTitle"
+                                            placeholder="Enter your portlet title">
+
+                                        <label for="portletIntro" class="form-label mt-3">Intro Text</label>
+                                        <textarea class="form-control" id="portletIntro" rows="3"
+                                            placeholder="Write a short intro..."></textarea>
+
+                                        <label for="alertStyle" class="form-label mt-3">Style</label>
+                                        <select class="form-select" id="alertStyle">
+                                            <option value="">None</option>
+                                            <option value="primary">Primary</option>
+                                            <option value="secondary">Secondary</option>
+                                            <option value="success">Success</option>
+                                            <option value="danger">Danger</option>
+                                            <option value="warning">Warning</option>
+                                            <option value="info" selected>Info</option>
+                                            <option value="light">Light</option>
+                                            <option value="dark">Dark</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Section 2: Carousel -->
+                            <div class="accordion-item section-content" data-toggle-id="toggleCarousel">
+                                <h2 class="accordion-header" id="headingCarousel">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseCarousel" aria-expanded="false"
+                                        aria-controls="collapseCarousel">
+                                        🎠 Carousel Slides
+                                    </button>
+                                </h2>
+                                <div id="collapseCarousel" class="accordion-collapse collapse"
+                                    aria-labelledby="headingCarousel" data-bs-parent="#portletAccordion">
+                                    <div class="accordion-body">
+                                        <form id="playgroundForm" class="mb-3"></form>
+                                        <button type="button" id="addSlideBtn" class="btn btn-primary mb-3">+ Add
+                                            Slide</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Section 3: Image Below Carousel -->
+                            <div class="accordion-item section-content" data-toggle-id="toggleImage">
+                                <h2 class="accordion-header" id="headingImage">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseImage" aria-expanded="false"
+                                        aria-controls="collapseImage">
+                                        🖼️ Image Below Carousel
+                                    </button>
+                                </h2>
+                                <div id="collapseImage" class="accordion-collapse collapse"
+                                    aria-labelledby="headingImage" data-bs-parent="#portletAccordion">
+                                    <div class="accordion-body">
+                                        <div class="image-config border rounded p-3 mb-4">
+                                            <label class="form-label">Image URL</label>
+                                            <input type="text" class="form-control mb-2" id="imgSrc"
+                                                value="https://cdn.ebaumsworld.com/mediaFiles/picture/2475828/85493615.jpg">
+
+                                            <label class="form-label">Alt Text</label>
+                                            <input type="text" class="form-control mb-2" id="imgAlt"
+                                                value="Dog with a suspicious stare">
+
+                                            <label class="form-label">Caption</label>
+                                            <input type="text" class="form-control mb-2" id="imgCaption"
+                                                value="When someone says ‘just one more tweak’ to the scroll-collapse logic.">
+
+                                            <label class="form-label">Shape</label>
+                                            <select class="form-select mb-2" id="imgShape">
+                                                <option value="rounded" selected>Rounded corners</option>
+                                                <option value="rounded-circle">Circle</option>
+                                                <option value="img-thumbnail">Thumbnail</option>
+                                                <option value="">None</option>
+                                            </select>
+
+                                            <label class="form-label">Alignment</label>
+                                            <select class="form-select mb-2" id="imgAlignment">
+                                                <option value="mx-auto d-block" selected>Centered</option>
+                                                <option value="float-start">Float left</option>
+                                                <option value="float-end">Float right</option>
+                                            </select>
+
+                                            <label class="form-label">Shadow</label>
+                                            <select class="form-select mb-2" id="imgShadow">
+                                                <option value="">None</option>
+                                                <option value="shadow-sm" selected>Small shadow</option>
+                                                <option value="shadow">Regular shadow</option>
+                                                <option value="shadow-lg">Large shadow</option>
+                                            </select>
+
+                                            <label class="form-label">Border</label>
+                                            <select class="form-select mb-2" id="imgBorder">
+                                                <option value="">None</option>
+                                                <option value="border">Border (default)</option>
+                                                <option value="border-primary">Border (primary)</option>
+                                                <option value="border-secondary">Border (secondary)</option>
+                                            </select>
+
+                                            <label class="form-label">Max Width (%)</label>
+                                            <input type="text" class="form-control mb-2" id="imgMaxWidth" value="100">
+
+                                            <label class="form-label">Lazy Loading</label>
+                                            <select class="form-select mb-2" id="imgLazy">
+                                                <option value="">Disabled</option>
+                                                <option value="lazy" selected>Enabled</option>
+                                            </select>
+
+                                            <label class="form-label">Caption Style</label>
+                                            <select class="form-select mb-2" id="imgCaptionStyle">
+                                                <option value="text-muted" selected>Muted</option>
+                                                <option value="fw-bold">Bold</option>
+                                                <option value="text-primary">Primary colour</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Section 4: Additional Text -->
+                            <div class="accordion-item section-content" data-toggle-id="toggleText">
+                                <h2 class="accordion-header" id="headingText">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseText" aria-expanded="false"
+                                        aria-controls="collapseText">
+                                        🧾 Additional Text
+                                    </button>
+                                </h2>
+                                <div id="collapseText" class="accordion-collapse collapse" aria-labelledby="headingText"
+                                    data-bs-parent="#portletAccordion">
+                                    <div class="accordion-body">
+                                        <label for="belowText" class="form-label">Additional Text</label>
+                                        <textarea class="form-control" id="belowText" rows="3"
+                                            placeholder="Add extra context, reflection, or call to action..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Section 5: Toggle Blocks -->
+                            <div class="accordion-item section-content" data-toggle-id="toggleToggles">
+                                <h2 class="accordion-header" id="headingToggles">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseToggles" aria-expanded="false"
+                                        aria-controls="collapseToggles">
+                                        🔄 Toggle Blocks
+                                    </button>
+                                </h2>
+                                <div id="collapseToggles" class="accordion-collapse collapse"
+                                    aria-labelledby="headingToggles" data-bs-parent="#portletAccordion">
+                                    <div class="accordion-body">
+                                        <div id="toggleContainer"></div>
+
+                                        <!-- Collapsible Content -->
+
+                                        <button type="button" class="btn btn-outline-primary mt-2" id="addToggleBtn">+
+                                            Add
+                                            Toggle
+                                            Block</button>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+                            <!-- Section 6: Standalone Buttons -->
+                            <div class="accordion-item section-content" data-toggle-id="toggleButtons">
+                                <h2 class="accordion-header" id="headingButtons">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseButtons" aria-expanded="false"
+                                        aria-controls="collapseButtons">
+                                        🔘 Standalone Buttons
+                                    </button>
+                                </h2>
+                                <div id="collapseButtons" class="accordion-collapse collapse"
+                                    aria-labelledby="headingButtons" data-bs-parent="#portletAccordion">
+                                    <div class="accordion-body">
+                                        <div class="standalone-buttons border rounded p-3 mb-4">
+                                            <div id="standaloneButtonBuilder">
+                                                <div class="button-row d-flex flex-wrap gap-2 mb-2">
+                                                    <input type="text" class="form-control btn-label"
+                                                        placeholder="Button label">
+                                                    <input type="text" class="form-control btn-url"
+                                                        placeholder="https://example.com">
+                                                    <div class="form-check align-self-center">
+                                                        <input class="form-check-input btn-newtab" type="checkbox">
+                                                        <label class="form-check-label">New tab</label>
+                                                    </div>
+                                                    <button type="button"
+                                                        class="btn btn-sm btn-danger remove-btn">Remove</button>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn btn-outline-primary mt-2"
+                                                id="addStandaloneButtonBtn">+
+                                                Add Button</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+
+                        <div class="dohicky-grid">
+                            <div class="dohicky-item"><button type="button" id="generateBtn"
+                                    class="btn btn-primary w-100">Generate
+                                    Code</button></div>
+                            <div class="dohicky-item"><button type="button" class="btn btn-primary w-100"
+                                    onclick="copyCode()">Copy</button></div>
+                            <div class="dohicky-item"><button type="button" class="btn btn-primary w-100"
+                                    onclick="exportConfig()">💾
+                                    Save Settings</button></div>
+                            <div class="dohicky-item"> <input type="file" id="configFile" accept=".txt"
+                                    style="display:none" />
+                                <button type="button" class="btn btn-primary w-100"
+                                    onclick="document.getElementById('configFile').click()">📂 Load Settings</button>
+                            </div>
+                        </div>
+
+
+                        <div class="row mt-4">
+                            <div class="col-md-6 border border-primary rounded p-3">
+                                <h5>Generated Code</h5>
+                                <pre><code id="output"></code></pre>
+
+                            </div>
+                            <div class="col-md-6 border border-primary rounded p-3">
+                                <h5>Live Preview</h5>
+                                <div id="previewArea"></div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div id="shared-footer"></div>
+
+            <!-- Bootstrap JS + Custom Script -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+            <script src="Assets/js/script.js"></script>
+            <script src="Assets/js/templates.js"></script>
+            <script>
+
+
+                document.addEventListener("DOMContentLoaded", () => {
+                    const toggleContainer = document.getElementById("toggleContainer");
+                    const addToggleBtn = document.getElementById("addToggleBtn");
+
+                    let toggleCount = 0;
+
+                    function createToggleBlock(index) {
+                        const block = document.createElement("div");
+                        block.className = "toggle-block border rounded p-3 mb-4";
+                        block.innerHTML = `
+        <div class="row g-3">
+          <div class="col-md-3">
+            <label class="form-label">Unique ID</label>
+            <input type="text" class="form-control collapse-id" value="toggle${index}">
+            <div class="form-text">Use a unique ID for each collapse block.</div>
+          </div>
+          <div class="col-md-9">
+            <label class="form-label">Button Label</label>
+            <input type="text" class="form-control collapse-label" value="Toggle ${index}">
+          </div>
+          <div class="col-12">
+            <label class="form-label">Text Content</label>
+            <textarea class="form-control collapse-content" rows="3">This section reveals modular magic, contributor clarity, and a sprinkle of onboarding delight.</textarea>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Image URL</label>
+            <input type="text" class="form-control collapse-image" placeholder="https://example.com/image.jpg">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Alt Text</label>
+            <input type="text" class="form-control collapse-alt" placeholder="Descriptive alt text">
+          </div>
+          <div class="col-12">
+            <label class="form-label">Buttons</label>
+            <div class="button-builder">
+              <div class="button-row d-flex flex-wrap gap-2 mb-2">
+                <input type="text" class="form-control btn-label" placeholder="Button label">
+                <input type="text" class="form-control btn-url" placeholder="https://example.com">
+                <div class="form-check align-self-center">
+                  <input class="form-check-input btn-newtab" type="checkbox">
+                  <label class="form-check-label">New tab</label>
+                </div>
+                <button type="button" class="btn btn-sm btn-danger remove-btn">Remove</button>
+              </div>
+            </div>
+            <button type="button" class="btn btn-outline-primary mt-2 add-button-btn">+ Add Button</button>
+          </div>
+          <div class="col-12 text-end">
+            <button type="button" class="btn btn-outline-danger remove-toggle-btn">Remove Toggle Block</button>
+          </div>
+        </div>
+      `;
+                        return block;
+                    }
+
+                    // Add toggle block
+                    addToggleBtn.addEventListener("click", () => {
+                        toggleContainer.appendChild(createToggleBlock(++toggleCount));
+                    });
+
+                    // Delegate button and toggle removal
+                    toggleContainer.addEventListener("click", (e) => {
+                        if (e.target.classList.contains("remove-toggle-btn")) {
+                            e.target.closest(".toggle-block").remove();
+                        }
+
+                        if (e.target.classList.contains("add-button-btn")) {
+                            const builder = e.target.previousElementSibling;
+                            const newRow = document.createElement("div");
+                            newRow.className = "button-row d-flex flex-wrap gap-2 mb-2";
+                            newRow.innerHTML = `
+          <input type="text" class="form-control btn-label" placeholder="Button label">
+          <input type="text" class="form-control btn-url" placeholder="https://example.com">
+          <div class="form-check align-self-center">
+            <input class="form-check-input btn-newtab" type="checkbox">
+            <label class="form-check-label">New tab</label>
+          </div>
+          <button type="button" class="btn btn-sm btn-danger remove-btn">Remove</button>
+        `;
+                            builder.appendChild(newRow);
+                        }
+
+                        if (e.target.classList.contains("remove-btn")) {
+                            e.target.closest(".button-row").remove();
+                        }
+                    });
+                });
+                document.addEventListener("DOMContentLoaded", () => {
+                    // 🎠 Carousel logic
+                    const form = document.getElementById("playgroundForm");
+                    const addBtn = document.getElementById("addSlideBtn");
+
+                    function createSlideRow(i, defaults = {}) {
+                        return `
+        <div class="slide-row border rounded p-2 mb-2">
+          <div class="row g-2">
+            <div class="col-md-6">
+              <label class="form-label">Image URL</label>
+              <input type="text" class="form-control" name="img" value="${defaults.img || ''}">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Alt Text</label>
+              <input type="text" class="form-control" name="alt" value="${defaults.alt || ''}">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Title</label>
+              <input type="text" class="form-control" name="title" value="${defaults.title || ''}">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Caption</label>
+              <input type="text" class="form-control" name="caption" value="${defaults.caption || ''}">
+            </div>
+          </div>
+          <button type="button" class="btn btn-sm btn-danger mt-2 removeSlideBtn">Remove</button>
+        </div>`;
+                    }
+
+                    form.insertAdjacentHTML("beforeend", createSlideRow(0, {
+                        img: "https://placekitten.com/800/400",
+                        alt: "Placeholder kitten",
+                        title: "Slide 1",
+                        caption: "Default caption"
+                    }));
+
+                    document.getElementById("generateBtn").onclick = () => {
+                        const isChecked = id => document.getElementById(id)?.checked;
+
+                        // 🎠 Carousel slides
+                        let slides = [];
+                        if (isChecked("toggleCarousel")) {
+                            const form = document.getElementById("playgroundForm");
+                            slides = [...form.querySelectorAll(".slide-row")].map(row => ({
+                                img: row.querySelector('[name="img"]').value,
+                                alt: row.querySelector('[name="alt"]').value,
+                                title: row.querySelector('[name="title"]').value,
+                                caption: row.querySelector('[name="caption"]').value
+                            }));
+                        }
+
+                        // 📝 Portlet title, intro, alert style
+                        let title = "", intro = "", alertStyle = "";
+                        if (isChecked("toggleTitle")) {
+                            title = document.getElementById("portletTitle").value;
+                            intro = document.getElementById("portletIntro").value;
+                            alertStyle = document.getElementById("alertStyle").value;
+                        }
+
+                        // 🖼️ Image block config
+                        let imageBlock = null;
+                        if (isChecked("toggleImage")) {
+                            imageBlock = {
+                                src: document.getElementById("imgSrc").value,
+                                alt: document.getElementById("imgAlt").value,
+                                caption: document.getElementById("imgCaption").value,
+                                shape: document.getElementById("imgShape").value,
+                                alignment: document.getElementById("imgAlignment").value,
+                                shadow: document.getElementById("imgShadow").value,
+                                border: document.getElementById("imgBorder").value,
+                                maxWidth: document.getElementById("imgMaxWidth").value,
+                                lazy: document.getElementById("imgLazy").value,
+                                captionStyle: document.getElementById("imgCaptionStyle").value
+                            };
+                        }
+
+                        // 🧾 Additional text
+                        let belowText = "";
+                        if (isChecked("toggleText")) {
+                            belowText = document.getElementById("belowText").value;
+                        }
+
+                        // 🔄 Toggle blocks
+                        let toggleBlocks = [];
+                        if (isChecked("toggleToggles")) {
+                            toggleBlocks = [...document.querySelectorAll(".toggle-block")].map(block => {
+                                const buttons = [...block.querySelectorAll(".button-row")].map(btn => ({
+                                    label: btn.querySelector(".btn-label").value,
+                                    url: btn.querySelector(".btn-url").value,
+                                    newTab: btn.querySelector(".btn-newtab").checked
+                                }));
+
+                                return {
+                                    id: block.querySelector(".collapse-id").value,
+                                    label: block.querySelector(".collapse-label").value,
+                                    content: block.querySelector(".collapse-content").value,
+                                    image: block.querySelector(".collapse-image").value,
+                                    alt: block.querySelector(".collapse-alt").value,
+                                    buttons
+                                };
+                            });
+                        }
+
+                        // 🔘 Standalone buttons
+                        let standaloneButtons = [];
+                        if (isChecked("toggleButtons")) {
+                            standaloneButtons = [...document.querySelectorAll("#standaloneButtonBuilder .button-row")].map(btn => ({
+                                label: btn.querySelector(".btn-label").value,
+                                url: btn.querySelector(".btn-url").value,
+                                newTab: btn.querySelector(".btn-newtab").checked
+                            }));
+                        }
+
+                        // 🧱 Generate full portlet HTML
+                        const html = templates.portlet({
+                            title,
+                            intro,
+                            alertStyle,
+                            carousel: slides.length ? { id: "carousel01", slides } : null,
+                            imageBlock,
+                            belowText,
+                            toggleBlocks,
+                            standaloneButtons
+                        });
+
+                        // 🖥️ Output and preview
+                        document.getElementById("output").textContent = html.trim();
+                        document.getElementById("previewArea").innerHTML = html;
+                    };
+
+                    // 🔘 Standalone button logic
+                    const standaloneBuilder = document.getElementById("standaloneButtonBuilder");
+                    const addStandaloneBtn = document.getElementById("addStandaloneButtonBtn");
+
+                    function createStandaloneButtonRow() {
+                        const row = document.createElement("div");
+                        row.className = "button-row d-flex flex-wrap gap-2 mb-2";
+                        row.innerHTML = `
+        <input type="text" class="form-control btn-label" placeholder="Button label">
+        <input type="text" class="form-control btn-url" placeholder="https://example.com">
+        <div class="form-check align-self-center">
+          <input class="form-check-input btn-newtab" type="checkbox">
+          <label class="form-check-label">New tab</label>
+        </div>
+        <button type="button" class="btn btn-sm btn-danger remove-btn">Remove</button>
+      `;
+                        return row;
+                    }
+
+                    addStandaloneBtn.addEventListener("click", () => {
+                        standaloneBuilder.appendChild(createStandaloneButtonRow());
+                    });
+
+                    standaloneBuilder.addEventListener("click", (e) => {
+                        if (e.target.classList.contains("remove-btn")) {
+                            e.target.closest(".button-row").remove();
+                        }
+                    });
+                });
+
+                function copyCode() {
+                    const text = document.getElementById("output").textContent;
+                    navigator.clipboard.writeText(text);
+                    alert("Code copied!");
+                }
+
+                document.querySelectorAll('.section-toggle').forEach(toggle => {
+                    const section = document.querySelector(`.section-content[data-toggle-id="${toggle.id}"]`);
+
+                    const updateVisibility = () => {
+                        section.style.display = toggle.checked ? 'block' : 'none';
+                    };
+
+                    toggle.addEventListener('change', updateVisibility);
+                    updateVisibility(); // Initial state
+                });
+
+                document.querySelectorAll('.section-toggle').forEach(toggle => {
+                    const section = document.querySelector(`.section-content[data-toggle-id="${toggle.id}"]`);
+
+                    const updateVisibility = () => {
+                        if (section) {
+                            section.classList.toggle("d-none", !toggle.checked);
+                        }
+                    };
+
+                    toggle.addEventListener('change', updateVisibility);
+                    updateVisibility(); // Initial state
+                });
+            </script>
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>
