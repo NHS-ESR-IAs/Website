@@ -630,7 +630,10 @@ function exportConfig() {
   URL.revokeObjectURL(url);
 }
 
-// Import config from a TXT file and apply it
+document.addEventListener("DOMContentLoaded", () => {
+  setupConfigImport("configFile", "output");
+});
+
 function setupConfigImport(fileInputId = "configFile", outputId = "output") {
   const input = document.getElementById(fileInputId);
   if (!input) return;
@@ -652,25 +655,50 @@ function setupConfigImport(fileInputId = "configFile", outputId = "output") {
         if (text.includes(marker)) {
           const [jsonText, codeText] = text.split(marker);
           jsonPart = jsonText.trim();
-          // remove the END marker if present
           codePart = codeText.replace("=== GENERATED CODE END ===", "").trim();
         }
 
         const payload = JSON.parse(jsonPart);
+        console.log("Parsed config:", payload);
 
-        if (payload.values) applyConfig(payload.values);
+        if (payload.values) {
+          applyConfig(payload.values);
+        }
 
         if (codePart && outputId) {
           const out = document.getElementById(outputId);
           if (out) out.textContent = codePart;
         }
 
+        alert("Settings loaded successfully!");
         console.log(`Config loaded from ${file.name}`);
       } catch (err) {
         console.error("Invalid config file", err);
         alert("The selected file is not a valid config.");
       }
     };
+
     reader.readAsText(file);
   });
+}
+
+function applyConfig(values) {
+  for (const [key, val] of Object.entries(values)) {
+    const el = document.getElementById(key);
+    if (!el) {
+      console.warn(`Element not found: ${key}`);
+      continue;
+    }
+
+    if (el.type === "checkbox") {
+      el.checked = val;
+      el.dispatchEvent(new Event("change")); // Sync visibility
+    } else {
+      el.value = val;
+    }
+  }
+
+  // Auto-regenerate preview
+  const generateBtn = document.getElementById("generateBtn");
+  if (generateBtn) generateBtn.click();
 }

@@ -1569,7 +1569,7 @@ templates.portlet = ({
 
   // 🧱 Final output
   return `
-  <div>
+  <div><div>
     ${header}
       ${carouselHtml}
       ${imageHtml}
@@ -1577,6 +1577,6 @@ templates.portlet = ({
       ${togglesHtml}
       ${standaloneHtml}
     </div>
-    </div>
+    </div></div>
   `;
 };
