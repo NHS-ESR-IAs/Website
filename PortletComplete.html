@@ -46,7 +46,8 @@
                         </p>
                         <p>Use the checkboxes to include only the sections you need. Add slides, tweak styles, and
                             personalize your layout without touching a line of code. When you're ready, hit
-                            <strong>Generate Code</strong> to see your creation come to life.</p>
+                            <strong>Generate Code</strong> to see your creation come to life.
+                        </p>
                         <p>Whether you're prototyping a team announcement, designing a dashboard widget, or just
                             exploring what's possible, this space is yours to remix. Every block is optional. Every
                             choice is yours.</p>
@@ -442,41 +443,68 @@
                     });
                 });
                 document.addEventListener("DOMContentLoaded", () => {
-                    // 🎠 Carousel logic
-                    const form = document.getElementById("playgroundForm");
                     const addBtn = document.getElementById("addSlideBtn");
 
                     function createSlideRow(i, defaults = {}) {
                         return `
-        <div class="slide-row border rounded p-2 mb-2">
-          <div class="row g-2">
-            <div class="col-md-6">
-              <label class="form-label">Image URL</label>
-              <input type="text" class="form-control" name="img" value="${defaults.img || ''}">
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">Alt Text</label>
-              <input type="text" class="form-control" name="alt" value="${defaults.alt || ''}">
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">Title</label>
-              <input type="text" class="form-control" name="title" value="${defaults.title || ''}">
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">Caption</label>
-              <input type="text" class="form-control" name="caption" value="${defaults.caption || ''}">
-            </div>
-          </div>
-          <button type="button" class="btn btn-sm btn-danger mt-2 removeSlideBtn">Remove</button>
-        </div>`;
+    <div class="slide-row border rounded p-2 mb-2">
+      <div class="row g-2">
+        <div class="col-md-6">
+          <label class="form-label">Image URL</label>
+          <input type="text" class="form-control" name="img" value="${defaults.img || ''}">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Alt Text</label>
+          <input type="text" class="form-control" name="alt" value="${defaults.alt || ''}">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Title</label>
+          <input type="text" class="form-control" name="title" value="${defaults.title || ''}">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Caption</label>
+          <input type="text" class="form-control" name="caption" value="${defaults.caption || ''}">
+        </div>
+      </div>
+      <button type="button" class="btn btn-sm btn-danger mt-2 removeSlideBtn">Remove</button>
+    </div>`;
                     }
 
-                    form.insertAdjacentHTML("beforeend", createSlideRow(0, {
-                        img: "https://placekitten.com/800/400",
-                        alt: "Placeholder kitten",
-                        title: "Slide 1",
-                        caption: "Default caption"
-                    }));
+                    // 🐾 Add default slide on load (only if carousel is enabled)
+                    if (document.getElementById("toggleCarousel")?.checked) {
+                        const form = document.getElementById("playgroundForm");
+                        if (form) {
+                            form.insertAdjacentHTML("beforeend", createSlideRow(0, {
+                                img: "https://placekitten.com/800/400",
+                                alt: "Placeholder kitten",
+                                title: "Slide 1",
+                                caption: "Default caption"
+                            }));
+                        }
+                    }
+
+                    // ➕ Add new slide on button click
+                    addBtn.addEventListener("click", () => {
+                        const toggle = document.getElementById("toggleCarousel");
+                        const form = document.getElementById("playgroundForm");
+
+                        if (!toggle?.checked) {
+                            alert("Carousel section is currently hidden. Please enable it to add slides.");
+                            return;
+                        }
+
+                        if (!form) {
+                            alert("Carousel form not found. Please check if the section is visible.");
+                            return;
+                        }
+
+                        form.insertAdjacentHTML("beforeend", createSlideRow(form.children.length));
+                    });
+                    document.getElementById("playgroundForm")?.addEventListener("click", (e) => {
+                        if (e.target.classList.contains("removeSlideBtn")) {
+                            e.target.closest(".slide-row")?.remove();
+                        }
+                    });
 
                     document.getElementById("generateBtn").onclick = () => {
                         const isChecked = id => document.getElementById(id)?.checked;

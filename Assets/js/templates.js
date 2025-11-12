@@ -1569,12 +1569,14 @@ templates.portlet = ({
 
   // 🧱 Final output
   return `
+  <div>
     ${header}
       ${carouselHtml}
       ${imageHtml}
       ${extraText}
       ${togglesHtml}
       ${standaloneHtml}
+    </div>
     </div>
   `;
 };
