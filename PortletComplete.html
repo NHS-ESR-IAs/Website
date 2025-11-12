@@ -327,7 +327,15 @@
                                     onclick="document.getElementById('configFile').click()">📂 Load Settings</button>
                             </div>
                         </div>
-
+                        <div class="dohicky-grid">
+                            <div class="dohicky-item"><button type="button" class="btn btn-outline-success w-100"
+                                    id="loadMicrohiveBtn">
+                                    🐝 Load Microhive Settings
+                                </button></div>
+                            <div class="dohicky-item"></div>
+                            <div class="dohicky-item"></div>
+                            <div class="dohicky-item"></div>
+                        </div>
 
                         <div class="row mt-4">
                             <div class="col-md-6 border border-primary rounded p-3">
@@ -659,6 +667,155 @@
                     toggle.addEventListener('change', updateVisibility);
                     updateVisibility(); // Initial state
                 });
+
+                // 🐝 Microhive preset config
+                const microhiveConfig = {
+                    themeSelectorHeader: "",
+                    headerSearch: "",
+                    sidebarSearch: "",
+                    toggleTitle: true,
+                    toggleCarousel: false,
+                    toggleImage: true,
+                    toggleText: true,
+                    toggleToggles: false,
+                    toggleButtons: true,
+                    portletTitle: "Microhive - Small Change, Big Change!",
+                    portletIntro: "Microhive is a restless fundraising company on a mission to champion the collective power of giving pennies, not pounds. We’re on a mission to empower change, one penny at a time.",
+                    alertStyle: "success",
+                    imgSrc: "Assets/Images/Microhive.webp",
+                    imgAlt: "Microhive",
+                    imgCaption: "£1.6 million raised so far!",
+                    imgShape: "rounded",
+                    imgAlignment: "mx-auto d-block",
+                    imgShadow: "shadow-sm",
+                    imgBorder: "",
+                    imgMaxWidth: "75",
+                    imgLazy: "lazy",
+                    imgCaptionStyle: "text-muted",
+                    belowText: `Microhive, the act of donating small amounts to charity, is a powerful tool for individuals and businesses to support charities and communities. While the contributions may seem modest on their own, collectively, they make a significant impact. To date Microhive (formerly known as Pennies from Heaven) has raised £8.7m by employers inviting their employees, pensioners and suppliers to donate small amounts to charity on a regular basis.
+
+We believe in making giving easy for businesses and individuals, and want to transform the way people donate to charity. The opportunities to Microhive are endless. Let’s unleash the power of small change giving and empower change one penny at a time.`,
+                    standaloneButtons: [
+                        {
+                            label: "Microhive",
+                            url: "https://microhive.org.uk/",
+                            newTab: true
+                        },
+                        {
+                            label: "Brochures",
+                            url: "https://microhive.org.uk/brochures/",
+                            newTab: true
+                        }
+                    ],
+                    configFile: ""
+                };
+
+                function applyConfig(values) {
+                    for (const [key, val] of Object.entries(values)) {
+                        if (key === "standaloneButtons") continue; // handled separately
+
+                        const el = document.getElementById(key);
+                        if (!el) {
+                            console.warn(`Element not found: ${key}`);
+                            continue;
+                        }
+
+                        if (el.type === "checkbox") {
+                            el.checked = val;
+                            el.dispatchEvent(new Event("change")); // sync visibility
+                        } else {
+                            el.value = val;
+                        }
+                    }
+
+                    // 🧿 Apply standalone buttons
+                    const builder = document.getElementById("standaloneButtonBuilder");
+                    if (builder && Array.isArray(values.standaloneButtons)) {
+                        builder.innerHTML = ""; // clear existing
+                        values.standaloneButtons.forEach(btn => {
+                            const row = document.createElement("div");
+                            row.className = "button-row d-flex flex-wrap gap-2 mb-2";
+                            row.innerHTML = `
+        <input type="text" class="form-control btn-label" placeholder="Button label" value="${btn.label}">
+        <input type="text" class="form-control btn-url" placeholder="https://example.com" value="${btn.url}">
+        <div class="form-check align-self-center">
+          <input class="form-check-input btn-newtab" type="checkbox" ${btn.newTab ? "checked" : ""}>
+          <label class="form-check-label">New tab</label>
+        </div>
+        <button type="button" class="btn btn-sm btn-danger remove-btn">Remove</button>
+      `;
+                            builder.appendChild(row);
+                        });
+                    }
+
+                    // 🔁 Regenerate preview
+                    const generateBtn = document.getElementById("generateBtn");
+                    if (generateBtn) generateBtn.click();
+                }
+                // 📂 Import config from file
+                function setupConfigImport(fileInputId = "configFile", outputId = "output") {
+                    const input = document.getElementById(fileInputId);
+                    if (!input) return;
+
+                    input.addEventListener("change", (e) => {
+                        const file = e.target.files[0];
+                        if (!file) return;
+
+                        const reader = new FileReader();
+                        reader.onload = (event) => {
+                            try {
+                                const text = event.target.result;
+                                const marker = "=== GENERATED CODE START ===";
+                                let jsonPart = text;
+                                let codePart = null;
+
+                                if (text.includes(marker)) {
+                                    const [jsonText, codeText] = text.split(marker);
+                                    jsonPart = jsonText.trim();
+                                    codePart = codeText.replace("=== GENERATED CODE END ===", "").trim();
+                                }
+
+                                const payload = JSON.parse(jsonPart);
+                                console.log("Parsed config:", payload);
+
+                                if (payload.values) applyConfig(payload.values);
+
+                                if (codePart && outputId) {
+                                    const out = document.getElementById(outputId);
+                                    if (out) out.textContent = codePart;
+                                }
+
+                                alert("Settings loaded successfully!");
+                                console.log(`Config loaded from ${file.name}`);
+                            } catch (err) {
+                                console.error("Invalid config file", err);
+                                alert("The selected file is not a valid config.");
+                            }
+                        };
+
+                        reader.readAsText(file);
+                    });
+                }
+
+                // 🚀 Init on page load
+                document.addEventListener("DOMContentLoaded", () => {
+                    setupConfigImport("configFile", "output");
+
+                    document.getElementById("loadMicrohiveBtn")?.addEventListener("click", () => {
+                        applyConfig(microhiveConfig);
+                        alert("Microhive settings loaded!");
+                    });
+                });
+
+                async function encodeImageToBase64(url) {
+                    const response = await fetch(url);
+                    const blob = await response.blob();
+                    return new Promise((resolve) => {
+                        const reader = new FileReader();
+                        reader.onloadend = () => resolve(reader.result); // returns data:image/...;base64,...
+                        reader.readAsDataURL(blob);
+                    });
+                }
             </script>
 
         </div>

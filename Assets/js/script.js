@@ -561,6 +561,17 @@ function collectConfig() {
         config[el.id] = el.value;
       }
     });
+
+  // 🧿 Collect standalone buttons
+  const buttonRows = document.querySelectorAll(
+    "#standaloneButtonBuilder .button-row"
+  );
+  config.standaloneButtons = [...buttonRows].map((row) => ({
+    label: row.querySelector(".btn-label")?.value || "",
+    url: row.querySelector(".btn-url")?.value || "",
+    newTab: row.querySelector(".btn-newtab")?.checked || false,
+  }));
+
   return config;
 }
 
