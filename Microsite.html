@@ -428,27 +428,15 @@ As part of the NHS family, we recognise the invaluable skills and experiences th
   }
 <\/script>
 `;
-    async function encodeImageToBase64(url) {
-      const response = await fetch(url);
-      const blob = await response.blob();
-      return new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.onloadend = () => resolve(reader.result); // returns data:image/...;base64,...
-        reader.readAsDataURL(blob);
-      });
-    }
+
 
     // Generate button handler
-    document.getElementById("generateBtn").onclick = async () => {
+    document.getElementById("generateBtn").onclick = () => {
       let code = micrositeCSS + "\n\n";
-
-      // 🖼️ Convert launcher image to Base64 if present
-      const launcherImageUrl = document.getElementById("launcherImage")?.value.trim();
-      const launcherImageBase64 = launcherImageUrl ? await encodeImageToBase64(launcherImageUrl) : "";
 
       // 🚀 Launcher block
       const launcherValues = {
-        image: launcherImageBase64,
+        image: document.getElementById("launcherImage")?.value.trim() || "",
         title: document.getElementById("launcherTitle")?.value.trim() || "",
         intro: document.getElementById("launcherIntro")?.value.trim() || "",
         button: document.getElementById("launcherButton")?.value.trim() || "",
@@ -461,18 +449,12 @@ As part of the NHS family, we recognise the invaluable skills and experiences th
         id: document.getElementById("PageId")?.value.trim() || "ESR_MS",
         parentId: document.querySelector("[name='parentId']")?.value || "",
         bannerTitle: document.getElementById("bannerTitle")?.value.trim() || "",
-        bannerLogo: "", // will be filled below
+        bannerLogo: document.getElementById("bannerLogo")?.value.trim() || "",
         section1: document.getElementById("section1")?.value || "",
         col40: document.querySelector("[name='col40']")?.value || "",
         col60: document.querySelector("[name='col60']")?.value || "",
         section2: document.getElementById("section2")?.value || ""
       };
-
-      // 🖼️ Convert banner logo to Base64 if present
-      const bannerLogoUrl = document.getElementById("bannerLogo")?.value.trim();
-      if (bannerLogoUrl) {
-        starterValues.bannerLogo = await encodeImageToBase64(bannerLogoUrl);
-      }
 
       if (!createdPageIds.includes(starterValues.id)) {
         createdPageIds.unshift(starterValues.id);

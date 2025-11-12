@@ -514,7 +514,17 @@
                         }
                     });
 
-                    document.getElementById("generateBtn").onclick = () => {
+                    async function encodeImageToBase64(url) {
+                        const response = await fetch(url);
+                        const blob = await response.blob();
+                        return new Promise((resolve) => {
+                            const reader = new FileReader();
+                            reader.onloadend = () => resolve(reader.result); // returns data:image/...;base64,...
+                            reader.readAsDataURL(blob);
+                        });
+                    }
+
+                    document.getElementById("generateBtn").onclick = async () => {
                         const isChecked = id => document.getElementById(id)?.checked;
 
                         // 🎠 Carousel slides
@@ -537,11 +547,19 @@
                             alertStyle = document.getElementById("alertStyle").value;
                         }
 
-                        // 🖼️ Image block config
+                        // 🖼️ Image block config with Base64 encoding
                         let imageBlock = null;
                         if (isChecked("toggleImage")) {
+                            const imgUrl = document.getElementById("imgSrc").value;
+                            let encodedSrc = imgUrl;
+                            try {
+                                encodedSrc = await encodeImageToBase64(imgUrl);
+                            } catch (err) {
+                                console.warn("Image encoding failed:", err);
+                            }
+
                             imageBlock = {
-                                src: document.getElementById("imgSrc").value,
+                                src: encodedSrc,
                                 alt: document.getElementById("imgAlt").value,
                                 caption: document.getElementById("imgCaption").value,
                                 shape: document.getElementById("imgShape").value,
@@ -682,7 +700,7 @@
                     portletTitle: "Microhive - Small Change, Big Change!",
                     portletIntro: "Microhive is a restless fundraising company on a mission to champion the collective power of giving pennies, not pounds. We’re on a mission to empower change, one penny at a time.",
                     alertStyle: "success",
-                    imgSrc: "Assets/Images/Microhive.webp",
+                    imgSrc: "https://raw.githubusercontent.com/NHS-ESR-IAs/Website/main/Assets/Images/Microhive.webp",
                     imgAlt: "Microhive",
                     imgCaption: "£1.6 million raised so far!",
                     imgShape: "rounded",
