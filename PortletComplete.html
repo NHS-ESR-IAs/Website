@@ -91,6 +91,10 @@
                                     checked>
                                 <label class="form-check-label" for="toggleButtons">Include Standalone Buttons</label>
                             </div>
+                            <div class="form-check">
+                                <input class="form-check-input section-toggle" type="checkbox" id="toggleESR" checked>
+                                <label class="form-check-label" for="toggleESR">Include ESR Quick Links</label>
+                            </div>
                         </div>
                         <!-- Accordion Wrapper -->
                         <div class="accordion mb-4" id="portletAccordion">
@@ -304,6 +308,53 @@
                                             <button type="button" class="btn btn-outline-primary mt-2"
                                                 id="addStandaloneButtonBtn">+
                                                 Add Button</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Section 7: ESR Quick Links -->
+                            <div class="accordion-item section-content" data-toggle-id="toggleESR">
+                                <h2 class="accordion-header" id="headingESR">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseESR" aria-expanded="false" aria-controls="collapseESR">
+                                        🧭 ESR Quick Links
+                                    </button>
+                                </h2>
+                                <div id="collapseESR" class="accordion-collapse collapse" aria-labelledby="headingESR"
+                                    data-bs-parent="#portletAccordion">
+                                    <div class="accordion-body">
+                                        <div class="border rounded p-3 mb-4">
+                                            <p class="text-muted mb-2">Select any ESR links you'd like to include as
+                                                buttons in your portlet:</p>
+                                            <div class="form-check">
+                                                <input class="form-check-input esr-toggle" type="checkbox"
+                                                    value="appraisals" id="esrAppraisals">
+                                                <label class="form-check-label" for="esrAppraisals">Manage
+                                                    Appraisals</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input esr-toggle" type="checkbox"
+                                                    value="compliance" id="esrCompliance">
+                                                <label class="form-check-label" for="esrCompliance">Manage
+                                                    Compliance</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input esr-toggle" type="checkbox"
+                                                    value="orgChart" id="esrOrgChart">
+                                                <label class="form-check-label" for="esrOrgChart">Launch Organisation
+                                                    Chart</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input esr-toggle" type="checkbox"
+                                                    value="absence" id="esrAbsence">
+                                                <label class="form-check-label" for="esrAbsence">Manage Absence</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input esr-toggle" type="checkbox"
+                                                    value="calendar" id="esrCalendar">
+                                                <label class="form-check-label" for="esrCalendar">View Team
+                                                    Calendar</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -523,7 +574,13 @@
                             reader.readAsDataURL(blob);
                         });
                     }
-
+                    const esrButtons = {
+                        appraisals: `<a class="btn btn-primary btn-block" onclick="auditPunchthrough('Manage Appraisals','https://my-epro.esr.nhs.uk/OA_HTML/RF.jsp?function_id=NHS_HR_MGR_MN_APPR_SS');" role="button" tabindex="0" target="_self">Manage Appraisals</a>`,
+                        compliance: `<a class="btn btn-primary btn-block" onclick="auditPunchthrough('Manage Compliance','https://my-epro.esr.nhs.uk/OA_HTML/RF.jsp?function_id=NHS_SSHR_COMP_MTRX_HIER');" role="button" tabindex="0" target="_self">Manage Compliance</a>`,
+                        orgChart: `<a class="btn btn-primary btn-block" onclick="auditPunchthrough('Launch Organisation Chart','https://my-epro.esr.nhs.uk/OA_HTML/RF.jsp?function_id=NHS_HR_ORG_CHRT_HOME_MGR_NOAP');" role="button" tabindex="0" target="_self">Launch Organisation Chart</a>`,
+                        absence: `<a class="btn btn-primary btn-block" onclick="auditPunchthrough('Manage Absence','https://my-epro.esr.nhs.uk/OA_HTML/RF.jsp?function_id=NHS_ABSENCE_CALENDAR_HIER');" role="button" tabindex="0" target="_self">Manage Absence</a>`,
+                        calendar: `<a class="btn btn-primary btn-block" id="mssTeamActionsLink" onclick="auditPunchthrough('View Team Calendar','https://my-epro.esr.nhs.uk/dashboard/web/nhs-property-services-limited/mss-team-actions')">View Team Calendar</a>`
+                    };
                     document.getElementById("generateBtn").onclick = async () => {
                         const isChecked = id => document.getElementById(id)?.checked;
 
@@ -609,6 +666,15 @@
                             }));
                         }
 
+                        // 🧭 ESR Quick Links
+                        let esrLinks = "";
+                        if (isChecked("toggleESR")) {
+                            document.querySelectorAll(".esr-toggle:checked").forEach(box => {
+                                const key = box.value;
+                                if (esrButtons[key]) esrLinks += esrButtons[key] + "\n";
+                            });
+                        }
+
                         // 🧱 Generate full portlet HTML
                         const html = templates.portlet({
                             title,
@@ -618,7 +684,8 @@
                             imageBlock,
                             belowText,
                             toggleBlocks,
-                            standaloneButtons
+                            standaloneButtons,
+                            esrLinks // 👈 now included
                         });
 
                         // 🖥️ Output and preview

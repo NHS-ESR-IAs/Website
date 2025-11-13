@@ -1476,6 +1476,7 @@ templates.portlet = ({
   belowText,
   toggleBlocks,
   standaloneButtons,
+  esrLinks,
 }) => {
   // 📝 Alert wrapper
   const hasStyle = alertStyle && alertStyle !== "none";
@@ -1567,16 +1568,19 @@ templates.portlet = ({
     )
     .join("");
 
+  // 🧭 ESR Quick Links
+  const esrHtml = esrLinks ? `<div class="mt-3">${esrLinks}</div>` : "";
+
   // 🧱 Final output
   return `
   <div><div>
     ${header}
-      ${carouselHtml}
-      ${imageHtml}
-      ${extraText}
-      ${togglesHtml}
-      ${standaloneHtml}
-    </div>
-    </div></div>
-  `;
+    ${carouselHtml}
+    ${imageHtml}
+    ${extraText}
+    ${togglesHtml}
+    ${standaloneHtml}
+    ${esrHtml}
+  </div></div>
+`;
 };
