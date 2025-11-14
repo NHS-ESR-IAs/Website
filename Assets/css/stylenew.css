@@ -1,0 +1,727 @@
+/* ============================================================
+   BASE: GLOBAL SETTINGS & TYPOGRAPHY
+============================================================ */
+:root {
+    --font-body: Arial, sans-serif;
+    --font-size-sm: 0.85rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 1.15rem;
+    --font-size-xl: 1.3rem;
+
+    /* Default theme (fallback) */
+    --color-bg: #f4f4f4;
+    --color-text: #1a1a1a;
+    --color-primary: #0072ce;
+    --color-accent: #005eb8;
+    --color-muted: #6c757d;
+    --color-link: #005eb8;
+    --color-link-active: #003d73;
+    --color-card: #ffffff;
+    --color-shadow: rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    scrollbar-gutter: stable;
+}
+
+body.scale-small .btn-primary {
+    font-size: var(--font-size-sm);
+}
+
+body.scale-medium .btn-primary {
+    font-size: var(--font-size-md);
+}
+
+body.scale-large .btn-primary {
+    font-size: var(--font-size-lg);
+}
+
+body.scale-xlarge .btn-primary {
+    font-size: var(--font-size-xl);
+}
+
+/* ============================================================
+   COMPONENTS: BUTTONS, NAV, SIDEBAR, TABS, BREADCRUMBS
+============================================================ */
+.btn-primary {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+.navbar {
+    background-color: var(--color-accent);
+    color: #fff;
+}
+
+.navbar .nav-link,
+.navbar .dropdown-toggle {
+    color: #fff !important;
+}
+
+.navbar .nav-link:hover,
+.navbar .dropdown-toggle:hover {
+    color: var(--color-primary) !important;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+    padding: 1rem;
+    font-weight: bold;
+    background-color: var(--color-accent);
+    color: #fff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-weight: bold;
+    color: var(--color-link);
+    transition: all 0.3s ease;
+}
+
+.nav-tabs .nav-link.active {
+    border-bottom-color: currentColor;
+    color: var(--color-link-active);
+}
+
+.tab-content {
+    padding: 1rem;
+    border-top: 1px solid #ccc;
+}
+
+.breadcrumb {
+    background: transparent;
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+}
+
+.breadcrumb-item a {
+    color: var(--color-link);
+    text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+    color: var(--color-link-active);
+    font-weight: bold;
+}
+
+/* ============================================================
+   LAYOUT & PAGES
+============================================================ */
+.page {
+    display: none;
+    padding: 40px;
+    background-color: var(--color-card);
+    max-width: 1200px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px var(--color-shadow);
+    border-radius: 8px;
+}
+
+.page.active {
+    display: block;
+}
+
+/* ============================================================
+   MODALS & CARDS
+============================================================ */
+.modal-content,
+.card {
+    background-color: var(--color-card);
+    color: var(--color-text);
+    box-shadow: 0 2px 8px var(--color-shadow);
+    padding: 2rem;
+}
+
+/* ============================================================
+   UTILITIES & INTERACTIONS
+============================================================ */
+.theme-box {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dark-mode .theme-box {
+    box-shadow: 0 2px 6px rgba(255, 255, 255, 0.25);
+}
+
+.did-you-know {
+    padding: 1em;
+    margin: 1em 0;
+    border-left: 4px solid var(--color-primary);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: sans-serif;
+}
+
+/* ============================================================
+   THEMES: NHS BLUE, GREEN, PURPLE, GREY, YELLOW, RED, PINK, CALM, CONTRAST
+============================================================ */
+body.theme-blue {
+    --color-bg: #e6f0fa;
+    --color-text: #1a1a1a;
+    --color-primary: #0072ce;
+    --color-accent: #005eb8;
+    --color-muted: #6c757d;
+    --color-link: #005eb8;
+    --color-link-active: #003d73;
+    --color-card: #ffffff;
+    --color-shadow: rgba(0, 94, 184, 0.08);
+}
+
+body.theme-green {
+    --color-bg: #e9f5ee;
+    --color-text: #1a1a1a;
+    --color-primary: #007f3b;
+    --color-accent: #00542a;
+    --color-muted: #4d6659;
+    --color-link: #007f3b;
+    --color-link-active: #00542a;
+    --color-card: #ffffff;
+    --color-shadow: rgba(0, 255, 170, 0.05);
+}
+
+body.theme-purple {
+    --color-bg: #f3f0f9;
+    --color-text: #1a1a1a;
+    --color-primary: #5e2a84;
+    --color-accent: #3c1663;
+    --color-muted: #6a4c7f;
+    --color-link: #5e2a84;
+    --color-link-active: #3c1663;
+    --color-card: #ffffff;
+    --color-shadow: rgba(60, 0, 80, 0.06);
+}
+
+body.theme-grey {
+    --color-bg: #f4f4f4;
+    --color-text: #1a1a1a;
+    --color-primary: #768692;
+    --color-accent: #425563;
+    --color-muted: #6c7a86;
+    --color-link: #425563;
+    --color-link-active: #5a6a75;
+    --color-card: #ffffff;
+    --color-shadow: rgba(66, 85, 99, 0.06);
+}
+
+body.theme-yellow {
+    --color-bg: #fffde7;
+    --color-text: #1a1a1a;
+    --color-primary: #fdd835;
+    --color-accent: #fbc02d;
+    --color-muted: #7a6f3b;
+    --color-link: #fbc02d;
+    --color-link-active: #7a6f3b;
+    --color-card: #ffffff;
+    --color-shadow: rgba(255, 235, 59, 0.08);
+}
+
+body.theme-red {
+    --color-bg: #fff6f6;
+    --color-text: #1a1a1a;
+    --color-primary: #aa1c17;
+    --color-accent: #891512;
+    --color-muted: #891512;
+    --color-link: #aa1c17;
+    --color-link-active: #891512;
+    --color-card: #ffffff;
+    --color-shadow: rgba(213, 40, 27, 0.08);
+}
+
+body.theme-pink {
+    --color-bg: #f8eaf1;
+    --color-text: #1a1a1a;
+    --color-primary: #7c2855;
+    --color-accent: #5e1f42;
+    --color-muted: #d9a8c0;
+    --color-link: #7c2855;
+    --color-link-active: #5e1f42;
+    --color-card: #ffffff;
+    --color-shadow: rgba(124, 40, 85, 0.08);
+}
+
+body.theme-calm {
+    --color-bg: #f2f2f2;
+    --color-text: #2a2a2a;
+    --color-primary: #4c4c4c;
+    --color-accent: #2a2a2a;
+    --color-muted: #6c6c6c;
+    --color-link: #2a2a2a;
+    --color-link-active: #4c4c4c;
+    --color-card: #ffffff;
+    --color-shadow: rgba(0, 0, 0, 0.06);
+}
+
+body.theme-contrast {
+    --color-bg: #000000;
+    --color-text: #ffffff;
+    --color-primary: yellow;
+    --color-accent: #ffffff;
+    --color-muted: #cccccc;
+    --color-link: yellow;
+    --color-link-active: #ffffff;
+    --color-card: #000000;
+    --color-shadow: rgba(255, 255, 0, 0.2);
+}
+
+/* ============================================================
+   DARK MODE OVERRIDES FOR EACH THEME
+============================================================ */
+body.theme-blue.dark-mode {
+    --color-bg: #0d1a26;
+    --color-text: #e0f0ff;
+    --color-primary: #41b6e6;
+    --color-accent: #003087;
+    --color-muted: #8ca0b3;
+    --color-link: #dce9f5;
+    --color-link-active: #a3b9d4;
+    --color-card: #162b3d;
+    --color-shadow: rgba(0, 94, 184, 0.1);
+}
+
+body.theme-green.dark-mode {
+    --color-bg: #002615;
+    --color-text: #d8f4e3;
+    --color-primary: #33a36a;
+    --color-accent: #00542a;
+    --color-muted: #99cbb1;
+    --color-link: #ccefdc;
+    --color-link-active: #99cbb1;
+    --color-card: #003d29;
+    --color-shadow: rgba(0, 255, 170, 0.05);
+}
+
+body.theme-purple.dark-mode {
+    --color-bg: #1e0b30;
+    --color-text: #e2d5f3;
+    --color-primary: #9d70c7;
+    --color-accent: #3c1663;
+    --color-muted: #bfa3e0;
+    --color-link: #e8d4ff;
+    --color-link-active: #bfa3e0;
+    --color-card: #290f4d;
+    --color-shadow: rgba(144, 93, 198, 0.1);
+}
+
+body.theme-grey.dark-mode {
+    --color-bg: #2a3136;
+    --color-text: #dce1e4;
+    --color-primary: #a3afb7;
+    --color-accent: #4a5964;
+    --color-muted: #aab6be;
+    --color-link: #e0e6ea;
+    --color-link-active: #aab6be;
+    --color-card: #353c42;
+    --color-shadow: rgba(66, 85, 99, 0.1);
+}
+
+body.theme-yellow.dark-mode {
+    --color-bg: #2a2600;
+    --color-text: #fffbd6;
+    --color-primary: #fff176;
+    --color-accent: #ffee58;
+    --color-muted: #d6c88a;
+    --color-link: #fffbd6;
+    --color-link-active: #d6c88a;
+    --color-card: #3a3500;
+    --color-shadow: rgba(255, 235, 59, 0.12);
+}
+
+body.theme-red.dark-mode {
+    --color-bg: #2a1110;
+    --color-text: #fbeaea;
+    --color-primary: #dca6a2;
+    --color-accent: #891512;
+    --color-muted: #dca6a2;
+    --color-link: #fbeaea;
+    --color-link-active: #dca6a2;
+    --color-card: #3a1a1a;
+    --color-shadow: rgba(213, 40, 27, 0.1);
+}
+
+body.theme-pink.dark-mode {
+    --color-bg: #2e1b27;
+    --color-text: #f8eaf1;
+    --color-primary: #d9a8c0;
+    --color-accent: #5e1f42;
+    --color-muted: #d9a8c0;
+    --color-link: #f8eaf1;
+    --color-link-active: #d9a8c0;
+    --color-card: #3a1a2a;
+    --color-shadow: rgba(124, 40, 85, 0.1);
+}
+
+body.theme-calm.dark-mode {
+    --color-bg: #1f1f1f;
+    --color-text: #e2e2e2;
+    --color-primary: #888888;
+    --color-accent: #4c4c4c;
+    --color-muted: #b0b0b0;
+    --color-link: #e2e2e2;
+    --color-link-active: #a0a0a0;
+    --color-card: #2b2b2b;
+    --color-shadow: rgba(255, 255, 255, 0.04);
+}
+
+body.theme-contrast.dark-mode {
+    --color-bg: #000000;
+    --color-text: #ffffff;
+    --color-primary: yellow;
+    --color-accent: #ffffff;
+    --color-muted: #cccccc;
+    --color-link: yellow;
+    --color-link-active: #ffffff;
+    --color-card: #000000;
+    --color-shadow: rgba(255, 255, 0, 0.2);
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 768px) {
+    .nhs-header {
+        position: static;
+    }
+
+    .tewv-logo {
+        max-width: 140px;
+    }
+}
+
+/* ============================================================
+   LOGO BAR & HEADER
+============================================================ */
+.logo-bar {
+    position: relative;
+    height: 80px;
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    z-index: 10;
+}
+
+.left-logo {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.center-heading {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.logo-bar h1 {
+    margin: 0;
+    color: var(--color-text);
+}
+
+.logo-wrapper {
+    position: fixed;
+    top: 20px;
+    left: 10px;
+    z-index: 1000;
+}
+
+.logo-wrapper img {
+    padding: 4px;
+    border-radius: 4px;
+    max-width: 200px;
+    height: auto;
+    display: block;
+}
+
+/* ============================================================
+   DROPDOWN & SUBMENU
+============================================================ */
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
+    display: none;
+}
+
+.dropdown-submenu:hover>.dropdown-menu,
+.dropdown-menu>li:hover>.submenu {
+    display: block;
+}
+
+.submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.submenu.open {
+    max-height: 500px;
+}
+
+/* ============================================================
+   MODAL & FULLSCREEN CARD
+============================================================ */
+.modal-content {
+    background-color: var(--color-card);
+    padding: 2rem;
+    box-shadow: 0 0 40px var(--color-shadow);
+}
+
+#cardModal .modal-body .card {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    box-shadow: none;
+}
+
+/* ============================================================
+   CLOSE BUTTON
+============================================================ */
+.close-button {
+    background: transparent;
+    border: none;
+    color: var(--color-text);
+}
+
+body.dark-mode .close-button {
+    color: #fff;
+}
+
+body.light-mode .close-button {
+    color: #000;
+}
+
+/* ============================================================
+   BANNER & LOGO ANIMATION
+============================================================ */
+.banner-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.Banner_image {
+    width: 100%;
+    height: 25vh;
+    object-fit: cover;
+    display: block;
+    padding: 10px 0;
+}
+
+.banner-text-overlay {
+    position: absolute;
+    bottom: 4vw;
+    left: 5vw;
+    color: #fff;
+    font-size: clamp(0.75rem, 2vw, 2rem);
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 0.3em 0.75em;
+    border-radius: 4px;
+    max-width: 80vw;
+    box-sizing: border-box;
+}
+
+.logo-container {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+.esr {
+    animation-name: fadeESR;
+}
+
+.nhs {
+    animation-name: fadeNHS;
+}
+
+@keyframes fadeESR {
+
+    0%,
+    40% {
+        opacity: 1;
+    }
+
+    50%,
+    90% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeNHS {
+
+    0%,
+    40% {
+        opacity: 0;
+    }
+
+    50%,
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* ============================================================
+   GLASS EFFECTS
+============================================================ */
+.glass .sidebar,
+.glass .card,
+.glass .modal,
+.glass .navbar,
+.glass .nhs-header {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(2px) saturate(180%);
+    -webkit-backdrop-filter: blur(2px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 2rem;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2),
+        inset 0 4px 20px rgba(255, 255, 255, 0.3);
+    overflow: hidden;
+    padding: 20px;
+}
+
+.glass .sidebar::after,
+.glass .card::after,
+.glass .modal::after,
+.glass .navbar::after,
+.glass .nhs-header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2rem;
+    backdrop-filter: blur(1px);
+    box-shadow: inset -10px -8px 0px -11px rgba(255, 255, 255, 1),
+        inset 0px -9px 0px -8px rgba(255, 255, 255, 1);
+    opacity: 0.6;
+    z-index: -1;
+    filter: blur(1px) drop-shadow(10px 4px 6px black) brightness(115%);
+}
+
+/* ============================================================
+   NAVBAR DROPDOWN ENHANCEMENTS
+============================================================ */
+.navbar-nav .dropdown-item {
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dropdown-item.submenu-toggle::after {
+    content: " ▶";
+    font-weight: bold;
+    margin-left: 10px;
+    float: right;
+}
+
+.navbar a {
+    cursor: pointer;
+}
+
+/* ============================================================
+   SEARCH WRAPPER
+============================================================ */
+.search-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 0px;
+}
+
+/* ============================================================
+   MENU BUTTON & HEADER BAR
+============================================================ */
+.menu-button-wrapper {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    z-index: 10;
+}
+
+.header-bar {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 120px;
+}
+
+/* ============================================================
+   PAGE ACTIVE CLASS
+============================================================ */
+.active {
+    display: block;
+}
+
+/* ============================================================
+   DROPDOWN ACCORDION LOGIC
+============================================================ */
+.dropdown-menu .submenu {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    display: none;
+}
+
+.dropdown-menu>li:hover>.submenu {
+    display: block;
+}
+
+/* ============================================================
+   RESPONSIVE BANNER HEIGHT
+============================================================ */
+@media (max-width: 576px) {
+    .banner-wrapper {
+        height: 100px;
+    }
+}
