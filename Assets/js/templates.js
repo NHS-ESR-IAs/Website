@@ -1768,3 +1768,129 @@ templates.survey = (data) => {
 </style>
 `;
 };
+
+// ===============================
+// Multiple Paydays Template
+// ===============================
+templates.payday = (config) => {
+  const { countdowns = [], imageUrl = "" } = config;
+
+  const imageHTML =
+    imageUrl && imageUrl.trim()
+      ? `<div style="text-align: center;"><img src="${imageUrl}" style="max-width:500px;" alt="Pay Day Banner" /></div>`
+      : "";
+
+  const countdownHTML = countdowns
+    .map((entry, index) => {
+      const id = index + 1;
+      return `
+      <div id="PDcountdown${id}" class="alert-primary">
+        <div id="PDtimer${id}" class="PDtimer"></div>
+        <div id="PDmessage${id}" class="PDmessage alert-danger">⏰ Pay day has passed!</div>
+      </div>
+    `;
+    })
+    .join("");
+
+  const countdownScript = `
+<script>
+(function(){
+  const countdowns = ${JSON.stringify(countdowns)};
+  countdowns.forEach((entry, index) => {
+    const id = index + 1;
+    const targetDate = new Date(entry.PDpayDate).getTime();
+    const visibleFrom = new Date(entry.PDvisibleFrom);
+    const visibleTo = new Date(entry.PDvisibleTo);
+    const now = new Date();
+    const wrapper = document.getElementById("PDcountdown" + id);
+    wrapper.style.display = (now >= visibleFrom && now <= visibleTo) ? "block" : "none";
+
+    const timer = document.getElementById("PDtimer" + id);
+    const message = document.getElementById("PDmessage" + id);
+
+    const interval = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+      if (distance < 0) {
+        clearInterval(interval);
+        timer.style.display = "none";
+        message.style.display = "block";
+        return;
+      }
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      timer.innerHTML = \`
+        <h4>The next pay day is \${entry.PDpayDateLabel}:</h4>
+        <h5>\${days} days \${hours} hours \${minutes} minutes \${seconds} seconds</h5>
+      \`;
+    }, 1000);
+  });
+})();
+</script>
+`;
+
+  const styles = `
+<style>
+  .PDtimer {
+    font-size: 1.5rem;
+    margin: 20px auto;
+    background-color: navy;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 50px;
+    padding: 20px;
+    border: 3px solid #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 90%;
+    width: 700px;
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  .PDmessage {
+    display: none;
+    font-size: 1.5rem;
+    color: red;
+    margin-top: 20px;
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .PDtimer h5 {
+    animation: pulse 1s infinite alternate;
+  }
+
+  @keyframes pulse {
+    from { transform: scale(1); color: #ffffff; }
+    to { transform: scale(1.05); color: #ffd700; }
+  }
+
+  @media (max-width: 600px) {
+    .PDtimer, .PDmessage {
+      font-size: 1.2rem;
+      padding: 15px;
+    }
+    .PDtimer h5 {
+      font-size: 1rem;
+    }
+  }
+</style>
+`;
+
+  return `
+${imageHTML}
+<div id="PDcountdowns">${countdownHTML}</div>
+${styles}
+${countdownScript}
+`;
+};

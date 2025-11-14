@@ -367,7 +367,15 @@
         "title": "📣 Survey Countdown Playground",
         "preview": "Assets/Images/SurveyCountdownPlayground.png",
         "description": "Animated rainbow countdown for surveys and contributor actions — with deadline logic and custom messages.",
-        "category": "Contributor Tools"
+        "category": "ESR Web Portlets"
+      },
+      {
+        "label": "💷 Pay Day Countdown Playground",
+        "href": "PayDays.html",
+        "title": "💷 Pay Day Countdown Playground",
+        "preview": "Assets/Images/PayDayCountdownPlayground.png",
+        "description": "Modular multi-date countdown with visibility windows and live timers — perfect for ESR dashboards and contributor nudges.",
+        "category": "ESR Web Portlets"
       }
     ]
   },
