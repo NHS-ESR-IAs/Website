@@ -1584,3 +1584,187 @@ templates.portlet = ({
   </div></div>
 `;
 };
+
+// ===============================
+// Christmas Countdown
+// ===============================
+
+templates.countdown = (data) => {
+  const snowflakes = Array.from({ length: data.snowflakes }, (_, i) => {
+    const left = 2 + i * (96 / data.snowflakes);
+    const size = (1.2 + Math.random() * 0.8).toFixed(1);
+    const duration = (6 + Math.random() * 4).toFixed(1);
+    return `<div class="snowflake" style="left:${left}%; font-size:${size}em; animation-duration:${duration}s;">❄️</div>`;
+  }).join("");
+
+  return `
+<div id="${data.countdownId}" class="countdown-container">
+  <h2 class="countdown-header">${data.title}</h2>
+  <div id="countdown-timer" class="countdown-timer"></div>
+  <div class="emoji-row">${data.emojiRow}</div>
+  ${snowflakes}
+</div>
+
+<script>
+  (function(){
+    const payday = new Date("${data.payday}T00:00:00");
+    const timer = document.getElementById("countdown-timer");
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = payday - now;
+      if (diff <= 0) {
+        timer.innerHTML = "${data.message}";
+        return;
+      }
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const m = Math.floor((diff / (1000 * 60)) % 60);
+      const s = Math.floor((diff / 1000) % 60);
+      timer.innerHTML = \`\${d}d \${h}h \${m}m \${s}s\`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  })();
+</script>
+
+<style>
+  .countdown-container {
+    text-align: center;
+    padding: 20px;
+    background: #001f3f;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    font-family: 'Segoe UI', sans-serif;
+    position: relative;
+    overflow: hidden;
+    color: white;
+  }
+
+  .countdown-header {
+    color: #ffcccb;
+    font-size: 2em;
+  }
+
+  .countdown-timer {
+    font-size: 1.5em;
+    color: #00ffcc;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .emoji-row {
+    font-size: 2em;
+  }
+
+  .snowflake {
+    position: absolute;
+    top: -30px;
+    animation-name: fall-zigzag;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    pointer-events: none;
+  }
+
+  @keyframes fall-zigzag {
+    0%   { transform: translateX(0) rotate(0deg); top: -30px; opacity: 1; }
+    25%  { transform: translateX(-20px) rotate(90deg); }
+    50%  { transform: translateX(20px) rotate(180deg); }
+    75%  { transform: translateX(-20px) rotate(270deg); }
+    100% { transform: translateX(0) rotate(360deg); top: 100%; opacity: 0; }
+  }
+</style>
+`;
+};
+
+// ===============================
+// Staff Survey Countdown
+// ===============================
+templates.survey = (data) => {
+  return `
+<div class="rainbow-background" style="padding:30px; border-radius:15px; box-shadow:0 0 15px rgba(0,0,0,0.4); font-family:'Segoe UI', sans-serif; position:relative; overflow:hidden;">
+  <div style="background:white; color:#002244; padding:20px; border-radius:10px; max-width:600px; margin:auto; box-shadow:0 0 10px rgba(0,0,0,0.2); text-align:center;">
+    <h2 class="animated-heading" style="font-size:2em; margin-bottom:10px;">${
+      data.title
+    }</h2>
+    <div id="survey-timer" class="glow-text" style="font-size:1.6em; font-weight:bold; margin-bottom:10px;"></div>
+    <div style="font-size:1.2em;">Make your voice heard before <strong>${new Date(
+      data.deadline
+    ).toLocaleDateString()}</strong>!</div>
+    <div class="emoji-bounce" style="font-size:2em; margin-top:15px;">${
+      data.emojiRow
+    }</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const deadline = new Date("${data.deadline}T23:59:59");
+  const timer = document.getElementById("survey-timer");
+
+  function updateSurveyCountdown() {
+    const now = new Date();
+    const diff = deadline - now;
+
+    if (diff <= 0) {
+      timer.innerHTML = "${data.message}";
+      return;
+    }
+
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const m = Math.floor((diff / (1000 * 60)) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+
+    timer.innerHTML = \`\${d}d \${h}h \${m}m \${s}s\`;
+  }
+
+  updateSurveyCountdown();
+  setInterval(updateSurveyCountdown, 1000);
+})();
+</script>
+
+<style>
+.rainbow-background {
+  background: linear-gradient(270deg, #ff4d4d, #ffcc00, #33cc33, #3399ff, #cc33ff);
+  background-size: 1000% 1000%;
+  animation: rainbowShift 20s ease infinite;
+}
+
+@keyframes rainbowShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animated-heading {
+  background: linear-gradient(to right, #ff4d4d, #ffcc00, #33cc33, #3399ff, #cc33ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShift 5s ease infinite;
+}
+
+@keyframes textShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.glow-text {
+  color: #002244;
+  text-shadow: 0 0 5px #00ccff, 0 0 10px #00ccff, 0 0 20px #00ccff;
+}
+
+.emoji-bounce {
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-15px); }
+  60% { transform: translateY(-7px); }
+}
+</style>
+`;
+};

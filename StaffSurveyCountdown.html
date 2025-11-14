@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MicroSiteKit – Survey Countdown Playground</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Assets/css/style.css" rel="stylesheet" />
+</head>
+
+<body class="glass">
+    <!-- Injected Partials -->
+    <div id="shared-header"></div>
+    <div id="main-nav"></div>
+    <div id="sidebar-nav"></div>
+
+    <!-- Page Content -->
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" id="breadcrumb"></ol>
+        </nav>
+        <div class="row">
+            <!-- Sidebar Gradient Title -->
+            <div class="col-md-4 gradient-col d-flex align-items-center justify-content-center text-start">
+                <h3 class="gradient-text">Countdowns</h3>
+            </div>
+
+            <!-- Intro Text -->
+            <div class="col-md-8">
+                <h4>📣 Survey Countdown Playground</h4>
+                <p>Use this to build urgency for surveys, feedback forms, or any time-sensitive contributor action. It’s
+                    animated, accessible, and joyfully modular.</p>
+                <ul>
+                    <li>📅 Live countdown to your deadline</li>
+                    <li>🌈 Rainbow background and animated heading</li>
+                    <li>📣 Custom message and emoji row</li>
+                </ul>
+                <p>Perfect for staff surveys, team polls, or “last chance to vote” nudges.</p>
+            </div>
+        </div>
+
+        <!-- Playground Panel -->
+        <div class="row mt-4">
+            <div class="col-md border border-primary rounded p-3">
+                <section class="playground mt-5">
+                    <h3>🔧 Playground</h3>
+
+                    <form id="playgroundForm" class="mb-3 row g-3">
+                        <!-- Fields will be injected here by renderPlayground -->
+                    </form>
+
+                    <div class="dohicky-grid">
+                        <div class="dohicky-item"><button type="button" id="generateBtn"
+                                class="btn btn-primary w-100">Generate Code</button></div>
+                        <div class="dohicky-item"><button type="button" class="btn btn-primary w-100"
+                                onclick="copyCode()">Copy</button></div>
+                        <div class="dohicky-item"><button type="button" class="btn btn-primary w-100"
+                                onclick="exportConfig()">💾 Save Settings</button></div>
+                        <div class="dohicky-item">
+                            <input type="file" id="configFile" accept=".txt" style="display:none" />
+                            <button type="button" class="btn btn-primary w-100"
+                                onclick="document.getElementById('configFile').click()">📂 Load Settings</button>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6 border border-primary rounded p-3">
+                            <h5>Generated Code</h5>
+                            <pre><code id="output"></code></pre>
+                        </div>
+                        <div class="col-md-6 border border-primary rounded p-3">
+                            <h5>Live Preview</h5>
+                            <div id="previewArea"></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Snippet Guide -->
+        <div class="row mt-5">
+            <div class="col-md">
+                <h5 class="mt-4 mb-2">🧩 Snippet Guide: Countdown with Colour</h5>
+                <ul>
+                    <li><strong>Set your deadline</strong> to match your survey close date.</li>
+                    <li><strong>Customize the title</strong> to reflect your campaign tone.</li>
+                    <li><strong>Use emojis</strong> to add energy and clarity.</li>
+                    <li><strong>Closed message</strong> appears automatically after the deadline.</li>
+                    <li><strong>Copy or save</strong> your config to reuse across campaigns.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div id="shared-footer"></div>
+
+        <!-- Bootstrap JS + Playground Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+        <script src="Assets/js/script.js"></script>
+        <script src="Assets/js/templates.js"></script>
+        <script src="Assets/js/survey-playground.js"></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const config = {
+                    fields: [
+                        { id: "surveyId", label: "Countdown ID", type: "text", default: "surveyCountdown" },
+                        { id: "title", label: "Banner Title", type: "text", default: "📝 Staff Survey Closes Soon!" },
+                        { id: "deadline", label: "Survey Deadline", type: "date", default: "2025-11-21" },
+                        { id: "message", label: "Closed Message", type: "text", default: "✅ Survey Closed – thank you for participating!" },
+                        { id: "emojiRow", label: "Emoji Row", type: "text", default: "📣 ✅ 🕓" }
+                    ],
+                    template: "survey"
+                };
+
+                renderPlayground(config);
+            });
+
+            function sanitizeSmartCharacters(str) {
+                return str
+                    .replace(/[\u2018\u2019\u201A\u201B\u2032\u2035]/g, "'")
+                    .replace(/[\u201C\u201D\u201E\u201F\u2033\u2036]/g, '"')
+                    .replace(/[\u2013]/g, '-')
+                    .replace(/[\u2014]/g, '--')
+                    .replace(/\u00A0/g, ' ')
+                    .replace(/\u2026/g, '...')
+                    .replace(/\u200B/g, '')
+                    .replace(/\uFEFF/g, '');
+            }
+
+            function copyCode() {
+                const rawText = document.getElementById("output").textContent;
+                const cleanText = sanitizeSmartCharacters(rawText);
+                navigator.clipboard.writeText(cleanText);
+                alert("Code copied (smart characters cleaned)!");
+            }
+        </script>
+    </div>
+</body>
+
+</html>

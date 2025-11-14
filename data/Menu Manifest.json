@@ -352,6 +352,22 @@
         "preview": "Assets/Images/WebPortletPlayground.png",
         "description": "Modular portlet builder with toggleable sections, live preview, and accessible code generation — designed for contributor-led prototyping and ESR deployment.",
         "category": "ESR Web Portlets"
+      },
+      {
+        "label": "🎄 Countdown Playground",
+        "href": "ChristmasCountdown.html",
+        "title": "🎄 Countdown Playground",
+        "preview": "Assets/Images/CountdownPlayground.png",
+        "description": "Festive countdown builder with live preview, snowflake animation, and customizable messages — perfect for pay day hype, launch prep, or seasonal joy.",
+        "category": "ESR Web Portlets"
+      },
+      {
+        "label": "📣 Survey Countdown Playground",
+        "href": "StaffSurveyCountdown.html",
+        "title": "📣 Survey Countdown Playground",
+        "preview": "Assets/Images/SurveyCountdownPlayground.png",
+        "description": "Animated rainbow countdown for surveys and contributor actions — with deadline logic and custom messages.",
+        "category": "Contributor Tools"
       }
     ]
   },
