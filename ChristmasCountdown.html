@@ -51,8 +51,24 @@
 
                     <form id="playgroundForm" class="mb-3 row g-3">
                         <!-- Fields will be injected here by renderPlayground -->
-                    </form>
 
+                    </form>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="toggleDays" checked>
+                        <label class="form-check-label" for="toggleDays">Show Days</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="toggleHours" checked>
+                        <label class="form-check-label" for="toggleHours">Show Hours</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="toggleMinutes" checked>
+                        <label class="form-check-label" for="toggleMinutes">Show Minutes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="toggleSeconds" checked>
+                        <label class="form-check-label" for="toggleSeconds">Show Seconds</label>
+                    </div>
                     <div class="dohicky-grid">
                         <div class="dohicky-item"><button type="button" id="generateBtn"
                                 class="btn btn-primary w-100">Generate Code</button></div>
@@ -104,58 +120,65 @@
         <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
         <script src="Assets/js/script.js"></script>
         <script src="Assets/js/templates.js"></script>
-        <script src="Assets/js/countdown-playground.js"></script>
+
 
         <script>
             document.addEventListener("DOMContentLoaded", () => {
-                const config = {
+                // Make config global
+                window.config = {
                     fields: [
-                        {
-                            id: "countdownId",
-                            label: "Countdown ID",
-                            type: "text",
-                            default: "christmasCountdown"
-                        },
-                        {
-                            id: "title",
-                            label: "Countdown Title",
-                            type: "text",
-                            default: "🎅 Countdown to Christmas Pay Day 🎁"
-                        },
-                        {
-                            id: "payday",
-                            label: "Pay Day Date",
-                            type: "date",
-                            default: "2025-12-22"
-                        },
-                        {
-                            id: "message",
-                            label: "Pay Day Message",
-                            type: "text",
-                            default: "💷 It's Pay Day! Merry Christmas!"
-                        },
-                        {
-                            id: "emojiRow",
-                            label: "Emoji Row",
-                            type: "text",
-                            default: "💷 🎄 ❄️ ⛄ 🔔 🌟 🍪 🕯️"
-                        },
-                        {
-                            id: "snowflakes",
-                            label: "Number of Snowflakes",
-                            type: "range",
-                            min: 5,
-                            max: 40,
-                            step: 1,
-                            default: 20
-                        }
+                        { id: "countdownId", label: "Countdown ID", type: "text", default: "christmasCountdown" },
+                        { id: "title", label: "Countdown Title", type: "text", default: "🎅 Countdown to Christmas Pay Day 🎁" },
+                        { id: "payday", label: "Pay Day Date", type: "date", default: "2025-12-22" },
+                        { id: "message", label: "Pay Day Message", type: "text", default: "💷 It's Pay Day! Merry Christmas!" },
+                        { id: "emojiRow", label: "Emoji Row", type: "text", default: "💷 🎄 ❄️ ⛄ 🔔 🌟 🍪 🕯️" },
+                        { id: "snowflakes", label: "Number of Snowflakes", type: "range", min: 5, max: 40, step: 1, default: 20 }
                     ],
                     template: "countdown"
                 };
 
-                renderPlayground(config);
+                renderPlayground(window.config);
+
+                const generateBtn = document.getElementById("generateBtn");
+                if (generateBtn) {
+                    generateBtn.onclick = () => {
+                        const values = {};
+
+                        // Collect values from configured fields
+                        window.config.fields.forEach((f) => {
+                            const el = document.getElementById(f.id);
+                            if (el) values[f.id] = el.value;
+                        });
+
+                        // Collect manual checkboxes
+                        values.toggleDays = document.getElementById("toggleDays").checked;
+                        values.toggleHours = document.getElementById("toggleHours").checked;
+                        values.toggleMinutes = document.getElementById("toggleMinutes").checked;
+                        values.toggleSeconds = document.getElementById("toggleSeconds").checked;
+
+                        let code = "";
+                        try {
+                            if (templates && templates[window.config.template]) {
+                                code = templates[window.config.template](values) || "";
+                            }
+                        } catch (err) {
+                            console.error("Template generation failed:", err);
+                        }
+
+                        // Update output box
+                        const outputEl = document.getElementById("output");
+                        if (outputEl) outputEl.textContent = code.trim();
+
+                        // Update preview
+                        const previewEl = document.getElementById("previewArea");
+                        if (previewEl && code) {
+                            previewEl.innerHTML = code;
+                        }
+                    };
+                }
             });
 
+            // ---------------- Helpers ----------------
             function sanitizeSmartCharacters(str) {
                 return str
                     .replace(/[\u2018\u2019\u201A\u201B\u2032\u2035]/g, "'")

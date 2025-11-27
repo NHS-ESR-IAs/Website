@@ -121,7 +121,23 @@
                         <input type="text" id="infoLink" class="form-control"
                             value="https://www.nhs.uk/conditions/flu/">
                     </div>
-
+                    <h5 class="mt-3">Countdown Units</h5>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="toggleDays" checked>
+                        <label class="form-check-label" for="toggleDays">Show Days</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="toggleHours" checked>
+                        <label class="form-check-label" for="toggleHours">Show Hours</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="toggleMinutes" checked>
+                        <label class="form-check-label" for="toggleMinutes">Show Minutes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="toggleSeconds" checked>
+                        <label class="form-check-label" for="toggleSeconds">Show Seconds</label>
+                    </div>
                     <div class="mb-2">
                         <label class="form-label">Countdown Target (ISO)</label>
                         <input type="text" id="countdownDate" class="form-control" value="2026-01-31T17:00">
@@ -201,56 +217,57 @@
         document.addEventListener("DOMContentLoaded", () => {
             const barChartForm = document.getElementById("barChartForm");
 
+            // --- Bar chart group builder ---
             function addBarGroup(defaults = { label: "", value: "", color: "#005EB8", delay: "0s" }) {
                 const div = document.createElement("div");
                 div.className = "border rounded p-2 mb-3";
 
                 div.innerHTML = `
-  <h6 class="mb-2">Bar Chart Group</h6>
-  <div class="row g-2 mb-2">
-    <div class="col-md-7">
-      <label class="form-label">Label</label>
-      <input type="text" class="form-control label" placeholder="Label" value="${defaults.label}">
-    </div>
-    <div class="col-md-2">
-      <label class="form-label">Value (%)</label>
-      <input type="number" class="form-control value" placeholder="%" value="${defaults.value}">
-    </div>
-    <div class="col-md-1">
-      <label class="form-label">Colour</label>
-      <input type="color" class="form-control form-control-color bar-color" value="${defaults.color}">
-    </div>
-    <div class="col-md-2">
-      <label class="form-label">Delay</label>
-      <input type="text" class="form-control delay" placeholder="0s" value="${defaults.delay}">
-    </div>
-    <div class="col-md-2 d-flex align-items-end">
-      <button type="button" class="btn btn-sm btn-danger removeBtn">Remove</button>
-    </div>
-  </div>
-`;
-
+            <h6 class="mb-2">Bar Chart Group</h6>
+            <div class="row g-2 mb-2">
+                <div class="col-md-7">
+                    <label class="form-label">Label</label>
+                    <input type="text" class="form-control label" placeholder="Label" value="${defaults.label}">
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Value (%)</label>
+                    <input type="number" class="form-control value" placeholder="%" value="${defaults.value}">
+                </div>
+                <div class="col-md-1">
+                    <label class="form-label">Colour</label>
+                    <input type="color" class="form-control form-control-color bar-color" value="${defaults.color}">
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Delay</label>
+                    <input type="text" class="form-control delay" placeholder="0s" value="${defaults.delay}">
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="button" class="btn btn-sm btn-danger removeBtn">Remove</button>
+                </div>
+            </div>
+        `;
                 div.querySelector(".removeBtn").onclick = () => div.remove();
-                document.getElementById("barChartForm").appendChild(div);
+                barChartForm.appendChild(div);
             }
 
-            // Seed with one example
-            addBarGroup({ label: "Emergency & Urgent Care", value: 92.4, color: "#FF0000", delay: "0s" });   // Red
-            addBarGroup({ label: "Surgical Services", value: 78.9, color: "#FF7F00", delay: "0.1s" }); // Orange
-            addBarGroup({ label: "Medical Specialties", value: 81.2, color: "#FFFF00", delay: "0.2s" }); // Yellow
-            addBarGroup({ label: "Maternity & Neonatal", value: 87.6, color: "#00FF00", delay: "0.3s" }); // Green
-            addBarGroup({ label: "Children & Young People", value: 74.3, color: "#00FFFF", delay: "0.4s" }); // Cyan
-            addBarGroup({ label: "Diagnostics & Imaging", value: 89.1, color: "#0000FF", delay: "0.5s" }); // Blue
-            addBarGroup({ label: "Community & Mental Health", value: 83.7, color: "#8B00FF", delay: "0.6s" }); // Violet
-            addBarGroup({ label: "Corporate & Support Services", value: 76.5, color: "#FF1493", delay: "0.7s" }); // Pink (extra rainbow pop)
+            // Seed with rainbow examples
+            addBarGroup({ label: "Emergency & Urgent Care", value: 92.4, color: "#FF0000", delay: "0s" });
+            addBarGroup({ label: "Surgical Services", value: 78.9, color: "#FF7F00", delay: "0.1s" });
+            addBarGroup({ label: "Medical Specialties", value: 81.2, color: "#FFFF00", delay: "0.2s" });
+            addBarGroup({ label: "Maternity & Neonatal", value: 87.6, color: "#00FF00", delay: "0.3s" });
+            addBarGroup({ label: "Children & Young People", value: 74.3, color: "#00FFFF", delay: "0.4s" });
+            addBarGroup({ label: "Diagnostics & Imaging", value: 89.1, color: "#0000FF", delay: "0.5s" });
+            addBarGroup({ label: "Community & Mental Health", value: 83.7, color: "#8B00FF", delay: "0.6s" });
+            addBarGroup({ label: "Corporate & Support Services", value: 76.5, color: "#FF1493", delay: "0.7s" });
 
             document.getElementById("addBarBtn").onclick = () => addBarGroup();
 
+            // --- Generate button ---
             document.getElementById("generateBtn").onclick = () => {
                 const barChart = [...document.querySelectorAll("#barChartForm .border")].map(div => ({
                     label: div.querySelector(".label")?.value || "",
                     value: div.querySelector(".value")?.value || "",
-                    color: div.querySelector(".bar-color")?.value || "", // match your new class
+                    color: div.querySelector(".bar-color")?.value || "",
                     delay: div.querySelector(".delay")?.value || ""
                 }));
 
@@ -259,40 +276,100 @@
                     introText: document.getElementById("introText").value,
                     startDate: document.getElementById("startDate").value,
                     endDate: document.getElementById("endDate").value,
-                    infoLinkText: document.getElementById("infoLinkText").value,   // ✅ add this
+                    infoLinkText: document.getElementById("infoLinkText").value,
                     infoLink: document.getElementById("infoLink").value,
                     countdownDate: document.getElementById("countdownDate").value,
                     piePercentage: document.getElementById("piePercentage").value,
                     pieColor: document.getElementById("pieColor").value,
-                    bookingLinkText: document.getElementById("bookingLinkText").value, // ✅ add this
+                    bookingLinkText: document.getElementById("bookingLinkText").value,
                     bookingLink: document.getElementById("bookingLink").value,
                     barChart,
-                    uid: Date.now() // unique suffix
+                    uid: Date.now()
                 };
 
                 const code = templates.fluPortlet(values);
                 document.getElementById("output").textContent = code;
                 document.getElementById("previewArea").innerHTML = code;
+
+                // Build config from checkboxes
+                const countdownConfig = {
+                    showDays: document.getElementById("toggleDays").checked,
+                    showHours: document.getElementById("toggleHours").checked,
+                    showMinutes: document.getElementById("toggleMinutes").checked,
+                    showSeconds: document.getElementById("toggleSeconds").checked
+                };
+
+                // Render countdown separately
+                const targetDate = new Date(values.countdownDate);
+                renderCountdown(targetDate, countdownConfig, "countdownPreview");
             };
         });
 
+        // --- Countdown functions ---
+        function calculateCountdown(targetDate, config) {
+            const now = new Date();
+            let diff = Math.max(0, targetDate - now);
+            let totalSeconds = Math.floor(diff / 1000);
+
+            let days = Math.floor(totalSeconds / (3600 * 24));
+            let hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+            let minutes = Math.floor((totalSeconds % 3600) / 60);
+            let seconds = totalSeconds % 60;
+
+            if (!config.showDays) { hours += days * 24; days = 0; }
+            if (!config.showHours) { minutes += hours * 60; hours = 0; }
+            if (!config.showMinutes) { seconds += minutes * 60; minutes = 0; }
+
+            return { days, hours, minutes, seconds };
+        }
+
+        function renderCountdown(targetDate, config) {
+            const tiles = document.querySelector("#tiles");
+
+            function update() {
+                const { days, hours, minutes, seconds } = calculateCountdown(targetDate, config);
+
+                let html = "";
+
+                if (config.showDays) {
+                    html += `<div class="tile"><span>${days}</span><div class="label">Days</div></div>`;
+                }
+                if (config.showHours) {
+                    html += `<div class="tile"><span>${hours}</span><div class="label">Hours</div></div>`;
+                }
+                if (config.showMinutes) {
+                    html += `<div class="tile"><span>${minutes}</span><div class="label">Mins</div></div>`;
+                }
+                if (config.showSeconds) {
+                    html += `<div class="tile"><span>${seconds}</span><div class="label">Secs</div></div>`;
+                }
+
+                tiles.innerHTML = html;
+            }
+
+            update();
+            setInterval(update, 1000);
+        }
+
+        // --- Utility functions ---
         function sanitizeSmartCharacters(str) {
             return str
-                .replace(/[\u2018\u2019\u201A\u201B\u2032\u2035]/g, "'") // single quotes
-                .replace(/[\u201C\u201D\u201E\u201F\u2033\u2036]/g, '"') // double quotes
-                .replace(/[\u2013]/g, '-') // en dash
-                .replace(/[\u2014]/g, '--') // em dash
-                .replace(/\u00A0/g, ' ') // non-breaking space
-                .replace(/\u2026/g, '...') // ellipsis
-                .replace(/\u200B/g, '') // zero-width space
-                .replace(/\uFEFF/g, ''); // BOM
+                .replace(/[\u2018\u2019\u201A\u201B\u2032\u2035]/g, "'")
+                .replace(/[\u201C\u201D\u201E\u201F\u2033\u2036]/g, '"')
+                .replace(/[\u2013]/g, '-')
+                .replace(/[\u2014]/g, '--')
+                .replace(/\u00A0/g, ' ')
+                .replace(/\u2026/g, '...')
+                .replace(/\u200B/g, '')
+                .replace(/\uFEFF/g, '');
         }
 
         function copyCode() {
-            const rawText = document.getElementById("output").textContent;
-            const cleanText = sanitizeSmartCharacters(rawText);
-            navigator.clipboard.writeText(cleanText);
-            alert("Code copied (smart characters cleaned)!");
+            const rawHtml = document.getElementById("previewArea").innerHTML;
+            const cleanHtml = sanitizeSmartCharacters(rawHtml);
+            navigator.clipboard.writeText(cleanHtml).then(() => {
+                alert("Rendered code copied (smart characters cleaned)!");
+            });
         }
 
         document.getElementById("pieColor").addEventListener("input", (e) => {

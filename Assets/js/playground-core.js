@@ -18,5 +18,5 @@ function copyCode() {
   const rawText = document.getElementById("output").textContent;
   const cleanText = sanitizeSmartCharacters(rawText);
   navigator.clipboard.writeText(cleanText);
-  alert("Code copied (smart characters cleaned)!");
+  alert("Code copied (emojis converted to base64)!");
 }

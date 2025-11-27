@@ -37,30 +37,63 @@ function renderPlayground(config) {
     })
     .join("");
 
-  document.getElementById("generateBtn").onclick = () => {
-    const values = {};
-    config.fields.forEach((f) => {
-      const el = document.getElementById(f.id);
-      values[f.id] = el ? el.value : "";
-    });
+  // 1. Load the manifest JSON at startup
+  fetch("data/emoji_manifest.json")
+    .then((res) => res.json())
+    .then((emojiManifest) => {
+      // 2. Build lookup: emoji character → htmlEntity
+      const emojiLookup = {};
+      Object.values(emojiManifest.emojis).forEach((category) => {
+        category.forEach((e) => {
+          const codePoints = e.unicode
+            .split(" ")
+            .map((cp) => parseInt(cp.replace("U+", ""), 16));
+          const emojiChar = String.fromCodePoint(...codePoints);
+          emojiLookup[emojiChar] = e.htmlEntity;
+        });
+      });
 
-    let code = "";
-    try {
-      code = templates[config.template](values) || "";
-    } catch (err) {
-      console.error("Template generation failed:", err);
-    }
+      // 3. Hook up your generate button
+      document.getElementById("generateBtn").onclick = () => {
+        const values = {};
 
-    // Update output box if we have code
-    const outputEl = document.getElementById("output");
-    if (outputEl) outputEl.textContent = code.trim();
+        // Collect values from configured fields
+        config.fields.forEach((f) => {
+          const el = document.getElementById(f.id);
+          if (!el) return;
+          values[f.id] = el.value;
+        });
 
-    // Update preview if we have code
-    const previewEl = document.getElementById("previewArea");
-    if (previewEl && code) {
-      previewEl.innerHTML = code;
-    }
-  };
+        // Collect manual checkboxes separately
+        values.toggleDays = document.getElementById("toggleDays").checked;
+        values.toggleHours = document.getElementById("toggleHours").checked;
+        values.toggleMinutes = document.getElementById("toggleMinutes").checked;
+        values.toggleSeconds = document.getElementById("toggleSeconds").checked;
+
+        let code = "";
+        try {
+          code = templates[config.template](values) || "";
+        } catch (err) {
+          console.error("Template generation failed:", err);
+        }
+
+        // 🔑 Replace emojis with ESR-safe HTML entities
+        Object.keys(emojiLookup).forEach((char) => {
+          code = code.split(char).join(emojiLookup[char]);
+        });
+
+        // Update output box
+        const outputEl = document.getElementById("output");
+        if (outputEl) outputEl.textContent = code.trim();
+
+        // Update preview
+        const previewEl = document.getElementById("previewArea");
+        if (previewEl && code) {
+          previewEl.innerHTML = code;
+        }
+      };
+    })
+    .catch((err) => console.error("Failed to load emoji manifest:", err));
 }
 
 // ===============================
@@ -973,7 +1006,6 @@ templates.fluPortlet = ({
  #countdown {
      font: 24px 'Droid Sans', Arial, sans-serif;
      color: white;
-     width: 200px;
      height: 120px;
      text-align: center;
      background: #005EB8;
@@ -985,120 +1017,12 @@ templates.fluPortlet = ({
      border-radius: 5px;
      box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.6);
      margin: auto;
-     padding: 12px 0;
      position: relative;
      top: 0;
      bottom: 0;
      left: 0;
      right: 0;
  }
-
- #countdown:before {
-     content: "";
-     width: 8px;
-     height: 60px;
-     background: #444;
-     background-image: -webkit-linear-gradient(top, #555, #41B6E6, #41B6E6, #555);
-     background-image: -moz-linear-gradient(top, #555, #41B6E6, #41B6E6, #555);
-     background-image: -ms-linear-gradient(top, #555, #41B6E6, #41B6E6, #555);
-     background-image: -o-linear-gradient(top, #555, #41B6E6, #41B6E6, #555);
-     border: 1px solid #111;
-     border-top-left-radius: 6px;
-     border-bottom-left-radius: 6px;
-     display: block;
-     position: absolute;
-     top: 20px;
-     left: -8px;
- }
-
- #countdown:after {
-     content: "";
-     width: 8px;
-     height: 60px;
-     background: #444;
-     background-image: -webkit-linear-gradient(top, #555, #41B6E6, #41B6E6, #555);
-     background-image: -moz-linear-gradient(top, #555, #41B6E6, #41B6E6, #555);
-     background-image: -ms-linear-gradient(top, #555, #41B6E6, #41B6E6, #555);
-     background-image: -o-linear-gradient(top, #555, #41B6E6, #41B6E6, #555);
-     border: 1px solid #111;
-     border-top-right-radius: 6px;
-     border-bottom-right-radius: 6px;
-     display: block;
-     position: absolute;
-     top: 20px;
-     right: -8px;
- }
-
- #countdown #tiles {
-     position: relative;
-     z-index: 1;
- }
-
- #countdown #tiles>span {
-     width: 35px;
-     max-width: 35px;
-     font: bold 20px 'Droid Sans', Arial, sans-serif;
-     text-align: center;
-     color: #111;
-     background-color: #ddd;
-     background-image: -webkit-linear-gradient(top, #bbb, #eee);
-     background-image: -moz-linear-gradient(top, #bbb, #eee);
-     background-image: -ms-linear-gradient(top, #bbb, #eee);
-     background-image: -o-linear-gradient(top, #bbb, #eee);
-     border-top: 1px solid #fff;
-     border-radius: 3px;
-     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.7);
-     margin: 0 7px;
-     padding: 4px 0;
-     display: inline-block;
-     position: relative;
- }
-
- #countdown #tiles>span:before {
-     content: "";
-     width: 10%;
-     height: 13px;
-     background: #111;
-     display: block;
-     padding: 0 3px;
-     position: absolute;
-     top: 41%;
-     left: -3px;
-     z-index: -1;
- }
-
- #countdown #tiles>span:after {
-     content: "";
-     width: 100%;
-     height: 1px;
-     background: #eee;
-     border-top: 1px solid #333;
-     display: block;
-     position: absolute;
-     top: 48%;
-     left: 0;
- }
-
- #countdown .CDlabels {
-     width: 120%;
-     height: 25px;
-     text-align: left;
-     position: absolute;
-     bottom: 28px;
-     left: -36px;
- }
-
- #countdown .CDlabels li {
-     width: 44px;
-     font: 12px 'Droid Sans', Arial, sans-serif;
-     color: #FAE100;
-     text-shadow: 1px 1px 0px #000;
-     text-align: center;
-     text-transform: uppercase;
-     display: inline-block;
-     left: -40;
- }
-
 
  @property --p {
      syntax: '<number>';
@@ -1211,7 +1135,95 @@ templates.fluPortlet = ({
      }
  }
                        
+#countdown {
+    font: 24px 'Droid Sans', Arial, sans-serif;
+    color: white;
+    min-width: 220px;
+    height: 120px;
+    text-align: center;
+    background: #005EB8;
+    background-image: -webkit-linear-gradient(top, #005EB8, #003087, #003087, #005EB8);
+    background-image: -moz-linear-gradient(top, #005EB8, #003087, #003087, #005EB8);
+    background-image: -ms-linear-gradient(top, #005EB8, #003087, #003087, #005EB8);
+    background-image: -o-linear-gradient(top, #005EB8, #003087, #003087, #005EB8);
+    border: 1px solid #111;
+    border-radius: 5px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.6);
+    margin: auto;
+    padding: 12px 20px;
+    position: relative;
 
+    /* NEW: flexbox centering */
+    display: flex;
+    justify-content: center;   /* center horizontally */
+    align-items: center;       /* center vertically */
+}
+
+#tiles {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;       /* center tile contents vertically */
+    gap: 10px;
+    width: 100%;
+}
+
+.tile {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tile span {
+    font: bold 20px 'Droid Sans', Arial, sans-serif;
+    text-align: center;
+    color: #111;
+    background-color: #ddd;
+    background-image: -webkit-linear-gradient(top, #bbb, #eee);
+    background-image: -moz-linear-gradient(top, #bbb, #eee);
+    background-image: -ms-linear-gradient(top, #bbb, #eee);
+    background-image: -o-linear-gradient(top, #bbb, #eee);
+    border-top: 1px solid #fff;
+    border-radius: 3px;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.7);
+    padding: 4px 0;
+    width: 100%;
+    max-width: 60px;
+    position: relative;
+    margin-bottom: 4px;        /* space between number and label */
+}
+
+.tile span:before {
+    content: "";
+    width: 10%;
+    height: 13px;
+    background: #111;
+    display: block;
+    position: absolute;
+    top: 41%;
+    left: -3px;
+    z-index: -1;
+}
+
+.tile span:after {
+    content: "";
+    width: 100%;
+    height: 1px;
+    background: #eee;
+    border-top: 1px solid #333;
+    display: block;
+    position: absolute;
+    top: 48%;
+    left: 0;
+}
+
+.tile .label {
+    font: 12px 'Droid Sans', Arial, sans-serif;
+    color: #FAE100;
+    text-shadow: 1px 1px 0px #000;
+    text-align: center;
+    text-transform: uppercase;
+}
 </style>
 
 <div class="Flu_body">
@@ -1242,21 +1254,12 @@ ${
         <strong>${startDate}</strong> to <strong>${endDate}</strong>.
       </p>
 
-      <!-- Countdown -->
-      <div class="card-body">
-        <div id="countdown">Countdown
-          <div id="tiles"></div>
-          <div class="CDlabels">
-            <ul>
-              <li class="Custom_Text">Days</li>
-              <li class="Custom_Text">Hours</li>
-              <li class="Custom_Text">Mins</li>
-              <li class="Custom_Text">Secs</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
+<!-- Countdown -->
+<div class="card-body">
+  <div id="countdown">
+    <div id="tiles"></div>
+  </div>
+</div>
       <!-- Pie Chart -->
       <h2 class="mt-5 Custom_Headings">Current Progress for Flu Vaccinations</h2>
       <p class="Custom_Text">The current uptake is as follows:</p>
@@ -1294,22 +1297,63 @@ ${
       barChart: [${barItems}]
     };
 
-    // Countdown
-    const target_date_flu = new Date(fluConfig.countdownDate);
-    const countdown_tiles = document.querySelector("#tiles");
+  // Countdown
+const targetDate = new Date(fluConfig.countdownDate);
 
-    function pad(n) { return (n < 10 ? '0' : '') + n; }
-    function getCountdown(target_date, target_html) {
-      const current_date = new Date().getTime();
-      let seconds_left = (target_date - current_date) / 1000;
-      const days = pad(parseInt(seconds_left / 86400)); seconds_left %= 86400;
-      const hours = pad(parseInt(seconds_left / 3600)); seconds_left %= 3600;
-      const minutes = pad(parseInt(seconds_left / 60));
-      const seconds = pad(parseInt(seconds_left % 60));
-      target_html.innerHTML = \`<span>\${days}</span><span>\${hours}</span><span>\${minutes}</span><span>\${seconds}</span>\`;
-    }
-    getCountdown(target_date_flu, countdown_tiles);
-    setInterval(() => getCountdown(target_date_flu, countdown_tiles), 1000);
+// helper to read checkbox state
+function getCountdownConfig() {
+  return {
+    showDays:    document.getElementById("toggleDays").checked,
+    showHours:   document.getElementById("toggleHours").checked,
+    showMinutes: document.getElementById("toggleMinutes").checked,
+    showSeconds: document.getElementById("toggleSeconds").checked
+  };
+}
+
+function calculateCountdown(targetDate, config) {
+  const now = new Date();
+  let diff = Math.max(0, targetDate - now);
+  let totalSeconds = Math.floor(diff / 1000);
+
+  let days = Math.floor(totalSeconds / (3600 * 24));
+  let hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+  let minutes = Math.floor((totalSeconds % 3600) / 60);
+  let seconds = totalSeconds % 60;
+
+  if (!config.showDays) { hours += days * 24; days = 0; }
+  if (!config.showHours) { minutes += hours * 60; hours = 0; }
+  if (!config.showMinutes) { seconds += minutes * 60; minutes = 0; }
+
+  return { days, hours, minutes, seconds };
+}
+
+function renderCountdown(targetDate, config, tilesId) {
+  const tiles = document.getElementById(tilesId);
+  if (!tiles) return;
+
+  function update() {
+    const { days, hours, minutes, seconds } = calculateCountdown(targetDate, config);
+    let html = "";
+    if (config.showDays)    html += '<div class="tile"><span>' + days    + '</span><div class="label">Days</div></div>';
+    if (config.showHours)   html += '<div class="tile"><span>' + hours   + '</span><div class="label">Hours</div></div>';
+    if (config.showMinutes) html += '<div class="tile"><span>' + minutes + '</span><div class="label">Mins</div></div>';
+    if (config.showSeconds) html += '<div class="tile"><span>' + seconds + '</span><div class="label">Secs</div></div>';
+    tiles.innerHTML = html;
+  }
+
+  update();
+  setInterval(update, 1000);
+}
+
+// initialise once
+renderCountdown(targetDate, getCountdownConfig(), "tiles");
+
+// re‑render whenever a checkbox changes
+["toggleDays","toggleHours","toggleMinutes","toggleSeconds"].forEach(id => {
+  document.getElementById(id).addEventListener("change", () => {
+    renderCountdown(targetDate, getCountdownConfig(), "tiles");
+  });
+});
 
     // Pie Chart
     const pie = document.createElement("div");
@@ -1329,7 +1373,7 @@ ${
       barContainer.appendChild(div);
     });
   })();
-  console.log("IIFE ran")
+
   </script>
 </div>
   `.trim();
@@ -1461,7 +1505,8 @@ templates.basicPage = (
       </div>
     </div>
   </div>
-</div>`;
+</div>
+`;
 
 // ===============================
 // Full Portlet Template
@@ -1600,32 +1645,64 @@ templates.countdown = (data) => {
   return `
 <div id="${data.countdownId}" class="countdown-container">
   <h2 class="countdown-header">${data.title}</h2>
-  <div id="countdown-timer" class="countdown-timer"></div>
+  <div id="tiles" class="countdown-timer"></div>
   <div class="emoji-row">${data.emojiRow}</div>
   ${snowflakes}
 </div>
 
 <script>
-  (function(){
+ (function(){
     const payday = new Date("${data.payday}T00:00:00");
-    const timer = document.getElementById("countdown-timer");
+    const tiles = document.getElementById("tiles");
 
-    function updateCountdown() {
+    function calculateCountdown(targetDate, config) {
       const now = new Date();
-      const diff = payday - now;
-      if (diff <= 0) {
-        timer.innerHTML = "${data.message}";
-        return;
-      }
-      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const m = Math.floor((diff / (1000 * 60)) % 60);
-      const s = Math.floor((diff / 1000) % 60);
-      timer.innerHTML = \`\${d}d \${h}h \${m}m \${s}s\`;
+      let diff = Math.max(0, targetDate - now);
+      let totalSeconds = Math.floor(diff / 1000);
+
+      let days = Math.floor(totalSeconds / (3600 * 24));
+      let hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+      let minutes = Math.floor((totalSeconds % 3600) / 60);
+      let seconds = totalSeconds % 60;
+
+      if (!config.showDays) { hours += days * 24; days = 0; }
+      if (!config.showHours) { minutes += hours * 60; hours = 0; }
+      if (!config.showMinutes) { seconds += minutes * 60; minutes = 0; }
+
+      return { days, hours, minutes, seconds };
     }
 
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+    function renderCountdown(targetDate, config) {
+      function update() {
+        const { days, hours, minutes, seconds } = calculateCountdown(targetDate, config);
+        let html = "";
+        if (config.showDays)    html += '<div class="tile"><span>' + days    + '</span><div class="label">Days</div></div>';
+        if (config.showHours)   html += '<div class="tile"><span>' + hours   + '</span><div class="label">Hours</div></div>';
+        if (config.showMinutes) html += '<div class="tile"><span>' + minutes + '</span><div class="label">Mins</div></div>';
+        if (config.showSeconds) html += '<div class="tile"><span>' + seconds + '</span><div class="label">Secs</div></div>';
+        tiles.innerHTML = html;
+      }
+      update();
+      setInterval(update, 1000);
+    }
+
+    // Build config from template data (booleans already captured)
+const countdownConfig = {
+  showDays: ${data.toggleDays},
+  showHours: ${data.toggleHours},
+  showMinutes: ${data.toggleMinutes},
+  showSeconds: ${data.toggleSeconds}
+};
+
+    renderCountdown(payday, countdownConfig);
+
+    // Re-render when toggles change
+    ["toggleDays","toggleHours","toggleMinutes","toggleSeconds"].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener("change", () => {
+        renderCountdown(payday, countdownConfig);
+      });
+    });
   })();
 </script>
 
@@ -1648,11 +1725,35 @@ templates.countdown = (data) => {
   }
 
   .countdown-timer {
-    font-size: 1.5em;
-    color: #00ffcc;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.tile {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tile span {
+  font: bold 20px 'Segoe UI', sans-serif;
+  color: #111;
+  background-color: #ddd;
+  border-radius: 3px;
+  padding: 4px 0;
+  width: 60px;
+  margin-bottom: 4px;
+}
+
+.tile .label {
+  font: 12px 'Segoe UI', sans-serif;
+  color: #FAE100;
+  text-shadow: 1px 1px 0px #000;
+  text-transform: uppercase;
+}
 
   .emoji-row {
     font-size: 2em;
@@ -1679,7 +1780,7 @@ templates.countdown = (data) => {
 };
 
 // ===============================
-// Staff Survey Countdown
+// Staff Survey Countdown (toggleable)
 // ===============================
 templates.survey = (data) => {
   return `
@@ -1688,7 +1789,7 @@ templates.survey = (data) => {
     <h2 class="animated-heading" style="font-size:2em; margin-bottom:10px;">${
       data.title
     }</h2>
-    <div id="survey-timer" class="glow-text" style="font-size:1.6em; font-weight:bold; margin-bottom:10px;"></div>
+    <div id="survey-tiles" class="glow-text" style="font-size:1.6em; font-weight:bold; margin-bottom:10px; display:flex; justify-content:center; gap:10px;"></div>
     <div style="font-size:1.2em;">Make your voice heard before <strong>${new Date(
       data.deadline
     ).toLocaleDateString()}</strong>!</div>
@@ -1701,27 +1802,48 @@ templates.survey = (data) => {
 <script>
 (function(){
   const deadline = new Date("${data.deadline}T23:59:59");
-  const timer = document.getElementById("survey-timer");
+  const tiles = document.getElementById("survey-tiles");
 
-  function updateSurveyCountdown() {
+  function calculateCountdown(targetDate, config) {
     const now = new Date();
-    const diff = deadline - now;
+    let diff = Math.max(0, targetDate - now);
+    let totalSeconds = Math.floor(diff / 1000);
 
-    if (diff <= 0) {
-      timer.innerHTML = "${data.message}";
-      return;
-    }
+    let days = Math.floor(totalSeconds / (3600 * 24));
+    let hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+    let minutes = Math.floor((totalSeconds % 3600) / 60);
+    let seconds = totalSeconds % 60;
 
-    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const m = Math.floor((diff / (1000 * 60)) % 60);
-    const s = Math.floor((diff / 1000) % 60);
+    if (!config.showDays) { hours += days * 24; days = 0; }
+    if (!config.showHours) { minutes += hours * 60; hours = 0; }
+    if (!config.showMinutes) { seconds += minutes * 60; minutes = 0; }
 
-    timer.innerHTML = \`\${d}d \${h}h \${m}m \${s}s\`;
+    return { days, hours, minutes, seconds };
   }
 
-  updateSurveyCountdown();
-  setInterval(updateSurveyCountdown, 1000);
+  function renderCountdown(targetDate, config) {
+    function update() {
+      const { days, hours, minutes, seconds } = calculateCountdown(targetDate, config);
+      let html = "";
+      if (config.showDays)    html += '<div class="tile"><span>' + days    + '</span><div class="label">Days</div></div>';
+      if (config.showHours)   html += '<div class="tile"><span>' + hours   + '</span><div class="label">Hours</div></div>';
+      if (config.showMinutes) html += '<div class="tile"><span>' + minutes + '</span><div class="label">Mins</div></div>';
+      if (config.showSeconds) html += '<div class="tile"><span>' + seconds + '</span><div class="label">Secs</div></div>';
+      tiles.innerHTML = html;
+    }
+    update();
+    setInterval(update, 1000);
+  }
+
+  // Flags baked in from playground checkboxes
+  const countdownConfig = {
+    showDays: ${data.toggleDays},
+    showHours: ${data.toggleHours},
+    showMinutes: ${data.toggleMinutes},
+    showSeconds: ${data.toggleSeconds}
+  };
+
+  renderCountdown(deadline, countdownConfig);
 })();
 </script>
 
@@ -1731,37 +1853,29 @@ templates.survey = (data) => {
   background-size: 1000% 1000%;
   animation: rainbowShift 20s ease infinite;
 }
-
 @keyframes rainbowShift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-
 .animated-heading {
   background: linear-gradient(to right, #ff4d4d, #ffcc00, #33cc33, #3399ff, #cc33ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: textShift 5s ease infinite;
 }
-
 @keyframes textShift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-
-.glow-text {
-  color: #002244;
-  text-shadow: 0 0 5px #00ccff, 0 0 10px #00ccff, 0 0 20px #00ccff;
-}
-
-.emoji-bounce {
-  animation: bounce 2s infinite;
-}
-
+.glow-text { color: #002244; text-shadow: 0 0 5px #00ccff, 0 0 10px #00ccff, 0 0 20px #00ccff; }
+.tile { flex: 1; display:flex; flex-direction:column; align-items:center; }
+.tile span { font:bold 20px 'Segoe UI', sans-serif; color:#111; background:#ddd; border-radius:3px; padding:4px 0; width:60px; margin-bottom:4px; }
+.tile .label { font:12px 'Segoe UI', sans-serif; color:#FAE100; text-shadow:1px 1px 0px #000; text-transform:uppercase; }
+.emoji-bounce { animation: bounce 2s infinite; }
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  0%,20%,50%,80%,100% { transform: translateY(0); }
   40% { transform: translateY(-15px); }
   60% { transform: translateY(-7px); }
 }
