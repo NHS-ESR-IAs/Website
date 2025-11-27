@@ -1900,7 +1900,7 @@ templates.payday = (config) => {
       return `
       <div id="PDcountdown${id}" class="alert-primary">
         <div id="PDtimer${id}" class="PDtimer"></div>
-        <div id="PDmessage${id}" class="PDmessage alert-danger">⏰ Pay day has passed!</div>
+        <div id="PDmessage${id}" class="PDmessage alert-danger">Pay day has passed!</div>
       </div>
     `;
     })
