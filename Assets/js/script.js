@@ -547,9 +547,10 @@ document.addEventListener("DOMContentLoaded", renderSiteMap);
 // Playground Config Utilities
 // ===============================
 
-// Collect all input/select/textarea values into an object
 function collectConfig() {
   const config = {};
+
+  // Collect global inputs with IDs
   document
     .querySelectorAll("input[id], select[id], textarea[id]")
     .forEach((el) => {
@@ -562,7 +563,7 @@ function collectConfig() {
       }
     });
 
-  // 🧿 Collect standalone buttons
+  // Collect standalone buttons
   const buttonRows = document.querySelectorAll(
     "#standaloneButtonBuilder .button-row"
   );
@@ -571,6 +572,22 @@ function collectConfig() {
     url: row.querySelector(".btn-url")?.value || "",
     newTab: row.querySelector(".btn-newtab")?.checked || false,
   }));
+
+  // 🔑 Collect all dynamic page forms
+  const pageForms = document.querySelectorAll("#pagesContainer > div.border");
+  config.pages = [...pageForms].map((form) => {
+    const get = (name) => form.querySelector(`[name='${name}']`);
+    return {
+      id: get("pageId")?.value.trim() || "",
+      parentId: get("parentId")?.value || "",
+      bannerTitle: get("bannerTitle")?.value.trim() || "",
+      bannerLogo: get("bannerLogo")?.value.trim() || "",
+      section1: get("section1")?.value || "",
+      col40: get("col40")?.value || "",
+      col60: get("col60")?.value || "",
+      section2: get("section2")?.value || "",
+    };
+  });
 
   return config;
 }
@@ -694,19 +711,42 @@ function setupConfigImport(fileInputId = "configFile", outputId = "output") {
 }
 
 function applyConfig(values) {
+  // Apply global values (those with IDs)
   for (const [key, val] of Object.entries(values)) {
-    const el = document.getElementById(key);
-    if (!el) {
-      console.warn(`Element not found: ${key}`);
-      continue;
-    }
+    if (key === "pages" || key === "standaloneButtons") continue;
+    const el =
+      document.getElementById(key) || document.querySelector(`[name="${key}"]`);
+    if (!el) continue;
 
     if (el.type === "checkbox") {
-      el.checked = val;
-      el.dispatchEvent(new Event("change")); // Sync visibility
+      el.checked = !!val;
+      el.dispatchEvent(new Event("change")); // sync visibility
+    } else if (el.type === "radio") {
+      const radio = document.querySelector(
+        `input[name="${key}"][value="${val}"]`
+      );
+      if (radio) radio.checked = true;
     } else {
       el.value = val;
     }
+  }
+
+  // Rebuild dynamic page forms
+  if (values.pages) {
+    const container = document.getElementById("pagesContainer");
+    container.innerHTML = ""; // clear existing forms
+
+    values.pages.forEach((p) => {
+      // create a new form block
+      addPageForm();
+      const form = container.lastElementChild;
+
+      // populate fields
+      Object.keys(p).forEach((name) => {
+        const field = form.querySelector(`[name='${name}']`);
+        if (field) field.value = p[name];
+      });
+    });
   }
 
   // Auto-regenerate preview

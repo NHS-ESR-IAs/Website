@@ -1481,8 +1481,7 @@ templates.basicPage = (
     <div class="row">
       <div class="col-12 Layout1" style="background-color:#005EB8; color:white; padding:1rem; border-radius:4px; text-align:center; box-shadow:0 2px 6px rgba(0,0,0,0.2);">
       <a class="closebtn" href="#"
-     onclick="showElementsByID('sidenav');
-     ${parentId ? `showElementsByID('${parentId}')` : ""}">×</a>
+     onclick="showElementsByID('sidenav');">×</a>
         ${
           bannerLogo
             ? `<img class="Logo" src="${bannerLogo}" alt="${bannerTitle}">`

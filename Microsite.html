@@ -208,35 +208,52 @@ As part of the NHS family, we recognise the invaluable skills and experiences th
       }
     });
 
+    // Track all created pages as {id, title}
     let pageCounter = 0;
-    const createdPageIds = []; // track all created IDs
+    const createdPages = [];
 
+    // Generate a new page ID
     function generatePageId() {
       pageCounter++;
       const base = document.getElementById("PageId")?.value.trim() || "Page";
       return `${base}${String(pageCounter).padStart(2, "0")}`;
     }
 
+    // Seed createdPages with the starter form's ID and Banner Title at load
+    document.addEventListener("DOMContentLoaded", () => {
+      const starterIdInput = document.querySelector("#PageId");
+      const starterTitleInput = document.querySelector("#bannerTitle");
+      if (starterIdInput && starterTitleInput) {
+        const starterId = starterIdInput.value.trim();
+        const starterTitle = starterTitleInput.value.trim();
+        if (starterId && starterTitle) {
+          createdPages.push({ id: starterId, title: starterTitle });
+        }
+      }
+    });
+
     function addPageForm() {
       const id = generatePageId();
-      // Now record this new page ID
-      createdPageIds.push(id);
-      const container = document.getElementById("pagesContainer");
+      // temporary title until user edits Banner Title
+      createdPages.push({ id, title: `Page ${id}` });
 
-      // Build parent options dynamically from existing IDs (before adding this one)
+      // Build parent options dynamically from existing pages
+      // Build parent options dynamically from existing pages
       const parentOptions = [
-        `<option value="Top_Level">Top Level</option>`, // special option
-        ...createdPageIds.map(pid => `<option value="${pid}">${pid}</option>`)
+        `<option value="Top_Level">Top Level</option>`,
+        ...createdPages
+          .filter(p => p.id !== id) // 👈 exclude the current page
+          .map(p => `<option value="${p.id}">${p.title}</option>`)
       ].join("");
 
-
+      const container = document.getElementById("pagesContainer");
       const formBlock = document.createElement("div");
       formBlock.className = "border rounded p-3 mb-3";
       formBlock.innerHTML = `
     <h5>Page ${id}</h5>
     <input type="hidden" name="pageId" value="${id}">
     <div class="mb-2">
-      <label class="form-label">Parent Page ID <span class="text-danger">*</span></label>
+      <label class="form-label">Parent Page <span class="text-danger">*</span></label>
       <select name="parentId" class="form-select" required>
         <option value="" disabled selected>Select a parent page</option>
         ${parentOptions}
@@ -271,18 +288,25 @@ As part of the NHS family, we recognise the invaluable skills and experiences th
     <button type="button" class="btn btn-danger btn-sm deletePageBtn">🗑 Delete Page</button>
   `;
 
+      // Keep createdPages in sync when Banner Title changes
+      formBlock.querySelector("[name='bannerTitle']").addEventListener("input", e => {
+        const page = createdPages.find(p => p.id === id);
+        if (page) page.title = e.target.value.trim();
+      });
+
       // Delete handler
       formBlock.querySelector(".deletePageBtn").onclick = () => {
         container.removeChild(formBlock);
-        const idx = createdPageIds.indexOf(id);
-        if (idx > -1) createdPageIds.splice(idx, 1);
+        const idx = createdPages.findIndex(p => p.id === id);
+        if (idx > -1) createdPages.splice(idx, 1);
+        refreshParentDropdowns();
       };
 
       container.appendChild(formBlock);
-
-
+      refreshParentDropdowns();
     }
 
+    // Hook up the Add Page button
     document.getElementById("addPageBtn").onclick = addPageForm;
 
 
@@ -294,6 +318,28 @@ As part of the NHS family, we recognise the invaluable skills and experiences th
         if (starterId) createdPageIds.push(starterId);
       }
     });
+
+
+    function refreshParentDropdowns() {
+      // Build the full option list once
+      const allOptions = [
+        `<option value="Top_Level">Top Level</option>`,
+        ...createdPages.map(p => `<option value="${p.id}">${p.title}</option>`)
+      ].join("");
+
+      // Update every parentId select
+      document.querySelectorAll("select[name='parentId']").forEach(select => {
+        const currentValue = select.value; // remember what was chosen
+        select.innerHTML = `
+      <option value="" disabled>Select a parent page</option>
+      ${allOptions}
+    `;
+        // restore previous selection if still valid
+        if (currentValue) {
+          select.value = currentValue;
+        }
+      });
+    }
 
 
 
