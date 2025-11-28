@@ -1379,6 +1379,8 @@ renderCountdown(targetDate, getCountdownConfig(), "tiles");
   `.trim();
 };
 
+//Basic Microsite//
+
 // Assets/js/templates.js
 window.templates = {};
 
@@ -1408,7 +1410,7 @@ templates.navbar = (pages) => {
     tree[parent].push(p);
   });
 
-  // Recursive renderer
+  // Recursive renderer (BS4-correct)
   const renderItems = (parent) => {
     if (!tree[parent]) return "";
     return tree[parent]
@@ -1417,21 +1419,29 @@ templates.navbar = (pages) => {
         if (children) {
           // Dropdown for pages with children
           return `
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="nav-${p.id}" role="button"
-                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                ${p.bannerTitle}
-              </a>
-              <div class="dropdown-menu" aria-labelledby="nav-${p.id}">
-                ${children}
-              </div>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="nav-${p.id}" role="button"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              ${p.bannerTitle}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="nav-${p.id}">
+              ${children}
+            </div>
+          </li>
+        `;
+        } else {
+          // Simple link: use nav-link at root, dropdown-item for children
+          if (parent === "root") {
+            return `
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="showElementsByID('${p.id}')">${p.bannerTitle}</a>
             </li>
           `;
-        } else {
-          // Simple link
-          return `
+          } else {
+            return `
             <a class="dropdown-item" href="#" onclick="showElementsByID('${p.id}')">${p.bannerTitle}</a>
           `;
+          }
         }
       })
       .join("");
@@ -1441,7 +1451,9 @@ templates.navbar = (pages) => {
   return `
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">${pages[0]?.bannerTitle || "Home"}</a>
+        <!--<a class="navbar-brand" href="#">${
+          pages[0]?.bannerTitle || "Home"
+        }</a>-->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarPages"
                 aria-controls="navbarPages" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -1462,15 +1474,15 @@ templates.basicPage = (
   allPages
 ) => `
 <div class="sidenav" id="${id}">
-  <a class="closebtn" href="#"
-     onclick="hideElementsByClass('sidenav');${
-       parentId ? `showElementsByID('${parentId}')` : ""
-     }">×</a>
+  
 
   <div class="container LayoutParent">
     <!-- Header / Banner -->
     <div class="row">
       <div class="col-12 Layout1" style="background-color:#005EB8; color:white; padding:1rem; border-radius:4px; text-align:center; box-shadow:0 2px 6px rgba(0,0,0,0.2);">
+      <a class="closebtn" href="#"
+     onclick="showElementsByID('sidenav');
+     ${parentId ? `showElementsByID('${parentId}')` : ""}">×</a>
         ${
           bannerLogo
             ? `<img class="Logo" src="${bannerLogo}" alt="${bannerTitle}">`

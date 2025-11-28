@@ -224,9 +224,11 @@ As part of the NHS family, we recognise the invaluable skills and experiences th
       const container = document.getElementById("pagesContainer");
 
       // Build parent options dynamically from existing IDs (before adding this one)
-      const parentOptions = createdPageIds
-        .map(pid => `<option value="${pid}">${pid}</option>`)
-        .join("");
+      const parentOptions = [
+        `<option value="Top_Level">Top Level</option>`, // special option
+        ...createdPageIds.map(pid => `<option value="${pid}">${pid}</option>`)
+      ].join("");
+
 
       const formBlock = document.createElement("div");
       formBlock.className = "border rounded p-3 mb-3";
@@ -297,110 +299,111 @@ As part of the NHS family, we recognise the invaluable skills and experiences th
 
     const micrositeCSS = `
 <style>
-  .vetContainer {
-    display: flex;
-    flex-direction: column;
-  }
+/* === Layout containers === */
+.vetContainer {
+  display: flex;
+  flex-direction: column;
+}
 
-  .vetItem {}
+.vetImage {
+  height: auto;
+  max-width: 100%;
+}
 
-  .vetImage {
-    height: auto;
-    max-width: auto;
-  }
+/* === Side navigation === */
+.sidenav {
+  height: 100%;
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-top: 60px;
+  background-color: #ffffff;
+  border: thin solid #41B6E6;
+  overflow-x: hidden;
+}
 
-  /*
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+  padding: 8px 32px;
+  text-decoration: none;
+  color: #ffffff;
+  display: block;
+  transition: 0.3s;
+}
 
-*/
-  .grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 1rem;
-  }
+.sidenav .closebtn:hover {
+  color: #f1f1f1;
+}
 
-  .grid-container2 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px));
-  }
+/* === Logos === */
+.Logo {
+  float: left;
+  padding: 0 10px;
+  max-height: 100px;
+}
 
-  .grid-item {
-    background-color: white;
-    color: black;
-    padding: 2px;
-  }
+/* === Dashboard images === */
+.dashboard_img {
+  border-radius: 20px;
+  display: block;
+  margin: auto;
+  width: 80%;
+  padding: 5px;
+}
 
-  .ImgButtons {
-    width: 100px;
-  }
+/* === Navbar styling === */
+.navbar {
+  background-color: #005EB8 !important; /* NHS blue */
+}
 
-  .sidenav {
-    height: 100%;
-    Display: None;
-    position: fixed;
-    z-index: 10000;
-    top: 0;
-    left: 0;
-    border-style: solid;
-    background-color: white;
-    border-width: thin;
-    border-color: #41B6E6;
-    overflow-x: hidden;
-    transition: 0s;
-    padding-top: 60px;
-    width:100%;
-  }
+.navbar .nav-link {
+  color: #ffffff !important; /* white text for top-level links */
+}
 
-  .closebtn {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 12px;
-    color: #FFFFFF display: block;
-    transition: 0.3s;
-  }
+.navbar .nav-link:hover,
+.navbar .nav-link:focus,
+.navbar .nav-link.active {
+  background-color: #003f7f !important; /* darker blue on hover/active */
+  color: #ffffff !important;
+}
 
-  .closebtn:hover {
-    color: #f1f1f1;
-  }
+/* Toggler styling */
+.navbar-toggler {
+  border-color: #ffffff;
+}
 
-  .sidenav .closebtn {
-    position: absolute;
-    top: 0px;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-  }
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30'
+  xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255,1)'
+  stroke-width='2' stroke-linecap='round' stroke-miterlimit='10'
+  d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
 
-  .Logo {
-    float: left;
-    padding-right: 10px;
-    padding-left: 10px;
-    max-height: 100px;
-  }
+/* === Dropdown menus === */
+.dropdown-menu {
+  background-color: #e6f2fa;   /* light blue background */
+  border: 1px solid #005EB8;   /* subtle NHS blue border */
+}
 
-  .Nav_Logo {
-    float: left;
-    padding: 10px;
-    max-height: 100px;
-  }
+.dropdown-menu .dropdown-item {
+  color: #003f7f !important;   /* dark blue text */
+  padding: 0.5rem 1rem;
+  line-height: 1.5;
+}
 
-  .NHSEButtons {
-    text-align: left;
-  }
-
-  .dashboard_img {
-    border-radius: 20px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 80%;
-    padding: 5px;
-  }
-
-  .VetIframe {
-    position: relative;
-    height: 600px;
-    width: 100%;
-  }
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus,
+.dropdown-menu .dropdown-item.active {
+  background-color: #cce0f5 !important; /* slightly darker light blue on hover */
+  color: #003f7f !important;
+}
 
 
 </style>
@@ -408,17 +411,21 @@ As part of the NHS family, we recognise the invaluable skills and experiences th
 
     const micrositeJS = `
 <script>
-  function hideElementsByClass(className) {
-    document.querySelectorAll("." + className).forEach(function(element) {
-      element.style.display = "none";
-    });
-  }
 
-  function showElementsByID(IDName) {
-    document.querySelectorAll("#" + IDName).forEach(function(element) {
-      element.style.display = "inline";
-    });
-  }
+// Navigate between pages
+function showElementsByID(IDName) {
+  // Hide all pages first
+  document.querySelectorAll(".sidenav").forEach(function(element) {
+    element.style.display = "none";
+  });
+
+  // Then unhide the requested page
+  document.querySelectorAll("#" + IDName).forEach(function(element) {
+    element.style.display = "inline";
+  });
+}
+
+  
 
   document.onreadystatechange = function() {
     if (document.readyState == "complete") {
@@ -456,6 +463,11 @@ As part of the NHS family, we recognise the invaluable skills and experiences th
         section2: document.getElementById("section2")?.value || ""
       };
 
+      // 🔑 Normalize Top_Level → null
+      if (starterValues.parentId === "Top_Level") {
+        starterValues.parentId = null;
+      }
+
       if (!createdPageIds.includes(starterValues.id)) {
         createdPageIds.unshift(starterValues.id);
       }
@@ -481,6 +493,11 @@ As part of the NHS family, we recognise the invaluable skills and experiences th
           return;
         }
 
+        // 🔑 Normalize Top_Level → null
+        if (values.parentId === "Top_Level") {
+          values.parentId = null;
+        }
+
         dynamicPages.push(values);
       });
 
@@ -498,7 +515,6 @@ As part of the NHS family, we recognise the invaluable skills and experiences th
 
       // Output + Preview
       document.getElementById("output").textContent = code.trim();
-
     };
 
     // Copy helper
