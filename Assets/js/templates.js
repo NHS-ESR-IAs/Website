@@ -960,6 +960,7 @@ templates.fluPortlet = ({
     .join(",");
 
   return `
+  <meta charset="UTF-8">
 <div>
 
 <style type="text/css">
@@ -1540,6 +1541,7 @@ templates.portlet = ({
     ? `class="alert alert-${alertStyle}" role="alert"`
     : "";
   const header = `
+  <meta charset="UTF-8">
   <div ${alertClass}>
     ${title ? `<h4>${title}</h4>` : ""}
     ${intro ? `<p>${intro}</p>` : ""}
@@ -1654,6 +1656,7 @@ templates.countdown = (data) => {
   }).join("");
 
   return `
+  <meta charset="UTF-8">
 <div id="${data.countdownId}" class="countdown-container">
   <h2 class="countdown-header">${data.title}</h2>
   <div id="tiles" class="countdown-timer"></div>
