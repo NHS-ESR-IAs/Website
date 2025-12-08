@@ -1795,6 +1795,7 @@ const countdownConfig = {
 // ===============================
 templates.survey = (data) => {
   return `
+  <meta charset="UTF-8">
 <div class="rainbow-background" style="padding:30px; border-radius:15px; box-shadow:0 0 15px rgba(0,0,0,0.4); font-family:'Segoe UI', sans-serif; position:relative; overflow:hidden;">
   <div style="background:white; color:#002244; padding:20px; border-radius:10px; max-width:600px; margin:auto; box-shadow:0 0 10px rgba(0,0,0,0.2); text-align:center;">
     <h2 class="animated-heading" style="font-size:2em; margin-bottom:10px;">${
