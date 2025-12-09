@@ -4,44 +4,57 @@
 
 function renderPlayground(config) {
   const form = document.getElementById("playgroundForm");
+
+  // Build the form fields
   form.innerHTML = config.fields
     .map((f) => {
       if (f.type === "textarea") {
         return `
-      <div class="col-12">
-        <label class="form-label" for="${f.id}">${f.label}</label>
-        <textarea class="form-control" id="${f.id}" rows="3">${f.default}</textarea>
-      </div>`;
+          <div class="col-12">
+            <label class="form-label" for="${f.id}">${f.label}</label>
+            <textarea class="form-control" id="${f.id}" rows="3">${f.default}</textarea>
+          </div>`;
       } else if (f.type === "select") {
         return `
-      <div class="col-12">
-        <label class="form-label" for="${f.id}">${f.label}</label>
-        <select class="form-select" id="${f.id}">
-          ${f.options
-            .map(
-              (o) =>
-                `<option value="${o.value}" ${
-                  o.value === f.default ? "selected" : ""
-                }>${o.label}</option>`
-            )
-            .join("")}
-        </select>
-      </div>`;
+          <div class="col-12">
+            <label class="form-label" for="${f.id}">${f.label}</label>
+            <select class="form-select" id="${f.id}">
+              ${f.options
+                .map(
+                  (o) =>
+                    `<option value="${o.value}" ${
+                      o.value === f.default ? "selected" : ""
+                    }>${o.label}</option>`
+                )
+                .join("")}
+            </select>
+          </div>`;
       } else {
         return `
-      <div class="col-12">
-        <label class="form-label" for="${f.id}">${f.label}</label>
-        <input class="form-control" type="${f.type}" id="${f.id}" value="${f.default}">
-      </div>`;
+          <div class="col-12">
+            <label class="form-label" for="${f.id}">${f.label}</label>
+            <input class="form-control" type="${f.type}" id="${f.id}" value="${f.default}">
+          </div>`;
       }
     })
     .join("");
+
+  // Inject CSS once for emoji sizing
+  const styleTag = document.createElement("style");
+  styleTag.textContent = `
+    .emoji-svg {
+      height: 1em;
+      width: 1em;
+      vertical-align: -0.2em; /* tweak baseline alignment */
+    }
+  `;
+  document.head.appendChild(styleTag);
 
   // 1. Load the manifest JSON at startup
   fetch("data/emoji_manifest.json")
     .then((res) => res.json())
     .then((emojiManifest) => {
-      // 2. Build lookup: emoji character → htmlEntity
+      // 2. Build lookup: emoji character → file path
       const emojiLookup = {};
       Object.values(emojiManifest.emojis).forEach((category) => {
         category.forEach((e) => {
@@ -49,7 +62,11 @@ function renderPlayground(config) {
             .split(" ")
             .map((cp) => parseInt(cp.replace("U+", ""), 16));
           const emojiChar = String.fromCodePoint(...codePoints);
-          emojiLookup[emojiChar] = e.htmlEntity;
+
+          // Skip ASCII punctuation like "-" to avoid runaway replacements
+          if (emojiChar.length === 1 && emojiChar.charCodeAt(0) < 128) return;
+
+          emojiLookup[emojiChar] = e.file; // path to SVG file
         });
       });
 
@@ -60,8 +77,7 @@ function renderPlayground(config) {
         // Collect values from configured fields
         config.fields.forEach((f) => {
           const el = document.getElementById(f.id);
-          if (!el) return;
-          values[f.id] = el.value;
+          if (el) values[f.id] = el.value;
         });
 
         // Collect manual checkboxes separately
@@ -77,20 +93,37 @@ function renderPlayground(config) {
           console.error("Template generation failed:", err);
         }
 
-        // 🔑 Replace emojis with ESR-safe HTML entities
-        Object.keys(emojiLookup).forEach((char) => {
-          code = code.split(char).join(emojiLookup[char]);
+        // 4. Detect which emojis are present
+        const presentEmojis = Object.keys(emojiLookup).filter((char) =>
+          code.includes(char)
+        );
+
+        // 5. Fetch and inline only those SVGs
+        Promise.all(
+          presentEmojis.map((char) =>
+            fetch(emojiLookup[char])
+              .then((res) => res.text())
+              .then((svgMarkup) => {
+                // Inject class for sizing
+                const sizedSvg = svgMarkup.replace(
+                  "<svg",
+                  '<svg class="emoji-svg"'
+                );
+                const regex = new RegExp(char, "g");
+                code = code.replace(regex, sizedSvg);
+              })
+          )
+        ).then(() => {
+          // Update output box (raw markup)
+          const outputEl = document.getElementById("output");
+          if (outputEl) outputEl.textContent = code.trim();
+
+          // Update preview (rendered SVGs)
+          const previewEl = document.getElementById("previewArea");
+          if (previewEl && code) {
+            previewEl.innerHTML = code;
+          }
         });
-
-        // Update output box
-        const outputEl = document.getElementById("output");
-        if (outputEl) outputEl.textContent = code.trim();
-
-        // Update preview
-        const previewEl = document.getElementById("previewArea");
-        if (previewEl && code) {
-          previewEl.innerHTML = code;
-        }
       };
     })
     .catch((err) => console.error("Failed to load emoji manifest:", err));
