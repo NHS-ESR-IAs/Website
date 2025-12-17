@@ -107,7 +107,7 @@ function renderPlayground(config) {
                 // Inject class for sizing
                 const sizedSvg = svgMarkup.replace(
                   "<svg",
-                  '<svg class="emoji-svg"'
+                  '<svg class="emoji-svg" width="1em" height="1em" style="vertical-align:-0.2em;"'
                 );
                 const regex = new RegExp(char, "g");
                 code = code.replace(regex, sizedSvg);
